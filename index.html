@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5F4F0">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222.5%22%20fill%3D%22%2315171A%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2220.5%22%20fill%3D%22%23567AFF%22%2F%3E%3Cg%20transform%3D%22rotate(22%2050%2050)%22%3E%3Cellipse%20cx%3D%2250%22%20cy%3D%2250%22%20rx%3D%2239%22%20ry%3D%2212.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%225%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'">
+<title>운동리듬 찾기 · 컨디션 플래닛</title>
+<style>
+:root{--bg:#F5F4F0;--surface:#fff;--ink:#15171A;--ink2:#555B66;--ink3:#8D939D;--line:#E4E2DA;--line2:#EEECE6;--accent:#2F54EB;--accent-weak:#E9EDFD;--warm:#D9583B;--warm-weak:#FBEAE5;--sab:env(safe-area-inset-bottom,0px);--sat:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;word-break:keep-all}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer;touch-action:manipulation}
+input{font:inherit;color:inherit}
+h1,h2,p,ul,ol{margin:0;padding:0} ul,ol{list-style:none}
+#app{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;padding:calc(var(--sat) + 18px) 20px calc(var(--sab) + 32px)}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:18px}
+.top .net{color:var(--warm);display:none}.top .net.on{display:inline}
+.eyebrow{font-size:13px;font-weight:600;color:var(--ink3)}
+.h1{font-size:27px;line-height:1.28;font-weight:700;letter-spacing:-.02em;margin-top:6px;white-space:pre-line}
+.sub{font-size:15px;color:var(--ink2);margin-top:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:14px}
+.card h2{font-size:13px;font-weight:600;color:var(--ink3);margin-bottom:10px}
+.field{display:block;margin-top:16px}
+.field span{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:8px}
+.field input{width:100%;height:58px;padding:0 18px;border-radius:16px;border:1px solid var(--line);background:var(--surface);font-size:18px;outline:none}
+.field input:focus{border-color:var(--ink)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;border-radius:18px;background:var(--ink);color:#fff;font-size:17px;font-weight:700;margin-top:20px}
+.btn[disabled]{opacity:.35}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.err{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--warm-weak);color:#8F2F18;font-size:14px}
+.q{margin-top:18px}
+.q>b{display:block;font-size:17px;font-weight:700}
+.q>small{color:var(--ink3);font-size:13px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.opt{min-height:54px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:15px;display:grid;place-items:center;line-height:1.2;padding:4px}
+.opt b{font-size:19px;font-weight:700;display:block}
+.opt small{font-size:11px;color:var(--ink3);font-weight:600}
+.opt.on{background:var(--ink);border-color:var(--ink);color:#fff}.opt.on small{color:#C9CDD4}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-top:4px}
+.big{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-top:6px}
+.timer{font-size:56px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1;margin:10px 0 4px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+.step{border-radius:12px;background:var(--line2);padding:10px 8px;text-align:center;font-weight:600;font-size:14px}
+.step small{display:block;font-size:11px;color:var(--ink3)}
+.step.now{background:var(--ink);color:#fff}.step.now small{color:#C9CDD4}
+.step.done{background:var(--accent-weak);color:#1F3CB5}
+.lines li{padding:10px 0;border-top:1px solid var(--line2);font-size:15px}.lines li:first-child{border-top:0}
+.find li{display:grid;grid-template-columns:10px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--line2)}.find li:first-child{border-top:0}
+.find i{width:10px;height:10px;border-radius:50%;margin-top:7px;background:var(--ink3)}.find .good i{background:var(--accent)}.find .bad i{background:var(--warm)}
+.find b{display:block;font-size:16px;font-weight:700;letter-spacing:-.01em}.find span{font-size:13px;color:var(--ink2)}
+.blk{display:grid;grid-template-columns:76px 1fr 1fr;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line2);font-size:14px}.blk:first-of-type{border-top:0}
+.blk b{font-weight:700}.blk .n{font-variant-numeric:tabular-nums}
+.d{display:inline-block;min-width:30px;text-align:center;padding:1px 6px;border-radius:6px;font-weight:700;font-size:12px;background:var(--line2);color:var(--ink2);margin-left:4px}
+.d.up{background:var(--accent-weak);color:#1F3CB5}.d.down{background:var(--warm-weak);color:#9B331B}
+.tag{font-size:11px;font-weight:700;padding:1px 6px;border-radius:6px;background:var(--line2);color:var(--ink2);margin-left:4px}
+.wk li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--line2)}.wk li:first-child{border-top:0}
+.wk .dd{font-weight:700;color:var(--ink3)}.wk small{display:block;color:var(--ink2);font-size:14px}
+.note{font-size:13px;color:var(--ink3);margin-top:10px;line-height:1.55}
+.mates{font-size:15px;color:var(--ink2);margin-top:8px}
+.center{min-height:50vh;display:grid;place-items:center;color:var(--ink3)}
+.pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;animation:p 1.5s infinite}@keyframes p{50%{opacity:.2}}
+</style>
+</head>
+<body>
+<div id="app"><div class="center">…</div></div>
+<script src="logic.js"></script>
+<script>
+(() => {
+'use strict';
+const CFG = { url: 'https://mcemapuswhvrjmlqtmxi.supabase.co', key: 'sb_publishable_tQnXHsXFkmfYGlcpQ3-uSg_Z3qzTtqM', defaultClass: 'ochang-1024' };
+const L = CPClass, ST = L.ST;
+const mem = {};
+const LS = { get(k, d = null) { try { const v = localStorage.getItem('cp15.' + k); return v == null ? (k in mem ? mem[k] : d) : JSON.parse(v); } catch (_) { return k in mem ? mem[k] : d; } }, set(k, v) { mem[k] = v; try { localStorage.setItem('cp15.' + k, JSON.stringify(v)); } catch (_) {} }, del(k) { delete mem[k]; try { localStorage.removeItem('cp15.' + k); } catch (_) {} } };
+const slug = (new URLSearchParams(location.search).get('c') || CFG.defaultClass).toLowerCase();
+const S = { key: LS.get('key.' + slug), st: LS.get('st.' + slug), pub: null, off: 0, net: true, busy: false, err: null,
+  f: { name: '', phone: '' }, in: LS.get('in.' + slug, { pref: {}, mood: null, body: null, energy: null }), ck: { mood: null, body: null }, pending: LS.get('pend.' + slug, null), sig: '' };
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = (q) => document.querySelector(q);
+async function rpc(fn, args) {
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 9000);
+  try {
+    const r = await fetch(CFG.url + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: CFG.key, 'Content-Type': 'application/json' }, body: JSON.stringify(args), signal: ctl.signal, cache: 'no-store' });
+    const text = await r.text(); let d = null; try { d = text ? JSON.parse(text) : null; } catch (_) {}
+    if (!r.ok) { const e = new Error((d && d.message) || 'http_' + r.status); e.code = (d && d.message) || ''; e.http = r.status; throw e; }
+    S.net = true; return d;
+  } catch (e) { if (e.http == null) { e.net = true; S.net = false; } throw e; } finally { clearTimeout(t); }
+}
+function setState(st) { S.st = st; LS.set('st.' + slug, st); S.off = st.class.now_ms - Date.now(); }
+const now = () => Date.now() + S.off;
+const PH = ['intake', 'teams', 'r1', 'c1', 'r2', 'c2', 'r3', 'c3', 'done'];
+function roundInfo() {                       // which round is running / which check is due for me
+  const c = S.st.class, me = S.st.me, i = PH.indexOf(c.phase), started = i < 2 ? 0 : Math.min(3, Math.floor(i / 2));
+  const running = c.phase[0] === 'r' ? +c.phase[1] : 0, left = running ? c.started_ms + c.minutes * 60000 - now() : 0;
+  const have = (r) => me.checks.some((x) => x.round === r) || (S.pending && S.pending.round === r);
+  let due = 0;
+  for (let r = 1; r <= started; r++) if (!have(r) && (r < started || running !== r || left <= 0)) { due = r; break; }
+  return { started, running, left, due, have };
+}
+const clock = (ms) => { const s = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const five = (name, val, lo, hi) => `<div class="five">${[1, 2, 3, 4, 5].map((v) => `<button class="opt${val === v ? ' on' : ''}" data-set="${name}" data-v="${v}"><b>${v}</b></button>`).join('')}</div><div class="ends"><span>${lo}</span><span>${hi}</span></div>`;
+const delta = (d) => `<span class="d ${d > 0 ? 'up' : d < 0 ? 'down' : ''}">${L.sg(d) || '0'}</span>`;
+
+function vJoin() {
+  const title = (S.pub && S.pub.title) || '운동리듬 찾기';
+  return `<p class="eyebrow">원데이클래스</p><h1 class="h1">${esc(title)}</h1><p class="sub">이름과 전화번호 뒷 4자리만 입력하면 시작합니다.</p>
+  <form data-form="join" novalidate><label class="field"><span>이름</span><input name="name" autocomplete="name" maxlength="30" enterkeyhint="next"></label>
+  <label class="field"><span>전화번호 뒷 4자리</span><input name="phone" inputmode="numeric" pattern="[0-9]*" maxlength="4" enterkeyhint="go"></label>
+  ${S.err ? `<div class="err">${esc(S.err)}</div>` : ''}<button class="btn"${S.busy ? ' disabled' : ''}>동의하고 시작하기</button></form>
+  <p class="note">이름·뒷 4자리와 오늘의 컨디션 기록은 수업을 진행하는 코치만 확인합니다.</p>`;
+}
+function vIntake() {
+  const I = S.in, ok = L.KEYS.every((k) => I.pref[k] != null) && I.mood && I.body && I.energy;
+  return `<p class="eyebrow">시작 전 체크 · 1분</p><h1 class="h1">${esc(S.st.me.name)}님,\n먼저 여섯 가지만 알려 주세요.</h1>
+  <div class="card"><h2>평소 어떤 운동을 좋아하세요?</h2>${L.KEYS.map((k) => `<div class="q"><b>${ST[k].ko}</b><div class="tri">${[[1, '좋아해요'], [0, '보통'], [-1, '싫어해요']].map(([v, l]) => `<button class="opt${I.pref[k] === v ? ' on' : ''}" data-pref="${k}" data-v="${v}">${l}</button>`).join('')}</div></div>`).join('')}</div>
+  <div class="card"><h2>지금 상태는 어떤가요?</h2>
+    <div class="q"><b>기분</b>${five('mood', I.mood, '바닥', '최고')}</div>
+    <div class="q"><b>몸 상태</b>${five('body', I.body, '무겁다', '가볍다')}</div>
+    <div class="q"><b>에너지</b>${five('energy', I.energy, '없다', '넘친다')}</div></div>
+  ${S.err ? `<div class="err">${esc(S.err)}</div>` : ''}<button class="btn" data-act="intake"${ok && !S.busy ? '' : ' disabled'}>${ok ? '제출하기' : '여섯 가지를 모두 골라 주세요'}</button>`;
+}
+function vWait() {
+  const me = S.st.me, t = L.bestTeam(me);
+  return `<p class="eyebrow"><span class="pulse"></span>팀 편성을 기다리는 중</p><h1 class="h1">답변을 받았습니다.</h1><p class="sub">모두 체크를 마치면 비슷한 상태의 세 명이 한 팀이 됩니다. 이 화면은 자동으로 넘어갑니다.</p>
+  <div class="card"><h2>지금 상태로 보면</h2><p style="font-size:17px;font-weight:700">${ST[t.ord[0]].ko}부터 시작하는 순서가 잘 맞습니다.</p><p class="sub" style="font-size:14px">${esc(t.line)}</p><p class="note">팀을 맞추면서 순서가 달라질 수 있습니다.</p></div>
+  <p class="note" style="text-align:center">지금까지 ${S.st.joined}명 입장</p>`;
+}
+function stepsHtml(me, ri) {
+  return `<div class="steps">${me.ord.map((k, i) => { const r = i + 1, done = ri.have(r), nowR = ri.running === r && !done; return `<div class="step${done ? ' done' : nowR ? ' now' : ''}"><small>${r}번째 · ${S.st.class.minutes}분</small>${ST[k].ko}</div>`; }).join('')}</div>`;
+}
+function vTeam(ri) {
+  const me = S.st.me;
+  return `<p class="eyebrow"><span class="pulse"></span>곧 시작합니다</p><h1 class="h1">${esc(me.kind)}</h1>
+  <p class="mates">${S.st.mates.length ? '같은 팀: ' + S.st.mates.map(esc).join(', ') : ''}</p>
+  <div class="card"><h2>오늘의 순서</h2>${stepsHtml(me, ri)}<p class="sub" style="font-size:15px;margin-top:14px">${esc(me.reason)}</p></div>
+  <p class="note" style="text-align:center">코치가 시작하면 이 화면이 타이머로 바뀝니다. ${ST[me.ord[0]].ko} 구역으로 이동해 주세요.</p>`;
+}
+function vRound(ri) {
+  const me = S.st.me, r = ri.running, k = me.ord[r - 1], lines = (S.st.class.routines || {})[k] || [], next = me.ord[r];
+  return `<p class="eyebrow">${r}번째 블록 · ${esc(me.kind)}</p><div class="big">${ST[k].ko}</div><div class="timer" id="timer">${clock(ri.left)}</div><p class="sub" style="margin-top:0">끝나면 컨디션을 두 번만 누릅니다. 그때까지 폰은 내려놓으세요.</p>
+  <div class="card"><h2>이렇게 해 보세요</h2><ul class="lines">${lines.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
+  ${stepsHtml(me, ri)}<p class="note" style="text-align:center">${next ? '다음은 ' + ST[next].ko : '마지막 블록입니다'}</p>`;
+}
+function vCheck(ri) {
+  const me = S.st.me, r = ri.due, k = me.ord[r - 1];
+  return `<p class="eyebrow">${r}번째 체크 · 두 번만 누르면 끝</p><h1 class="h1">${ST[k].ko} ${S.st.class.minutes}분 끝.\n지금은 어떤가요?</h1>
+  <div class="card"><div class="q" style="margin-top:0"><b>기분</b>${five('cmood', S.ck.mood, '바닥', '최고')}</div><div class="q"><b>몸 상태</b>${five('cbody', S.ck.body, '무겁다', '가볍다')}</div></div>
+  ${S.err ? `<div class="err">${esc(S.err)}</div>` : ''}`;
+}
+function vBetween(ri) {
+  const me = S.st.me, next = me.ord[ri.started];
+  return `<p class="eyebrow"><span class="pulse"></span>기록했습니다</p><h1 class="h1">${next ? `다음은 ${ST[next].ko}.\n구역으로 이동해 주세요.` : '잠시만 기다려 주세요.'}</h1><p class="sub">코치가 다음 블록을 시작하면 자동으로 넘어갑니다.</p><div class="card"><h2>오늘의 순서</h2>${stepsHtml(me, ri)}</div>`;
+}
+function vReport() {
+  const me = S.st.me, R = L.report(me);
+  return `<p class="eyebrow">${esc(me.name)}님의 오늘 · ${esc(me.kind)}</p><h1 class="h1">${esc(R.type)}</h1>
+  <div class="card"><h2>오늘 일어난 일</h2>
+    <div class="blk"><b>시작</b><span class="n">기분 ${me.mood0}</span><span class="n">몸 ${me.body0}</span></div>
+    ${R.rows.map((r) => `<div class="blk"><b>${ST[r.st].ko}${r.pref ? `<span class="tag">${r.pref > 0 ? '좋아함' : '싫어함'}</span>` : ''}</b><span class="n">기분 ${r.m1}${delta(r.dm)}</span><span class="n">몸 ${r.b1}${delta(r.db)}</span></div>`).join('')}</div>
+  <div class="card"><h2>숫자가 말해 주는 것</h2><ul class="find">${R.findings.map((f) => `<li class="${f.tone}"><i></i><div><b>${esc(f.text)}</b><span>${esc(f.ev)}</span></div></li>`).join('')}</ul></div>
+  <div class="card"><h2>그래서, 이번 주는 이렇게</h2><ul class="wk">${R.week.map((w) => `<li><span class="dd">${w.d}</span><div><b>${esc(w.t)}</b><small>${esc(w.x)}</small></div></li>`).join('')}</ul><p class="sub" style="font-size:14px">${esc(R.why)}</p><p class="sub" style="font-size:14px"><b>처진 날 규칙</b> · ${esc(R.rule)}</p></div>
+  <div class="card"><h2>한 달 뒤에는</h2><ul class="lines">${R.month.map((x) => `<li>${esc(x)}</li>`).join('')}</ul><p class="note">오늘 하루 기록으로 만든 예상입니다. 한 달 기록이 쌓이면 실제 숫자로 바뀝니다.</p></div>
+  <div class="card"><h2>한 달 프로그램</h2>${me.want_v2 === true ? '<p style="font-weight:700;font-size:17px">신청됐습니다. 코치가 따로 안내드립니다.</p><button class="btn ghost" data-act="optin" data-v="0">신청 취소</button>' : `<p style="font-size:15px">운동할 때마다 전·후 컨디션을 한 번씩만 남기면, 한 달 뒤 나에게 맞는 운동과 4주 플랜을 받아 봅니다. 코치와 함께 한 달 더 해 보시겠어요?</p><button class="btn" data-act="optin" data-v="1">한 달 더 해 보고 싶어요</button>`}</div>`;
+}
+function view() {
+  if (!S.key || !S.st) return vJoin();
+  const me = S.st.me, c = S.st.class;
+  if (!me.intake) return vIntake();
+  if (!me.team) return vWait();
+  const ri = roundInfo();
+  if (ri.due) return vCheck(ri);
+  if (me.checks.length >= 3) return vReport();
+  if (ri.running && !ri.have(ri.running)) return vRound(ri);
+  if (ri.started === 0) return vTeam(ri);
+  return vBetween(ri);
+}
+function render(force) {
+  const html = view(), sig = html.replace(/<div class="timer" id="timer">[^<]*<\/div>/, '') + S.net + S.busy;
+  if (!force && sig === S.sig) { const t = $('#timer'); if (t && S.st) t.textContent = clock(roundInfo().left); return; }
+  S.sig = sig;
+  $('#app').innerHTML = `<div class="top"><span>컨디션 플래닛</span><span class="net${S.net ? '' : ' on'}">연결 재시도 중…</span></div>${html}`;
+  document.querySelectorAll('form input').forEach((el) => { if (el.name in S.f) el.value = S.f[el.name]; });
+}
+async function flushPending() {
+  if (!S.pending || !S.key) return;
+  const p = S.pending;
+  try { setState(await rpc('v15_check', { p_key: S.key, p_round: p.round, p_mood: p.mood, p_body: p.body })); S.pending = null; LS.del('pend.' + slug); }
+  catch (e) { if (!e.net && e.code !== 'round_not_started') { S.pending = null; LS.del('pend.' + slug); S.err = '기록하지 못했어요. 다시 눌러 주세요.'; } }
+}
+async function poll() {
+  if (!S.key) { if (!S.pub) { try { S.pub = await rpc('v15_class_public', { p_class: slug }); } catch (_) {} render(); } return; }
+  await flushPending();
+  try { setState(await rpc('v15_state', { p_key: S.key })); }
+  catch (e) { if (e.code === 'invalid_key') { S.key = null; S.st = null; LS.del('key.' + slug); LS.del('st.' + slug); } }
+  render();
+}
+document.addEventListener('click', async (ev) => {
+  const b = ev.target.closest('button'); if (!b) return; const d = b.dataset;
+  if (d.pref) { S.in.pref[d.pref] = +d.v; LS.set('in.' + slug, S.in); render(); }
+  else if (d.set === 'mood' || d.set === 'body' || d.set === 'energy') { S.in[d.set] = +d.v; LS.set('in.' + slug, S.in); render(); }
+  else if (d.set === 'cmood' || d.set === 'cbody') {
+    S.ck[d.set === 'cmood' ? 'mood' : 'body'] = +d.v; S.err = null;
+    if (S.ck.mood && S.ck.body) { const ri = roundInfo(); S.pending = { round: ri.due, mood: S.ck.mood, body: S.ck.body }; LS.set('pend.' + slug, S.pending); S.ck = { mood: null, body: null }; render(); await flushPending(); }
+    render();
+  } else if (d.act === 'intake') {
+    if (S.busy) return; S.busy = true; S.err = null; render();
+    try { setState(await rpc('v15_intake', { p_key: S.key, p_pref: S.in.pref, p_mood: S.in.mood, p_body: S.in.body, p_energy: S.in.energy })); window.scrollTo(0, 0); }
+    catch (e) { S.err = e.net ? '연결이 불안정해요. 다시 눌러 주세요.' : '문제가 생겼어요. 다시 눌러 주세요.'; }
+    S.busy = false; render();
+  } else if (d.act === 'optin') { try { setState(await rpc('v15_optin', { p_key: S.key, p_yes: d.v === '1' })); } catch (_) {} render(); }
+});
+document.addEventListener('input', (ev) => { const el = ev.target; if (el.name === 'phone') el.value = el.value.replace(/\D/g, '').slice(0, 4); if (el.name in S.f) S.f[el.name] = el.value; });
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' && ev.target.name === 'name') { ev.preventDefault(); const p = $('input[name=phone]'); if (p) p.focus(); } });
+document.addEventListener('submit', async (ev) => {
+  ev.preventDefault(); if (S.busy) return;
+  const name = S.f.name.trim().replace(/\s+/g, ' '), phone = S.f.phone.trim();
+  if (!name) { S.err = '이름을 입력해 주세요.'; render(); return; }
+  if (!/^\d{4}$/.test(phone)) { S.err = '전화번호 뒷 4자리를 숫자로 입력해 주세요.'; render(); return; }
+  S.busy = true; S.err = null; render();
+  let out = null, err = null;
+  for (let i = 0; i < 3 && !out; i++) { try { out = await rpc('v15_join', { p_class: slug, p_name: name, p_phone4: phone }); } catch (e) { err = e; if (!e.net) break; await new Promise((r) => setTimeout(r, 900 * (i + 1))); } }
+  S.busy = false;
+  if (out) { S.key = out.key; LS.set('key.' + slug, S.key); setState(out.state); window.scrollTo(0, 0); }
+  else S.err = err && err.code === 'class_not_found' ? '수업을 찾을 수 없어요. 링크를 다시 확인해 주세요.' : err && err.code === 'rate_limited' ? '잠시 후 다시 시도해 주세요.' : '연결이 불안정해요. 다시 눌러 주세요.';
+  render();
+});
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') poll(); });
+setInterval(() => { if (document.visibilityState === 'visible') render(); }, 1000);
+setInterval(() => { if (document.visibilityState === 'visible') poll(); }, 3000);
+if (S.st) S.off = 0;
+render(true); poll();
+})();
+</script>
+</body>
+</html>
