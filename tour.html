@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222.5%22%20fill%3D%22%2315171A%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2220.5%22%20fill%3D%22%23567AFF%22%2F%3E%3Cg%20transform%3D%22rotate(22%2050%2050)%22%3E%3Cellipse%20cx%3D%2250%22%20cy%3D%2250%22%20rx%3D%2239%22%20ry%3D%2212.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%225%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<title>컨디션 플래닛 · 원데이클래스 데모</title>
+<meta name="description" content="45분 수업 한 번으로 회원마다 다른 운동 리듬을 숫자로 보여 주는 컨디션 플래닛 원데이클래스 데모.">
+<style>
+:root{--bg:#F6F7F9;--card:#fff;--ink:#0E1116;--ink2:#4A5160;--ink3:#8B93A1;--line:#E6E8EC;--soft:#EEF0F3;--cardio:#FF6A3D;--weights:#3D5AFE;--stretch:#0FA37A;--sun:#FFD028}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all}
+h1,h2,h3,p,ul,ol{margin:0;padding:0} ul,ol{list-style:none} a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+header{position:sticky;top:0;z-index:5;background:rgba(246,247,249,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:10px;height:64px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800}
+.pill{font-size:12px;font-weight:700;color:var(--ink2);background:var(--soft);padding:3px 10px;border-radius:999px}
+.sp{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:14px;background:var(--ink);color:#fff;font-weight:700;white-space:nowrap}
+.btn.ghost{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.btn.lg{min-height:58px;font-size:18px;padding:0 26px;border-radius:18px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:72px 0 56px}
+.k{font-size:14px;font-weight:800;letter-spacing:.06em;color:var(--ink3)}
+h1{font-size:clamp(34px,5vw,60px);line-height:1.14;font-weight:800;letter-spacing:-.035em;margin-top:10px}
+h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--sun) 62%)}
+.lead{font-size:20px;color:var(--ink2);margin-top:20px;max-width:34em}
+.cta{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.trio{display:grid;gap:10px}
+.trio div{border-radius:22px;padding:20px 22px;color:#fff;font-weight:800;font-size:22px;display:flex;justify-content:space-between;align-items:center;letter-spacing:-.02em}
+.trio small{font-size:14px;font-weight:700;opacity:.9}
+section{padding:64px 0}
+section.alt{background:var(--card);border-block:1px solid var(--line)}
+h2{font-size:clamp(26px,3.4vw,40px);line-height:1.2;font-weight:800;letter-spacing:-.03em;margin-top:8px;max-width:22em}
+.sub{color:var(--ink2);margin-top:12px;max-width:40em}
+/* phones */
+.phones{display:flex;gap:26px;overflow-x:auto;padding:36px 28px 20px;margin:0 -28px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.ph{flex:none;width:292px;scroll-snap-align:center}
+.frame{width:292px;height:632px;border-radius:38px;background:#0E1116;padding:9px;box-shadow:0 30px 60px rgba(14,17,22,.18)}
+.frame .in{width:274px;height:614px;border-radius:30px;overflow:hidden;background:var(--bg)}
+.frame iframe{width:390px;height:874px;border:0;transform:scale(.7026);transform-origin:0 0;display:block}
+.ph b{display:block;margin-top:16px;font-size:17px;font-weight:800}
+.ph b i{font-style:normal;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;margin-right:8px}
+.ph p{font-size:14px;color:var(--ink2);margin-top:4px}
+/* coach */
+.tabs{display:inline-flex;background:var(--soft);border-radius:14px;padding:4px;margin-top:22px}
+.tabs button{font:inherit;border:0;background:none;padding:9px 16px;border-radius:11px;font-weight:700;color:var(--ink2);cursor:pointer}
+.tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.screen{margin-top:18px;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px rgba(14,17,22,.14),0 0 0 1px var(--line);background:var(--bg);position:relative}
+.screen iframe{width:1360px;height:900px;border:0;transform-origin:0 0;display:block}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.box{background:var(--card);border-radius:24px;padding:28px;box-shadow:0 0 0 1px var(--line)}
+section.alt .box{background:var(--bg)}
+.box h3{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.box .t{font-size:13px;font-weight:800;color:var(--ink3);letter-spacing:.05em;margin-bottom:8px}
+.box li{position:relative;padding:10px 0 10px 18px;border-top:1px solid var(--line);font-size:16px;color:var(--ink2)}
+.box li:first-child{border-top:0;margin-top:10px}
+.box li::before{content:"";position:absolute;left:0;top:21px;width:8px;height:2px;background:var(--ink)}
+.box li b{color:var(--ink)}
+.funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:32px;border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.funnel div{padding:26px;background:var(--card);border-left:1px solid var(--line)}
+.funnel div:first-child{border-left:0}
+.funnel .s{font-size:13px;font-weight:800;color:var(--ink3)}
+.funnel h3{font-size:21px;font-weight:800;margin:4px 0 8px;letter-spacing:-.02em}
+.funnel p{font-size:15px;color:var(--ink2)}
+.funnel .now{background:var(--ink);color:#fff}.funnel .now p,.funnel .now .s{color:#C9CED6}
+footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding:44px 0 30px}.g3,.funnel{grid-template-columns:1fr}.funnel div{border-left:0;border-top:1px solid var(--line)}section{padding:44px 0}.wrap{padding:0 20px}.phones{margin:0 -20px;padding-inline:20px}header .btn{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><span class="brand"><svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="24" fill="#0E1116"/><g transform="rotate(22 50 50)"><ellipse cx="50" cy="50" rx="39" ry="12.5" fill="none" stroke="#fff" stroke-width="6"/></g><circle cx="50" cy="50" r="20.5" fill="#FFD028"/><g transform="rotate(22 50 50)"><path d="M11 50a39 12.5 0 0 0 78 0" fill="none" stroke="#fff" stroke-width="6"/></g></svg>컨디션 플래닛</span><span class="pill">원데이클래스 데모</span><span class="sp"></span><a class="btn ghost" href="#coach">코치 화면</a><a class="btn" href="./?preview=join" target="_blank" rel="noopener">회원 화면 체험</a></div></header>
+
+<div class="wrap hero">
+  <div><p class="k">CONDITION PLANET · ONE-DAY CLASS</p>
+    <h1>"웨이트 40분 하세요"는<br><em>답이 아닙니다.</em></h1>
+    <p class="lead">같은 운동도 사람마다, 그날의 상태마다 다르게 작용합니다. 컨디션 플래닛은 45분 수업 한 번으로 회원 한 명 한 명에게 무엇이 기분과 몸을 바꾸는지 숫자로 보여 줍니다.</p>
+    <div class="cta"><a class="btn lg" href="./?preview=join" target="_blank" rel="noopener">회원 화면 직접 눌러 보기</a><a class="btn lg ghost" href="#coach">코치 화면 보기</a></div></div>
+  <div class="trio"><div style="background:var(--cardio)">유산소 <small>15분 → 체크</small></div><div style="background:var(--weights)">웨이트 <small>15분 → 체크</small></div><div style="background:var(--stretch)">스트레칭 <small>15분 → 체크</small></div></div>
+</div>
+
+<section class="alt"><div class="wrap">
+  <p class="k">회원이 보는 화면</p><h2>링크 하나로 들어와 45분 뒤 자기 리포트를 받아 갑니다.</h2><p class="sub">앱 설치도 회원가입도 없습니다. 아래는 실제 화면이며 직접 눌러 볼 수 있습니다.</p>
+  <div class="phones" id="phones"></div>
+</div></section>
+
+<section id="coach"><div class="wrap">
+  <p class="k">코치가 보는 화면</p><h2>코치는 버튼 하나씩만 누르면 수업이 흘러갑니다.</h2><p class="sub">팀 편성, 타이머, 체크 수집, 수업 뒤 결론까지 한 화면입니다. 태블릿이나 TV에 그대로 띄워 발표 화면으로 씁니다.</p>
+  <div class="tabs" id="tabs"><button class="on" data-v="live">수업 진행 중</button><button data-v="done">수업이 끝난 뒤</button></div>
+  <div class="screen" id="screen"><iframe id="cf" title="코치 화면" src="coach.html?preview=live&show=1"></iframe></div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <p class="k">왜 이 제품인가</p><h2>기획, 운영, 사업 구조를 한 장으로.</h2>
+  <div class="g3">
+    <div class="box"><p class="t">기획</p><h3>출석은 아는데, 기분은 모른다</h3><ul>
+      <li>헬스장은 회원이 <b>왔는지</b>는 알지만 운동이 그 사람에게 <b>어떻게 작용했는지</b>는 모릅니다.</li>
+      <li>회원은 무엇이 자기에게 맞는지 모른 채 남들이 하는 루틴을 따라 합니다.</li>
+      <li>운동 전후 컨디션을 <b>두 번의 터치</b>로 남기면 그 답이 숫자로 쌓입니다.</li></ul></div>
+    <div class="box"><p class="t">운영</p><h3>코치 한 명, 링크 하나</h3><ul>
+      <li>준비물은 <b>회원용 링크</b>와 코치용 화면 한 대입니다.</li>
+      <li>선호와 상태가 비슷한 세 명씩 <b>자동으로 팀</b>이 되고 구역이 겹치지 않게 순서가 나옵니다.</li>
+      <li>폰이 꺼진 회원은 코치가 대신 입력하고, 늦게 온 회원은 자동 배정합니다.</li></ul></div>
+    <div class="box"><p class="t">사업</p><h3>체험이 구독으로 이어지는 구조</h3><ul>
+      <li>원데이클래스는 <b>신규 회원 유입</b>과 재등록 상담의 근거가 됩니다.</li>
+      <li>수업 끝에 회원이 직접 <b>"한 달 더"</b>를 누릅니다. 그 명단이 다음 단계의 고객입니다.</li>
+      <li>센터는 지점 단위 월 구독, 회원은 무료입니다. 가격안은 지점당 월 4.9만~19만 원입니다.</li></ul></div>
+  </div>
+  <div class="funnel">
+    <div class="now"><p class="s">지금 · 데모</p><h3>원데이클래스</h3><p>45분, 세 블록, 블록마다 체크. 끝나면 개인 리포트와 일주일 플랜.</p></div>
+    <div><p class="s">다음</p><h3>한 달 프로그램</h3><p>운동할 때마다 전후 한 번씩 기록. 한 달 뒤 그 사람에게 맞는 운동과 4주 플랜을 줍니다.</p></div>
+    <div><p class="s">그다음</p><h3>지점 구독</h3><p>코치에게는 누가 좋아지고 누가 멀어지는지, 본사에는 지점별 프로그램 효과가 보입니다.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">컨디션 플래닛 · 원데이클래스 데모 버전 · 화면 속 이름과 숫자는 예시입니다.</div></footer>
+
+<script>
+(() => {
+  const shots = [
+    ['join', '입장', '이름과 뒷 4자리만 입력합니다.'],
+    ['intake', '선호 체크', '유산소·웨이트·스트레칭을 좋아하는지 한 화면에 하나씩 묻습니다.'],
+    ['intake2', '지금 상태', '기분, 몸 상태, 에너지. 누르면 바로 다음으로 넘어갑니다.'],
+    ['team', '팀과 순서', '비슷한 세 명이 한 팀이 되고, 왜 이 순서인지 이유를 받습니다.'],
+    ['round', '15분 블록', '구역 색, 남은 시간, 할 운동. 이때는 폰을 내려놓습니다.'],
+    ['check', '블록 뒤 체크', '기분과 몸 상태, 두 번만 누르면 저장됩니다.'],
+    ['report', '개인 리포트', '블록별 변화, 숫자가 말해 주는 것, 일주일 플랜, 한 달 뒤.'],
+  ];
+  document.getElementById('phones').innerHTML = shots.map(([k, t, d], i) => `<div class="ph"><div class="frame"><div class="in"><iframe title="${t}" loading="lazy" src="./?preview=${k}"></iframe></div></div><b><i>${i + 1}</i>${t}</b><p>${d}</p></div>`).join('');
+  const screen = document.getElementById('screen'), cf = document.getElementById('cf');
+  const fit = () => { const s = screen.clientWidth / 1360; cf.style.transform = 'scale(' + s + ')'; screen.style.height = Math.round(900 * s) + 'px'; };
+  fit(); window.addEventListener('resize', fit);
+  document.getElementById('tabs').addEventListener('click', (ev) => { const b = ev.target.closest('button'); if (!b) return; document.querySelectorAll('#tabs button').forEach((x) => x.classList.toggle('on', x === b)); cf.src = 'coach.html?preview=' + b.dataset.v + '&show=1'; });
+})();
+</script>
+</body>
+</html>

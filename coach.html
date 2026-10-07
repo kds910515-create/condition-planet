@@ -8,70 +8,109 @@
 <meta name="referrer" content="no-referrer">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222.5%22%20fill%3D%22%2315171A%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2220.5%22%20fill%3D%22%23567AFF%22%2F%3E%3Cg%20transform%3D%22rotate(22%2050%2050)%22%3E%3Cellipse%20cx%3D%2250%22%20cy%3D%2250%22%20rx%3D%2239%22%20ry%3D%2212.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%225%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'">
-<title>코치 화면 · 운동리듬 찾기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<title>컨디션 플래닛 · 코치 화면</title>
 <style>
-:root{--bg:#F5F4F0;--surface:#fff;--ink:#15171A;--ink2:#555B66;--ink3:#8D939D;--line:#E4E2DA;--line2:#EEECE6;--accent:#2F54EB;--accent-weak:#E9EDFD;--warm:#D9583B;--warm-weak:#FBEAE5}
+:root{--bg:#F6F7F9;--card:#fff;--ink:#0E1116;--ink2:#4A5160;--ink3:#8B93A1;--line:#E6E8EC;--soft:#EEF0F3;--down:#C2341A;--down-w:#FFE9E5;--ok:#12B76A}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;word-break:keep-all}
 button,select,textarea,input{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none;padding:0}
-h1,h2,h3,p,ul{margin:0;padding:0} ul{list-style:none}
-.wrap{max-width:1280px;margin:0 auto;padding:0 20px 80px}
-.head{display:flex;gap:14px 24px;align-items:center;flex-wrap:wrap;padding:20px 0 16px;border-bottom:1px solid var(--line)}
-.head h1{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-right:auto}
-.phase{font-weight:700;color:var(--ink2)}
-.timer{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
-.timer.over{color:var(--warm)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;white-space:nowrap}
-.btn.big{min-height:60px;font-size:18px;padding:0 28px;border-radius:16px}
-.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
-.btn.sm{min-height:32px;padding:0 10px;font-size:13px;border-radius:8px}
-.btn.warn{background:var(--warm)}
+h1,h2,h3,p,ul,ol{margin:0;padding:0} ul,ol{list-style:none}
+.n{font-variant-numeric:tabular-nums}
+.wrap{max-width:1320px;margin:0 auto;padding:0 28px 90px}
+.top{display:flex;align-items:center;gap:10px;height:64px}
+.top .brand{display:flex;align-items:center;gap:8px;font-weight:800}
+.pill{font-size:11px;font-weight:700;color:var(--ink2);background:var(--soft);padding:3px 9px;border-radius:999px}
+.top .sp{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;white-space:nowrap}
+.btn:hover{opacity:.92}
+.btn.ghost{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.btn.sm{min-height:32px;padding:0 10px;font-size:13px;border-radius:9px}
+.btn.xl{min-height:68px;font-size:20px;padding:0 30px;border-radius:20px}
+.btn.warn{background:var(--down)}
 .btn[disabled]{opacity:.4;cursor:default}
-.now{display:flex;gap:16px 28px;align-items:center;flex-wrap:wrap;padding:20px 0}
-.now .txt{flex:1;min-width:260px}
-.now .txt b{display:block;font-size:20px;font-weight:800;letter-spacing:-.01em}
-.now .txt span{color:var(--ink2)}
-.stats{display:flex;gap:18px;font-weight:600;color:var(--ink2)}
-.stats b{font-size:22px;color:var(--ink);margin-right:4px;font-variant-numeric:tabular-nums}
-.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
-.col{background:#ECEAE4;border-radius:18px;padding:14px}
-.col h2{font-size:17px;font-weight:800;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.col h2 small{font-size:12px;color:var(--ink2);font-weight:600}
-.col .ordline{font-size:13px;color:var(--ink2);margin:2px 0 10px}
-.col .ordline b.cur{color:var(--ink);background:var(--surface);padding:1px 6px;border-radius:6px}
-.mc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:8px}
-.mc .n{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:17px;font-weight:700}
-.mc .s{font-size:13px;color:var(--ink2);margin-top:2px}
-.mc .tr{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center;font-variant-numeric:tabular-nums}
-.pt{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;padding:3px 8px;border-radius:8px;background:var(--line2);color:var(--ink2)}
-.pt.up{background:var(--accent-weak);color:#1F3CB5}.pt.down{background:var(--warm-weak);color:#9B331B}.pt.wait{border:1px dashed var(--ink3);background:transparent}
-.tag{font-size:11px;font-weight:700;padding:1px 6px;border-radius:6px;background:var(--line2);color:var(--ink2);margin-left:4px}
-.tag.bot{border:1px dashed var(--ink3);background:transparent}.tag.v2{background:var(--accent);color:#fff}
-.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
-select{height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);padding:0 6px;font-size:13px}
-h2.sec{font-size:18px;font-weight:800;margin:34px 0 4px}
-.subx{color:var(--ink2);font-size:13px;margin-bottom:10px}
-.concl li{padding:12px 0;border-bottom:1px solid var(--line);font-size:18px;font-weight:500;max-width:70ch}
-.concl li:first-child{border-top:2px solid var(--ink)}
-.concl b{background:var(--accent-weak);padding:0 5px;border-radius:5px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.concl b.bad{background:var(--warm-weak)}
+/* stage */
+.stage{background:var(--card);border-radius:28px;padding:28px 30px;box-shadow:0 1px 2px rgba(14,17,22,.04),0 0 0 1px var(--line)}
+.stage h1{font-size:15px;font-weight:700;color:var(--ink3)}
+.rail{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:14px}
+.rail div{font-size:12px;font-weight:700;color:var(--ink3)}
+.rail i{display:block;height:6px;border-radius:3px;background:var(--line);margin-bottom:8px}
+.rail .past i{background:var(--ink)} .rail .cur i{background:var(--ink);position:relative;overflow:hidden}
+.rail .cur i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:sh 1.6s infinite}@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.rail .cur,.rail .past{color:var(--ink)}
+.now{display:flex;gap:20px 36px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.now .txt{flex:1;min-width:300px}
+.now .txt b{display:block;font-size:30px;font-weight:800;letter-spacing:-.025em;line-height:1.25}
+.now .txt span{display:block;color:var(--ink2);font-size:16px;margin-top:6px;max-width:60ch}
+.clock{font-size:72px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.clock.over{color:var(--down)}
+.kpis{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.kpi{display:flex;align-items:baseline;gap:8px;padding:10px 16px;border-radius:14px;background:var(--soft);font-weight:700;color:var(--ink2);font-size:13px}
+.kpi b{font-size:22px;font-weight:800;color:var(--ink)}
+.kpi .meter{align-self:center;width:90px;height:6px;border-radius:3px;background:#DADDE3;overflow:hidden}.kpi .meter i{display:block;height:100%;background:var(--ok)}
+/* lanes */
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px;align-items:start}
+.lane{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);overflow:hidden}
+.lane header{padding:18px 20px 16px;color:#fff}
+.lane header h2{font-size:22px;font-weight:800;letter-spacing:-.02em;display:flex;justify-content:space-between;align-items:baseline}
+.lane header h2 small{font-size:13px;font-weight:700;opacity:.9}
+.route{display:flex;gap:6px;margin-top:12px}
+.route span{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.2)}
+.route span.cur{background:#fff;color:var(--ink)}
+.lane .body{padding:8px 12px 12px;display:grid;gap:8px}
+.mc{border-radius:16px;padding:12px 14px;background:var(--bg)}
+.mc .r1{display:flex;align-items:center;gap:10px}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;flex:none}
+.mc .nm{font-size:17px;font-weight:800;line-height:1.2}
+.mc .meta{font-size:12px;font-weight:600;color:var(--ink3);display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.mc .tools{margin-left:auto;display:flex;gap:4px;opacity:0;transition:opacity .15s}
+.mc:hover .tools,.mc .tools:focus-within{opacity:1}
+.traj{display:flex;align-items:center;gap:6px;margin-top:10px}
+.pt{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;font-weight:700;color:var(--ink3);min-width:38px}
+.pt b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:15px;font-weight:800;color:#fff;background:var(--ink)}
+.pt.wait b{background:transparent;color:var(--ink3);box-shadow:inset 0 0 0 1.5px dashed var(--line);border:1.5px dashed #C9CED6}
+.pt.todo b{background:var(--soft);color:var(--ink3)}
+.traj .ln{flex:1;height:2px;background:var(--line);margin-bottom:14px;min-width:6px}
+.dl{font-size:11px;font-weight:800;padding:1px 6px;border-radius:6px;background:var(--soft);color:var(--ink2);margin-bottom:14px}
+.dl.up{background:var(--ink);color:#fff}.dl.down{background:var(--down-w);color:var(--down)}
+.tagv{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;background:var(--ink);color:#fff}
+.tagb{font-size:11px;font-weight:700;padding:1px 6px;border-radius:6px;border:1px dashed var(--ink3);color:var(--ink3)}
+select{height:32px;border-radius:9px;border:1px solid var(--line);background:var(--card);padding:0 6px;font-size:13px}
+.empty{padding:22px 10px;text-align:center;color:var(--ink3);font-weight:600;font-size:14px}
+/* results */
+h2.sec{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:44px 0 6px}
+.subx{color:var(--ink2);margin-bottom:14px}
+.res{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+.box{background:var(--card);border-radius:24px;padding:24px;box-shadow:0 0 0 1px var(--line)}
+.box h3{font-size:13px;font-weight:700;color:var(--ink3);margin-bottom:14px}
+.concl li{padding:14px 0;border-top:1px solid var(--soft);font-size:19px;font-weight:600;line-height:1.5;letter-spacing:-.01em}
+.concl li:first-child{border-top:0;padding-top:0}
+.concl b{background:#FFF1B8;padding:0 6px;border-radius:6px;font-weight:800;white-space:nowrap}
+.concl b.bad{background:var(--down-w);color:var(--down)}
+.hbar{display:grid;grid-template-columns:86px minmax(0,1fr) 56px;gap:12px;align-items:center;padding:8px 0;font-weight:700}
+.hbar .t{height:26px;border-radius:8px;background:var(--soft);overflow:hidden}.hbar .t i{display:block;height:100%;border-radius:8px;min-width:4px}
+.hbar .v{text-align:right;font-weight:800;font-size:17px}
+.hbar .l{display:flex;align-items:center;gap:8px}
+.icw{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:#fff}
 .scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px;background:var(--surface);border-radius:14px;overflow:hidden}
-th{font-size:12px;color:var(--ink3);text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:10px;border-bottom:1px solid var(--line2);white-space:nowrap;font-variant-numeric:tabular-nums}
-.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:10px}
-.copy{display:flex;gap:8px;margin-top:6px}.copy input{flex:1;height:40px;border-radius:10px;border:1px solid var(--line);padding:0 10px;min-width:0;background:var(--surface)}
-textarea{width:100%;min-height:74px;border-radius:10px;border:1px solid var(--line);padding:8px 10px;background:var(--surface)}
-.five{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:6px 0 12px}
-.five button{min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:700}.five button.on{background:var(--ink);color:#fff}
-.scrim{position:fixed;inset:0;background:rgba(21,23,26,.45);display:grid;place-items:center;padding:16px;z-index:20}
-.modal{width:min(440px,100%);background:var(--bg);border-radius:18px;padding:20px}
-.modal h3{font-size:18px;font-weight:800;margin-bottom:8px}
-#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;font-weight:600;padding:10px 16px;border-radius:12px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30}#toast.on{opacity:1}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+th{font-size:12px;color:var(--ink3);text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 10px;border-bottom:1px solid var(--soft);white-space:nowrap}
+.seq{display:flex;gap:2px;height:22px;width:180px}.seq span{border-radius:6px;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.copy{display:flex;gap:8px}.copy input{flex:1;height:44px;border-radius:12px;border:1px solid var(--line);padding:0 12px;min-width:0;background:var(--card);font-weight:600}
+textarea{width:100%;min-height:74px;border-radius:12px;border:1px solid var(--line);padding:8px 10px;background:var(--card)}
+.toolrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:6px 0 14px}
+.five button{min-height:48px;border-radius:12px;background:var(--card);box-shadow:0 0 0 1px var(--line);font-weight:800;text-align:center}.five button.on{background:var(--ink);color:#fff}
+.scrim{position:fixed;inset:0;background:rgba(14,17,22,.5);display:grid;place-items:center;padding:16px;z-index:20}
+.modal{width:min(460px,100%);background:var(--bg);border-radius:24px;padding:24px;max-height:92vh;overflow:auto}
+.modal h3{font-size:20px;font-weight:800;margin-bottom:8px}
+#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:#fff;font-weight:700;padding:11px 18px;border-radius:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30}#toast.on{opacity:1}
 .center{min-height:70vh;display:grid;place-items:center;text-align:center;color:var(--ink2);padding:24px}
-@media (max-width:900px){.cols{grid-template-columns:1fr}}
+details.set{margin-top:40px}details.set summary{cursor:pointer;font-weight:700;color:var(--ink2);padding:10px 0}
+body.show .mc .tools,body.show details.set,body.show .linkbox{display:none}
+@media (max-width:980px){.lanes,.res{grid-template-columns:1fr}.wrap{padding:0 16px 80px}.now .txt b{font-size:24px}.clock{font-size:56px}}
 </style>
 </head>
 <body>
@@ -83,7 +122,7 @@ textarea{width:100%;min-height:74px;border-radius:10px;border:1px solid var(--li
    report(): turns one person's start state + three checks into findings, a one-week plan and a cautious one-month outlook. */
 (function (g) {
 'use strict';
-const ST = { cardio: { ko: '유산소' }, weights: { ko: '웨이트' }, stretch: { ko: '스트레칭' } };
+const ST = { cardio: { ko: '유산소', c: '#FF6A3D', w: '#FFEEE7' }, weights: { ko: '웨이트', c: '#3D5AFE', w: '#E9EDFF' }, stretch: { ko: '스트레칭', c: '#0FA37A', w: '#E2F6EF' } };
 const KEYS = ['cardio', 'weights', 'stretch'];
 const TEAMS = [
   { id: 1, name: '달리기 팀', ord: ['cardio', 'weights', 'stretch'], line: '심박을 먼저 올리고, 힘을 쓰고, 풀면서 끝냅니다.' },
@@ -166,6 +205,7 @@ function report(m) {
     { d: '금', t: '기본 45분', x: core },
     { d: '토', t: '바꿔 보기 45분', x: `${name(closer)} 15분 → ${name(mid)} 15분 → ${name(opener)} 15분` },
   ];
+  week.forEach((w) => { w.seq = w.x.split(' → ').map((p) => { const m = p.match(/^(.+) ([0-9]+)분$/); return { st: KEYS.find((k) => ST[k].ko === m[1]), min: +m[2] }; }); });
   const why = even ? '세 블록이 고르게 효과가 있었으니 오늘 순서를 그대로 기본으로 씁니다. 토요일은 순서를 뒤집어 차이가 있는지 확인합니다.' : `몸을 가장 풀어 준 ${ro(name(opener))} 시작하고, 기분을 가장 올린 ${ro(name(closer))} 끝내 좋은 기분으로 나갑니다. 기분이 가장 덜 올랐던 ${un(name(weak))} 10분으로 줄였습니다. 토요일은 순서를 뒤집어 차이가 있는지 확인합니다.`;
   const rule = `기분이 2 이하인 날은 ${name(closer)} 15분만 하고 가도 됩니다.`;
   const up = R.filter((r) => r.dm > 0).length;
@@ -190,19 +230,32 @@ function summary(members) {
     optin: members.filter((m) => m.want_v2 === true).map((m) => m.name),
   };
 }
-g.CPClass = { ST, KEYS, TEAMS, score, bestTeam, assign, one, reason, rows, report, summary, sg };
+// shared drawing helpers (icons, mood face, level bars)
+const svg = (inner, size, sw) => `<svg width="${size || 24}" height="${size || 24}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw || 2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+const UI = {
+  icon(k, size) { return svg({ cardio: '<path d="M2.5 12.5h4l2.2-5.5 4.2 11 2.3-5.5h6.3"/>', weights: '<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/>', stretch: '<circle cx="12" cy="4.6" r="1.9"/><path d="M4 8.5c2.8 1.8 5 2.3 8 2.3s5.2-.5 8-2.3M12 10.8v5.2l-3.6 5M12 16l3.6 5"/>' }[k] || '', size, 2); },
+  face(v, size) {
+    const mouth = { 1: 'M14 28q6-6 12 0', 2: 'M14.5 27q5.5-3.5 11 0', 3: 'M14.5 26h11', 4: 'M14 24.5q6 5.5 12 0', 5: 'M13 23.5h14a7 7 0 0 1-14 0z' }[v], bg = ['', '#DDE1E8', '#E8E3CC', '#F6E7A1', '#FCDD68', '#FFD028'][v];
+    return `<svg width="${size || 40}" height="${size || 40}" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="${bg}"/><g fill="none" stroke="#0E1116" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 16v2M25.5 16v2"/><path d="${mouth}"${v === 5 ? ' fill="#0E1116"' : ''}/></g></svg>`;
+  },
+  bars(v, size) { const h = size || 28; return `<svg width="${h}" height="${h}" viewBox="0 0 28 28" aria-hidden="true">${[1, 2, 3, 4, 5].map((i) => `<rect x="${1 + (i - 1) * 5.5}" y="${24 - i * 4.2}" width="3.6" height="${i * 4.2}" rx="1.2" fill="${i <= v ? '#0E1116' : '#D9DDE4'}"/>`).join('')}</svg>`; },
+  battery(v, size) { const h = size || 28; return `<svg width="${h}" height="${h}" viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="8" width="21" height="12" rx="3.2" fill="none" stroke="#0E1116" stroke-width="2"/><rect x="24.2" y="11.5" width="2.2" height="5" rx="1" fill="#0E1116"/><rect x="4.6" y="10.6" width="${(15.8 * v) / 5}" height="6.8" rx="1.4" fill="#0E1116"/></svg>`; },
+  check: svg('<path d="M5 12.5l4.5 4.5L19 7.5"/>', 20, 2.6), back: svg('<path d="M15 6l-6 6 6 6"/>', 22, 2.2), arrow: svg('<path d="M5 12h14M13 6l6 6-6 6"/>', 18, 2.2),
+  logo: '<svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="24" fill="#0E1116"/><g transform="rotate(22 50 50)"><ellipse cx="50" cy="50" rx="39" ry="12.5" fill="none" stroke="#fff" stroke-width="6"/></g><circle cx="50" cy="50" r="20.5" fill="#FFD028"/><g transform="rotate(22 50 50)"><path d="M11 50a39 12.5 0 0 0 78 0" fill="none" stroke="#fff" stroke-width="6"/></g></svg>',
+};
+const ROUTINES = { cardio: ['러닝머신 또는 사이클', '처음 3분 천천히 → 9분 숨이 조금 찰 정도 → 마지막 3분 천천히', '옆 사람과 대화가 되는 속도면 충분합니다'], weights: ['머신 3가지: 레그프레스 · 랫풀다운 · 체스트프레스', '각 12회 × 2세트, 마지막 2~3회가 힘든 무게', '세트 사이 1분 쉬기, 자세가 흔들리면 무게를 낮춥니다'], stretch: ['폼롤러: 등 · 엉덩이 · 허벅지 각 1분', '고관절 · 햄스트링 스트레칭 각 30초 × 2', '캣카우 10회, 마지막 2분은 누워서 호흡'] };
+g.CPClass = { UI, ROUTINES, ST, KEYS, TEAMS, score, bestTeam, assign, one, reason, rows, report, summary, sg };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 </script>
 <script>
 (() => {
 'use strict';
 const CFG = { url: 'https://mcemapuswhvrjmlqtmxi.supabase.co', key: 'sb_publishable_tQnXHsXFkmfYGlcpQ3-uSg_Z3qzTtqM' };
-const L = CPClass, ST = L.ST, q = new URLSearchParams(location.search);
+const L = CPClass, ST = L.ST, UI = L.UI, q = new URLSearchParams(location.search), PV = q.get('preview');
 const slug = (q.get('c') || 'ochang-1024').toLowerCase();
 let coachKey = q.get('k') || '';
-try { if (coachKey) localStorage.setItem('cp15.coach.' + slug, coachKey); else coachKey = localStorage.getItem('cp15.coach.' + slug) || ''; } catch (_) {}
-if (q.get('k')) try { history.replaceState(null, '', location.pathname + '?c=' + slug); } catch (_) {}     // keep the secret out of the address bar and screenshots
-const S = { d: null, off: 0, err: null, modal: null, arm: null, sig: '', busy: false };
+if (!PV) { try { if (coachKey) localStorage.setItem('cp15.coach.' + slug, coachKey); else coachKey = localStorage.getItem('cp15.coach.' + slug) || ''; } catch (_) {} if (q.get('k')) try { history.replaceState(null, '', location.pathname + '?c=' + slug); } catch (_) {} }
+const S = { d: null, off: 0, err: null, modal: null, sig: '', busy: false };
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const $ = (x) => document.querySelector(x);
 function toast(m) { const el = $('#toast'); el.textContent = m; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 2200); }
@@ -212,85 +265,104 @@ async function rpc(fn, args) {
   if (!r.ok) { const e = new Error((d && d.message) || 'http_' + r.status); e.code = (d && d.message) || ''; throw e; }
   return d;
 }
+function mock(kind) {          // preview without a class: nine example members
+  const names = ['김하늘', '박서준', '이도윤', '최지우', '정민서', '강예린', '윤재현', '임수아', '한지호'], done = kind === 'done';
+  const M = names.map((n, i) => ({ id: 'm' + i, name: n, phone4: '0000', is_bot: false, pref: { cardio: [1, -1, 0][i % 3], weights: [-1, 1, 0][(i + 1) % 3], stretch: [0, 1, -1][(i + 2) % 3] }, mood0: [2, 3, 2, 4, 1, 3, 2, 3, 2][i], body0: [2, 3, 1, 3, 2, 4, 2, 3, 3][i], energy0: [2, 4, 1, 5, 2, 3, 2, 4, 3][i], intake: true, want_v2: done ? [true, true, null, true, false, true, null, true, null][i] : null, checks: [] }));
+  L.assign(M).forEach((a) => Object.assign(M.find((m) => m.id === a.id), a));
+  const add = [[1, 1], [1, 0], [2, 1], [0, 1], [1, 1], [1, 0], [0, 0], [1, 1], [-1, 0]];
+  M.forEach((m, i) => { let pm = m.mood0, pb = m.body0; const rounds = done ? 3 : i === 4 ? 0 : 1; for (let r = 1; r <= rounds; r++) { pm = Math.max(1, Math.min(5, pm + add[(i + r * 2) % 9][0])); pb = Math.max(1, Math.min(5, pb + add[(i + r) % 9][1])); m.checks.push({ round: r, station: m.ord[r - 1], mood: pm, body: pb }); } });
+  return { class: { slug: 'demo', title: '헬스장에서 운동리듬 찾기', phase: done ? 'done' : 'r2', minutes: 15, routines: L.ROUTINES, started_ms: Date.now() - 5 * 60000 - 20000, now_ms: Date.now() }, members: M };
+}
 async function load() {
+  if (PV) { if (!S.d) S.d = mock(PV); render(); return; }
   try { const d = await rpc('v15_coach_state'); S.d = d; S.off = d.class.now_ms - Date.now(); S.err = null; }
   catch (e) { S.err = e.code === 'forbidden' ? 'forbidden' : 'net'; }
   render();
 }
-async function act(p, ok) { if (S.busy) return; S.busy = true; try { await p; if (ok) toast(ok); } catch (e) { toast(e.code === 'teams_missing' ? '팀이 없는 회원이 있습니다. 먼저 팀을 배정해 주세요.' : '실패했습니다. 다시 눌러 주세요.'); } S.busy = false; await load(); }
-const PH = ['intake', 'teams', 'r1', 'c1', 'r2', 'c2', 'r3', 'c3', 'done'];
-const PHL = { intake: '입장 · 시작 전 체크', teams: '팀 편성 완료', r1: '1번째 블록 진행 중', c1: '1번째 체크', r2: '2번째 블록 진행 중', c2: '2번째 체크', r3: '3번째 블록 진행 중', c3: '3번째 체크', done: '마무리 · 리포트' };
+async function act(p, ok) { if (PV) { toast('미리보기 화면에서는 동작하지 않습니다.'); return; } if (S.busy) return; S.busy = true; render(); try { await (typeof p === 'function' ? p() : p); if (ok) toast(ok); } catch (e) { toast(e.code === 'teams_missing' ? '팀이 없는 회원이 있습니다. 먼저 팀을 배정해 주세요.' : '실패했습니다. 다시 눌러 주세요.'); } S.busy = false; await load(); }
+const RAIL = ['입장 · 체크', '팀 편성', '1블록', '2블록', '3블록', '리포트'];
+const railIdx = (p) => ({ intake: 0, teams: 1, r1: 2, c1: 2, r2: 3, c2: 3, r3: 4, c3: 4, done: 5 }[p]);
 const clock = (ms) => { const neg = ms < 0, s = Math.abs(Math.ceil(ms / 1000)); return (neg ? '+' : '') + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
 const left = () => (S.d.class.started_ms + S.d.class.minutes * 60000) - (Date.now() + S.off);
-const memberUrl = () => new URL('./?c=' + slug, location.href).href;
+const memberUrl = () => new URL((location.pathname.endsWith('coach.html') ? './' : './') + '?c=' + slug, location.href).href;
+const sgn = (v) => (v == null ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(1));
 
 function nextAction(c, M) {
   const ready = M.filter((m) => m.intake), teamed = ready.filter((m) => m.team), round = c.phase[1] ? +c.phase[1] : 0;
   const checked = (r) => teamed.filter((m) => m.checks.some((x) => x.round === r)).length;
-  if (c.phase === 'intake') return { t: '회원들이 들어와 선호와 지금 상태를 체크하는 단계입니다.', s: `입장 ${M.length}명 · 체크 완료 ${ready.length}명. 모두 끝나면 팀을 편성하세요.`, b: ready.length ? ['teams-auto', `팀 편성하기 (${ready.length}명)`] : null };
-  if (c.phase === 'teams') return { t: '팀과 순서가 회원 폰에 표시됐습니다.', s: '각 팀이 첫 구역으로 이동하면 시작하세요.', b: ['phase:r1', `1번째 블록 시작 (${c.minutes}분)`] };
-  if (c.phase[0] === 'r') return { t: `${round}번째 블록 진행 중입니다.`, s: `시간이 끝나면 회원 폰이 자동으로 체크 화면으로 바뀝니다. 지금까지 체크 ${checked(round)}/${teamed.length}명.`, b: ['phase:c' + round, '블록 끝내고 체크 받기'], timer: true };
-  if (c.phase[0] === 'c' && round < 3) return { t: `${round}번째 체크를 받는 중입니다. ${checked(round)}/${teamed.length}명 완료.`, s: '다음 구역으로 이동시킨 뒤 시작하세요. 체크를 못 한 회원은 카드에서 대신 입력할 수 있습니다.', b: ['phase:r' + (round + 1), `${round + 1}번째 블록 시작 (${c.minutes}분)`] };
-  if (c.phase === 'c3') return { t: `마지막 체크를 받는 중입니다. ${checked(3)}/${teamed.length}명 완료.`, s: '체크를 마친 회원 폰에는 개인 리포트가 바로 뜹니다.', b: ['phase:done', '마무리하기'] };
-  return { t: '수업이 끝났습니다.', s: '아래 결과를 화면에 띄우고, 한 달 프로그램 신청자를 확인하세요.', b: null };
+  if (c.phase === 'intake') return { t: '회원들이 입장해 선호와 지금 상태를 체크하고 있습니다.', s: `${M.length}명 입장, ${ready.length}명 체크 완료. 모두 끝나면 팀을 편성하세요.`, b: ready.length ? ['teams-auto', `팀 편성하기 · ${ready.length}명`] : null, prog: [ready.length, M.length, '체크 완료'] };
+  if (c.phase === 'teams') return { t: '팀과 순서가 회원 폰에 표시됐습니다.', s: '각 팀이 첫 구역으로 이동하면 시작하세요.', b: ['phase:r1', `1블록 시작 · ${c.minutes}분`] };
+  if (c.phase[0] === 'r') return { t: `${round}블록 진행 중`, s: '시간이 끝나면 회원 폰이 자동으로 체크 화면으로 바뀝니다.', b: ['phase:c' + round, '블록 끝내고 체크 받기'], timer: true, prog: [checked(round), teamed.length, `${round}번째 체크`] };
+  if (c.phase[0] === 'c' && round < 3) return { t: `${round}번째 체크를 받는 중`, s: '체크가 끝난 팀부터 다음 구역으로 이동시키고, 준비되면 시작하세요.', b: ['phase:r' + (round + 1), `${round + 1}블록 시작 · ${c.minutes}분`], prog: [checked(round), teamed.length, `${round}번째 체크`] };
+  if (c.phase === 'c3') return { t: '마지막 체크를 받는 중', s: '체크를 마친 회원 폰에는 개인 리포트가 바로 뜹니다.', b: ['phase:done', '수업 마무리하기'], prog: [checked(3), teamed.length, '3번째 체크'] };
+  return { t: '수업이 끝났습니다.', s: '아래 결론을 화면에 띄워 함께 보고, 한 달 프로그램 신청자를 확인하세요.', b: null, prog: [M.filter((m) => m.want_v2 === true).length, M.length, '한 달 신청'] };
 }
-function card(m, c) {
-  const p = m.pref || {}, like = L.KEYS.filter((k) => p[k] > 0).map((k) => ST[k].ko), dis = L.KEYS.filter((k) => p[k] < 0).map((k) => ST[k].ko);
-  const round = c.phase[1] ? +c.phase[1] : 0;
-  let pm = m.mood0, tr = m.intake ? `<span class="pt">시작 ${m.mood0}·${m.body0}</span>` : '';
-  if (m.ord) [1, 2, 3].forEach((r) => {
-    const x = m.checks.find((y) => y.round === r);
-    if (x) { const d = x.mood - pm; tr += `<span class="pt ${d > 0 ? 'up' : d < 0 ? 'down' : ''}" title="${ST[x.station].ko} 뒤 기분·몸">${ST[x.station].ko} ${x.mood}·${x.body}</span>`; pm = x.mood; }
-    else if (r <= round && (c.phase[0] === 'c' || c.phase === 'done' || r < round)) tr += `<button class="pt wait" data-act="proxy" data-id="${m.id}" data-r="${r}">${r}번째 미체크 · 대신 입력</button>`;
-  });
-  return `<div class="mc"><div class="n"><span>${esc(m.name)}${m.is_bot ? '<span class="tag bot">가상</span>' : ''}${m.want_v2 === true ? '<span class="tag v2">한 달 신청</span>' : ''}</span>
-    <span class="tools" style="margin:0"><select data-move="${m.id}" aria-label="팀 이동"><option value="">팀 이동</option>${L.TEAMS.map((t) => `<option value="${t.id}">${t.name}</option>`).join('')}</select><button class="btn ghost sm" data-act="remove" data-id="${m.id}" title="명단에서 삭제">×</button></span></div>
-    <div class="s">${m.intake ? `에너지 ${m.energy0}${like.length ? ' · 좋아함 ' + like.join('·') : ''}${dis.length ? ' · 싫어함 ' + dis.join('·') : ''}` : '시작 전 체크 중…'}</div><div class="tr">${tr}</div></div>`;
+function card(m, c, col) {
+  const p = m.pref || {}, round = c.phase[1] ? +c.phase[1] : 0;
+  const prefs = L.KEYS.filter((k) => p[k]).map((k) => `<span style="color:${ST[k].c}">${p[k] > 0 ? '♥' : '✕'}${ST[k].ko}</span>`).join('');
+  let traj = '';
+  if (m.intake) {
+    traj = `<div class="pt"><b>${m.mood0}</b>시작</div>`; let pm = m.mood0;
+    if (m.ord) [1, 2, 3].forEach((r) => {
+      const x = m.checks.find((y) => y.round === r), k = m.ord[r - 1];
+      if (x) { const d = x.mood - pm; traj += `<span class="dl n ${d > 0 ? 'up' : d < 0 ? 'down' : ''}">${d > 0 ? '+' + d : d < 0 ? '−' + Math.abs(d) : '0'}</span><div class="pt"><b style="background:${ST[k].c}">${x.mood}</b>${ST[k].ko}</div>`; pm = x.mood; }
+      else if (r <= round && (c.phase[0] === 'c' || c.phase === 'done' || r < round)) traj += `<span class="ln"></span><button class="pt wait" data-act="proxy" data-id="${m.id}" data-r="${r}" title="대신 입력"><b>?</b>대신 입력</button>`;
+      else traj += `<span class="ln"></span><div class="pt todo"><b>${UI.icon(k, 16)}</b>${ST[k].ko}</div>`;
+    });
+  }
+  return `<div class="mc"><div class="r1"><span class="av" style="background:${col || '#8B93A1'}">${esc(m.name.replace(/^QA-/, '').slice(0, 1))}</span><div><div class="nm">${esc(m.name)} ${m.is_bot ? '<span class="tagb">가상</span>' : ''}${m.want_v2 === true ? '<span class="tagv">한 달 신청</span>' : ''}</div><div class="meta">${m.intake ? `<span>몸 ${m.body0} · 에너지 ${m.energy0}</span>${prefs}` : '<span>시작 전 체크 중…</span>'}</div></div>
+    <span class="tools"><select data-move="${m.id}" aria-label="팀 이동"><option value="">팀 이동</option>${L.TEAMS.map((t) => `<option value="${t.id}">${t.name}</option>`).join('')}</select><button class="btn ghost sm" data-act="remove" data-id="${m.id}" title="명단에서 삭제">×</button></span></div>
+    ${traj ? `<div class="traj">${traj}</div>` : ''}</div>`;
 }
 function resultHtml(M) {
   const R = L.summary(M); if (!R.n) return '';
-  const sg = (v) => (v == null ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(1));
-  const st = R.stations.filter((x) => x.n).sort((a, b) => b.dm - a.dm), best = st[0];
+  const st = R.stations.filter((x) => x.n).sort((a, b) => b.dm - a.dm), best = st[0], mx = Math.max(0.5, ...st.map((x) => Math.abs(x.dm)));
   const lines = [
-    `${R.n}명 중 <b>${R.up}명</b>은 들어올 때보다 좋은 기분으로 끝났고, <b>${R.same}명</b>은 그대로, <b class="${R.down ? 'bad' : ''}">${R.down}명</b>은 내려갔습니다. 평균 기분 <b>${R.mood0.toFixed(1)} → ${R.mood3.toFixed(1)}</b>, 몸 상태 <b>${R.body0.toFixed(1)} → ${R.body3.toFixed(1)}</b>.`,
-    best ? `기분을 가장 많이 올린 블록은 ${ST[best.k].ko}(<b>${sg(best.dm)}</b>)입니다. ` + st.slice(1).map((x) => `${ST[x.k].ko} <b class="${x.dm < 0 ? 'bad' : ''}">${sg(x.dm)}</b>`).join(', ') + '.' : '',
-    R.disliked.n ? `'싫어한다'고 고른 운동 뒤 기분 변화는 평균 <b class="${R.disliked.dm < 0 ? 'bad' : ''}">${sg(R.disliked.dm)}</b>(${R.disliked.n}번)` + (R.liked.n ? `, '좋아한다'고 고른 운동 뒤는 <b>${sg(R.liked.dm)}</b>(${R.liked.n}번)였습니다.` : '였습니다.') : '',
-    `순서로 보면 1번째 블록 <b>${sg(R.rounds[0])}</b>, 2번째 <b>${sg(R.rounds[1])}</b>, 3번째 <b>${sg(R.rounds[2])}</b>.`,
-    `한 달 프로그램 신청: <b>${R.optin.length}명</b>${R.optin.length ? ' (' + R.optin.map(esc).join(', ') + ')' : ''}.`,
+    `${R.n}명 중 <b>${R.up}명</b>이 들어올 때보다 좋은 기분으로 끝났습니다. 평균 기분 <b>${R.mood0.toFixed(1)} → ${R.mood3.toFixed(1)}</b>, 몸 상태 <b>${R.body0.toFixed(1)} → ${R.body3.toFixed(1)}</b>.` + (R.down ? ` 내려간 사람은 <b class="bad">${R.down}명</b>.` : ''),
+    best ? `기분을 가장 많이 올린 블록은 <b>${ST[best.k].ko} ${sgn(best.dm)}</b>.` : '',
+    R.disliked.n ? `'싫어한다'고 고른 운동 뒤에도 기분은 평균 <b class="${R.disliked.dm < 0 ? 'bad' : ''}">${sgn(R.disliked.dm)}</b>` + (R.liked.n ? `, '좋아한다'고 고른 운동 뒤는 <b>${sgn(R.liked.dm)}</b>였습니다.` : '였습니다.') : '',
+    `<b>${R.optin.length}명</b>이 한 달 프로그램을 신청했습니다.` + (R.optin.length ? ' ' + R.optin.map(esc).join(', ') : ''),
   ].filter(Boolean);
-  const rows = M.filter((m) => m.checks.length >= 3).map((m) => { const rep = L.report(m); return `<tr><td><b>${esc(m.name)}</b></td><td>${esc(m.kind || '')}</td><td>${m.mood0}·${m.body0}</td>${rep.rows.map((r) => `<td>${ST[r.st].ko}${r.pref ? (r.pref > 0 ? ' ♥' : ' ✕') : ''} ${r.m1}·${r.b1} <span class="pt ${r.dm > 0 ? 'up' : r.dm < 0 ? 'down' : ''}">${L.sg(r.dm) || 0}</span></td>`).join('')}<td>${esc(rep.week[0].x)}</td><td>${m.want_v2 === true ? '신청' : m.want_v2 === false ? '안 함' : '—'}</td></tr>`; }).join('');
-  return `<h2 class="sec">오늘의 결론</h2><p class="subx">숫자는 기분·몸 상태(1~5). ♥ 좋아한다고 고른 운동, ✕ 싫어한다고 고른 운동.</p><ul class="concl">${lines.map((x) => `<li>${x}</li>`).join('')}</ul>
-  <h2 class="sec">회원별 결과</h2><div class="scroll"><table><thead><tr><th>회원</th><th>팀</th><th>시작</th><th>1번째</th><th>2번째</th><th>3번째</th><th>이번 주 기본 순서</th><th>한 달</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  const bar = (label, v, col, max) => `<div class="hbar"><span class="l">${label}</span><span class="t"><i style="width:${Math.max(3, Math.round((Math.abs(v || 0) / max) * 100))}%;background:${v < 0 ? 'var(--down)' : col}"></i></span><span class="v n">${sgn(v)}</span></div>`;
+  const rows = M.filter((m) => m.checks.length >= 3).map((m) => { const rep = L.report(m); return `<tr><td><b>${esc(m.name)}</b></td><td>${esc(m.kind || '')}</td><td class="n">${m.mood0} → ${rep.rows[2].m1}</td>${rep.rows.map((r) => `<td><span style="color:${ST[r.st].c};font-weight:800">${ST[r.st].ko}</span>${r.pref ? (r.pref > 0 ? ' ♥' : ' ✕') : ''} <span class="dl n ${r.dm > 0 ? 'up' : r.dm < 0 ? 'down' : ''}" style="margin:0">${r.dm > 0 ? '+' + r.dm : r.dm < 0 ? '−' + Math.abs(r.dm) : '0'}</span></td>`).join('')}<td><div class="seq">${rep.week[0].seq.map((s) => `<span style="flex:${s.min};background:${ST[s.st].c}">${s.min}</span>`).join('')}</div></td><td>${m.want_v2 === true ? '<span class="tagv">신청</span>' : m.want_v2 === false ? '안 함' : '—'}</td></tr>`; }).join('');
+  return `<h2 class="sec">오늘의 결론</h2><p class="subx">${R.n}명의 기록에서 나온 숫자입니다. 기분과 몸 상태는 1(바닥)~5(최고).</p>
+  <div class="res"><div class="box"><h3>한눈에</h3><ul class="concl">${lines.map((x) => `<li>${x}</li>`).join('')}</ul></div>
+    <div class="box"><h3>블록별 기분 변화 (15분 뒤, 평균)</h3>${st.map((x) => bar(`<span class="icw" style="background:${ST[x.k].c}">${UI.icon(x.k, 15)}</span>${ST[x.k].ko}`, x.dm, ST[x.k].c, mx)).join('')}
+      <h3 style="margin-top:22px">좋아하는 운동 vs 싫어하는 운동</h3>${bar('♥ 좋아함', R.liked.dm, '#0E1116', Math.max(0.5, Math.abs(R.liked.dm || 0), Math.abs(R.disliked.dm || 0)))}${bar('✕ 싫어함', R.disliked.dm, '#8B93A1', Math.max(0.5, Math.abs(R.liked.dm || 0), Math.abs(R.disliked.dm || 0)))}
+      <h3 style="margin-top:22px">순서별 (1번째 · 2번째 · 3번째 블록)</h3>${R.rounds.map((v, i) => bar(`${i + 1}번째`, v, '#0E1116', Math.max(0.5, ...R.rounds.map((x) => Math.abs(x || 0))))).join('')}</div></div>
+  <div class="box" style="margin-top:16px"><h3>회원별 결과와 이번 주 기본 순서</h3><div class="scroll"><table><thead><tr><th>회원</th><th>팀</th><th>기분</th><th>1번째</th><th>2번째</th><th>3번째</th><th>이번 주 기본 45분</th><th>한 달</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
 }
 function view() {
-  if (S.err === 'forbidden' || !coachKey) return `<div class="center"><div><h1 style="font-size:22px;margin-bottom:8px">코치 전용 화면입니다</h1><p>전달받은 코치 링크로 다시 열어 주세요.</p></div></div>`;
+  if (!PV && (S.err === 'forbidden' || !coachKey)) return `<div class="center"><div><h1 style="font-size:24px;font-weight:800;margin-bottom:8px">코치 전용 화면입니다</h1><p>전달받은 코치 링크로 다시 열어 주세요.</p></div></div>`;
   if (!S.d) return `<div class="center">${S.err ? '연결 중… 잠시만 기다려 주세요.' : '불러오는 중…'}</div>`;
-  const c = S.d.class, M = S.d.members, na = nextAction(c, M), un = M.filter((m) => !m.team), running = c.phase[0] === 'r';
-  const cur = c.phase[1] ? +c.phase[1] : 0;
-  const cols = L.TEAMS.map((t) => { const a = M.filter((m) => m.team === t.id); return `<div class="col"><h2>${t.name}<small>${a.length}명</small></h2><p class="ordline">${t.ord.map((k, i) => (i + 1 === cur ? `<b class="cur">${ST[k].ko}</b>` : ST[k].ko)).join(' → ')}</p>${a.map((m) => card(m, c)).join('') || '<p class="subx">아직 없음</p>'}</div>`; }).join('');
-  return `<div class="head"><h1>${esc(c.title)}</h1><span class="phase">${PHL[c.phase]}</span>${na.timer ? `<span class="timer${left() < 0 ? ' over' : ''}" id="timer">${clock(left())}</span>` : ''}
-      <div class="stats"><span><b>${M.length}</b>입장</span><span><b>${M.filter((m) => m.intake).length}</b>체크</span><span><b>${M.filter((m) => m.checks.length >= 3).length}</b>완료</span></div></div>
-    <div class="now"><div class="txt"><b>${na.t}</b><span>${na.s}</span></div>${na.b ? `<button class="btn big" data-act="${na.b[0]}"${S.busy ? ' disabled' : ''}>${na.b[1]}</button>` : ''}</div>
-    ${un.length ? `<div class="col" style="margin-bottom:14px"><h2>아직 팀이 없는 회원<small>${un.length}명</small></h2>${c.phase !== 'intake' && un.some((m) => m.intake) ? '<div class="tools"><button class="btn sm" data-act="late">늦게 온 회원 자동 배정</button></div>' : ''}<div class="cols" style="margin-top:4px">${un.map((m) => card(m, c)).join('')}</div></div>` : ''}
-    <div class="cols">${cols}</div>
+  const c = S.d.class, M = S.d.members, na = nextAction(c, M), un = M.filter((m) => !m.team), cur = c.phase[1] ? +c.phase[1] : 0, ri = railIdx(c.phase), show = document.body.classList.contains('show');
+  const lanes = L.TEAMS.map((t) => { const a = M.filter((m) => m.team === t.id), col = ST[t.ord[0]].c; return `<section class="lane"><header style="background:${col}"><h2>${t.name}<small>${a.length}명</small></h2><div class="route">${t.ord.map((k, i) => `<span class="${i + 1 === cur ? 'cur' : ''}">${UI.icon(k, 14)}${ST[k].ko}</span>`).join('')}</div></header><div class="body">${a.map((m) => card(m, c, col)).join('') || '<p class="empty">아직 없음</p>'}</div></section>`; }).join('');
+  return `<div class="top"><span class="brand">${UI.logo}컨디션 플래닛</span><span class="pill">원데이클래스 · 코치</span>${PV ? '<span class="pill" style="background:#FFF1B8;color:#0E1116">미리보기 · 예시 데이터</span>' : ''}<span class="sp"></span><button class="btn ghost sm" data-act="showmode">${show ? '진행 도구 보이기' : '발표 화면으로'}</button></div>
+    <div class="stage"><h1>${esc(c.title)}</h1><div class="rail">${RAIL.map((n, i) => `<div class="${i < ri ? 'past' : i === ri ? 'cur' : ''}"><i></i>${n}</div>`).join('')}</div>
+      <div class="now"><div class="txt"><b>${na.t}</b><span>${na.s}</span></div>${na.timer ? `<span class="clock n${left() < 0 ? ' over' : ''}" id="timer">${clock(left())}</span>` : ''}${na.b ? `<button class="btn xl" data-act="${na.b[0]}"${S.busy ? ' disabled' : ''}>${na.b[1]}</button>` : ''}</div>
+      <div class="kpis"><span class="kpi"><b class="n">${M.length}</b>입장</span><span class="kpi"><b class="n">${M.filter((m) => m.intake).length}</b>시작 전 체크</span>${na.prog ? `<span class="kpi"><b class="n">${na.prog[0]}/${na.prog[1]}</b>${na.prog[2]}<span class="meter"><i style="width:${na.prog[1] ? Math.round((na.prog[0] / na.prog[1]) * 100) : 0}%"></i></span></span>` : ''}<span class="kpi"><b class="n">${M.filter((m) => m.checks.length >= 3).length}</b>리포트 완료</span></div></div>
+    ${un.length ? `<section class="lane" style="margin-top:18px"><header style="background:var(--ink)"><h2>아직 팀이 없는 회원<small>${un.length}명</small></h2>${c.phase !== 'intake' && un.some((m) => m.intake) ? '<div class="route"><button class="btn ghost sm" data-act="late">늦게 온 회원 자동 배정</button></div>' : ''}</header><div class="body" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">${un.map((m) => card(m, c)).join('')}</div></section>` : ''}
+    <div class="lanes">${lanes}</div>
     ${resultHtml(M)}
-    <h2 class="sec">회원에게 보낼 링크</h2><div class="copy"><input readonly id="mlink" value="${esc(memberUrl())}"><button class="btn ghost" data-act="copy">복사</button></div>
-    <h2 class="sec">리허설 · 설정</h2><p class="subx">혼자서 처음부터 끝까지 돌려 볼 수 있습니다. 가상 회원은 체크 단계에서 스스로 답합니다. 블록 시간을 1분으로 줄이면 5분 안에 끝납니다.</p>
-    <div class="box"><div class="tools"><button class="btn ghost sm" data-act="fill">가상 회원 8명 채우기</button><button class="btn ghost sm" data-act="reset" data-v="bots">가상 회원만 삭제</button><button class="btn ghost sm" data-act="reset" data-v="progress">팀·체크만 초기화 (명단 유지)</button><button class="btn ghost sm" style="color:var(--warm)" data-act="reset" data-v="all">전체 초기화</button>
-      <span>블록 시간 <select data-minutes>${[15, 10, 5, 3, 1].map((v) => `<option${v === c.minutes ? ' selected' : ''}>${v}</option>`).join('')}</select> 분</span>${c.phase !== 'intake' ? '<button class="btn ghost sm" data-act="teams-auto">팀 다시 편성</button>' : ''}<button class="btn ghost sm" data-act="routines">구역별 운동 안내 수정</button></div></div>`;
+    <div class="linkbox"><h2 class="sec" style="font-size:20px">회원에게 보낼 링크</h2><div class="copy"><input readonly id="mlink" value="${esc(memberUrl())}"><button class="btn" data-act="copy">복사</button></div></div>
+    <details class="set"><summary>리허설 · 설정</summary><p class="subx">혼자서 처음부터 끝까지 돌려 볼 수 있습니다. 가상 회원은 체크 단계에서 스스로 답합니다. 블록 시간을 1분으로 줄이면 5분 안에 끝납니다.</p>
+      <div class="toolrow"><button class="btn ghost sm" data-act="fill">가상 회원 8명 채우기</button><button class="btn ghost sm" data-act="reset" data-v="bots">가상 회원만 삭제</button><button class="btn ghost sm" data-act="reset" data-v="progress">팀·체크만 초기화</button><button class="btn ghost sm" style="color:var(--down)" data-act="reset" data-v="all">전체 초기화</button>
+      <span>블록 시간 <select data-minutes>${[15, 10, 5, 3, 1].map((v) => `<option${v === c.minutes ? ' selected' : ''}>${v}</option>`).join('')}</select> 분</span>${c.phase !== 'intake' ? '<button class="btn ghost sm" data-act="teams-auto">팀 다시 편성</button>' : ''}<button class="btn ghost sm" data-act="routines">구역별 운동 안내 수정</button></div></details>`;
 }
 function modalHtml() {
   const m = S.modal; if (!m) return '';
-  if (m.type === 'proxy') return `<div class="scrim"><div class="modal"><h3>${esc(m.name)} · ${m.r}번째 체크 대신 입력</h3><p class="subx">기분</p><div class="five">${[1, 2, 3, 4, 5].map((v) => `<button class="${m.mood === v ? 'on' : ''}" data-px="mood" data-v="${v}">${v}</button>`).join('')}</div><p class="subx">몸 상태</p><div class="five">${[1, 2, 3, 4, 5].map((v) => `<button class="${m.body === v ? 'on' : ''}" data-px="body" data-v="${v}">${v}</button>`).join('')}</div><div class="tools"><button class="btn" data-act="proxy-save"${m.mood && m.body ? '' : ' disabled'}>저장</button><button class="btn ghost" data-act="close">취소</button></div></div></div>`;
-  if (m.type === 'confirm') return `<div class="scrim"><div class="modal"><h3>${esc(m.title)}</h3><p class="subx">${esc(m.text)}</p><div class="tools"><button class="btn warn" data-act="confirm-yes">${esc(m.yes)}</button><button class="btn ghost" data-act="close">취소</button></div></div></div>`;
-  if (m.type === 'routines') { const r = S.d.class.routines || {}; return `<div class="scrim"><div class="modal"><h3>구역별 운동 안내</h3><p class="subx">회원 폰의 블록 화면에 그대로 나옵니다. 한 줄에 하나씩.</p>${L.KEYS.map((k) => `<p class="subx" style="margin:8px 0 4px"><b>${ST[k].ko}</b></p><textarea id="rt-${k}">${esc((r[k] || []).join('\n'))}</textarea>`).join('')}<div class="tools"><button class="btn" data-act="routines-save">저장</button><button class="btn ghost" data-act="close">취소</button></div></div></div>`; }
+  if (m.type === 'proxy') return `<div class="scrim"><div class="modal"><h3>${esc(m.name)} · ${m.r}번째 체크 대신 입력</h3><p class="subx" style="margin:10px 0 0">기분</p><div class="five">${[1, 2, 3, 4, 5].map((v) => `<button class="${m.mood === v ? 'on' : ''}" data-px="mood" data-v="${v}">${v}</button>`).join('')}</div><p class="subx" style="margin:0">몸 상태</p><div class="five">${[1, 2, 3, 4, 5].map((v) => `<button class="${m.body === v ? 'on' : ''}" data-px="body" data-v="${v}">${v}</button>`).join('')}</div><div class="toolrow"><button class="btn" data-act="proxy-save"${m.mood && m.body ? '' : ' disabled'}>저장</button><button class="btn ghost" data-act="close">취소</button></div></div></div>`;
+  if (m.type === 'confirm') return `<div class="scrim"><div class="modal"><h3>${esc(m.title)}</h3><p class="subx">${esc(m.text)}</p><div class="toolrow"><button class="btn warn" data-act="confirm-yes">${esc(m.yes)}</button><button class="btn ghost" data-act="close">취소</button></div></div></div>`;
+  if (m.type === 'routines') { const r = S.d.class.routines || {}; return `<div class="scrim"><div class="modal"><h3>구역별 운동 안내</h3><p class="subx">회원 폰의 블록 화면에 그대로 나옵니다. 한 줄에 하나씩.</p>${L.KEYS.map((k) => `<p style="margin:10px 0 4px;font-weight:800;color:${ST[k].c}">${ST[k].ko}</p><textarea id="rt-${k}">${esc((r[k] || []).join('\n'))}</textarea>`).join('')}<div class="toolrow" style="margin-top:12px"><button class="btn" data-act="routines-save">저장</button><button class="btn ghost" data-act="close">취소</button></div></div></div>`; }
   return '';
 }
 function render(force) {
   const html = view(), sig = html.replace(/id="timer">[^<]*</, '') + S.busy;
   if (!force && sig === S.sig) { const t = $('#timer'); if (t) { t.textContent = clock(left()); t.classList.toggle('over', left() < 0); } return; }
-  if (!force && document.activeElement && document.activeElement.tagName === 'SELECT') return;   // do not close an open dropdown
+  if (!force && document.activeElement && (document.activeElement.tagName === 'SELECT' || document.querySelector('details.set[open]') && document.activeElement.closest && document.activeElement.closest('details.set'))) return;
+  const open = !!document.querySelector('details.set[open]');
   S.sig = sig; $('#root').innerHTML = html;
+  if (open) { const d = document.querySelector('details.set'); if (d) d.open = true; }
 }
 const modal = (m) => { S.modal = m; $('#modal').innerHTML = modalHtml(); };
 const ready = () => S.d.members.filter((m) => m.intake);
@@ -298,26 +370,28 @@ document.addEventListener('click', (ev) => {
   const b = ev.target.closest('button'); if (!b) return; const d = b.dataset, a = d.act || '';
   if (d.px) { S.modal[d.px] = +d.v; modal(S.modal); return; }
   if (a === 'close') return modal(null);
-  if (a === 'teams-auto') { const plan = L.assign(ready()); const go = async () => { await rpc('v15_coach_teams', { p_assign: plan }); if (S.d.class.phase === 'intake') await rpc('v15_coach_phase', { p_phase: 'teams' }); }; if (S.d.class.phase === 'intake') act(go(), '팀을 편성했습니다.'); else modal({ type: 'confirm', title: '팀을 다시 편성할까요?', text: '이미 진행 중이면 회원들의 순서가 바뀝니다.', yes: '다시 편성', fn: go }); }
-  else if (a === 'late') act(rpc('v15_coach_teams', { p_assign: S.d.members.filter((m) => m.intake && !m.team).map(L.one) }), '배정했습니다.');
-  else if (a.startsWith('phase:')) act(rpc('v15_coach_phase', { p_phase: a.slice(6) }));
+  if (a === 'showmode') { document.body.classList.toggle('show'); render(true); return; }
+  if (a === 'teams-auto') { const plan = L.assign(ready()); const go = async () => { await rpc('v15_coach_teams', { p_assign: plan }); if (S.d.class.phase === 'intake') await rpc('v15_coach_phase', { p_phase: 'teams' }); }; if (S.d.class.phase === 'intake') act(go, '팀을 편성했습니다.'); else modal({ type: 'confirm', title: '팀을 다시 편성할까요?', text: '이미 진행 중이면 회원들의 순서가 바뀝니다.', yes: '다시 편성', fn: go }); }
+  else if (a === 'late') act(() => rpc('v15_coach_teams', { p_assign: S.d.members.filter((m) => m.intake && !m.team).map(L.one) }), '배정했습니다.');
+  else if (a.startsWith('phase:')) act(() => rpc('v15_coach_phase', { p_phase: a.slice(6) }));
   else if (a === 'copy') { const el = $('#mlink'); (navigator.clipboard ? navigator.clipboard.writeText(el.value) : Promise.reject()).then(() => toast('복사했습니다.')).catch(() => { el.select(); toast('선택된 주소를 복사해 주세요.'); }); }
-  else if (a === 'fill') act(rpc('v15_coach_fill', { p_n: 8 }), '가상 회원 8명을 넣었습니다.');
+  else if (a === 'fill') act(() => rpc('v15_coach_fill', { p_n: 8 }), '가상 회원 8명을 넣었습니다.');
   else if (a === 'reset') { const t = { bots: ['가상 회원을 삭제할까요?', '가상 회원과 그 기록만 지웁니다.'], progress: ['팀과 체크 기록을 초기화할까요?', '명단과 시작 전 체크는 남고, 팀·블록 체크·신청 여부가 지워집니다.'], all: ['전체를 초기화할까요?', '이 수업의 모든 회원과 기록이 영구 삭제됩니다. 실제 수업이 끝난 뒤에는 누르지 마세요.'] }[d.v]; modal({ type: 'confirm', title: t[0], text: t[1], yes: '초기화', fn: () => rpc('v15_coach_reset', { p_what: d.v }) }); }
-  else if (a === 'confirm-yes') { const fn = S.modal.fn; modal(null); act(fn(), '완료했습니다.'); }
+  else if (a === 'confirm-yes') { const fn = S.modal.fn; modal(null); act(fn, '완료했습니다.'); }
   else if (a === 'remove') { const m = S.d.members.find((x) => x.id === d.id); modal({ type: 'confirm', title: `${m.name} 님을 명단에서 삭제할까요?`, text: '이 회원의 기록이 지워집니다.', yes: '삭제', fn: () => rpc('v15_coach_remove', { p_member: d.id }) }); }
   else if (a === 'proxy') { const m = S.d.members.find((x) => x.id === d.id); modal({ type: 'proxy', id: m.id, name: m.name, r: +d.r, mood: null, body: null }); }
-  else if (a === 'proxy-save') { const m = S.modal; modal(null); act(rpc('v15_coach_check', { p_member: m.id, p_round: m.r, p_mood: m.mood, p_body: m.body }), '저장했습니다.'); }
+  else if (a === 'proxy-save') { const m = S.modal; modal(null); act(() => rpc('v15_coach_check', { p_member: m.id, p_round: m.r, p_mood: m.mood, p_body: m.body }), '저장했습니다.'); }
   else if (a === 'routines') modal({ type: 'routines' });
-  else if (a === 'routines-save') { const r = {}; L.KEYS.forEach((k) => { r[k] = $('#rt-' + k).value.split('\n').map((x) => x.trim()).filter(Boolean).slice(0, 6); }); modal(null); act(rpc('v15_coach_config', { p_routines: r, p_minutes: null }), '저장했습니다.'); }
+  else if (a === 'routines-save') { const r = {}; L.KEYS.forEach((k) => { r[k] = $('#rt-' + k).value.split('\n').map((x) => x.trim()).filter(Boolean).slice(0, 6); }); modal(null); act(() => rpc('v15_coach_config', { p_routines: r, p_minutes: null }), '저장했습니다.'); }
 });
 document.addEventListener('change', (ev) => {
   const el = ev.target;
-  if (el.dataset.move && el.value) { const m = S.d.members.find((x) => x.id === el.dataset.move), t = L.TEAMS.find((x) => x.id === +el.value); el.blur(); act(rpc('v15_coach_teams', { p_assign: [{ id: m.id, team: t.id, ord: t.ord, kind: t.name, reason: m.intake ? L.reason(m, t) : t.line }] }), '옮겼습니다.'); }
-  else if ('minutes' in el.dataset) { el.blur(); act(rpc('v15_coach_config', { p_routines: null, p_minutes: +el.value }), '블록 시간을 바꿨습니다.'); }
+  if (el.dataset.move && el.value) { const m = S.d.members.find((x) => x.id === el.dataset.move), t = L.TEAMS.find((x) => x.id === +el.value); el.blur(); act(() => rpc('v15_coach_teams', { p_assign: [{ id: m.id, team: t.id, ord: t.ord, kind: t.name, reason: m.intake ? L.reason(m, t) : t.line }] }), '옮겼습니다.'); }
+  else if ('minutes' in el.dataset) { el.blur(); act(() => rpc('v15_coach_config', { p_routines: null, p_minutes: +el.value }), '블록 시간을 바꿨습니다.'); }
 });
+if (q.get('show')) document.body.classList.add('show');
 setInterval(() => { if (!S.modal) render(); }, 1000);
-setInterval(() => { if (!document.hidden && !S.modal && !S.busy) load(); }, 3000);
+setInterval(() => { if (!PV && !document.hidden && !S.modal && !S.busy) load(); }, 3000);
 load();
 })();
 </script>
