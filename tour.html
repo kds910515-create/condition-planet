@@ -70,6 +70,20 @@ section.alt .box{background:var(--bg)}
 .funnel .now{background:var(--ink);color:#fff}.funnel .now p,.funnel .now .s{color:#C9CED6}
 footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
 @media (max-width:900px){.hero{grid-template-columns:1fr;padding:44px 0 30px}.g3,.funnel{grid-template-columns:1fr}.funnel div{border-left:0;border-top:1px solid var(--line)}section{padding:44px 0}.wrap{padding:0 20px}.phones{margin:0 -20px;padding-inline:20px}header .btn{display:none}}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+.box.tb{padding:24px 24px 14px}
+.box.tb h3{font-size:19px}
+.box.tb .cap{font-size:14px;color:var(--ink3);margin-top:2px}
+.pt{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;line-height:1.5}
+.pt th{text-align:left;font-size:12px;font-weight:800;color:var(--ink3);padding:8px 10px 8px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+.pt td{padding:11px 10px 11px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+.pt tr:last-child td{border-bottom:0}
+.pt td:first-child{font-weight:800;color:var(--ink);white-space:nowrap}
+.pt b{color:var(--ink);font-weight:700}
+.pt .c{color:var(--cardio);font-weight:800}.pt .w{color:var(--weights);font-weight:800}
+.mix{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;margin-top:6px;min-width:90px}
+.mix i{display:block;border-radius:3px}
+@media (max-width:900px){.g2{grid-template-columns:1fr}.box.tb{overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -78,23 +92,34 @@ footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
 <div class="wrap hero">
   <div><p class="k">CONDITION PLANET · ONE-DAY CLASS</p>
     <h1>"웨이트 40분 하세요"는<br><em>답이 아닙니다.</em></h1>
-    <p class="lead">같은 운동도 사람마다, 그날의 상태마다 다르게 작용합니다. 컨디션 플래닛은 45분 수업 한 번으로 회원 한 명 한 명에게 무엇이 기분과 몸을 바꾸는지 숫자로 보여 줍니다.</p>
+    <p class="lead">같은 운동도 사람마다, 그날의 상태마다 다르게 작용합니다. 컨디션 플래닛은 목표와 수준을 먼저 묻고, 유산소·웨이트·스트레칭에서 무엇을 어떤 강도로 할지 처방한 뒤, 그 운동이 기분과 몸을 어떻게 바꿨는지 숫자로 보여 줍니다.</p>
     <div class="cta"><a class="btn lg" href="./?preview=join" target="_blank" rel="noopener">회원 화면 직접 눌러 보기</a><a class="btn lg ghost" href="#coach">코치 화면 보기</a></div></div>
   <div class="trio"><div style="background:var(--cardio)">유산소 <small>15분 → 체크</small></div><div style="background:var(--weights)">웨이트 <small>15분 → 체크</small></div><div style="background:var(--stretch)">스트레칭 <small>15분 → 체크</small></div></div>
 </div>
 
 <section class="alt"><div class="wrap">
-  <p class="k">회원이 보는 화면</p><h2>링크 하나로 들어와 45분 뒤 자기 리포트를 받아 갑니다.</h2><p class="sub">앱 설치도 회원가입도 없습니다. 아래는 실제 화면이며 직접 눌러 볼 수 있습니다.</p>
+  <p class="k">회원이 보는 화면</p><h2>헬스장이 처음인 회원도 이 화면 하나로 끝까지 갑니다.</h2><p class="sub">앱 설치도 회원가입도 없습니다. 목표 설정부터 수업, 리포트, 다음 주에 혼자 하는 운동까지 한 링크에서 이어집니다. 아래는 실제 화면이며 직접 눌러 볼 수 있습니다.</p>
   <div class="phones" id="phones"></div>
 </div></section>
 
-<section id="coach"><div class="wrap">
+<section id="plan"><div class="wrap">
+  <p class="k">플랜 시스템</p><h2>목표가 강도를 정하고, 수준이 운동 내용을 정합니다.</h2><p class="sub">회원이 고른 목표(4가지)와 수준(3단계)에 따라 유산소 속도와 숨 강도, 웨이트 기구와 세트·횟수·휴식, 주간 시간 배분이 자동으로 정해집니다. 아래 표는 실제 앱이 쓰는 처방 규칙에서 그대로 뽑은 것입니다.</p>
+  <div class="g2"><div class="box tb"><h3>목표가 바뀌면 · 초급 기준</h3><p class="cap">같은 15분이라도 강도와 방식이 달라집니다.</p><table class="pt"><thead><tr><th>목표</th><th>유산소 15분</th><th>웨이트 15분</th><th>하루 45분 배분</th></tr></thead><tbody><tr><td>다이어트</td><td><b>경사 걷기</b><br>5.0~5.5km/h · 경사 4~6%<br><span class="c">숨 5~6</span> · 숨은 차지만 대화가 되는 정도</td><td><span class="w">2세트 × 15회 · 휴식 45초</span><br>15회를 하고도 3번은 더 할 수 있는 무게</td><td>유산소 20 · 웨이트 15 · 스트레칭 10분<span class="mix"><i style="flex:20;background:#FF6A3D"></i><i style="flex:15;background:#3D5AFE"></i><i style="flex:10;background:#0FA37A"></i></span></td></tr><tr><td>근력</td><td><b>가볍게 걷기</b><br>5.0~5.5km/h · 경사 1~2%<br><span class="c">숨 4~5</span> · 숨은 차지만 대화가 되는 정도</td><td><span class="w">2세트 × 10~12회 · 휴식 75초</span><br>10~12회를 하고도 3번은 더 할 수 있는 무게</td><td>유산소 10 · 웨이트 25 · 스트레칭 10분<span class="mix"><i style="flex:10;background:#FF6A3D"></i><i style="flex:25;background:#3D5AFE"></i><i style="flex:10;background:#0FA37A"></i></span></td></tr><tr><td>체력</td><td><b>빠른 걷기 인터벌</b><br>빠르게 60초 + 천천히 60초 × 5번<br><span class="c">숨 5~6</span> · 숨은 차지만 대화가 되는 정도</td><td><span class="w">2세트 × 15회 · 휴식 30~45초</span><br>15회를 하고도 3번은 더 할 수 있는 무게</td><td>유산소 20 · 웨이트 15 · 스트레칭 10분<span class="mix"><i style="flex:20;background:#FF6A3D"></i><i style="flex:15;background:#3D5AFE"></i><i style="flex:10;background:#0FA37A"></i></span></td></tr><tr><td>스트레스</td><td><b>편하게 걷기</b><br>4.5~5.0km/h · 경사 0~1%<br><span class="c">숨 3~4</span> · 노래도 부를 수 있는 정도</td><td><span class="w">2세트 × 12회 · 휴식 60초</span><br>12회를 하고도 3번은 더 할 수 있는 무게</td><td>유산소 15 · 웨이트 15 · 스트레칭 15분<span class="mix"><i style="flex:15;background:#FF6A3D"></i><i style="flex:15;background:#3D5AFE"></i><i style="flex:15;background:#0FA37A"></i></span></td></tr></tbody></table></div>
+    <div class="box tb"><h3>수준이 바뀌면 · 다이어트 기준</h3><p class="cap">기구에서 프리웨이트로, 걷기에서 인터벌로 올라갑니다.</p><table class="pt"><thead><tr><th>수준</th><th>유산소 15분</th><th>웨이트 15분</th></tr></thead><tbody><tr><td>초급<br><span style="font-weight:500;color:var(--ink3);font-size:12px;white-space:normal">헬스장이 처음이거나 3개월이 안 됐어요</span></td><td><b>경사 걷기</b><br>5.0~5.5km/h · 경사 4~6%<br><span class="c">숨 5~6</span> · 숨은 차지만 대화가 되는 정도</td><td><b>레그프레스 · 랫풀다운 · 체스트프레스</b><br><span class="w">2세트 × 15회 · 휴식 45초</span><br>15회를 하고도 3번은 더 할 수 있는 무게</td></tr><tr><td>중급<br><span style="font-weight:500;color:var(--ink3);font-size:12px;white-space:normal">3개월 넘게 꾸준히 해 왔어요</span></td><td><b>러닝 인터벌</b><br>빠르게 60초 + 천천히 90초 × 4번<br><span class="c">숨 7~8</span> · 말하기 어려운 정도</td><td><b>고블릿 스쿼트 · 시티드로우 · 덤벨 벤치프레스</b><br><span class="w">3세트 × 12회 · 휴식 30초</span><br>12회를 하고도 2번은 더 할 수 있는 무게</td></tr><tr><td>상급<br><span style="font-weight:500;color:var(--ink3);font-size:12px;white-space:normal">1년 넘게 했고 프리웨이트가 익숙해요</span></td><td><b>고강도 인터벌</b><br>빠르게 40초 + 천천히 60초 × 6번<br><span class="c">숨 8~9</span> · 말하기 어려운 정도</td><td><b>바벨 스쿼트 · 벤치프레스 · 바벨 로우</b><br><span class="w">3세트 × 10회 · 휴식 45초</span><br>10회를 하고도 2번은 더 할 수 있는 무게</td></tr></tbody></table></div></div>
+  <div class="g3">
+    <div class="box"><p class="t">강도 기준</p><h3>속도가 아니라 숨</h3><ul><li>모든 유산소 처방에 <b>숨 1~10 척도</b>가 붙습니다. "숨은 차지만 대화가 되는 정도"처럼 초보자가 바로 알 수 있는 말로 안내합니다.</li><li>웨이트는 <b>"15회를 하고도 3번은 더 할 수 있는 무게"</b>처럼 숫자 없이도 맞출 수 있는 기준을 줍니다.</li></ul></div>
+    <div class="box"><p class="t">오늘 상태 반영</p><h3>처진 날은 낮춰서</h3><ul><li>시작 전 에너지나 몸 상태가 낮으면 <b>속도와 무게를 한 단계 낮춘</b> 처방이 나옵니다.</li><li>기분이 2 이하인 날은 수업에서 기분을 가장 올린 운동 <b>15분만 하고 가는 규칙</b>을 제안합니다.</li></ul></div>
+    <div class="box"><p class="t">진행</p><h3>4주 동안 조금씩</h3><ul><li>1주차는 익숙해지는 주, 2~3주차는 시간·경사·세트를 하나씩 올리고, 4주차에 다시 잽니다.</li><li>혼자 운동한 날도 <b>전후 기분이 기록</b>되어 코치 화면에 "수업 후 혼자 N회"로 보입니다.</li></ul></div>
+  </div>
+</div></section>
+
+<section id="coach" class="alt"><div class="wrap">
   <p class="k">코치가 보는 화면</p><h2>코치는 버튼 하나씩만 누르면 수업이 흘러갑니다.</h2><p class="sub">팀 편성, 타이머, 체크 수집, 수업 뒤 결론까지 한 화면입니다. 태블릿이나 TV에 그대로 띄워 발표 화면으로 씁니다.</p>
   <div class="tabs" id="tabs"><button class="on" data-v="live">수업 진행 중</button><button data-v="done">수업이 끝난 뒤</button></div>
   <div class="screen" id="screen"><iframe id="cf" title="코치 화면" src="coach.html?preview=live&show=1"></iframe></div>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <p class="k">왜 이 제품인가</p><h2>기획, 운영, 사업 구조를 한 장으로.</h2>
   <div class="g3">
     <div class="box"><p class="t">기획</p><h3>출석은 아는데, 기분은 모른다</h3><ul>
@@ -111,7 +136,7 @@ footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
       <li>센터는 지점 단위 월 구독, 회원은 무료입니다. 가격안은 지점당 월 4.9만~19만 원입니다.</li></ul></div>
   </div>
   <div class="funnel">
-    <div class="now"><p class="s">지금 · 데모</p><h3>원데이클래스</h3><p>45분, 세 블록, 블록마다 체크. 끝나면 개인 리포트와 일주일 플랜.</p></div>
+    <div class="now"><p class="s">지금 · 데모</p><h3>원데이클래스</h3><p>목표·수준 설정, 45분 세 블록 가이드, 블록마다 체크. 끝나면 개인 리포트와 요일별로 따라 하는 플랜.</p></div>
     <div><p class="s">다음</p><h3>한 달 프로그램</h3><p>운동할 때마다 전후 한 번씩 기록. 한 달 뒤 그 사람에게 맞는 운동과 4주 플랜을 줍니다.</p></div>
     <div><p class="s">그다음</p><h3>지점 구독</h3><p>코치에게는 누가 좋아지고 누가 멀어지는지, 본사에는 지점별 프로그램 효과가 보입니다.</p></div>
   </div>
@@ -123,12 +148,15 @@ footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
 (() => {
   const shots = [
     ['join', '입장', '이름과 뒷 4자리만 입력합니다.'],
-    ['intake', '선호 체크', '유산소·웨이트·스트레칭을 좋아하는지 한 화면에 하나씩 묻습니다.'],
-    ['intake2', '지금 상태', '기분, 몸 상태, 에너지. 누르면 바로 다음으로 넘어갑니다.'],
-    ['team', '팀과 순서', '비슷한 세 명이 한 팀이 되고, 왜 이 순서인지 이유를 받습니다.'],
-    ['round', '15분 블록', '구역 색, 남은 시간, 할 운동. 이때는 폰을 내려놓습니다.'],
+    ['goal', '목표 설정', '다이어트, 근력, 체력, 스트레스. 목표를 가장 먼저 묻습니다.'],
+    ['level', '수준', '초급·중급·상급. 수준에 맞는 기구와 무게, 속도로 안내합니다.'],
+    ['intake2', '선호와 지금 상태', '좋아하는 운동, 기분, 몸 상태, 에너지. 누르면 바로 넘어갑니다.'],
+    ['team', '팀, 순서, 내 처방', '비슷한 세 명이 한 팀이 되고, 구역마다 무엇을 어떤 강도로 할지 받습니다.'],
+    ['round', '15분 블록 가이드', '남은 시간과 지금 할 동작. 몇 분에 무엇을 하는지 순서대로 따라갑니다.'],
     ['check', '블록 뒤 체크', '기분과 몸 상태, 두 번만 누르면 저장됩니다.'],
-    ['report', '개인 리포트', '블록별 변화, 숫자가 말해 주는 것, 일주일 플랜, 한 달 뒤.'],
+    ['report', '개인 리포트', '블록별 변화, 숫자가 말해 주는 것, 이번 주 구성, 한 달 뒤.'],
+    ['plan', '내 플랜', '요일별 운동 내용과 강도, 4주 진행, 혼자 한 운동 기록.'],
+    ['solo', '혼자 따라 하기', '수업이 끝난 뒤에도 같은 링크로 타이머와 동작 안내를 받습니다.'],
   ];
   document.getElementById('phones').innerHTML = shots.map(([k, t, d], i) => `<div class="ph"><div class="frame"><div class="in"><iframe title="${t}" loading="lazy" src="./?preview=${k}"></iframe></div></div><b><i>${i + 1}</i>${t}</b><p>${d}</p></div>`).join('');
   const screen = document.getElementById('screen'), cf = document.getElementById('cf');

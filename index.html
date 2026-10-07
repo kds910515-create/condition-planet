@@ -128,6 +128,62 @@ h1,h2,h3,p,ul,ol{margin:0;padding:0} ul,ol{list-style:none}
 .out li svg{margin-top:2px}
 .cta{position:sticky;bottom:calc(var(--sab) + 10px);margin-top:18px;z-index:3}
 .cta .btn{margin:0;box-shadow:0 10px 30px rgba(14,17,22,.25)}
+/* plan system */
+.opt .em svg{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.chips .tag{white-space:normal;line-height:1.4;border-radius:10px;padding:5px 9px}
+.rx-n{font-size:13px;font-weight:700;color:var(--ink2)}
+.rx-t{font-size:23px;font-weight:800;letter-spacing:-.025em;line-height:1.3;margin-top:2px}
+.rpe{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-top:14px}
+.rpe i{height:10px;border-radius:3px;background:var(--soft)}
+.rpe-l{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ink3);margin-top:5px}
+.rpe-l b{color:var(--ink);font-weight:800}
+.tl{margin-top:16px}
+.tl li{display:grid;grid-template-columns:68px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px solid var(--soft)}
+.tl .tm{font-size:12px;font-weight:700;color:var(--ink3);padding-top:2px}
+.tl b{display:block;font-size:15px;font-weight:800;line-height:1.4}
+.tl p{font-size:14px;color:var(--ink2);line-height:1.5;margin-top:1px}
+.tl small{display:block;font-size:13px;color:var(--ink3);line-height:1.5;margin-top:4px}
+.tl.live li.past{opacity:.38}.tl.live li.past small,.tl.live li.next small{display:none}
+.tl.live li.now{margin:0 -12px;padding:12px;border-radius:14px;border-top-color:transparent;background:var(--soft)}
+.tl.live li.now+li{border-top-color:transparent}
+.tl.live li.now .tm{color:var(--ink)}
+.tip{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--soft);font-size:14px;line-height:1.6;color:var(--ink2)}
+.tip b{color:var(--ink)}
+details.how{margin-top:12px;border-top:1px solid var(--soft);padding-top:12px}
+details.how summary{font-size:14px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.how summary::-webkit-details-marker{display:none}
+details.how summary::after{content:"+";font-size:18px;color:var(--ink3);font-weight:600}
+details.how[open] summary::after{content:"−"}
+details.how li{font-size:14px;color:var(--ink2);line-height:1.6;padding:6px 0 0 14px;position:relative}
+details.how li::before{content:"";position:absolute;left:0;top:16px;width:5px;height:5px;border-radius:50%;background:var(--ink3)}
+.stop .rxs{display:block;font-size:13px;font-weight:600;color:var(--ink2);line-height:1.45;margin-top:3px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--soft);border-radius:14px;padding:4px;margin-bottom:20px}
+.seg button{height:40px;border-radius:11px;text-align:center;font-size:14px;font-weight:700;color:var(--ink2)}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(14,17,22,.08)}
+.dayb{display:block;width:100%;padding:14px 0;border-top:1px solid var(--soft)}
+.dayb:first-of-type{border-top:0;padding-top:0}
+.dayb .hd{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800}
+.dayb .hd .d{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}
+.dayb .hd .go{margin-left:auto;font-size:13px;font-weight:700;color:var(--ink3)}
+.dayb .seq{margin-top:10px;height:8px}.dayb .seq span{border-radius:4px}
+.ln{display:grid;grid-template-columns:8px minmax(0,1fr);gap:9px;font-size:13px;line-height:1.5;color:var(--ink2);margin-top:7px}
+.ln i{width:8px;height:8px;border-radius:50%;margin-top:6px}
+.ln b{color:var(--ink);font-weight:700}
+.wk li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:11px 0;border-top:1px solid var(--soft);font-size:14px;line-height:1.55;color:var(--ink2)}
+.wk li:first-child{border-top:0;padding-top:0}
+.wk li b{font-size:13px;font-weight:800;color:var(--ink)}
+.rl li{display:grid;grid-template-columns:44px 52px minmax(0,1fr);gap:8px;padding:8px 0;font-size:13px;color:var(--ink2);align-items:center}
+.rl li b{font-weight:800;color:var(--ink)}
+.rl i{display:block;height:8px;border-radius:3px;background:var(--ink)}
+.lg li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--soft);font-size:14px}
+.lg li:first-child{border-top:0;padding-top:0}
+.lg small{display:block;font-size:12px;color:var(--ink3);font-weight:600}
+.lg b{font-weight:800}
+.mini{display:inline-flex;align-items:center;height:34px;padding:0 12px;border-radius:10px;background:var(--soft);font-size:13px;font-weight:700;color:var(--ink2);margin-top:12px}
+.sh{display:flex;align-items:center;gap:12px}
+.sh .ic{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;color:#fff;flex:none}
+.sh b{display:block;font-size:17px;font-weight:800}.sh small{font-size:12px;color:var(--ink3);font-weight:700}
 .center{flex:1;display:grid;place-items:center;color:var(--ink3)}
 .fade{animation:f .28s ease both}@keyframes f{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (min-width:520px){body{background:#E9EBEF}#app{background:var(--bg)}}
@@ -266,6 +322,152 @@ const UI = {
 const ROUTINES = { cardio: ['러닝머신 또는 사이클', '처음 3분 천천히 → 9분 숨이 조금 찰 정도 → 마지막 3분 천천히', '옆 사람과 대화가 되는 속도면 충분합니다'], weights: ['머신 3가지: 레그프레스 · 랫풀다운 · 체스트프레스', '각 12회 × 2세트, 마지막 2~3회가 힘든 무게', '세트 사이 1분 쉬기, 자세가 흔들리면 무게를 낮춥니다'], stretch: ['폼롤러: 등 · 엉덩이 · 허벅지 각 1분', '고관절 · 햄스트링 스트레칭 각 30초 × 2', '캣카우 10회, 마지막 2분은 누워서 호흡'] };
 g.CPClass = { UI, ROUTINES, ST, KEYS, TEAMS, score, bestTeam, assign, one, reason, rows, report, summary, sg };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
+
+/* Condition Planet V1.5 — plan system (loaded after logic.js).
+   goal (diet / strength / stamina / relief) × level (beg / mid / adv) × station → what to do, at what intensity, step by step.
+   Speeds and loads are starting points; the breathing scale (1–10) always wins. General exercise guidance, not medical advice. */
+(function (g) {
+'use strict';
+const L = g.CPClass, ST = L.ST;
+const GOALS = {
+  diet: { ko: '다이어트', d: '체지방을 줄이고 싶어요' },
+  strength: { ko: '근력 · 탄탄한 몸', d: '근육을 키우고 라인을 잡고 싶어요' },
+  stamina: { ko: '체력 · 건강', d: '쉽게 지치지 않는 몸을 원해요' },
+  relief: { ko: '스트레스 · 컨디션', d: '기분 전환과 회복이 필요해요' },
+};
+const LEVELS = {
+  beg: { ko: '초급', d: '헬스장이 처음이거나 3개월이 안 됐어요' },
+  mid: { ko: '중급', d: '3개월 넘게 꾸준히 해 왔어요' },
+  adv: { ko: '상급', d: '1년 넘게 했고 프리웨이트가 익숙해요' },
+};
+const PRIN = {
+  diet: '체지방을 줄이려면 오래 유지할 수 있는 중간 강도의 유산소로 운동량을 쌓고, 근력 운동으로 근육을 지켜야 합니다. 식사 조절이 함께 가야 숫자가 바뀝니다.',
+  strength: '근육은 충분한 무게와 휴식, 그리고 조금씩 늘려 가는 과정에서 자랍니다. 유산소는 몸을 데우는 정도로 둡니다.',
+  stamina: '체력은 조금 힘든 구간을 반복해서 넘길 때 늡니다. 주 150분의 중강도 활동이 기준선입니다.',
+  relief: '기분 전환이 목표라면 힘들게 할 필요가 없습니다. 편한 강도로 자주 움직이는 것이 가장 효과적입니다.',
+};
+const n1 = (v) => (Math.round(v * 10) / 10).toString();
+const rng = (a) => (a[0] === a[1] ? n1(a[0]) : n1(a[0]) + '~' + n1(a[1]));
+const k1 = (v) => v.toFixed(1), krng = (a) => k1(a[0]) + '~' + k1(a[1]);
+const say = (hi) => (hi <= 4 ? '편안함 · 노래도 부를 수 있는 정도' : hi <= 6 ? '숨은 차지만 대화가 되는 정도' : hi <= 7 ? '짧은 문장만 말할 수 있는 정도' : '말하기 어려운 정도');
+const mm = (v) => { const r = Math.round(v * 2) / 2; return (r % 1 ? r.toFixed(1) : String(r)); };
+
+/* ---------------- cardio ---------------- */
+const st = (name, rpe, warm, kmh, inc) => ({ name, rpe, warm, type: 'steady', kmh, inc });
+const iv = (name, rpe, warm, reps, hs, hk, es, ek) => ({ name, rpe, warm, type: 'interval', reps, hs, hk, es, ek });
+const CARDIO = {
+  beg: { diet: st('경사 걷기', [5, 6], 4.5, [5.0, 5.5], [4, 6]), stamina: iv('빠른 걷기 인터벌', [5, 6], 4.5, 5, 60, 6.0, 60, 4.5), strength: st('가볍게 걷기', [4, 5], 4.5, [5.0, 5.5], [1, 2]), relief: st('편하게 걷기', [3, 4], 4.0, [4.5, 5.0], [0, 1]) },
+  mid: { diet: iv('러닝 인터벌', [7, 8], 5.5, 4, 60, 9.5, 90, 5.5), stamina: st('일정한 조깅', [6, 7], 5.5, [7.5, 8.5], [0, 1]), strength: st('경사 빠른 걷기', [5, 6], 5.0, [5.8, 6.2], [6, 8]), relief: st('가벼운 조깅', [4, 5], 5.0, [6.0, 6.5], [0, 1]) },
+  adv: { diet: iv('고강도 인터벌', [8, 9], 6.0, 6, 40, 13, 60, 6.0), stamina: st('템포 러닝', [7, 8], 6.5, [10, 11], [0, 1]), strength: st('가파른 경사 걷기', [6, 7], 5.5, [6.0, 6.5], [10, 12]), relief: st('편한 조깅', [4, 5], 6.0, [7.5, 8.0], [0, 1]) },
+};
+const WHY = {
+  cardio: { diet: '다이어트의 기본은 오래 유지할 수 있는 중간 강도입니다. 숨은 차지만 대화가 되는 선을 지키세요.', stamina: '조금 힘든 구간과 쉬운 구간을 번갈아 하면 체력이 빨리 늡니다.', strength: '근력이 목표인 날 유산소는 몸을 데우는 정도면 충분합니다.', relief: '기분 전환에는 편안한 강도가 맞습니다. 힘들게 할 필요가 없습니다.' },
+  weights: { diet: '감량 중에도 근육을 지켜야 다시 찌지 않습니다. 큰 근육을, 쉬는 시간은 짧게.', strength: '근육은 천천히 내리는 동작과 충분한 휴식에서 자랍니다.', stamina: '쉬는 시간을 줄여 오래 버티는 힘을 기릅니다.', relief: '가벼운 무게로 움직임과 호흡에 집중합니다.' },
+  stretch: { diet: '몸을 풀고 코어를 깨워 두면 다음 운동에서 다치지 않고 더 많이 움직일 수 있습니다.', strength: '어깨와 가슴을 열어 두면 웨이트 자세가 안정됩니다.', stamina: '코어가 깨어 있어야 달릴 때 자세가 무너지지 않습니다.', relief: '긴 날숨은 긴장을 내려 줍니다. 반동 없이 천천히.' },
+};
+const HOWTO = {
+  cardio: ['러닝머신 양옆 발판에 서서 시작 버튼을 누르고, 벨트가 움직이면 올라섭니다.', '손잡이를 잡지 말고 팔을 자연스럽게 흔듭니다. 속도와 경사는 화면의 +/- 버튼으로 바꿉니다.', '어지럽거나 가슴이 답답하면 바로 정지 버튼을 누르고 코치를 부르세요.'],
+  weights: ['기구에 앉기 전에 무게 핀과 의자 높이를 먼저 맞춥니다. 모르겠으면 코치에게 물어보세요.', '힘을 줄 때 숨을 내쉬고, 돌아올 때 들이쉽니다. 숨을 참지 않습니다.', '들 때 2초, 내릴 때 3초. 무게가 "쾅" 하고 떨어지면 너무 무거운 겁니다.'],
+  stretch: ['늘릴 때 반동을 주지 않습니다. 시원한 정도에서 멈추고 숨을 내쉽니다.', '찌릿하거나 날카로운 통증이 오면 범위를 줄입니다.', '좌우를 같은 시간만큼 합니다.'],
+};
+/* ---------------- weights ---------------- */
+const WT = {
+  beg: { rir: 3, ex: [['레그프레스', '등과 엉덩이를 패드에 붙이고 무릎이 발끝 방향을 향하게. 다리를 펼 때 무릎을 끝까지 잠그지 않습니다.'], ['랫풀다운', '허벅지 패드를 고정하고 바를 쇄골 쪽으로 당깁니다. 어깨가 귀 쪽으로 올라가지 않게.'], ['체스트프레스', '손잡이가 가슴 중간 높이에 오도록 의자를 맞추고, 팔꿈치가 완전히 펴지기 직전까지 밉니다.']],
+    by: { diet: [2, '15회', '45초'], strength: [2, '10~12회', '75초'], stamina: [2, '15회', '30~45초'], relief: [2, '12회', '60초'] } },
+  mid: { rir: 2, ex: [['고블릿 스쿼트', '덤벨을 가슴 앞에 들고, 엉덩이를 뒤로 빼며 허벅지가 바닥과 평행할 때까지 앉습니다.'], ['시티드로우', '가슴을 펴고 팔꿈치를 몸 뒤로 당깁니다. 허리를 뒤로 젖히지 않습니다.'], ['덤벨 벤치프레스', '어깨뼈를 모아 벤치에 붙이고, 덤벨을 가슴 옆까지 내렸다가 밉니다.']],
+    by: { diet: [3, '12회', '30초 · 세 운동을 이어서 한 바퀴'], strength: [3, '8~10회', '60초', 2], stamina: [3, '12~15회', '45초'], relief: [2, '12회', '60초'] } },
+  adv: { rir: 2, ex: [['바벨 스쿼트', '발은 어깨너비, 가슴을 세우고 엉덩이와 무릎을 함께 굽힙니다.'], ['벤치프레스', '어깨뼈를 모으고 발로 바닥을 밀며, 바를 가슴 중앙으로 내립니다.'], ['바벨 로우', '상체를 45도로 숙이고 허리를 편 채 바를 배꼽 쪽으로 당깁니다.']],
+    by: { diet: [3, '10회', '45초 · 세 운동을 이어서 한 바퀴'], strength: [3, '5~6회', '90초 · 스쿼트와 벤치프레스는 번갈아', 2], stamina: [3, '12회', '30초'], relief: [2, '8회', '60초'] } },
+};
+/* ---------------- stretch ---------------- */
+const GX = {
+  diet: ['코어 깨우기', 3, '데드버그 좌우 8회 × 2세트, 플랭크 20초 × 2번.'], stamina: ['코어 깨우기', 3, '데드버그 좌우 8회 × 2세트, 플랭크 20초 × 2번.'],
+  strength: ['어깨 · 가슴 열기', 3, '벽에 손을 대고 가슴 늘리기 좌우 30초 × 2번, 어깨 크게 돌리기 10회.'], relief: ['긴 호흡', 3, '누워서 배에 손을 얹고 4초 들이쉬고 6초 내쉽니다.'],
+};
+const SM = {
+  beg: (x) => [['폼롤러로 등 · 엉덩이 · 허벅지 풀기', 3, '각 1분씩. 아픈 곳을 세게 누르지 말고 천천히 굴립니다.'], ['고관절 앞쪽 늘리기', 2, '한쪽 무릎을 꿇은 런지 자세. 좌우 30초 × 2번.'], ['햄스트링 늘리기', 2, '누워서 한쪽 다리를 들어 수건으로 당깁니다. 좌우 30초 × 2번.'], ['등 풀기', 3, '네발 자세에서 등을 말았다 펴기(캣카우) 10회, 옆으로 누워 가슴 열기 좌우 8회.'], x, ['차일드 포즈로 호흡', 2, '무릎을 꿇고 엎드려 코로 4초 들이쉬고 6초 내쉽니다.']],
+  mid: (x) => [['폼롤러 전신', 2, '등 · 엉덩이 · 허벅지 · 종아리.'], ['월드 그레이티스트 스트레치', 3, '런지 → 팔꿈치를 바닥으로 → 가슴 열기. 좌우 5회.'], ['90/90 고관절 돌리기', 2, '앉아서 양 무릎을 90도로. 좌우 1분씩.'], ['등 풀기', 2, '캣카우 10회, 옆으로 누워 가슴 열기 좌우 8회.'], x, ['딥 스쿼트 버티기', 1.5, '30초 × 2번. 뒤꿈치를 바닥에 붙입니다.'], ['호흡 정리', 1.5, '누워서 4초 들이쉬고 6초 내쉽니다.']],
+  adv: (x) => [['폼롤러 · 흉추 펴기', 2, '폼롤러를 등 가운데 두고 가슴을 천장으로 엽니다.'], ['월드 그레이티스트 스트레치', 3, '런지 → 팔꿈치를 바닥으로 → 가슴 열기. 좌우 5회.'], ['코삭 스쿼트', 2, '좌우로 깊게 6회씩, 천천히.'], ['어깨 준비', 2, '벽에 등을 대고 팔 올리기 12회, 밴드 당겨 벌리기 12회.'], x, ['딥 스쿼트 버티기 · 흉추 회전', 1.5, '앉은 자세에서 한 팔씩 천장으로.'], ['호흡 정리', 1.5, '누워서 4초 들이쉬고 6초 내쉽니다.']],
+};
+
+const easyOf = (m) => m.energy0 != null && (m.energy0 <= 2 || m.body0 <= 2);
+function plan(m, station, T) {
+  T = T || 15;
+  const goal = GOALS[m.goal] ? m.goal : 'stamina', level = LEVELS[m.level] ? m.level : 'beg', easy = easyOf(m);
+  const out = { station, goal, level, easy, why: WHY[station][goal], howto: level === 'beg' ? HOWTO[station] : null, steps: [], chips: [] };
+  if (station === 'cardio') {
+    const c = CARDIO[level][goal], d = easy ? -0.5 : 0, rpe = [Math.max(2, c.rpe[0] - (easy ? 1 : 0)), Math.max(3, c.rpe[1] - (easy ? 1 : 0))];
+    const warm = T * 0.2, cool = T * 0.13, main = T - warm - cool;
+    out.name = c.name; out.rpe = rpe; out.say = say(rpe[1]);
+    out.steps.push({ from: 0, to: warm, t: '몸 풀기', d: `${k1(c.warm)}km/h · 경사 0%`, cue: '팔을 크게 흔들며 걷습니다.' });
+    if (c.type === 'steady') {
+      const k = [c.kmh[0] + d, c.kmh[1] + d];
+      out.target = `${krng(k)}km/h · 경사 ${rng(c.inc)}%`;
+      out.steps.push({ from: warm, to: T - cool, t: '본 운동 · ' + c.name, d: `속도 ${krng(k)}km/h, 경사 ${rng(c.inc)}%`, cue: `숨 ${rng(rpe)}/10: ${out.say}. 숨이 너무 차면 속도를 0.5 낮춥니다.`, main: true });
+    } else {
+      const reps = Math.max(1, Math.round((main * 60) / (c.hs + c.es)));
+      out.target = `빠르게 ${c.hs}초 + 천천히 ${c.es}초 × ${reps}번`;
+      out.steps.push({ from: warm, to: T - cool, t: '본 운동 · ' + c.name, d: `빠르게 ${c.hs}초(${k1(c.hk + d)}km/h) → 천천히 ${c.es}초(${k1(c.ek)}km/h), ${reps}번 반복`, cue: `빠른 구간은 숨 ${rng(rpe)}/10: ${out.say}. 천천히 구간에서 숨을 고릅니다.`, main: true });
+    }
+    out.steps.push({ from: T - cool, to: T, t: '정리 걷기', d: '4.0km/h · 경사 0%', cue: '숨이 가라앉을 때까지 천천히.' });
+    out.chips = ['러닝머신', '사이클이면 같은 숨 기준으로 저항 조절'];
+  } else if (station === 'weights') {
+    const w = WT[level], b = w.by[goal], sets = b[0] + (T >= 22 ? 1 : 0), last = b[3] ? b[3] + (T >= 22 ? 1 : 0) : sets, ex = T < 12 ? w.ex.slice(0, 2) : w.ex, pre = Math.min(2, T * 0.14), post = Math.min(1, T * 0.07), each = (T - pre - post) / ex.length;
+    out.name = ex.map((e) => e[0]).join(' · '); out.target = `${sets}세트 × ${b[1]} · 휴식 ${b[2].split(' · ')[0]}`;
+    out.load = `${b[1]}를 하고도 ${w.rir}번은 더 할 수 있는 무게` + (easy ? ' · 오늘은 한 칸 가볍게' : '');
+    out.steps.push({ from: 0, to: pre, t: '준비 세트', d: `${ex.length === 2 ? '두' : '세'} 운동 모두 절반 무게로 10회씩`, cue: '자세와 의자 높이를 확인하는 시간입니다.' });
+    ex.forEach((e, i) => { const s = i === 2 ? last : sets; out.steps.push({ from: pre + i * each, to: pre + (i + 1) * each, t: e[0], d: `${s}세트 × ${b[1]} · 휴식 ${i === 2 ? b[2].split(' · ')[0] : b[2]}`, cue: e[1], main: true }); });
+    out.steps.push({ from: T - post, to: T, t: '정리', d: level === 'beg' ? '무게 핀을 가장 가벼운 쪽으로 돌려놓고 기구를 닦습니다.' : '덤벨과 원판을 제자리에 돌려놓습니다.', cue: '' });
+    out.chips = [out.load, '들 때 2초 · 내릴 때 3초'];
+  } else {
+    const list = SM[level](GX[goal]), tot = list.reduce((a, x) => a + x[1], 0); let at = 0;
+    out.name = '풀기 · 늘리기 · 호흡'; out.target = '반동 없이 천천히 · 한 동작 30초';
+    list.forEach((x) => { const dur = (x[1] / tot) * T; out.steps.push({ from: at, to: at + dur, t: x[0], d: x[2], cue: '', main: x === GX[goal] }); at += dur; });
+    out.chips = ['매트 · 폼롤러', '숨을 참지 않기'];
+  }
+  const ms = (v) => { const x = Math.round(v * 60); return Math.floor(x / 60) + ':' + String(x % 60).padStart(2, '0'); };
+  out.steps.forEach((s) => { s.label = T < 6 ? `${ms(s.from)}~${ms(s.to)}` : `${mm(s.from)}~${mm(s.to)}분`; });
+  if (easy && station !== 'stretch') out.note = station === 'cardio' ? '오늘 에너지나 몸 상태가 낮다고 답해서 속도와 숨 기준을 한 단계 낮췄습니다.' : '오늘 에너지나 몸 상태가 낮다고 답해서 무게를 한 칸 가볍게 잡습니다.';
+  return out;
+}
+function brief(m, station, min) {
+  const p = plan({ goal: m.goal, level: m.level }, station, min || 15);
+  return station === 'cardio' ? `${p.name} · ${p.target} · 숨 ${rng(p.rpe)}/10` : station === 'weights' ? `${p.name} · ${p.target}` : `${p.steps.filter((s) => !/호흡/.test(s.t)).slice(0, 3).map((s) => s.t.split(' · ')[0]).join(', ')} 외`;
+}
+const G23 = {
+  diet: ['유산소 본 운동을 2분 늘립니다. 웨이트는 같은 무게로 2회씩 더 합니다.', '유산소 경사를 1~2% 올리거나 인터벌을 한 번 추가합니다. 웨이트는 한 세트를 더합니다.'],
+  strength: ['마지막 세트에서 2회 더 할 수 있었다면 무게를 한 칸 올립니다.', '웨이트에 한 세트를 더합니다. 유산소는 그대로 둡니다.'],
+  stamina: ['유산소 본 운동을 2분 늘립니다.', '같은 시간에 속도를 0.5km/h 올리고, 웨이트 휴식을 10초 줄입니다.'],
+  relief: ['강도는 그대로 두고, 빠지지 않고 오는 것을 목표로 합니다.', '스트레칭을 5분 늘리고 호흡 시간을 길게 가져갑니다.'],
+};
+function progress(goal, level) {
+  goal = GOALS[goal] ? goal : 'stamina';
+  const first = level === 'beg' || !LEVELS[level] ? '기구와 자세에 익숙해지는 주입니다. 무게는 가볍게, 숨은 편한 쪽으로 맞춥니다.' : '지금 할 수 있는 무게와 속도를 기록해 두는 주입니다.';
+  const last = level === 'beg' || !LEVELS[level] ? '토요일 하루를 더해 주 4회로 늘립니다. 1주차 첫날과 같은 조건으로 컨디션을 다시 잽니다.' : '운동량을 30% 줄여 회복하고, 1주차 첫날과 같은 조건으로 컨디션을 다시 잽니다.';
+  return [first, G23[goal][0], G23[goal][1], last];
+}
+const ALLOC = { diet: { cardio: 20, weights: 15, stretch: 10 }, strength: { weights: 25, cardio: 10, stretch: 10 }, stamina: { cardio: 20, weights: 15, stretch: 10 }, relief: { stretch: 15, cardio: 15, weights: 15 } };
+const PRIMARY = { diet: 'cardio', strength: 'weights', stamina: 'cardio', relief: 'stretch' };
+// report + plan: the goal decides the minutes, today's response decides the order, the level decides the content
+const base = L.report;
+L.report = function (m) {
+  const R = base(m); if (!R) return R;
+  const goal = GOALS[m.goal] ? m.goal : 'stamina', level = LEVELS[m.level] ? m.level : 'beg';
+  const order = R.week[0].seq.map((x) => x.st), A = ALLOC[goal], prim = PRIMARY[goal], other = [R.closer, R.opener].concat(order).find((k) => k !== prim);
+  const core = order.map((k) => ({ st: k, min: A[k] })), short = order.filter((k) => k === prim || k === other).map((k) => ({ st: k, min: k === prim ? 15 : 10 }));
+  R.week = [{ d: '월', t: '기본 45분', seq: core }, { d: '수', t: '짧은 날 25분', seq: short }, { d: '금', t: '기본 45분', seq: core }];
+  if (level !== 'beg') R.week.push({ d: '토', t: '순서 바꿔 보기 45분', seq: core.slice().reverse() });
+  R.why = `목표(${GOALS[goal].ko})에 맞춰 ${ST[prim].ko} ${A[prim]}분을 중심에 둡니다. ` + (order[0] === R.opener && order[2] === R.closer ? `순서는 오늘 반응을 따라, 몸을 가장 풀어 준 ${ST[order[0]].ko}부터 시작하고 기분을 가장 올린 ${ST[order[2]].ko}에서 끝냅니다.` : '순서는 오늘 잘 맞았던 그대로 갑니다.') + (level !== 'beg' ? ' 토요일은 순서를 뒤집어 차이가 있는지 확인합니다.' : '');
+  R.week.forEach((w) => { w.lines = w.seq.map((s) => ({ st: s.st, min: s.min, txt: brief(m, s.st, s.min) })); });
+  const weekMin = R.week.reduce((a, w) => a + w.seq.reduce((x, s) => x + s.min, 0), 0), n = R.week.length * 4, up = R.rows.filter((r) => r.dm > 0).length;
+  R.month[0] = `한 달이면 ${n}번, ${weekMin * 4}분입니다. ` + (weekMin >= 150 ? `주 ${weekMin}분으로 세계보건기구 권장량(주 150분)을 채웁니다.` : `주 ${weekMin}분에서 시작해 4주차에 하루를 더하면 권장량(주 150분)에 닿습니다.`);
+  R.month[2] = `오늘 세 블록 중 ${up}개에서 기분이 올랐습니다. ${n}번의 기록이 쌓이면 어느 요일, 어느 시간, 어느 순서가 맞는지 실제 숫자로 다시 짭니다.`;
+  R.goal = goal; R.level = level; R.principle = PRIN[goal]; R.progress = progress(goal, level); R.weekMin = weekMin;
+  return R;
+};
+const RPE = [['1~3', '가볍게', '노래를 부를 수 있는 정도'], ['4~6', '중간', '숨은 차지만 대화가 되는 정도'], ['7~8', '힘들게', '짧은 문장만 말할 수 있는 정도'], ['9~10', '전력', '말하기 어려운 정도']];
+Object.assign(L, { GOALS, LEVELS, PRIN, RPE, ALLOC, plan, brief, progress });
+})(typeof globalThis !== 'undefined' ? globalThis : this);
 </script>
 <script>
 (() => {
@@ -276,8 +478,10 @@ const mem = {};
 const LS = { get(k, d = null) { if (PV) return k in mem ? mem[k] : d; try { const v = localStorage.getItem('cp15.' + k); return v == null ? (k in mem ? mem[k] : d) : JSON.parse(v); } catch (_) { return k in mem ? mem[k] : d; } }, set(k, v) { mem[k] = v; if (PV) return; try { localStorage.setItem('cp15.' + k, JSON.stringify(v)); } catch (_) {} }, del(k) { delete mem[k]; if (PV) return; try { localStorage.removeItem('cp15.' + k); } catch (_) {} } };
 const slug = (qs.get('c') || CFG.defaultClass).toLowerCase();
 const S = { key: LS.get('key.' + slug), st: LS.get('st.' + slug), pub: null, off: 0, net: true, busy: false, err: null, f: { name: '', phone: '' },
-  in: LS.get('in.' + slug, { step: 0, pref: {}, mood: null, body: null, energy: null }), ck: { mood: null, body: null }, pending: LS.get('pend.' + slug, null), sig: '' };
-if (S.in.step == null) S.in.step = 0;
+  in: LS.get('in.' + slug, null), ck: { mood: null, body: null }, pending: LS.get('pend.' + slug, null), sig: '',
+  tab: null, day: null, edit: null, solo: LS.get('solo.' + slug, null), spend: LS.get('spend.' + slug, []) };
+const freshIn = () => ({ v: 2, step: 0, goal: null, level: null, pref: {}, mood: null, body: null, energy: null });
+if (!S.in || S.in.v !== 2) S.in = freshIn();
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const $ = (q) => document.querySelector(q);
 const MOOD = ['', '바닥이에요', '조금 처져요', '보통이에요', '좋아요', '아주 좋아요'], MOOD_S = ['', '바닥', '처짐', '보통', '좋음', '최고'];
@@ -317,14 +521,37 @@ function vJoin() {
   ${S.err ? `<div class="err">${esc(S.err)}</div>` : ''}<button class="btn"${S.busy ? ' disabled' : ''}>동의하고 시작하기</button></form>
   <p class="note" style="margin-top:14px">이름·뒷 4자리와 오늘의 컨디션 기록은 수업을 진행하는 코치만 확인합니다.</p></div>`;
 }
+/* ---------- plan pieces ---------- */
+const gi = (p) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const GI = { diet: gi('<path d="M12 3c.5 3.3 4.5 5.2 4.5 9.6a4.5 4.5 0 0 1-9 0c0-1.7.7-3 1.7-4 .3 1.5 1 2.2 1.8 2.5C10.7 8.7 10.9 5.6 12 3z"/>'), strength: gi('<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/>'), stamina: gi('<path d="M12 20s-7-4.4-7-9.6A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.4C19 15.6 12 20 12 20z"/>'), relief: gi('<path d="M3 9c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0M3 15c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0"/>') };
+const LI = { beg: UI.bars(1, 24), mid: UI.bars(3, 24), adv: UI.bars(5, 24) };
+const goalOf = (me) => (L.GOALS[me.goal] ? me.goal : 'stamina'), levelOf = (me) => (L.LEVELS[me.level] ? me.level : 'beg');
+const glTag = (me) => `<span class="tag" style="background:var(--ink);color:#fff">${L.GOALS[goalOf(me)].ko}</span><span class="tag">${L.LEVELS[levelOf(me)].ko}</span>`;
+const gauge = (p) => (p.rpe ? `<div class="rpe">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => `<i${i >= p.rpe[0] && i <= p.rpe[1] ? ` style="background:${ST[p.station].c}"` : ''}></i>`).join('')}</div><div class="rpe-l"><span>1 편안함</span><b>숨 ${p.rpe[0]}~${p.rpe[1]} · ${esc(p.say)}</b><span>10 전력</span></div>` : '');
+const tl = (p, el) => `<ol class="tl${el == null ? '' : ' live'}">${p.steps.map((s) => `<li class="${el == null ? '' : el >= s.to ? 'past' : el >= s.from ? 'now' : 'next'}"><span class="tm n">${s.label}</span><div><b>${esc(s.t)}</b><p>${esc(s.d)}</p>${s.cue ? `<small>${esc(s.cue)}</small>` : ''}</div></li>`).join('')}</ol>`;
+const howto = (p, open) => (p.howto ? `<details class="how"${open ? ' open' : ''}><summary>${ST[p.station].ko}, 처음이라면</summary><ul>${p.howto.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></details>` : '');
+function rx(p, el, o) {      // one station's prescription: headline, intensity, step timeline
+  o = o || {};
+  return `<p class="rx-n">${esc(p.name)}</p><p class="rx-t n" style="color:${ST[p.station].c}">${esc(p.target)}</p>${gauge(p)}
+    <div class="chips">${p.chips.map((c) => `<span class="tag">${esc(c)}</span>`).join('')}</div>${p.note ? `<div class="tip">${esc(p.note)}</div>` : ''}
+    ${tl(p, el)}${o.why === false ? '' : `<div class="tip"><b>왜 이렇게 하나요</b> · ${esc(p.why)}</div>`}${howto(p, o.open)}`;
+}
+const rpeCard = () => `<div class="card"><h2>강도는 숨으로 맞춥니다 · 1~10</h2><ul class="rl">${L.RPE.map((r, i) => `<li><b class="n">${r[0]}</b><span>${r[1]}</span><span>${r[2]}</span></li>`).join('')}</ul><p class="note" style="margin-top:8px">러닝머신의 속도 숫자보다 내 숨이 기준입니다. 같은 속도도 사람마다, 날마다 다르게 느껴집니다.</p></div>`;
 const QS = [
+  { k: 'goal', choice: 1, t: '어떤 목표로\n운동하시나요?', sub: '목표에 따라 유산소 강도와 웨이트 방식이 달라집니다.' },
+  { k: 'level', choice: 1, t: '운동 경험은\n어느 정도인가요?', sub: '수준에 맞는 기구, 무게, 속도로 안내합니다.' },
   { k: 'cardio', pref: 1 }, { k: 'weights', pref: 1 }, { k: 'stretch', pref: 1 },
   { k: 'mood', t: '지금 기분은\n어떤가요?', labels: MOOD, ic: (v) => UI.face(v, 40) },
   { k: 'body', t: '몸 상태는\n어떤가요?', labels: BODY, ic: (v) => UI.bars(v, 32) },
   { k: 'energy', t: '에너지는\n얼마나 남았나요?', labels: ENERGY, ic: (v) => UI.battery(v, 32) },
 ];
 function vIntake() {
-  const I = S.in, q = QS[Math.min(I.step, 5)], top = `<div class="wz-top">${I.step > 0 ? `<button data-act="back" aria-label="이전">${UI.back}</button>` : ''}<span>${I.step + 1} / 6</span></div>`;
+  const I = S.in, q = QS[Math.min(I.step, QS.length - 1)], top = `<div class="wz-top">${I.step > 0 ? `<button data-act="back" aria-label="이전">${UI.back}</button>` : ''}<span>${I.step + 1} / ${QS.length}</span></div>`;
+  if (q.choice) {
+    const set = q.k === 'goal' ? L.GOALS : L.LEVELS, ic = q.k === 'goal' ? GI : LI;
+    return `<div class="fade" data-step="${I.step}">${top}<h1 class="h1">${q.t}</h1><p class="sub">${q.sub}</p>
+    <div class="opts">${Object.keys(set).map((v) => `<button class="opt${I[q.k] === v ? ' on' : ''}" data-choice="${q.k}" data-v="${v}"><span class="em">${ic[v]}</span><span>${set[v].ko}<small>${set[v].d}</small></span></button>`).join('')}</div></div>`;
+  }
   if (q.pref) {
     const cur = I.pref[q.k];
     return `<div class="fade" data-step="${I.step}">${top}<span class="badge" style="background:${ST[q.k].w};color:${ST[q.k].c}">${sic(q.k, 16)}<span style="color:var(--ink)">${ST[q.k].ko}</span></span>
@@ -338,30 +565,38 @@ function vIntake() {
 }
 const prefTags = (me) => L.KEYS.filter((k) => (me.pref || {})[k]).map((k) => `<span class="tag" style="background:${ST[k].w};color:${ST[k].c}">${me.pref[k] > 0 ? '♥' : '✕'} <span style="color:var(--ink)">${ST[k].ko}</span></span>`).join('');
 function vWait() {
-  const me = S.st.me, t = L.bestTeam(me);
-  return `<div class="fade"><p class="eyebrow"><span class="dot"></span>팀 편성을 기다리는 중</p><h1 class="h1">${esc(me.name)}님,\n답변을 받았습니다.</h1><p class="sub">모두 체크를 마치면 비슷한 상태의 세 명이 한 팀이 됩니다. 이 화면은 자동으로 넘어갑니다.</p>
-  <div class="card"><h2>내가 알려 준 지금 상태</h2><div class="sum"><div><b class="n">${me.mood0}</b>기분</div><div><b class="n">${me.body0}</b>몸 상태</div><div><b class="n">${me.energy0}</b>에너지</div></div><div class="prefs">${prefTags(me)}</div></div>
-  <div class="card"><h2>지금 상태로 보면</h2><div class="stop" style="padding:0">${sic(t.ord[0])}<div><b>${ST[t.ord[0]].ko}부터 시작</b><small>${esc(t.line)}</small></div></div><p class="note" style="margin-top:12px">팀을 맞추면서 순서가 달라질 수 있습니다.</p></div>
+  const me = S.st.me, t = L.bestTeam(me), T = S.st.class.minutes;
+  return `<div class="fade"><p class="eyebrow"><span class="dot"></span>팀 편성을 기다리는 중</p><h1 class="h1">${esc(me.name)}님,
+답변을 받았습니다.</h1><p class="sub">모두 체크를 마치면 비슷한 상태의 세 명이 한 팀이 됩니다. 이 화면은 자동으로 넘어갑니다.</p>
+  <div class="card"><h2>내 목표와 지금 상태</h2><div class="prefs" style="margin:0 0 12px">${glTag(me)}</div><div class="sum"><div><b class="n">${me.mood0}</b>기분</div><div><b class="n">${me.body0}</b>몸 상태</div><div><b class="n">${me.energy0}</b>에너지</div></div><div class="prefs">${prefTags(me)}</div></div>
+  <div class="card"><h2>오늘 내가 할 운동 · ${T}분씩</h2><div class="route">${t.ord.map((k) => { const p = L.plan(me, k, T); return `<div class="stop">${sic(k)}<div><b>${ST[k].ko}</b><span class="rxs">${esc(p.name)}<br>${esc(p.target)}${p.rpe ? ` · 숨 ${p.rpe[0]}~${p.rpe[1]}/10` : ''}</span></div></div>`; }).join('')}</div>
+    <p class="note" style="margin-top:10px">${esc(L.GOALS[goalOf(me)].ko)} 목표, ${L.LEVELS[levelOf(me)].ko} 기준입니다. 순서는 팀이 정해지면 확정됩니다.</p></div>
   <p class="note" style="text-align:center;margin-top:16px">지금까지 ${S.st.joined}명 입장</p></div>`;
 }
-function routeHtml(me, ri) {
-  return `<div class="route">${me.ord.map((k, i) => { const r = i + 1, done = ri.have(r), nowR = ri.running === r && !done; return `<div class="stop${done ? ' done' : ''}">${sic(k)}<div><b>${ST[k].ko}</b><small>${r}번째 · ${S.st.class.minutes}분</small></div><span class="st">${done ? '완료' : nowR ? '진행 중' : ''}</span></div>`; }).join('')}</div>`;
+function routeHtml(me, ri, withRx) {
+  const T = S.st.class.minutes;
+  return `<div class="route">${me.ord.map((k, i) => { const r = i + 1, done = ri.have(r), nowR = ri.running === r && !done, p = withRx ? L.plan(me, k, T) : null; return `<div class="stop${done ? ' done' : ''}">${sic(k)}<div><b>${ST[k].ko}</b><small>${r}번째 · ${T}분</small>${p ? `<span class="rxs">${esc(p.name)}<br>${esc(p.target)}${p.rpe ? ` · 숨 ${p.rpe[0]}~${p.rpe[1]}/10` : ''}</span>` : ''}</div><span class="st">${done ? '완료' : nowR ? '진행 중' : ''}</span></div>`; }).join('')}</div>`;
 }
 function vTeam(ri) {
-  const me = S.st.me, k0 = me.ord[0];
+  const me = S.st.me, k0 = me.ord[0], p0 = L.plan(me, k0, S.st.class.minutes), beg = levelOf(me) === 'beg';
   return `<div class="fade"><div class="hero" style="background:${ST[k0].c}"><p class="k">오늘의 팀</p><p class="t">${esc(me.kind)}</p>
     ${S.st.mates.length ? `<div class="mates">${S.st.mates.map((n) => `<span class="mate"><i style="color:${ST[k0].c}">${esc(n.replace(/^QA-/, '').slice(0, 1))}</i>${esc(n)}</span>`).join('')}</div>` : ''}</div>
-  <div class="card"><h2>오늘의 순서 · 15분씩 세 번</h2>${routeHtml(me, ri)}</div>
+  <div class="card"><h2>오늘의 순서와 내 처방 · ${S.st.class.minutes}분씩 세 번</h2><div class="prefs" style="margin:0 0 8px">${glTag(me)}</div>${routeHtml(me, ri, true)}${p0.easy ? `<div class="tip">오늘 에너지나 몸 상태가 낮다고 답해서 유산소 속도와 웨이트 무게를 한 단계 낮춰 두었습니다.</div>` : ''}</div>
   <div class="card"><h2>왜 이 순서인가요</h2><p class="why">${esc(me.reason)}</p></div>
+  ${rpeCard()}
+  ${beg ? `<div class="card"><h2>헬스장이 처음이라면</h2><ul class="out"><li>${UI.check}<span>운동화 끈을 묶고, 물과 수건을 챙깁니다.</span></li><li>${UI.check}<span>블록이 시작되면 이 화면이 몇 분에 무엇을 하는지 순서대로 알려 줍니다. 그대로 따라 하면 됩니다.</span></li><li>${UI.check}<span>기구 사용법을 모르면 손을 드세요. 코치가 바로 맞춰 드립니다.</span></li><li>${UI.check}<span>찌릿한 통증이나 어지러움이 오면 그 자리에서 멈춥니다. 오늘은 잘하는 날이 아니라 알아보는 날입니다.</span></li></ul></div>` : ''}
   <p class="note" style="text-align:center;margin-top:16px"><span class="dot" style="margin-right:6px"></span>${ST[k0].ko} 구역으로 이동해 주세요. 코치가 시작하면 타이머로 바뀝니다.</p></div>`;
 }
+const ringHtml = (k, left, total, lab) => { const C = 2 * Math.PI * 94, frac = Math.max(0, Math.min(1, left / total)); return `<div class="ring"><svg width="208" height="208" viewBox="0 0 208 208"><circle cx="104" cy="104" r="94" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="10"/><circle id="arc" cx="104" cy="104" r="94" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - frac)).toFixed(1)}"/></svg>
+      <div class="in"><div>${UI.icon(k, 30)}<div class="time n" id="timer">${clock(left)}</div><div class="lab">${lab}</div></div></div></div>`; };
 function vRound(ri) {
-  const me = S.st.me, r = ri.running, k = me.ord[r - 1], lines = (S.st.class.routines || {})[k] || L.ROUTINES[k], next = me.ord[r], C = 2 * Math.PI * 94, frac = Math.max(0, Math.min(1, ri.left / ri.total));
+  const me = S.st.me, r = ri.running, k = me.ord[r - 1], T = S.st.class.minutes, p = L.plan(me, k, T), next = me.ord[r], el = Math.max(0, (ri.total - ri.left) / 60000);
+  const memo = (S.st.class.routines || {})[k], custom = memo && JSON.stringify(memo) !== JSON.stringify(L.ROUTINES[k]);
   return `<div><div class="hero" style="background:${ST[k].c};text-align:center;padding-bottom:20px"><p class="k">${r}번째 블록 · ${esc(me.kind)}</p>
-    <div class="ring"><svg width="208" height="208" viewBox="0 0 208 208"><circle cx="104" cy="104" r="94" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="10"/><circle id="arc" cx="104" cy="104" r="94" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - frac)).toFixed(1)}"/></svg>
-      <div class="in"><div>${UI.icon(k, 30)}<div class="time n" id="timer">${clock(ri.left)}</div><div class="lab">${ST[k].ko}</div></div></div></div>
-    <p style="font-size:14px;font-weight:600;opacity:.9">끝나면 두 번만 누릅니다. 그때까지 폰은 내려놓으세요.</p></div>
-  <div class="card"><h2>이렇게 해 보세요</h2><ol class="steps">${lines.map((x, i) => `<li><i>${i + 1}</i><span>${esc(x)}</span></li>`).join('')}</ol></div>
+    ${ringHtml(k, ri.left, ri.total, ST[k].ko)}
+    <p style="font-size:14px;font-weight:600;opacity:.9">끝나면 두 번만 누릅니다. 화면은 켜 두고 따라 하세요.</p></div>
+  <div class="card"><h2>지금 할 것 · ${L.GOALS[p.goal].ko} · ${L.LEVELS[p.level].ko}</h2>${rx(p, el, { open: r === 1 })}</div>
+  ${custom ? `<div class="card"><h2>코치 메모</h2><ol class="steps">${memo.map((x, i) => `<li><i>${i + 1}</i><span>${esc(x)}</span></li>`).join('')}</ol></div>` : ''}
   ${next ? `<div class="nextup">${sic(next, 20, '12px')}<span><small>다음 구역</small>${ST[next].ko}</span></div>` : `<div class="nextup"><span><small>다음</small>마지막 블록입니다. 끝나면 리포트가 나옵니다.</span></div>`}</div>`;
 }
 function vCheck(ri) {
@@ -376,6 +611,7 @@ function vBetween(ri) {
   const me = S.st.me, next = me.ord[ri.started];
   return `<div class="fade"><p class="eyebrow"><span class="dot"></span>기록했습니다</p>
   ${next ? `<h1 class="h1">다음은 ${ST[next].ko}.\n구역으로 이동해 주세요.</h1><div class="hero" style="background:${ST[next].c};margin-top:18px;display:flex;align-items:center;gap:14px">${UI.icon(next, 40)}<div><p class="k">${ri.started + 1}번째 블록</p><p class="t" style="font-size:28px">${ST[next].ko}</p></div></div>` : `<h1 class="h1">수고하셨습니다.\n잠시만 기다려 주세요.</h1>`}
+  ${next ? (() => { const p = L.plan(me, next, S.st.class.minutes); return `<div class="card"><h2>다음 블록에서 할 것</h2><p class="rx-n">${esc(p.name)}</p><p class="rx-t n" style="color:${ST[next].c}">${esc(p.target)}</p>${gauge(p)}<div class="tip">${esc(p.why)}</div></div>`; })() : ''}
   <div class="card"><h2>오늘의 순서</h2>${routeHtml(me, ri)}</div><p class="note" style="text-align:center;margin-top:16px">코치가 다음 블록을 시작하면 자동으로 넘어갑니다.</p></div>`;
 }
 function chart(me, R) {
@@ -391,20 +627,88 @@ function chart(me, R) {
   });
   return `<div class="legend"><span><i style="background:#0E1116"></i>기분</span><span><i style="background:#B8BEC9"></i>몸 상태</span><span style="color:var(--ink3);font-weight:600">1 바닥 ~ 5 최고</span></div><svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block" role="img" aria-label="블록별 기분과 몸 상태 변화">${g}</svg>`;
 }
-function vReport() {
-  const me = S.st.me, R = L.report(me), end = R.rows[2];
+function vReport(me, R) {
+  const end = R.rows[2];
   return `<div class="fade"><p class="eyebrow">${esc(me.name)}님의 오늘 · ${esc(me.kind)}</p><h1 class="h1">${esc(R.type)}</h1>
-  <div class="card"><h2>45분 전과 지금</h2><div class="ba">${UI.face(me.mood0, 52)}<span class="big n">${me.mood0}</span><span class="arr">${UI.arrow}</span>${UI.face(end.m1, 52)}<span class="big n">${end.m1}</span></div>
+  <div class="card"><h2>${S.st.class.minutes * 3}분 전과 지금</h2><div class="ba">${UI.face(me.mood0, 52)}<span class="big n">${me.mood0}</span><span class="arr">${UI.arrow}</span>${UI.face(end.m1, 52)}<span class="big n">${end.m1}</span></div>
     <div class="kv"><span class="tag">기분 ${delta(R.dmT)}</span><span class="tag">몸 상태 ${me.body0} → ${end.b1} ${delta(R.dbT)}</span></div></div>
-  <div class="card"><h2>15분마다 무슨 일이 있었나</h2>${chart(me, R)}
+  <div class="card"><h2>${S.st.class.minutes}분마다 무슨 일이 있었나</h2>${chart(me, R)}
     <div style="margin-top:6px">${R.rows.map((r) => `<div class="blk">${sic(r.st, 20)}<div><b>${ST[r.st].ko}</b><small>${r.pref > 0 ? '좋아한다고 고른 운동' : r.pref < 0 ? '싫어한다고 고른 운동' : '보통이라고 고른 운동'}</small></div><div class="c">기분<br>${delta(r.dm)}</div><div class="c">몸<br>${delta(r.db)}</div></div>`).join('')}</div></div>
   <div class="card"><h2>숫자가 말해 주는 것</h2><ul class="find">${R.findings.slice(1).map((f) => `<li class="${f.tone}"><i></i><div><b>${esc(f.text)}</b><span>${esc(f.ev)}</span></div></li>`).join('')}</ul></div>
-  <div class="card"><h2>그래서, 이번 주는 이렇게</h2><div class="legend">${L.KEYS.map((k) => `<span><i style="background:${ST[k].c}"></i>${ST[k].ko}</span>`).join('')}</div>
+  <div class="card"><h2>그래서, 이번 주는 이렇게</h2><div class="prefs" style="margin:0 0 12px">${glTag(me)}<span class="tag">주 ${R.week.length}회 · ${R.weekMin}분</span></div><div class="legend">${L.KEYS.map((k) => `<span><i style="background:${ST[k].c}"></i>${ST[k].ko}</span>`).join('')}</div>
     ${R.week.map((w) => { const tot = w.seq.reduce((a, s) => a + s.min, 0); return `<div class="day"><span class="d">${w.d}</span><div><div class="t">${esc(w.t)}</div><div class="seq" style="width:${Math.round((tot / 45) * 100)}%">${w.seq.map((s) => `<span style="flex:${s.min};background:${ST[s.st].c}">${s.min}분</span>`).join('')}</div></div></div>`; }).join('')}
-    <p class="why" style="font-size:14px;margin-top:8px">${esc(R.why)}</p><div class="rule"><b>처진 날 규칙</b> · ${esc(R.rule)}</div></div>
+    <p class="why" style="font-size:14px;margin-top:8px">${esc(R.why)}</p><div class="rule"><b>처진 날 규칙</b> · ${esc(R.rule)}</div>
+    <button class="btn ghost" data-tab="plan">요일별로 무엇을 하는지 보기</button></div>
   <div class="card"><h2>한 달 뒤에는</h2><ul class="out">${R.month.map((x) => `<li>${UI.check}<span>${esc(x)}</span></li>`).join('')}</ul><p class="note" style="margin-top:8px">오늘 하루 기록으로 만든 예상입니다. 한 달 기록이 쌓이면 실제 숫자로 바뀝니다.</p></div>
   ${me.want_v2 === true ? `<div class="card" style="text-align:center"><p style="font-size:18px;font-weight:800">한 달 프로그램을 신청했습니다.</p><p class="sub" style="margin-top:4px">코치가 따로 안내드립니다.</p><button class="btn ghost" data-act="optin" data-v="0">신청 취소</button></div>`
     : `<div class="card"><h2>한 달 프로그램</h2><p class="why">운동할 때마다 전·후 컨디션을 한 번씩만 남기면, 한 달 뒤 나에게 맞는 운동과 4주 플랜을 받습니다.</p></div><div class="cta"><button class="btn" data-act="optin" data-v="1">한 달 더 해 보고 싶어요</button></div>`}</div>`;
+}
+/* ---------- my plan: what to do on which day, guided, and logged ---------- */
+const std = (me) => ({ goal: me.goal, level: me.level });
+const soloList = (me) => (me.solo || []).concat(S.spend);
+const dstr = (ms) => { const d = new Date(ms); return `${d.getMonth() + 1}/${d.getDate()} (${'일월화수목금토'[d.getDay()]})`; };
+function vPlan(me, R) {
+  const solo = soloList(me), up = solo.filter((x) => x.mood1 > x.mood0).length, avg = solo.length ? solo.reduce((a, x) => a + (x.mood1 - x.mood0), 0) / solo.length : 0;
+  return `<div class="fade"><p class="eyebrow">${esc(me.name)}님의 플랜</p><h1 class="h1">${L.GOALS[R.goal].ko} · ${L.LEVELS[R.level].ko}\n주 ${R.week.length}회, ${R.weekMin}분</h1>
+  <p class="sub">${esc(R.principle)}</p><button class="mini" data-act="edit">목표 · 수준 바꾸기</button>
+  <div class="card"><h2>이번 주 · 요일을 누르면 따라 할 수 있습니다</h2>
+    ${R.week.map((w, i) => `<button class="dayb" data-day="${i}"><span class="hd"><span class="d">${w.d}</span>${esc(w.t)}<span class="go">열기 ›</span></span>
+      <span class="seq">${w.seq.map((s) => `<span style="flex:${s.min};background:${ST[s.st].c}"></span>`).join('')}</span>
+      ${w.lines.map((l) => `<span class="ln"><i style="background:${ST[l.st].c}"></i><span><b>${ST[l.st].ko} ${l.min}분</b> · ${esc(l.txt)}</span></span>`).join('')}</button>`).join('')}
+    <p class="why" style="font-size:14px;margin-top:14px">${esc(R.why)}</p><div class="rule"><b>처진 날 규칙</b> · ${esc(R.rule)}</div></div>
+  ${rpeCard()}
+  <div class="card"><h2>4주 동안 이렇게 늘립니다</h2><ul class="wk">${R.progress.map((x, i) => `<li><b>${i + 1}주차</b><span>${esc(x)}</span></li>`).join('')}</ul></div>
+  <div class="card"><h2>혼자 한 운동 기록</h2>${solo.length ? `<p class="why" style="font-size:15px;margin-bottom:12px"><b style="color:var(--ink)">${solo.length}번 중 ${up}번 기분이 올랐습니다.</b> 운동 한 번에 평균 ${avg > 0 ? '+' : ''}${(Math.round(avg * 10) / 10).toFixed(1)}입니다.</p>
+    <ul class="lg">${solo.slice().reverse().map((x) => `<li><div><b>${dstr(x.at_ms)}</b><small>${esc(x.label)} · ${x.minutes}분</small></div><div class="n">기분 ${x.mood0} → ${x.mood1} ${delta(x.mood1 - x.mood0)}</div></li>`).join('')}</ul>`
+    : `<p class="why" style="font-size:14px">아직 없습니다. 헬스장에 온 날 위에서 요일을 누르고 시작하면, 운동 전과 후의 기분이 여기에 쌓입니다.</p>`}</div>
+  <p class="note" style="margin-top:16px">일반적인 운동 가이드입니다. 통증이 있거나 치료 중인 질환이 있으면 코치나 의료진과 먼저 상의하세요.</p></div>`;
+}
+function vDay(me, R, i) {
+  const w = R.week[i];
+  return `<div class="fade"><div class="wz-top"><button data-act="dayback" aria-label="뒤로">${UI.back}</button><span>내 플랜</span></div>
+  <h1 class="h1">${w.d}요일\n${esc(w.t)}</h1><p class="sub">위에서부터 순서대로 하면 됩니다. 시작을 누르면 블록마다 타이머와 지금 할 동작을 보여 줍니다.</p>
+  ${w.seq.map((s, j) => `<div class="card"><div class="sh">${sic(s.st, 20)}<div><small>${j + 1}번째 · ${s.min}분</small><b>${ST[s.st].ko}</b></div></div><div style="margin-top:14px">${rx(L.plan(std(me), s.st, s.min), null)}</div></div>`).join('')}
+  <div class="cta"><button class="btn" data-act="solo" data-v="${i}">이 운동 시작하기</button></div></div>`;
+}
+function vEdit() {
+  const E = S.edit, grp = (k, set, ic) => `<div class="opts" style="margin-top:0">${Object.keys(set).map((v) => `<button class="opt${E[k] === v ? ' on' : ''}" data-edit="${k}" data-v="${v}"><span class="em">${ic[v]}</span><span>${set[v].ko}<small>${set[v].d}</small></span></button>`).join('')}</div>`;
+  return `<div class="fade"><div class="wz-top"><button data-act="editback" aria-label="뒤로">${UI.back}</button><span>내 플랜</span></div>
+  <h1 class="h1">목표와 수준을\n바꿉니다.</h1><p class="sub">바꾸면 요일별 운동 내용과 강도가 바로 다시 짜입니다. 순서는 오늘 수업의 반응을 그대로 씁니다.</p>
+  <div class="card"><h2>목표</h2>${grp('goal', L.GOALS, GI)}</div><div class="card"><h2>수준</h2>${grp('level', L.LEVELS, LI)}</div>
+  ${S.err ? `<div class="err">${esc(S.err)}</div>` : ''}<div class="cta"><button class="btn" data-act="editsave"${S.busy ? ' disabled' : ''}>이대로 다시 짜기</button></div></div>`;
+}
+const saveSolo = () => { if (S.solo) LS.set('solo.' + slug, S.solo); else LS.del('solo.' + slug); };
+function soloTick() { const so = S.solo; if (!so || so.phase !== 'run') return null; const total = so.seq[so.i].min * 60000; return { left: so.t0 + total - Date.now(), total }; }
+const fiveQ = (title, key, cur, kind) => `<div class="q"><b>${title}</b><div class="five">${[1, 2, 3, 4, 5].map((v) => `<button class="fbtn${cur === v ? ' on' : ''}" data-set="${key}" data-v="${v}">${kind === 'mood' ? UI.face(v, 46) : UI.bars(v, 40)}<span>${(kind === 'mood' ? MOOD_S[v] : BODY_S[v]) || '&nbsp;'}</span></button>`).join('')}</div></div>`;
+function vSolo(me, R) {
+  const so = S.solo, top = `<div class="wz-top"><button data-act="soloquit" aria-label="그만두기">${UI.back}</button><span>${esc(so.label)}</span></div>`;
+  if (so.phase === 'pre') return `<div class="fade">${top}<h1 class="h1">시작하기 전,\n지금은 어떤가요?</h1><div class="card">${fiveQ('기분', 'smood0', so.pre.mood, 'mood')}${fiveQ('몸 상태', 'sbody0', so.pre.body, 'body')}</div><p class="note" style="text-align:center;margin-top:14px">둘 다 누르면 넘어갑니다. 오늘 상태에 맞춰 강도를 조절합니다.</p></div>`;
+  if (so.phase === 'low') return `<div class="fade">${top}<h1 class="h1">오늘은 처진 날이네요.\n규칙대로 갈까요?</h1><p class="sub">${esc(R.rule)} 수업 날 기분을 가장 올린 운동이 ${ST[R.closer].ko}였습니다.</p>
+    <button class="btn" data-act="sololow" data-v="1">${ST[R.closer].ko} 15분만 하기</button><button class="btn ghost" data-act="sololow" data-v="0" style="margin-top:10px">강도를 낮춰 계획대로 하기</button></div>`;
+  if (so.phase === 'run') {
+    const s = so.seq[so.i], tk = soloTick(), p = L.plan({ goal: me.goal, level: me.level, energy0: so.easy ? 1 : 3, body0: 3 }, s.st, s.min), next = so.seq[so.i + 1], el = Math.max(0, (tk.total - tk.left) / 60000);
+    return `<div><div class="hero" style="background:${ST[s.st].c};text-align:center;padding-bottom:20px"><p class="k">${so.i + 1} / ${so.seq.length} 블록 · ${esc(so.label)}</p>${ringHtml(s.st, tk.left, tk.total, tk.left > 0 ? ST[s.st].ko : '시간이 됐습니다')}</div>
+    <div class="card"><h2>지금 할 것 · ${L.GOALS[p.goal].ko} · ${L.LEVELS[p.level].ko}</h2>${rx(p, el, { why: false })}</div>
+    <div class="cta"><button class="btn" data-act="solonext">${next ? `다음 · ${ST[next.st].ko} ${next.min}분 시작` : '운동 끝내기'}</button></div>
+    <button class="mini" data-act="soloquit" style="display:flex;margin:16px auto 0">운동 중단</button></div>`;
+  }
+  if (so.phase === 'post') return `<div class="fade"><p class="eyebrow"><span class="dot"></span>${esc(so.label)}</p><h1 class="h1">수고하셨습니다.\n지금은 어떤가요?</h1><div class="card">${fiveQ('기분', 'smood1', so.post.mood, 'mood')}${fiveQ('몸 상태', 'sbody1', so.post.body, 'body')}</div><p class="note" style="text-align:center;margin-top:14px">둘 다 누르면 자동으로 저장됩니다.</p></div>`;
+  const dm = so.post.mood - so.pre.mood, db = so.post.body - so.pre.body;
+  return `<div class="fade"><p class="eyebrow"><span class="dot"></span>기록했습니다</p><h1 class="h1">${dm > 0 ? `오늘 운동이 기분을\n${dm}칸 올렸습니다.` : dm === 0 ? (db > 0 ? '기분은 그대로,\n몸은 가벼워졌습니다.' : '오늘은 변화가\n크지 않았습니다.') : '오늘은 기분이\n내려갔습니다.'}</h1>
+  <div class="card"><h2>${so.min}분 전과 지금</h2><div class="ba">${UI.face(so.pre.mood, 52)}<span class="big n">${so.pre.mood}</span><span class="arr">${UI.arrow}</span>${UI.face(so.post.mood, 52)}<span class="big n">${so.post.mood}</span></div>
+    <div class="kv"><span class="tag">기분 ${delta(dm)}</span><span class="tag">몸 상태 ${so.pre.body} → ${so.post.body} ${delta(db)}</span></div>
+    <p class="why" style="font-size:14px;margin-top:14px">${dm < 0 ? `다음에 시작 전 기분이 낮으면 처진 날 규칙을 써 보세요. ${esc(R.rule)}` : '이 기록이 쌓이면 어느 요일, 어느 순서가 나에게 맞는지 숫자로 다시 짭니다.'}</p></div>
+  <div class="cta"><button class="btn" data-act="solodone">내 플랜으로 돌아가기</button></div></div>`;
+}
+const curTab = () => S.tab || (Date.now() - LS.get('seen.' + slug, Date.now()) > 6 * 3600000 ? 'plan' : 'report');
+function vDone() {
+  const me = S.st.me, R = L.report(me);
+  if (!LS.get('seen.' + slug)) LS.set('seen.' + slug, Date.now());
+  if (S.solo) return vSolo(me, R);
+  if (S.edit) return vEdit();
+  if (S.day != null && R.week[S.day]) return vDay(me, R, S.day);
+  const tab = curTab();
+  return `<div class="seg"><button data-tab="report"${tab === 'report' ? ' class="on"' : ''}>오늘 리포트</button><button data-tab="plan"${tab === 'plan' ? ' class="on"' : ''}>내 플랜</button></div>${tab === 'plan' ? vPlan(me, R) : vReport(me, R)}`;
 }
 function stage() {            // 0 check-in · 1 team · 2-4 blocks · 5 report
   if (!S.key || !S.st) return -1; const me = S.st.me;
@@ -418,7 +722,7 @@ function view() {
   if (!me.team) return vWait();
   const ri = roundInfo();
   if (ri.due) return vCheck(ri);
-  if (me.checks.length >= 3) return vReport();
+  if (me.checks.length >= 3) return vDone();
   if (ri.running && !ri.have(ri.running)) return vRound(ri);
   if (ri.started === 0) return vTeam(ri);
   return vBetween(ri);
@@ -426,19 +730,20 @@ function view() {
 function render(force) {
   const html = view(), sig = html.replace(/id="timer">[^<]*</, '').replace(/stroke-dashoffset="[^"]*"/, '') + S.net + S.busy;
   if (!force && sig === S.sig) {
-    const t = $('#timer'); if (t && S.st) { const ri = roundInfo(), C = 2 * Math.PI * 94; t.textContent = clock(ri.left); const a = $('#arc'); if (a) a.setAttribute('stroke-dashoffset', (C * (1 - Math.max(0, Math.min(1, ri.left / ri.total)))).toFixed(1)); }
+    const t = $('#timer'); if (t && S.st) { const ri = soloTick() || roundInfo(), C = 2 * Math.PI * 94; t.textContent = clock(ri.left); const a = $('#arc'); if (a) a.setAttribute('stroke-dashoffset', (C * (1 - Math.max(0, Math.min(1, ri.left / ri.total)))).toFixed(1)); }
     return;
   }
   S.sig = sig;
-  const st = stage(), names = ['체크', '팀', '1블록', '2블록', '3블록', '리포트'];
+  const st0 = stage(), names = ['체크', '팀', '1블록', '2블록', '3블록', '리포트'], st = st0 === 5 && (S.solo || S.edit || S.day != null || curTab() === 'plan') ? -1 : st0;
   $('#app').innerHTML = `<div class="bar">${UI.logo}<span>컨디션 플래닛</span><span class="pill">원데이클래스</span><span class="net${S.net ? '' : ' on'}">연결 재시도 중…</span></div>
-    ${st >= 0 ? `<div class="journey">${names.map((_, i) => `<i class="${i <= st ? 'on' : ''}"></i>`).join('')}<span>${names.map((n, i) => (i === st ? `<b>${n}</b>` : `<span>${n}</span>`)).join('')}</span></div>` : '<div style="height:26px"></div>'}${html}`;
+    ${st >= 0 ? `<div class="journey">${names.map((_, i) => `<i class="${i <= st ? 'on' : ''}"></i>`).join('')}<span>${names.map((n, i) => (i === st ? `<b>${n}</b>` : `<span>${n}</span>`)).join('')}</span></div>` : `<div style="height:${st0 === 5 ? 14 : 26}px"></div>`}${html}`;
   document.querySelectorAll('form input').forEach((el) => { if (el.name in S.f) el.value = S.f[el.name]; });
 }
 /* ---------- preview (no network): lets anyone look at every screen ---------- */
+const PG = { goal: 'diet', level: 'beg' };
 function mock(s) {
-  const st = { class: { title: '헬스장에서 운동리듬 찾기', phase: 'intake', minutes: 15, routines: L.ROUTINES, started_ms: null, now_ms: Date.now() }, me: { name: '김지우', pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [] }, mates: [], joined: 7 }, me = st.me;
-  const filled = () => Object.assign(me, { pref: { cardio: 1, weights: -1, stretch: 0 }, mood0: 2, body0: 2, energy0: 2, intake: true });
+  const st = { class: { title: '헬스장에서 운동리듬 찾기', phase: 'intake', minutes: 15, routines: L.ROUTINES, started_ms: null, now_ms: Date.now() }, me: { name: '김지우', goal: null, level: null, solo: [], pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [] }, mates: [], joined: 7 }, me = st.me;
+  const filled = () => Object.assign(me, PG, { pref: { cardio: 1, weights: -1, stretch: 0 }, mood0: 2, body0: 2, energy0: 2, intake: true });
   const teamed = () => { filled(); const t = L.TEAMS[2]; Object.assign(me, { team: 3, ord: t.ord, kind: t.name, reason: L.reason(me, t) }); st.mates = ['박서준', '이도윤']; };
   if (s === 'wait') filled();
   if (s === 'team') { teamed(); st.class.phase = 'teams'; }
@@ -448,13 +753,36 @@ function mock(s) {
   if (s === 'report') { teamed(); st.class.phase = 'done'; me.checks = [{ round: 1, station: 'stretch', mood: 3, body: 3 }, { round: 2, station: 'cardio', mood: 3, body: 3 }, { round: 3, station: 'weights', mood: 5, body: 4 }]; }
   return st;
 }
-if (PV) { if (PV === 'join') { S.key = null; S.st = null; } else { S.key = 'preview'; S.st = mock(PV === 'intake2' ? 'intake' : PV); S.in = PV === 'intake2' ? { step: 3, pref: { cardio: 1, weights: -1, stretch: 0 }, mood: null, body: null, energy: null } : { step: 0, pref: {}, mood: null, body: null, energy: null }; } S.pending = null; }
+if (PV) {
+  if (PV === 'join') { S.key = null; S.st = null; }
+  else {
+    const base = { goal: 'intake', level: 'intake', intake2: 'intake', plan: 'report', day: 'report', solo: 'report' }[PV] || PV;
+    S.key = 'preview'; S.st = mock(base); S.in = freshIn();
+    if (PV === 'level') Object.assign(S.in, { step: 1, goal: 'diet' });
+    if (PV === 'intake2') Object.assign(S.in, { step: 5, goal: 'diet', level: 'beg', pref: { cardio: 1, weights: -1, stretch: 0 } });
+    if (PV === 'plan') { S.tab = 'plan'; S.st.me.solo = [{ at_ms: Date.now() - 5 * 864e5, label: '월 · 기본 45분', minutes: 45, mood0: 2, body0: 2, mood1: 4, body1: 3 }, { at_ms: Date.now() - 3 * 864e5, label: '수 · 짧은 날 25분', minutes: 25, mood0: 3, body0: 3, mood1: 4, body1: 4 }]; }
+    if (PV === 'day') S.day = 0;
+    if (PV === 'solo') { const w = L.report(S.st.me).week[0]; S.solo = { day: 0, label: w.d + ' · ' + w.t, seq: w.seq, phase: 'run', i: 1, t0: Date.now() - 7.4 * 60000, used: 10 * 60000, pre: { mood: 3, body: 3 }, post: {}, easy: false, cid: 'preview' }; }
+  }
+  S.pending = null; S.spend = [];
+}
 
 async function flushPending() {
+  if (S.spend.length) await flushSolo();
   if (!S.pending || !S.key || PV) return;
   const p = S.pending;
   try { setState(await rpc('v15_check', { p_key: S.key, p_round: p.round, p_mood: p.mood, p_body: p.body })); S.pending = null; LS.del('pend.' + slug); }
   catch (e) { if (!e.net && e.code !== 'round_not_started') { S.pending = null; LS.del('pend.' + slug); S.err = '기록하지 못했어요. 다시 눌러 주세요.'; } }
+}
+async function flushSolo() {
+  if (!S.key || PV) return;
+  for (const p of S.spend.slice()) {
+    let drop = true;
+    try { setState(await rpc('v15_solo', { p_key: S.key, p_cid: p.cid, p_label: p.label, p_minutes: p.minutes, p_mood0: p.mood0, p_body0: p.body0, p_mood1: p.mood1, p_body1: p.body1 })); }
+    catch (e) { if (e.net) drop = false; }
+    if (!drop) break;
+    S.spend = S.spend.filter((x) => x.cid !== p.cid); LS.set('spend.' + slug, S.spend);
+  }
 }
 async function poll() {
   if (PV) return;
@@ -466,15 +794,53 @@ async function poll() {
 }
 async function submitIntake() {
   if (S.busy) return; S.busy = true; S.err = null;
-  if (PV) { S.st = mock('team'); S.busy = false; render(); window.scrollTo(0, 0); return; }
-  try { setState(await rpc('v15_intake', { p_key: S.key, p_pref: S.in.pref, p_mood: S.in.mood, p_body: S.in.body, p_energy: S.in.energy })); window.scrollTo(0, 0); }
+  if (PV) { Object.assign(PG, { goal: S.in.goal || 'diet', level: S.in.level || 'beg' }); S.st = mock('team'); Object.assign(S.st.me, { mood0: S.in.mood || 2, body0: S.in.body || 2, energy0: S.in.energy || 2 }); S.busy = false; render(); window.scrollTo(0, 0); return; }
+  try { setState(await rpc('v15_intake', { p_key: S.key, p_pref: S.in.pref, p_mood: S.in.mood, p_body: S.in.body, p_energy: S.in.energy, p_goal: S.in.goal, p_level: S.in.level })); window.scrollTo(0, 0); }
   catch (e) { S.err = e.net ? '연결이 불안정해요. 아래 버튼으로 다시 보내 주세요.' : '문제가 생겼어요. 다시 보내 주세요.'; }
   S.busy = false; render();
 }
-const stepOn = () => { LS.set('in.' + slug, S.in); render(); setTimeout(() => { if (S.in.step < 5) { S.in.step++; LS.set('in.' + slug, S.in); render(); window.scrollTo(0, 0); } else submitIntake(); }, 170); };
+const stepOn = () => { LS.set('in.' + slug, S.in); render(); setTimeout(() => { if (S.in.step < QS.length - 1) { S.in.step++; LS.set('in.' + slug, S.in); render(); window.scrollTo(0, 0); } else submitIntake(); }, 170); };
 document.addEventListener('click', async (ev) => {
   const b = ev.target.closest('button'); if (!b) return; const d = b.dataset;
+  const top = () => window.scrollTo(0, 0), so = S.solo;
+  const soloStart = () => { so.phase = 'run'; so.i = 0; so.t0 = Date.now(); so.used = 0; saveSolo(); render(); top(); };
   if (d.pref) { S.in.pref[d.pref] = +d.v; stepOn(); }
+  else if (d.choice) { S.in[d.choice] = d.v; stepOn(); }
+  else if (d.tab) { S.tab = d.tab; render(); top(); }
+  else if (d.day) { S.day = +d.day; render(); top(); }
+  else if (d.act === 'dayback') { S.day = null; render(); top(); }
+  else if (d.act === 'edit') { S.edit = { goal: goalOf(S.st.me), level: levelOf(S.st.me) }; S.err = null; render(); top(); }
+  else if (d.edit) { S.edit[d.edit] = d.v; render(); }
+  else if (d.act === 'editback') { S.edit = null; S.err = null; render(); top(); }
+  else if (d.act === 'editsave') {
+    if (S.busy) return; const E = S.edit;
+    if (PV) { Object.assign(S.st.me, E); S.edit = null; render(); top(); return; }
+    S.busy = true; S.err = null; render();
+    try { setState(await rpc('v15_plan_set', { p_key: S.key, p_goal: E.goal, p_level: E.level })); S.edit = null; top(); } catch (e) { S.err = '저장하지 못했어요. 다시 눌러 주세요.'; }
+    S.busy = false; render();
+  }
+  else if (d.act === 'solo') { const w = L.report(S.st.me).week[+d.v]; S.solo = { day: +d.v, label: w.d + ' · ' + w.t, seq: w.seq.map((x) => ({ st: x.st, min: x.min })), phase: 'pre', i: 0, t0: 0, used: 0, pre: { mood: null, body: null }, post: { mood: null, body: null }, easy: false, cid: Date.now().toString(36) + Math.random().toString(36).slice(2, 10) }; saveSolo(); render(); top(); }
+  else if (d.act === 'soloquit') { S.solo = null; saveSolo(); render(); top(); }
+  else if (so && (d.set === 'smood0' || d.set === 'sbody0')) {
+    so.pre[d.set === 'smood0' ? 'mood' : 'body'] = +d.v; saveSolo(); render();
+    if (so.pre.mood && so.pre.body) setTimeout(() => { if (S.solo !== so || so.phase !== 'pre') return; if (so.pre.mood <= 2) { so.phase = 'low'; saveSolo(); render(); top(); } else { so.easy = so.pre.body <= 2; soloStart(); } }, 200);
+  }
+  else if (so && d.act === 'sololow') { so.easy = true; if (d.v === '1') { so.seq = [{ st: L.report(S.st.me).closer, min: 15 }]; so.label = so.label.split(' · ')[0] + ' · 처진 날 15분'; } soloStart(); }
+  else if (so && d.act === 'solonext') {
+    const tk = soloTick(); if (!tk) return; so.used += Math.min(tk.total, Math.max(0, tk.total - tk.left));
+    if (so.i < so.seq.length - 1) { so.i++; so.t0 = Date.now(); } else { so.phase = 'post'; so.min = Math.max(1, Math.round(so.used / 60000)); }
+    saveSolo(); render(); top();
+  }
+  else if (so && (d.set === 'smood1' || d.set === 'sbody1')) {
+    so.post[d.set === 'smood1' ? 'mood' : 'body'] = +d.v; saveSolo(); render();
+    if (so.post.mood && so.post.body && so.phase === 'post') {
+      so.phase = 'done'; saveSolo();
+      const rec = { cid: so.cid, at_ms: Date.now(), label: so.label, minutes: so.min, mood0: so.pre.mood, body0: so.pre.body, mood1: so.post.mood, body1: so.post.body };
+      if (PV) S.st.me.solo = (S.st.me.solo || []).concat(rec); else { S.spend.push(rec); LS.set('spend.' + slug, S.spend); }
+      setTimeout(async () => { render(); top(); await flushSolo(); render(); }, 200);
+    }
+  }
+  else if (d.act === 'solodone') { S.solo = null; saveSolo(); S.day = null; S.tab = 'plan'; render(); top(); }
   else if (d.set === 'mood' || d.set === 'body' || d.set === 'energy') { S.in[d.set] = +d.v; stepOn(); }
   else if (d.act === 'back') { S.in.step = Math.max(0, S.in.step - 1); S.err = null; render(); }
   else if (d.act === 'intake') submitIntake();
@@ -498,7 +864,7 @@ document.addEventListener('submit', async (ev) => {
   let out = null, err = null;
   for (let i = 0; i < 3 && !out; i++) { try { out = await rpc('v15_join', { p_class: slug, p_name: name, p_phone4: phone }); } catch (e) { err = e; if (!e.net) break; await new Promise((r) => setTimeout(r, 900 * (i + 1))); } }
   S.busy = false;
-  if (out) { S.key = out.key; LS.set('key.' + slug, S.key); S.in = { step: 0, pref: {}, mood: null, body: null, energy: null }; LS.set('in.' + slug, S.in); setState(out.state); window.scrollTo(0, 0); }
+  if (out) { S.key = out.key; LS.set('key.' + slug, S.key); S.in = freshIn(); LS.set('in.' + slug, S.in); setState(out.state); window.scrollTo(0, 0); }
   else S.err = err && err.code === 'class_not_found' ? '수업을 찾을 수 없어요. 링크를 다시 확인해 주세요.' : err && err.code === 'rate_limited' ? '잠시 후 다시 시도해 주세요.' : '연결이 불안정해요. 다시 눌러 주세요.';
   render();
 });
