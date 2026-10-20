@@ -128,7 +128,7 @@ footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
   <div class="g3">
     <div class="box"><p class="t">사전 설문</p><h3>수업 전에 미리 압니다</h3><ul><li>단톡방 링크로 클래스 안내를 먼저 보여 주고, <b>1분 설문</b>(경력 · 평소 운동 · 선호 · 통증 · 원하는 느낌)을 받습니다.</li><li>코치는 수업 전에 <b>통증 · 주의 부위</b>와 자동 팀 편성을 확인합니다.</li></ul></div>
     <div class="box"><p class="t">수업 중</p><h3>10초 반응 입력</h3><ul><li>존이 끝날 때마다 <b>기분 이모지 · RPE 1~10 · 다시 하고 싶은 정도 1~5</b>를 누릅니다.</li><li>코치 화면에 팀별 현재 존과 회원별 입력 완료가 보이고, 버튼 하나로 다음 Round로 넘어갑니다.</li></ul></div>
-    <div class="box"><p class="t">수업 뒤</p><h3>결과는 행동으로 끝납니다</h3><ul><li>오늘의 발견 → 다음 운동 제안(1순위 · 강도 · 운동) → 4주 리듬 테스트 설명.</li><li>하루 결과로 "○○형"이라고 정하지 않고, <b>"오늘의 반응에서는"</b>이라고 말합니다.</li></ul></div>
+    <div class="box"><p class="t">수업 뒤</p><h3>결과는 행동으로 끝납니다</h3><ul><li>오늘의 발견 → 다음 운동 제안 → <b>오늘 결과로 짠 2주 플랜</b> → 헬스장에 온 날의 순서 → 운동 방법 모음(유튜브) → 4주 리듬 테스트 설명.</li><li>하루 결과로 "○○형"이라고 정하지 않고, <b>"오늘의 반응에서는"</b>이라고 말합니다.</li></ul></div>
   </div>
   <p style="margin-top:18px"><a class="btn ghost" href="moves.html">존별 동작 안내 보기</a></p>
 </div></section>
@@ -715,7 +715,75 @@ function zresult(m) {
   const intensity = hard ? 'RPE 5~6 · 오늘보다 한 단계 낮게' : easy ? `${ZONES[rec.st].rpe} · 오늘보다 조금 더` : ZONES[rec.st].rpe;
   return { rows, best, rec, expect: ex, line, caution, intensity, items: ZONES[rec.st].items.map((x) => x.name.split(' · ')[0]), sentence: `오늘의 반응에서는 ${zname(rec.st)}가 가장 잘 맞았습니다.` };
 }
-Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSizes, zteams, teamOf, zresult });
+/* ---------- after the class: a two-week plan from today's reaction, the gym-day flow, and a how-to library ---------- */
+const YT = (q) => 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
+const LIB = {
+  hybrid: [
+    { name: '버피', how: '선 자세 → 손 짚고 다리 뒤로 → 다시 모아 일어나 점프. 처음엔 점프 없이.', q: '버피 정확한 자세 초보' },
+    { name: '스텝박스 스텝업', how: '올린 발 뒤꿈치로 밀며 올라서기. 무릎이 안으로 모이지 않게.', q: '스텝박스 스텝업 하는 법', demo: 'stepup' },
+    { name: '고블릿 스쿼트', how: '덤벨을 가슴에 붙이고 엉덩이를 뒤로 빼며 앉기.', q: '고블릿 스쿼트 자세', demo: 'goblet' },
+    { name: '덤벨 푸시프레스', how: '무릎을 살짝 굽혔다가 다리 힘으로 머리 위로 밀기.', q: '덤벨 푸시프레스 하는 법', demo: 'pushpress' },
+    { name: '케틀벨 스윙', how: '허리가 아니라 엉덩이를 접었다 펴는 힘으로 흔들기.', q: '케틀벨 스윙 초보 자세' },
+    { name: '마운틴 클라이머', how: '플랭크 자세에서 무릎을 가슴 쪽으로 번갈아 당기기.', q: '마운틴 클라이머 자세' },
+    { name: '점핑잭', how: '가볍게 뛰며 팔다리를 벌렸다 모으기. 숨을 올리는 준비 동작.', q: '점핑잭 하는 법' },
+    { name: '초보 서킷 루틴 짜는 법', how: '3~4동작, 동작마다 30~40초, 바퀴 사이 1분 휴식.', q: '초보 서킷 트레이닝 루틴' },
+  ],
+  cardio: [
+    { name: '런닝머신 인터벌 하는 법', how: '1분 빠르게(RPE 7) → 2분 편하게, 4~6번 반복.', q: '런닝머신 인터벌 트레이닝 방법 초보', demo: 'run' },
+    { name: '경사 걷기 (인클라인 워킹)', how: '속도는 편하게, 경사로 숨을 올리기. 손잡이에 매달리지 않기.', q: '런닝머신 경사 걷기 방법', demo: 'incline' },
+    { name: '대화 가능한 강도로 오래 걷기 · 뛰기', how: '숨은 차지만 한 문장은 말할 수 있는 속도로 20~30분.', q: '존2 유산소 운동 방법' },
+    { name: '천국의 계단 타는 법', how: '손잡이는 가볍게, 발 전체로 밟기. 처음엔 낮은 단계로.', q: '천국의 계단 올바른 자세', demo: 'stair' },
+    { name: '실내 자전거 인터벌', how: '안장 높이를 맞추고 30초 빠르게 → 90초 편하게.', q: '실내자전거 인터벌 방법' },
+    { name: '로잉머신', how: '다리 → 몸통 → 팔 순서로 당기고, 반대로 돌아오기.', q: '로잉머신 올바른 자세 초보' },
+    { name: '일립티컬 (크로스 트레이너)', how: '무릎에 부담이 적은 유산소. 상체는 세우고 일정한 리듬으로.', q: '일립티컬 사용법' },
+  ],
+  weights: [
+    { name: '체스트프레스', how: '손잡이를 가슴 중간 높이로 맞추고, 팔꿈치가 다 펴지기 직전까지.', q: '체스트프레스 머신 사용법', demo: 'chestpress' },
+    { name: '레그프레스', how: '허리를 패드에 붙이고 무릎을 끝까지 잠그지 않기.', q: '레그프레스 올바른 자세', demo: 'legpress' },
+    { name: '랫풀다운', how: '가슴을 펴고 바를 쇄골 쪽으로. 어깨는 내린 채.', q: '랫풀다운 정확한 자세', demo: 'latpull' },
+    { name: '시티드 로우', how: '가슴을 펴고 팔꿈치를 몸 뒤로 당기기.', q: '시티드 로우 머신 자세' },
+    { name: '숄더프레스 머신', how: '손잡이를 어깨 높이로 맞추고 머리 위로 밀기.', q: '숄더프레스 머신 사용법' },
+    { name: '레그 익스텐션 · 레그 컬', how: '반동 없이 천천히. 허벅지 앞뒤를 따로 씁니다.', q: '레그 익스텐션 레그컬 사용법' },
+    { name: '덤벨 루마니안 데드리프트', how: '무릎을 살짝 굽힌 채 엉덩이를 뒤로 빼며 덤벨을 내리기.', q: '덤벨 루마니안 데드리프트 자세' },
+    { name: '무게와 세트 정하는 법', how: '마지막 2~3회가 조금 힘든 무게(RPE 6~7), 세트 사이 60~90초.', q: '헬스 초보 무게 세트 휴식 정하는 법' },
+  ],
+};
+const BLOCK = {   // what one block of a zone looks like in the plan: main ~20 min, short ~10 min, week 2 progression, a lighter version
+  weights: { main: '레그프레스 · 체스트프레스 · 랫풀다운 각 10~12회 × 2세트 · 세트 사이 60~90초 · RPE 6~7', short: '세 기구 중 두 개, 10~12회 × 2세트', up: '세 기구 각 3세트로 늘리거나, 같은 무게로 12회까지 채우기', easy: '가벼운 무게로 각 12회 × 2세트 · RPE 5~6' },
+  cardio: { main: 'EASY 3분 → RHYTHM 14분(RPE 6) → PUSH 3분(RPE 7)', short: 'EASY 2분 → RHYTHM 8분(RPE 6)', up: 'EASY 3분 → 1분 빠르게(RPE 7) / 2분 편하게 × 5번 → 정리 2분', easy: 'EASY 3분 → RHYTHM 12분을 RPE 5로 · PUSH는 빼기' },
+  hybrid: { main: '고블릿 스쿼트 10 → 푸시프레스 8 → 스텝업 10~12 · 3~4바퀴 · 바퀴 사이 1분', short: '같은 세 동작 2바퀴', up: '4~5바퀴로 늘리거나, 바퀴마다 버피 5회 추가', easy: '2~3바퀴 · 바퀴 사이 90초 · 숨이 차면 바로 쉬기' },
+};
+// two weeks from today's reaction: the best zone leads, the second supports, the zone that was too hard starts one step lighter
+function twoWeeks(m, R) {
+  R = R || zresult(m); if (!R) return null;
+  const order = R.rows.slice().sort((a, b) => (a.st === R.rec.st ? -1 : b.st === R.rec.st ? 1 : 0) || (b.dm == null ? -9 : b.dm) - (a.dm == null ? -9 : a.dm) || (b.again || 0) - (a.again || 0) || b.mood - a.mood);
+  const P = order[0].st, S2 = order[1].st, T = order[2].st, row = (k) => R.rows.find((x) => x.st === k);
+  const light = new Set(R.rows.filter((r) => (r.rpe != null && r.rpe >= 8) || (r.dm != null && r.dm < 0 && r.rpe >= 7)).map((r) => r.st));
+  const exp = m.survey && m.survey.exp != null ? m.survey.exp : 1, four = exp >= 3, tAgain = (row(T).again || 0) >= 3;
+  const blk = (k, kind, wk) => ({ st: k, min: kind === 'main' ? 20 : 10, txt: wk === 1 && light.has(k) ? BLOCK[k].easy + (kind === 'short' ? ' · 10분' : '') : wk === 2 && kind === 'main' && !light.has(k) ? BLOCK[k].up : BLOCK[k][kind], lighter: wk === 1 && light.has(k) });
+  const week = (wk) => {
+    const d = [{ d: '월', blocks: [blk(P, 'main', wk), blk(S2, 'short', wk)] }, { d: '수', blocks: [blk(S2, 'main', wk), blk(P, 'short', wk)] }, { d: '금', blocks: [blk(P, 'main', wk), blk(tAgain ? T : S2, 'short', wk)] }];
+    if (four) d.splice(2, 0, { d: '목', blocks: [blk(T, 'short', wk), blk(P, 'short', wk)] });
+    if (four) { d[1].d = '화'; d[3].d = '토'; }
+    return d.map((x) => Object.assign(x, { min: 10 + x.blocks.reduce((a, b) => a + b.min, 0) }));
+  };
+  const name = m.name || '';
+  const rules = [`기분이 2 이하인 날은 ${zname(P)}를 가볍게 15분 하고 마무리 스트레칭만 해도 됩니다.`];
+  const used = new Set([P, S2].concat(four || tAgain ? [T] : []));
+  [...light].forEach((k) => rules.push(used.has(k) ? `${zname(k)}는 오늘 힘들었던 운동이라 1주차는 한 단계 가볍게 시작합니다. 편하게 느껴지면 2주차에 원래 강도로 올립니다.` : `${zname(k)}는 오늘 강도가 높았던 운동이라 이번 2주 플랜에서는 뺐습니다. 다시 해 볼 때는 한 단계 가볍게 시작하세요.`));
+  if (m.survey && m.survey.pain) rules.push(`"${m.survey.pain}"은 통증이 없는 범위에서만 움직이고, 아프면 그 동작은 빼 주세요.`);
+  rules.push('운동이 끝나면 기분, 힘든 정도, 다시 하고 싶은 정도를 기억해 두세요. 2주 뒤 무엇이 달라졌는지 비교할 수 있습니다.');
+  const flow = [
+    { t: '도착 · 컨디션 체크', min: 1, d: '오늘 기분을 1~5로 떠올려 봅니다. 2 이하면 처진 날 규칙대로 가볍게.' },
+    { t: '준비', min: 5, d: '런닝머신에서 편하게 걷기, 팔·다리·어깨 크게 돌리기.' },
+    { t: `${zname(P)} · 메인`, min: 20, st: P, d: BLOCK[P].main },
+    { t: `${zname(S2)} · 보조`, min: 12, st: S2, d: BLOCK[S2].short },
+    { t: '마무리', min: 5, d: '천천히 걷기 2분, 허벅지·엉덩이·가슴 스트레칭, 길게 내쉬는 호흡.' },
+  ];
+  const closing = `${name}님은 헬스장에 오면 준비 5분 → ${zname(P)} 20분 → ${zname(S2)} 10~15분 → 마무리 5분, 이 순서로 시작부터 마무리까지 해 보세요. 2주 동안 이렇게 해 보시면 신체 리듬이 자리를 잡아 컨디션이 더 좋아지길 기대해 봅니다.`;
+  return { P, S: S2, T, light: [...light], perWeek: four ? 4 : 3, minutes: '약 40~45분', weeks: [week(1), week(2)], rules, flow, closing };
+}
+Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSizes, zteams, teamOf, zresult, twoWeeks, LIB, YT });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 /* Condition Planet V1.5 — local simulation backend (pages opened with ?sim=1).
@@ -839,7 +907,8 @@ g.CPSim = {
     ['round-h', 'C · HYBRID', '고블릿 스쿼트 → 푸시프레스 → 스텝업 반복. 움직이는 그림으로.'],
     ['input', '10초 입력', '기분 이모지, RPE 1~10, 다시 하고 싶은 정도 1~5.'],
     ['next', '다음 존으로', '"좋아요. 다음 운동 존으로 이동해주세요."'],
-    ['result', '오늘의 결과', '오늘의 발견 → 다음 운동 제안 → 4주 설명 → 의향 남기기.'],
+    ['result', '오늘의 결과', '오늘의 발견 → 다음 운동 제안 → 2주 플랜 → 헬스장에 오면 이렇게 → 운동 방법 모음 → 4주 의향.'],
+    ['lib', '운동 방법 모음', '하이브리드 · 유산소 · 웨이트 탭. 버피, 인터벌, 체스트프레스 등을 유튜브로.'],
   ];
   document.getElementById('phones').innerHTML = shots.map(([k, t, d], i) => `<div class="ph"><div class="frame"><div class="in"><iframe title="${t}" loading="lazy" src="./?preview=${k}"></iframe></div></div><b><i>${i + 1}</i>${t}</b><p>${d}</p></div>`).join('');
   const screen = document.getElementById('screen'), cf = document.getElementById('cf');
