@@ -907,8 +907,12 @@ g.CPSim = {
     ['round-h', 'C · HYBRID', '고블릿 스쿼트 → 푸시프레스 → 스텝업 반복. 움직이는 그림으로.'],
     ['input', '10초 입력', '기분 이모지, RPE 1~10, 다시 하고 싶은 정도 1~5.'],
     ['next', '다음 존으로', '"좋아요. 다음 운동 존으로 이동해주세요."'],
-    ['result', '오늘의 결과', '오늘의 발견 → 다음 운동 제안 → 2주 플랜 → 헬스장에 오면 이렇게 → 운동 방법 모음 → 4주 의향.'],
-    ['lib', '운동 방법 모음', '하이브리드 · 유산소 · 웨이트 탭. 버피, 인터벌, 체스트프레스 등을 유튜브로.'],
+    ['result-1', '결과 1 · 오늘의 발견', '예상 운동, 기분이 가장 좋아진 운동, 전후 기분, RPE, 해석 한 문장.'],
+    ['result-2', '결과 2 · 다음 운동', '"오늘의 반응에서는…" 1순위 · 강도 · 운동.'],
+    ['result-3', '결과 3 · 2주 플랜', '오늘 결과로 짠 2주. 1주차 · 2주차 탭.'],
+    ['result-4', '결과 4 · 헬스장에 오면', '도착부터 마무리까지 순서와 마무리 문장.'],
+    ['result-5', '결과 5 · 운동 방법', '하이브리드 · 유산소 · 웨이트 탭, 유튜브로 연결.'],
+    ['result-6', '결과 6 · 4주 테스트', '하루 결과의 한계, 4주 기록으로 알 수 있는 것, 의향 남기기.'],
   ];
   document.getElementById('phones').innerHTML = shots.map(([k, t, d], i) => `<div class="ph"><div class="frame"><div class="in"><iframe title="${t}" loading="lazy" src="./?preview=${k}"></iframe></div></div><b><i>${i + 1}</i>${t}</b><p>${d}</p></div>`).join('');
   const screen = document.getElementById('screen'), cf = document.getElementById('cf');

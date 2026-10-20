@@ -104,7 +104,7 @@ h1,h2,h3,p,ul,ol{margin:0;padding:0} ul,ol{list-style:none}
 .flow li i{width:28px;height:28px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
 .flow b{display:block;font-size:16px;font-weight:800}.flow b small{font-size:12px;color:var(--ink3);font-weight:700;margin-left:4px}
 .flow p{font-size:14px;color:var(--ink2);line-height:1.5;margin-top:2px}
-.closing{margin-top:14px;padding:16px 18px;border-radius:18px;background:var(--ink);color:#fff;font-size:16px;font-weight:700;line-height:1.6}
+.closing{margin-top:12px;padding:16px 18px;border-radius:18px;background:var(--ink);color:#fff;font-size:16px;font-weight:700;line-height:1.6}
 .libtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .lt3{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:104px;padding:14px;border-radius:20px;color:#fff;text-align:left}
 .lt3 span{font-size:13px;font-weight:800;opacity:.85}.lt3 b{font-size:19px;font-weight:800;margin-top:auto}.lt3 small{font-size:12px;font-weight:700;opacity:.9}
@@ -116,6 +116,17 @@ h1,h2,h3,p,ul,ol{margin:0;padding:0} ul,ol{list-style:none}
 .libl li svg,.libl .tile{width:96px;height:67px;border-radius:12px;display:grid;place-items:center}
 .libl b{display:block;font-size:17px;font-weight:800;line-height:1.3}.libl p{font-size:14px;color:var(--ink2);line-height:1.5;margin-top:3px}
 .yt{display:inline-flex;align-items:center;margin-top:8px;height:34px;padding:0 12px;border-radius:10px;background:#FF0033;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+.rpage{padding-bottom:84px}
+.rptop{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--ink3)}
+.rptop b{color:var(--ink)}
+.rpnav{display:flex;gap:6px;overflow-x:auto;margin:10px -20px 16px;padding:0 20px 2px;scrollbar-width:none}
+.rpnav::-webkit-scrollbar{display:none}
+.rpnav button{flex:none;height:34px;padding:0 12px;border-radius:999px;background:var(--soft);font-size:13px;font-weight:700;color:var(--ink3)}
+.rpnav button.past{color:var(--ink2)}.rpnav button.on{background:var(--ink);color:#fff}
+.rpfoot{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);display:grid;grid-template-columns:auto 1fr;gap:8px;padding:12px 20px calc(var(--sab) + 12px);background:linear-gradient(transparent,var(--bg) 26%);z-index:5}
+.rpfoot .btn{margin:0;min-height:56px}.rpfoot .btn.ghost{padding:0 22px}
+.rpfoot.one{grid-template-columns:1fr}
+.tabs3.two{grid-template-columns:1fr 1fr}
 /* result */
 .step{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.04em;margin-top:26px}
 .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
@@ -888,7 +899,8 @@ const LS = { get(k, d = null) { if (PV) return k in mem ? mem[k] : d; try { cons
 const slug = SIM ? 'sim' : (qs.get('c') || CFG.defaultClass).toLowerCase();
 const S = { key: LS.get('key.' + slug), st: LS.get('st.' + slug), pub: null, off: 0, net: true, busy: false, err: null, f: { name: '', phone: '' }, sig: '',
   page: 'intro', sv: LS.get('sv.' + slug, { i: 0, a: {} }), ck: { mood: null, rpe: null, again: null }, pending: LS.get('pend.' + slug, null), fin: LS.get('fin.' + slug, {}), ask: false, lib: LS.get('lib.' + slug, null), libY: 0 };
-try { if (S.lib && !(history.state && history.state.cpLib)) { S.lib = null; LS.del('lib.' + slug); } } catch (_) {}
+S.rp = LS.get('rp.' + slug, 0); S.wk = 0;
+try { if (history.state && history.state.cpPage != null) S.rp = history.state.cpPage; } catch (_) {}
 const LT = SIM || PV || window.top !== window.self ? ' target="_blank" rel="noopener"' : '';
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const $ = (q) => document.querySelector(q);
@@ -992,55 +1004,72 @@ function vNext(ri) {
   if (!k) return `<div class="fade"><p class="big">좋아요.\n결과를 만들고 있어요.</p></div>`;
   return `<div class="fade"><p class="big">좋아요.\n다음 운동 존으로 이동해주세요.</p>${zcard(k, L.NTH[ri.started + 1] + ' 운동')}</div>`;
 }
-function vResult() {
-  const me = S.st.me, R = L.zresult(me); if (!R) return `<div class="center">결과를 불러오는 중…</div>`;
-  const b = R.best, rec = R.rec, likeTxt = me.survey && me.survey.like === 3 ? '잘 모르겠다' : R.expect ? Z[R.expect].ko : '—';
-  const asked = me.interest ? { yes: '관심 있어요', explain: '설명 먼저 듣고 싶어요', no: '이번에는 괜찮아요' }[me.interest] : null;
-  return `<div class="fade"><p class="eyebrow">${esc(me.name)}님의 오늘</p><h1 class="h1">오늘의 결과</h1>
-  <p class="step">① 오늘의 발견</p>
+/* the result, one topic per screen: finding · next workout · two weeks · gym-day flow · how-to · four weeks */
+const RP = [['find', '오늘의 발견'], ['next', '운동 제안'], ['plan', '2주 플랜'], ['flow', '헬스장에 오면'], ['lib', '운동 방법'], ['four', '4주 테스트']];
+function pFind(me, R) {
+  const b = R.best, likeTxt = me.survey && me.survey.like === 3 ? '잘 모르겠다' : R.expect ? Z[R.expect].ko : '—';
+  return `<h1 class="h1">오늘의 발견</h1>
   <div class="facts"><div class="fact"><small>처음 예상했던 운동</small><b>${esc(likeTxt)}</b></div><div class="fact"><small>기분이 가장 좋아진 운동</small><b style="color:${ST[b.st].c}">${Z[b.st].ko}</b></div>
     <div class="fact"><small>운동 전 기분</small><b>${b.before == null ? '—' : L.MOODS[me.mood0] + ' ' + me.mood0}</b></div><div class="fact"><small>${Z[b.st].ko} 후 기분</small><b>${L.MOODS[b.mood]} ${b.mood}</b></div>
     <div class="fact wide"><small>${Z[b.st].ko} 체감 강도</small><b>RPE ${b.rpe == null ? '—' : b.rpe}</b></div></div>
-  <div class="read"><p>${esc(R.line)}</p>${R.caution ? `<p>${esc(R.caution)}</p>` : ''}</div>
-  <p class="step">② 다음 운동 때 이렇게 해보세요</p>
-  <div class="card rec"><p style="font-size:16px;font-weight:700">${esc(R.sentence)}</p>
-    <div class="zt" style="margin-top:12px"><i style="background:${ST[rec.st].c}">${Z[rec.st].code}</i><b>추천 1순위 · ${Z[rec.st].ko}</b></div>
-    <dl class="kv"><dt>추천 강도</dt><dd>${esc(R.intensity)}</dd><dt>추천 운동</dt><dd>${R.items.map(esc).join(', ')}</dd></dl>
-    <p class="note" style="margin-top:12px">하루의 반응으로 "○○형"이라고 정하지는 않습니다.</p></div>
-  ${(() => { const p = L.twoWeeks(me, R); if (!p) return ''; const blockRow = (b) => `<div class="bk"><span class="zc" style="background:${ST[b.st].c}">${Z[b.st].code} ${Z[b.st].ko} ${b.min}분</span><span>${esc(b.txt)}${b.lighter ? ' <i class="lt">가볍게</i>' : ''}</span></div>`;
-    return `<p class="step">③ 앞으로 2주, 이렇게 해보세요</p>
-  <div class="card plan2"><div class="chips"><span class="chip dark">주 ${p.perWeek}회</span><span class="chip">1회 ${p.minutes}</span><span class="chip" style="background:${ST[p.P].w};color:${ST[p.P].c}">중심 · ${Z[p.P].ko}</span><span class="chip">보조 · ${Z[p.S].ko}</span></div>
-    ${p.weeks.map((w, i) => `<h4>${i + 1}주차 · ${i === 0 ? '오늘 강도 그대로 익히기' : '조금만 더 올리기'}</h4>${w.map((d) => `<div class="dy"><span class="dd">${d.d}</span><div><small>준비 5분 · 마무리 5분 포함 약 ${d.min}분</small>${d.blocks.map(blockRow).join('')}</div></div>`).join('')}`).join('')}
-    <ul class="list" style="margin-top:10px">${p.rules.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
-  <p class="step">④ 헬스장에 오면 이렇게</p>
-  <div class="card"><ol class="flow">${p.flow.map((x, i) => `<li><i style="${x.st ? 'background:' + ST[x.st].c + ';color:#fff' : ''}">${i + 1}</i><div><b>${esc(x.t)} <small>${x.min}분</small></b><p>${esc(x.d)}</p></div></li>`).join('')}</ol>
-    <div class="closing">${esc(p.closing)}</div></div>
-  <p class="step">⑤ 운동 방법 모음</p>
-  <p class="note" style="margin-top:6px">누르면 하는 방법이 나오고, 유튜브 영상으로 이어집니다.</p>
-  <div class="libtabs">${['hybrid', 'cardio', 'weights'].map((k) => `<button class="lt3" data-lib="${k}" style="background:${ST[k].c}"><span>${Z[k].code}</span><b>${Z[k].ko}</b><small>${L.LIB[k].length}가지 방법${k === p.P ? ' · 추천' : ''}</small></button>`).join('')}</div>`; })()}
-  <p class="step">⑥ 오늘은 하루의 반응입니다</p>
-  <div class="card"><p style="font-size:15px;line-height:1.6;color:var(--ink2)">운동 리듬은 요일, 수면, 컨디션, 스트레스, 운동 종류, 운동 강도에 따라 달라질 수 있습니다. 4주 동안 운동할 때마다 짧게 기록하면 한 달 뒤 이런 것을 보여 드릴 수 있습니다.</p>
-    <ul class="list" style="margin-top:8px"><li>어떤 요일에 운동 반응이 좋은지</li><li>어떤 컨디션에서 어떤 운동이 잘 맞는지</li><li>웨이트 · 유산소 · 하이브리드 중 어디에서 반응이 좋은지</li><li>어떤 강도가 가장 지속하기 좋은지</li><li>나만의 주간 운동 패턴</li></ul>
-    <p class="note" style="margin-top:12px">예시</p><div class="week"><div><b>월</b><span>웨이트 반응 좋음 → 웨이트</span></div><div><b>수</b><span>중강도 유산소에서 기분 상승폭 큼 → 유산소</span></div><div><b>금</b><span>컨디션이 낮을 때 하이브리드 만족도 감소 → 가벼운 웨이트 또는 회복 운동</span></div></div></div>
+  <div class="read"><p>${esc(R.line)}</p>${R.caution ? `<p>${esc(R.caution)}</p>` : ''}</div>`;
+}
+function pNext(me, R) {
+  const rec = R.rec;
+  return `<h1 class="h1">다음 운동 때\n이렇게 해보세요</h1>
+  <div class="card rec"><p style="font-size:17px;font-weight:700;line-height:1.5">${esc(R.sentence)}</p>
+    <div class="zt" style="margin-top:14px"><i style="background:${ST[rec.st].c}">${Z[rec.st].code}</i><b>추천 1순위 · ${Z[rec.st].ko}</b></div>
+    <dl class="kv"><dt>추천 강도</dt><dd>${esc(R.intensity)}</dd><dt>추천 운동</dt><dd>${R.items.map(esc).join(', ')}</dd></dl></div>
+  <div class="items" style="margin-top:12px">${Z[rec.st].items.map((x) => `<div class="it">${L.demoSvg(x.demo, 92)}<div><b>${esc(x.name.split(' · ')[0])}</b><span>${esc(x.dose || Z[rec.st].dose || Z[rec.st].time)}</span></div></div>`).join('')}</div>
+  <p class="note" style="margin-top:14px">하루의 반응으로 "○○형"이라고 정하지는 않습니다.</p>`;
+}
+function pPlan(me, R, p) {
+  const w = Math.min(1, S.wk || 0), blockRow = (b) => `<div class="bk"><span class="zc" style="background:${ST[b.st].c}">${Z[b.st].code} ${Z[b.st].ko} ${b.min}분</span><span>${esc(b.txt)}${b.lighter ? ' <i class="lt">가볍게</i>' : ''}</span></div>`;
+  return `<h1 class="h1">앞으로 2주,\n이렇게 해보세요</h1>
+  <div class="chips" style="margin-top:12px"><span class="chip dark">주 ${p.perWeek}회</span><span class="chip">1회 ${p.minutes}</span><span class="chip" style="background:${ST[p.P].w};color:${ST[p.P].c}">중심 · ${Z[p.P].ko}</span><span class="chip">보조 · ${Z[p.S].ko}</span></div>
+  <div class="tabs3 two">${['1주차 · 익히기', '2주차 · 조금 더'].map((t, i) => `<button class="${i === w ? 'on' : ''}" data-wk="${i}" style="${i === w ? 'background:var(--ink)' : ''}">${t}</button>`).join('')}</div>
+  <div class="card plan2" style="margin-top:12px">${p.weeks[w].map((d) => `<div class="dy"><span class="dd">${d.d}</span><div><small>준비 · 마무리 포함 약 ${d.min}분</small>${d.blocks.map(blockRow).join('')}</div></div>`).join('')}</div>
+  <ul class="list" style="margin-top:12px">${p.rules.slice(0, -1).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+}
+function pFlow(me, R, p) {
+  return `<h1 class="h1">헬스장에 오면\n이렇게</h1>
+  <div class="card"><ol class="flow">${p.flow.map((x, i) => `<li><i style="${x.st ? 'background:' + ST[x.st].c + ';color:#fff' : ''}">${i + 1}</i><div><b>${esc(x.t)} <small>${x.min}분</small></b><p>${esc(x.d)}</p></div></li>`).join('')}</ol></div>
+  <div class="closing">${esc(p.closing)}</div>`;
+}
+function pLib(me, R, p) {
+  const k = L.LIB[S.lib] ? S.lib : p.P;
+  return `<h1 class="h1">운동 방법</h1><p class="sub">누르면 유튜브에서 하는 방법을 볼 수 있어요. 돌아오면 이 화면이 그대로 있습니다.</p>
+  <div class="tabs3">${['hybrid', 'cardio', 'weights'].map((x) => `<button class="${x === k ? 'on' : ''}" data-lib="${x}" style="${x === k ? 'background:' + ST[x].c : ''}">${Z[x].ko}${x === p.P ? ' ★' : ''}</button>`).join('')}</div>
+  <ul class="libl">${L.LIB[k].map((x) => `<li>${x.demo ? L.demoSvg(x.demo, 96) : `<span class="tile" style="background:${ST[k].w};color:${ST[k].c}">${UI.icon(k, 28)}</span>`}<div><b>${esc(x.name)}</b><p>${esc(x.how)}</p><a class="yt" href="${L.YT(x.q)}"${LT}>유튜브에서 보기 ↗</a></div></li>`).join('')}</ul>`;
+}
+function pFour(me) {
+  const asked = me.interest ? { yes: '관심 있어요', explain: '설명 먼저 듣고 싶어요', no: '이번에는 괜찮아요' }[me.interest] : null;
+  return `<h1 class="h1">오늘은\n하루의 반응입니다</h1>
+  <p class="sub">운동 리듬은 요일, 수면, 컨디션, 스트레스, 운동 종류와 강도에 따라 달라집니다. 4주 동안 운동할 때마다 짧게 기록하면 이런 것을 알 수 있어요.</p>
+  <ul class="list" style="margin-top:8px"><li>어떤 요일에 반응이 좋은지</li><li>어떤 컨디션에서 어떤 운동이 잘 맞는지</li><li>어떤 강도가 가장 오래 하기 좋은지</li></ul>
+  <div class="week"><div><b>월</b><span>웨이트 반응 좋음 → 웨이트</span></div><div><b>수</b><span>중강도 유산소에서 기분이 크게 오름 → 유산소</span></div><div><b>금</b><span>컨디션이 낮으면 하이브리드 만족도가 떨어짐 → 가벼운 웨이트</span></div></div>
+  <p class="note" style="margin-top:6px">위는 예시입니다.</p>
   <div class="ask"><h3>4주 동안 내 운동 리듬을\n더 확인해보고 싶나요?</h3>
     ${asked ? `<p class="sub">남겨 주셨어요: <b style="color:var(--ink)">${asked}</b></p><button class="lnk" data-act="ask">다시 고르기</button>`
       : S.ask ? `<div class="choice">${[['yes', '관심 있어요'], ['explain', '설명 먼저 듣고 싶어요'], ['no', '이번에는 괜찮아요']].map(([v, t]) => `<button class="btn ghost" style="margin:0" data-interest="${v}">${t}</button>`).join('')}</div>`
-      : `<button class="btn" data-act="ask">4주 리듬 테스트 참여 의향 남기기</button>`}</div></div>`;
+      : `<button class="btn" data-act="ask">4주 리듬 테스트 참여 의향 남기기</button>`}</div>`;
 }
-function vLib(k) {
-  return `<div class="fade"><button class="backbtn" data-act="lib-close">${UI.back}<span>결과로 돌아가기</span></button>
-  <h1 class="h1" style="margin-top:10px">운동 방법 모음</h1>
-  <div class="tabs3">${['hybrid', 'cardio', 'weights'].map((x) => `<button class="${x === k ? 'on' : ''}" data-lib="${x}" style="${x === k ? 'background:' + ST[x].c : ''}">${Z[x].ko}</button>`).join('')}</div>
-  <p class="sub">${Z[k].code} · ${Z[k].en} · ${esc(Z[k].feel)}</p>
-  <ul class="libl">${L.LIB[k].map((x) => `<li>${x.demo ? L.demoSvg(x.demo, 96) : `<span class="tile" style="background:${ST[k].w};color:${ST[k].c}">${UI.icon(k, 28)}</span>`}<div><b>${esc(x.name)}</b><p>${esc(x.how)}</p><a class="yt" href="${L.YT(x.q)}"${LT} data-yt="${k}">유튜브에서 방법 보기 ↗</a></div></li>`).join('')}</ul>
-  <button class="btn ghost" data-act="lib-close">결과로 돌아가기</button></div>`;
+function vResult() {
+  const me = S.st.me, R = L.zresult(me); if (!R) return `<div class="center">결과를 불러오는 중…</div>`;
+  const p = L.twoWeeks(me, R), i = Math.max(0, Math.min(RP.length - 1, S.rp || 0));
+  try { if (!history.state || history.state.cpPage == null) history.replaceState({ cpPage: i }, ''); } catch (_) {}
+  const body = [pFind, pNext, pPlan, pFlow, pLib, pFour][i](me, R, p);
+  return `<div class="fade rpage"><div class="rptop"><span>${esc(me.name)}님의 오늘</span><b class="n">${i + 1} / ${RP.length}</b></div>
+  <div class="rpnav">${RP.map(([, t], j) => `<button class="${j === i ? 'on' : j < i ? 'past' : ''}" data-rp="${j}">${t}</button>`).join('')}</div>
+  ${body}
+  <div class="rpfoot${i === 0 ? ' one' : ''}">${i > 0 ? `<button class="btn ghost" data-rp="${i - 1}">이전</button>` : ''}${i < RP.length - 1 ? `<button class="btn" data-rp="${i + 1}">다음 · ${RP[i + 1][1]}</button>` : ''}</div></div>`;
 }
 function stage() { if (!S.key || !S.st || !S.st.me.team) return 0; const me = S.st.me; if (me.checks.length >= 3) return 4; return Math.max(1, Math.min(3, roundInfo().started || 1)); }
 function view() {
   if (!S.key || !S.st) return S.page === 'name' ? vName() : vIntro();
   const me = S.st.me;
   if (!me.intake) return vSurvey();
-  if (me.checks.length >= 3) return S.lib && L.LIB[S.lib] ? vLib(S.lib) : vResult();
+  if (me.checks.length >= 3) return vResult();
   if (!me.team || S.st.class.phase === 'intake') return vReady();
   if (me.mood0 == null && roundInfo().started === 0) return vMood();
   const ri = roundInfo();
@@ -1075,8 +1104,8 @@ function mock(s) {
 }
 if (PV) {
   if (PV === 'intro' || PV === 'name') { S.key = null; S.st = null; S.page = PV; S.pub = { title: '나만의 운동 리듬 찾기 · 10월 24일(토) 12:00' }; }
-  else { S.key = 'preview'; S.st = mock(PV === 'survey' || PV === 'survey-pain' ? 'survey' : PV); }
-  if (PV === 'lib') { S.st = mock('result'); S.lib = 'hybrid'; } else S.lib = null;
+  else { S.key = 'preview'; S.st = mock(PV === 'survey' || PV === 'survey-pain' ? 'survey' : /^result/.test(PV) ? 'result' : PV); }
+  if (PV === 'lib') { S.st = mock('result'); S.rp = 4; } else if (/^result/.test(PV)) S.rp = +(PV.split('-')[1] || 1) - 1;
   S.sv = PV === 'survey-pain' ? { i: 3, a: { exp: 1, usual: 2, like: 1 } } : { i: 0, a: {} }; S.pending = null; S.fin = {};
 }
 
@@ -1133,13 +1162,9 @@ document.addEventListener('click', async (ev) => {
       }, 250);
     }
   }
-  else if (d.lib) {
-    const opening = !S.lib; if (opening) S.libY = window.scrollY;
-    S.lib = d.lib; LS.set('lib.' + slug, S.lib);
-    try { if (opening) history.pushState({ cpLib: d.lib }, ''); else history.replaceState({ cpLib: d.lib }, ''); } catch (_) {}
-    render(); window.scrollTo(0, 0);
-  }
-  else if (d.act === 'lib-close') { if (history.state && history.state.cpLib) history.back(); else closeLib(); }
+  else if (d.rp != null && d.rp !== '') { goPage(+d.rp); }
+  else if (d.lib) { S.lib = d.lib; LS.set('lib.' + slug, S.lib); render(); }
+  else if (d.wk != null && d.wk !== '') { S.wk = +d.wk; render(); }
   else if (d.act === 'ask') { S.ask = true; if (S.st) S.st.me.interest = null; render(); }
   else if (d.interest) { S.ask = false; if (PV) { S.st.me.interest = d.interest; render(); return; } try { setState(await rpc('v15_interest', { p_key: S.key, p_choice: d.interest })); } catch (_) { S.st.me.interest = d.interest; } render(); }
 });
@@ -1159,8 +1184,9 @@ document.addEventListener('submit', async (ev) => {
   else S.err = err && err.code === 'class_not_found' ? '수업을 찾을 수 없어요. 링크를 다시 확인해 주세요.' : err && err.code === 'rate_limited' ? '잠시 후 다시 시도해 주세요.' : '연결이 불안정해요. 다시 눌러 주세요.';
   render();
 });
-function closeLib() { if (!S.lib) return; S.lib = null; LS.del('lib.' + slug); render(); window.scrollTo(0, S.libY || 0); }
-addEventListener('popstate', () => { if (S.lib) closeLib(); });
+// result pages live in the browser history, so the phone's back button steps back a page and a trip to YouTube comes back to the same page
+function goPage(n) { S.rp = n; LS.set('rp.' + slug, n); try { history.pushState({ cpPage: n }, ''); } catch (_) {} render(); window.scrollTo(0, 0); }
+addEventListener('popstate', (e) => { if (!S.st || !S.st.me || S.st.me.checks.length < 3) return; S.rp = e.state && e.state.cpPage != null ? e.state.cpPage : 0; LS.set('rp.' + slug, S.rp); render(); window.scrollTo(0, 0); });
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') poll(); });
 setInterval(() => { if (SIM || document.visibilityState === 'visible') render(); }, 1000);
 setInterval(() => { if (SIM || document.visibilityState === 'visible') poll(); }, SIM ? 800 : 3000);
