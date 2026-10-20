@@ -766,7 +766,7 @@ function guide() {
 }
 let sig = '';
 function tick() {
-  const g = guide(), pk = CPSim.peek(), sp = pk.speed, tc = [1, 2, 3].map((t) => pk.members.filter((m) => m.team === t).length).filter(Boolean), comp = `참가 ${pk.members.length}명 · ${tc.length ? '팀 ' + tc.join(' / ') : '미리보기 ' + CPClass.teamSizes(pk.members.length).join(' / ')}`, s = JSON.stringify(g) + sp + comp; if (s === sig) return; sig = s;
+  const g = guide(), pk = CPSim.peek(), sp = pk.speed, tc = [1, 2, 3].map((t) => pk.members.filter((m) => m.team === t).length).filter(Boolean), tot = pk.members.length + (pk.members.some((m) => !m.is_bot) ? 0 : 1), comp = `참가 ${tot}명(나 포함) · ${tc.length ? '팀 ' + tc.join(' / ') : '예상 팀 ' + CPClass.teamSizes(tot).join(' / ')}`, s = JSON.stringify(g) + sp + comp; if (s === sig) return; sig = s;
   $('comp').textContent = comp;
   $('who').textContent = g.side === 'm' ? '회원 폰' : '코치 화면'; $('todo').textContent = g.t; $('stepno').textContent = `지금 할 일 · ${Math.min(g.i + 1, STEPS.length)} / ${STEPS.length}`;
   $('steps').innerHTML = STEPS.map((x, i) => `<li class="${i < g.i ? 'past' : i === g.i ? 'cur' : ''}">${x}</li>`).join('');
