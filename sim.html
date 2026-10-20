@@ -351,7 +351,28 @@ L.report = function (m) {
   return R;
 };
 const RPE = [['1~3', '가볍게', '노래를 부를 수 있는 정도'], ['4~6', '중간', '숨은 차지만 대화가 되는 정도'], ['7~8', '힘들게', '짧은 문장만 말할 수 있는 정도'], ['9~10', '전력', '말하기 어려운 정도']];
-Object.assign(L, { GOALS, LEVELS, PRIN, RPE, ALLOC, LADDER, plan, brief, progress });
+/* ---------------- one-day result ---------------- */
+const jg = (w) => { const c = w.charCodeAt(w.length - 1); return c >= 0xac00 && c <= 0xd7a3 ? (c - 0xac00) % 28 : 0; };
+const eul = (w) => w + (jg(w) ? '을' : '를'), ieyo = (w) => w + (jg(w) ? '이에요' : '예요');
+const EFFORT = [['아주 쉬웠어요', 2], ['쉬웠어요', 4], ['적당했어요', 6], ['힘들었어요', 8], ['아주 힘들었어요', 10]];
+const AGAIN = { 3: '또 하고 싶어요', 2: '그저 그래요', 1: '별로예요' };
+// what they guessed, what actually lifted their mood, what they want to do again, and one line that ties it together
+function result(m) {
+  if (!m || !m.ord || !m.checks || m.checks.length < 3) return null;
+  const rows = m.ord.map((k, i) => { const c = m.checks.find((x) => x.round === i + 1) || {}, prev = i === 0 ? m.mood0 : (m.checks.find((x) => x.round === i) || {}).mood || m.mood0; return { st: k, round: i + 1, mood: c.mood, dm: c.mood - prev, rpe: c.rpe || null, again: c.again || null }; });
+  const best = rows.slice().sort((a, b) => b.dm - a.dm || b.mood - a.mood || a.round - b.round)[0];
+  const again = rows.slice().sort((a, b) => (b.again || 0) - (a.again || 0) || b.dm - a.dm || b.mood - a.mood)[0];
+  const ex = ST[m.expect] ? m.expect : (L.KEYS.find((k) => (m.pref || {})[k] > 0) || null), ko = (k) => ST[k].ko, up = rows.some((r) => r.dm > 0);
+  let line;
+  if (!up) line = `오늘은 기분이 크게 오르지 않았어요. 그중 ${eul(ko(best.st))} 한 뒤가 가장 나았어요.`;
+  else if (ex && ex === best.st) line = `예상대로 ${ko(best.st)} 뒤에 기분이 가장 좋아졌어요.`;
+  else if (ex) line = `${eul(ko(ex))} 예상했지만, 실제로는 ${ko(best.st)} 뒤에 기분이 가장 좋아졌어요.`;
+  else line = `${ko(best.st)} 뒤에 기분이 가장 좋아졌어요.`;
+  if (up && best.rpe >= 8) line += ' 힘들었는데도 기분은 올라갔어요.';
+  else if (again.st !== best.st && again.again === 3) line += ` 다시 하고 싶은 건 ${ieyo(ko(again.st))}.`;
+  return { rows, expect: ex, best, again: again.again ? again : null, line, mood0: m.mood0, mood3: rows[2].mood };
+}
+Object.assign(L, { GOALS, LEVELS, PRIN, RPE, ALLOC, LADDER, EFFORT, AGAIN, plan, brief, progress, result });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 /* Condition Planet V1.5 — movement demos (loaded after plan.js).
@@ -361,7 +382,6 @@ Object.assign(L, { GOALS, LEVELS, PRIN, RPE, ALLOC, LADDER, plan, brief, progres
 (function (g) {
 'use strict';
 const L = g.CPClass, ST = L.ST;
-const INK = '#0E1116', FAR = '#A9B0BD';
 // tempo: seconds [a→b, hold at b, b→a, hold at a]
 const LIFT = [3, 0.2, 2, 0.4], PUSH = [2, 0.2, 3, 0.4], HOLD = [2.2, 1.6, 2.2, 0.6], STEP = [0.55, 0, 0.55, 0], RUN = [0.32, 0, 0.32, 0];
 const D = {
@@ -461,7 +481,8 @@ const D = {
 };
 const PTS = ['H', 'S', 'E', 'W', 'P', 'K', 'F', 'E2', 'W2', 'K2', 'F2', 'C'];
 const full = (p) => { const o = Object.assign({}, p); ['E', 'W', 'K', 'F'].forEach((k) => { if (!o[k + '2']) o[k + '2'] = [p[k][0] - 5, p[k][1] - 2]; }); return o; };
-Object.keys(D).forEach((k) => { D[k].A = full(D[k].a); D[k].B = full(D[k].b); });
+const CUES = {"squat":["엉덩이를 뒤로 빼며 앉기","무릎은 발끝 방향으로"],"pushup":["몸은 일자로","힘들면 무릎을 대고"],"superman":["팔다리를 살짝 들기","시선은 바닥"],"legpress":["허리를 패드에 붙이기","무릎은 끝까지 펴지 않기"],"chestpress":["손잡이는 가슴 높이","돌아올 때 천천히"],"latpull":["가슴 펴고 쇄골까지","어깨는 내리기"],"bbsquat":["가슴을 세우고","발바닥 전체로 밀기"],"bench":["어깨뼈를 모으고","가슴 가운데로 내리기"],"bbrow":["허리 곧게, 상체 45도","배꼽 쪽으로 당기기"],"walk":["손잡이 잡지 않기","팔을 자연스럽게"],"incline":["상체 살짝 앞으로","보폭은 짧게"],"run":["발은 가볍게 착지","팔꿈치 90도"],"roller":["등 위아래로 천천히","허리와 목은 피하기"],"hipflexor":["골반을 앞으로 밀기","허리는 꺾지 않기"],"hamstring":["무릎 펴고 다리 들기","반동 없이 30초"],"catcow":["내쉬며 등을 말고","들이쉬며 가슴을 열기"],"deadbug":["허리는 바닥에 붙이고","팔과 반대 다리 뻗기"],"child":["엉덩이는 뒤꿈치 쪽으로","길게 내쉬기"],"wgs":["손은 바닥에 짚고","팔을 천장으로 열기"],"s9090":["허리를 펴고","앞 정강이 위로 숙이기"],"deepsquat":["뒤꿈치 붙이기","가슴 세우고 버티기"],"cossack":["한쪽으로 깊게 앉기","반대 다리는 곧게"],"wallslide":["등을 벽에 붙이고","팔을 위로 밀기"],"breath":["4초 들이쉬기","6초 내쉬기"],"pecwall":["손은 벽에 고정","몸을 앞으로 돌리기"]};
+Object.keys(D).forEach((k) => { D[k].A = full(D[k].a); D[k].B = full(D[k].b); D[k].cue = CUES[k]; });
 const f1 = (v) => Math.round(v * 10) / 10;
 function phase(d, ms) {
   const [a, h1, b, h2] = d.tempo, T = a + h1 + b + h2; let x = ((ms / 1000) % T + T) % T;
@@ -469,19 +490,32 @@ function phase(d, ms) {
   if (x < a) return ez(x / a); x -= a; if (x < h1) return 1; x -= h1; if (x < b) return 1 - ez(x / b); return 0;
 }
 function poseAt(d, t) { const o = {}; PTS.forEach((k) => { const a = d.A[k], b = d.B[k]; if (a && b) o[k] = [f1(a[0] + (b[0] - a[0]) * t), f1(a[1] + (b[1] - a[1]) * t)]; }); return o; }
-const pt = (p) => p[0] + ' ' + p[1];
-function parts(d, t) {
-  const p = poseAt(d, t), c = ST[d.st].c, at = (x) => (typeof x === 'string' ? p[x] : x);
-  const torso = p.C ? `M${pt(p.S)}Q${pt(p.C)} ${pt(p.P)}` : `M${pt(p.S)}L${pt(p.P)}`;
-  const near = `${torso}M${pt(p.S)}L${pt(p.H)}M${pt(p.P)}L${pt(p.K)}L${pt(p.F)}M${pt(p.S)}L${pt(p.E)}L${pt(p.W)}`;
-  const far = `M${pt(p.P)}L${pt(p.K2)}L${pt(p.F2)}M${pt(p.S)}L${pt(p.E2)}L${pt(p.W2)}`;
-  const dp = (d.dp || []).map((x) => {
+// a simple person: hair and face, neck, T-shirt torso, shorts, limbs that taper, hands and shoes; far-side limbs one shade darker
+const C = { skin: '#E8B08A', skin2: '#C98F6B', hair: '#2B211C', shirt: '#26324A', shirt2: '#3A4766', shorts: '#171C27', shorts2: '#3B4357', shoe: '#11151C' };
+const seg = (a, b, w, c) => `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+const dot = (p, r, c) => `<circle cx="${p[0]}" cy="${p[1]}" r="${r}" fill="${c}"/>`;
+const along = (a, b, k) => [f1(a[0] + (b[0] - a[0]) * k), f1(a[1] + (b[1] - a[1]) * k)];
+function shoe(k, ft, c) { const dx = ft[0] - k[0], dy = ft[1] - k[1], L0 = Math.hypot(dx, dy) || 1; return seg(ft, [f1(ft[0] + (dy / L0) * 7), f1(ft[1] - (dx / L0) * 7)], 7, c); }
+function leg(p, k, ft, far) { return seg(p, k, far ? 12 : 12.5, far ? C.shorts2 : C.shorts) + seg(k, ft, far ? 9.5 : 10, far ? C.skin2 : C.skin) + seg(along(p, k, 0.15), along(p, k, 0.7), far ? 12 : 12.5, far ? C.shorts2 : C.shorts) + shoe(k, ft, C.shoe); }
+function arm(sh, e, w, far) { const sk = far ? C.skin2 : C.skin; return seg(sh, e, far ? 8.5 : 9, sk) + seg(e, w, far ? 7.5 : 8, sk) + dot(w, far ? 4 : 4.4, sk) + seg(sh, along(sh, e, 0.48), far ? 10.5 : 11, far ? C.shirt2 : C.shirt); }
+function dynProps(d, p) {
+  const c = ST[d.st].c, at = (x) => (typeof x === 'string' ? p[x] : x);
+  return (d.dp || []).map((x) => {
     if (x[0] === 'disc') { const q = p[x[1]]; return `<circle cx="${f1(q[0] + (x[3] || 0))}" cy="${f1(q[1] + (x[4] || 0))}" r="${x[2]}" fill="#fff" stroke="${c}" stroke-width="4"/><circle cx="${f1(q[0] + (x[3] || 0))}" cy="${f1(q[1] + (x[4] || 0))}" r="2.2" fill="${c}"/>`; }
     if (x[0] === 'bar') { const q = p[x[1]], r = (x[2] * Math.PI) / 180, dx = (Math.cos(r) * x[3]) / 2, dy = (Math.sin(r) * x[3]) / 2; return `<line x1="${f1(q[0] - dx)}" y1="${f1(q[1] - dy)}" x2="${f1(q[0] + dx)}" y2="${f1(q[1] + dy)}" stroke="${c}" stroke-width="${x[4]}" stroke-linecap="round"/>`; }
     const a = at(x[1]), b = at(x[2]); return `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${c}" stroke-width="${x[3]}" stroke-linecap="round"/>`;
   }).join('');
-  return { near, far, dp, head: p.H };
 }
+function figure(d, t) {
+  const p = poseAt(d, t), flat = !!d.flat, tor = p.C ? `M${p.S[0]} ${p.S[1]}Q${p.C[0]} ${p.C[1]} ${p.P[0]} ${p.P[1]}` : `M${p.S[0]} ${p.S[1]}L${p.P[0]} ${p.P[1]}`;
+  const hx = p.H[0] - p.S[0], hy = p.H[1] - p.S[1], hl = Math.hypot(hx, hy) || 1, back = [f1(p.H[0] - (hx / hl) * 2.4 - 1.2), f1(p.H[1] - (hy / hl) * 2.4)];
+  return leg(p.P, p.K2, p.F2, !flat) + arm(p.S, p.E2, p.W2, !flat) + dynProps(d, p)
+    + dot(p.P, 9.5, C.shorts) + `<path d="${tor}" fill="none" stroke="${C.shirt}" stroke-width="21" stroke-linecap="round"/>`
+    + leg(p.P, p.K, p.F, false) + seg(p.S, along(p.S, p.H, 0.6), 7.5, C.skin) + dot(back, 10.6, C.hair) + dot(p.H, 9.4, C.skin)
+    + arm(p.S, p.E, p.W, false);
+}
+// kept for checks: the raw joint positions at a moment of the movement
+function parts(d, t) { const p = poseAt(d, t); return { pose: p, svg: figure(d, t) }; }
 function statics(d) {
   const c = ST[d.st].c;
   let s = d.noGround ? '' : `<line x1="${d.mat ? 30 : 22}" y1="${d.mat ? 124 : 126}" x2="${d.mat ? 178 : 178}" y2="${d.mat ? 124 : 126}" stroke="${d.mat ? c : '#C9CED6'}" stroke-width="${d.mat ? 5 : 2}" stroke-linecap="round" opacity="${d.mat ? 0.35 : 1}"/>`;
@@ -495,16 +529,14 @@ function statics(d) {
 // markup for one animated figure; it also shows a sensible still pose when scripts or animation are paused
 function demoSvg(id, width) {
   const d = D[id]; if (!d) return '';
-  const q = parts(d, 0.5), w = width || 200;
-  return `<svg class="demo" data-demo="${id}" viewBox="0 0 200 140" width="${w}" height="${Math.round(w * 0.7)}" role="img" aria-label="${d.name} 동작"><rect width="200" height="140" rx="18" fill="${ST[d.st].w}"/><g${d.rot ? ` transform="rotate(${d.rot} 100 124)"` : ''}>${statics(d)}<path class="fa" d="${q.far}" fill="none" stroke="${d.flat ? INK : FAR}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><g class="dp">${q.dp}</g><path class="ne" d="${q.near}" fill="none" stroke="${INK}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="hd" cx="${q.head[0]}" cy="${q.head[1]}" r="9" fill="${INK}"/></g></svg>`;
+  const w = width || 200;
+  return `<svg class="demo" data-demo="${id}" viewBox="0 0 200 140" width="${w}" height="${Math.round(w * 0.7)}" role="img" aria-label="${d.name} 동작"><rect width="200" height="140" rx="18" fill="${ST[d.st].w}"/><g${d.rot ? ` transform="rotate(${d.rot} 100 124)"` : ''}>${statics(d)}<g class="fig">${figure(d, 0.5)}</g></g></svg>`;
 }
 function tick(ms) {
   const els = document.querySelectorAll('svg[data-demo]');
   for (let i = 0; i < els.length; i++) {
     const el = els[i], d = D[el.dataset.demo]; if (!d) continue;
-    const r = el._r || (el._r = { fa: el.querySelector('.fa'), ne: el.querySelector('.ne'), hd: el.querySelector('.hd'), dp: el.querySelector('.dp') });
-    const q = parts(d, phase(d, ms));
-    r.fa.setAttribute('d', q.far); r.ne.setAttribute('d', q.near); r.hd.setAttribute('cx', q.head[0]); r.hd.setAttribute('cy', q.head[1]); if (d.dp) r.dp.innerHTML = q.dp;
+    const g0 = el._g || (el._g = el.querySelector('.fig')); if (g0) g0.innerHTML = figure(d, phase(d, ms));
   }
 }
 if (typeof document !== 'undefined' && typeof requestAnimationFrame === 'function') {
@@ -513,7 +545,7 @@ if (typeof document !== 'undefined' && typeof requestAnimationFrame === 'functio
 }
 const tempoText = (d) => d.beat || (d.tempo === LIFT ? '내려갈 때 3초 · 올라올 때 2초' : d.tempo === PUSH ? '힘줄 때 2초 · 돌아올 때 3초' : d.swing ? '일정한 리듬으로 계속' : d.tempo[0] >= 4 ? '들이쉬기 4초 · 내쉬기 6초' : '천천히 움직이고 끝에서 잠깐 멈춤');
 const yt = (d) => 'https://www.youtube.com/results?search_query=' + encodeURIComponent(d.name + ' 자세');
-Object.assign(L, { DEMO: D, demoSvg, demoPhase: phase, demoParts: parts, demoTempo: tempoText, demoYt: yt });
+Object.assign(L, { DEMO: D, demoSvg, demoPhase: phase, demoParts: parts, demoFigure: figure, demoTempo: tempoText, demoYt: yt });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 /* Condition Planet V1.5 — local simulation backend (pages opened with ?sim=1).
@@ -535,16 +567,17 @@ const pub = (m) => { const o = Object.assign({}, m); delete o.key; o.solo = m.so
 const state = (s, m) => { const me = pub(m); delete me.id; delete me.phone4; return { class: cls(s), me, mates: s.members.filter((x) => x !== m && m.team && x.team === m.team).map((x) => x.name), joined: s.members.length }; };
 const who = (s, key) => { const m = s.members.find((x) => x.key && x.key === key); if (!m) throw err('invalid_key'); return m; };
 const started = (p) => ({ r1: 1, c1: 1, r2: 2, c2: 2, r3: 3, c3: 3, done: 3 }[p] || 0);
-const blank = () => ({ goal: null, level: null, pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
+const blank = () => ({ goal: null, level: null, expect: null, pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
 function addBots(s, n) {
   for (let i = 0; i < Math.max(0, Math.min(12, n)); i++) {
     const k = s.members.filter((m) => m.is_bot).length;
     s.members.push(Object.assign(blank(), { id: 'b' + (++s.seq), key: null, name: NAMES[k % NAMES.length] + (k >= NAMES.length ? ' ' + (Math.floor(k / NAMES.length) + 1) : ''), phone4: '0000', is_bot: true,
-      goal: rnd(['diet', 'diet', 'strength', 'stamina', 'relief']), level: rnd(['beg', 'beg', 'mid', 'adv']), pref: { cardio: rnd([-1, 0, 1]), weights: rnd([-1, 0, 1]), stretch: rnd([-1, 0, 1]) },
+      goal: 'stamina', level: rnd(['beg', 'beg', 'mid', 'adv']), expect: null, pref: null,
       mood0: 1 + Math.floor(Math.random() * 4), body0: 1 + Math.floor(Math.random() * 4), energy0: 1 + Math.floor(Math.random() * 5), intake: true }));
+    const b = s.members[s.members.length - 1]; b.expect = rnd(STN); b.pref = { [b.expect]: 1 }; b.body0 = b.energy0;
   }
 }
-function setCheck(m, round, mood, body, by) { const c = { round, station: m.ord[round - 1], mood, body, by_coach: !!by }, i = m.checks.findIndex((x) => x.round === round); if (i >= 0) m.checks[i] = c; else m.checks.push(c); m.checks.sort((a, b) => a.round - b.round); }
+function setCheck(m, round, mood, body, by, rpe, again) { const c = { round, station: m.ord[round - 1], mood, body: body || null, rpe: rpe || null, again: again || null, by_coach: !!by }, i = m.checks.findIndex((x) => x.round === round); if (i >= 0) m.checks[i] = c; else m.checks.push(c); m.checks.sort((a, b) => a.round - b.round); }
 const API = {
   v15_class_public: (s) => ({ slug: 'sim', title: s.class.title, phase: s.class.phase }),
   v15_join(s, a) {
@@ -558,7 +591,7 @@ const API = {
   v15_intake(s, a) {
     const m = who(s, a.p_key); if (![a.p_mood, a.p_body, a.p_energy].every(int5)) throw err('invalid_input');
     const p = a.p_pref || {}; m.pref = {}; STN.forEach((k) => { m.pref[k] = Math.max(-1, Math.min(1, Math.round(+p[k] || 0))); });
-    Object.assign(m, { mood0: a.p_mood, body0: a.p_body, energy0: a.p_energy, goal: L.GOALS[a.p_goal] ? a.p_goal : m.goal || 'stamina', level: L.LEVELS[a.p_level] ? a.p_level : m.level || 'beg', intake: true });
+    Object.assign(m, { mood0: a.p_mood, body0: a.p_body, energy0: a.p_energy, goal: L.GOALS[a.p_goal] ? a.p_goal : m.goal || 'stamina', level: L.LEVELS[a.p_level] ? a.p_level : m.level || 'beg', expect: STN.includes(a.p_expect) ? a.p_expect : m.expect, intake: true });
     return state(s, m);
   },
   v15_late_join(s, a) {
@@ -570,9 +603,9 @@ const API = {
     return state(s, m);
   },
   v15_check(s, a) {
-    const m = who(s, a.p_key); if (![1, 2, 3].includes(a.p_round) || !int5(a.p_mood) || !int5(a.p_body)) throw err('invalid_input');
+    const m = who(s, a.p_key); if (![1, 2, 3].includes(a.p_round) || !int5(a.p_mood) || (a.p_body != null && !int5(a.p_body)) || (a.p_rpe != null && !(a.p_rpe >= 1 && a.p_rpe <= 10)) || (a.p_again != null && ![1, 2, 3].includes(a.p_again))) throw err('invalid_input');
     if (!m.ord) throw err('no_team'); if (a.p_round > started(s.class.phase)) throw err('round_not_started');
-    setCheck(m, a.p_round, a.p_mood, a.p_body, false); return state(s, m);
+    setCheck(m, a.p_round, a.p_mood, a.p_body, false, a.p_rpe, a.p_again); return state(s, m);
   },
   v15_optin(s, a) { const m = who(s, a.p_key); m.want_v2 = !!a.p_yes; return state(s, m); },
   v15_solo(s, a) {
@@ -587,11 +620,11 @@ const API = {
     const p = a.p_phase; if (!['intake', 'teams', 'r1', 'c1', 'r2', 'c2', 'r3', 'c3', 'done'].includes(p)) throw err('invalid_phase');
     if (p !== 'intake' && s.members.some((m) => m.intake && !m.team)) throw err('teams_missing');
     s.class.phase = p; if (p[0] === 'r') s.class.started_ms = nowOf(s);
-    if (p[0] === 'c') { const r = +p[1]; s.members.filter((m) => m.is_bot && m.ord && !m.checks.some((x) => x.round === r)).forEach((m) => { const prev = m.checks.find((x) => x.round === r - 1) || { mood: m.mood0, body: m.body0 }; setCheck(m, r, clamp(prev.mood + rnd([-1, 0, 0, 1, 1, 1, 2])), clamp(prev.body + rnd([-1, 0, 0, 1, 1, 1])), false); }); }
-    if (p === 'done') s.members.filter((m) => m.is_bot && m.checks.length >= 3 && m.want_v2 == null).forEach((m) => { m.want_v2 = Math.random() < 0.5 ? true : null; });
+    if (p[0] === 'c') { const r = +p[1]; s.members.filter((m) => m.is_bot && m.ord && !m.checks.some((x) => x.round === r)).forEach((m) => { const prev = m.checks.find((x) => x.round === r - 1) || { mood: m.mood0, body: m.body0 }; setCheck(m, r, clamp(prev.mood + rnd([-1, 0, 0, 1, 1, 1, 2])), null, false, rnd([3, 4, 5, 6, 7, 8]), rnd([1, 2, 3])); }); }
     return { ok: true };
   },
-  v15_coach_check(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m || !m.ord) throw err('invalid_input'); setCheck(m, a.p_round, a.p_mood, a.p_body, true); return { ok: true }; },
+  v15_coach_check(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m || !m.ord) throw err('invalid_input'); setCheck(m, a.p_round, a.p_mood, a.p_body, true, a.p_rpe, a.p_again); return { ok: true }; },
+  v15_coach_member(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m) throw err('not_found'); if (a.p_goal && !L.GOALS[a.p_goal]) throw err('invalid_input'); if (a.p_level && !L.LEVELS[a.p_level]) throw err('invalid_input'); if (a.p_goal) m.goal = a.p_goal; if (a.p_level) m.level = a.p_level; if (a.p_want) m.want_v2 = a.p_want === 'yes' ? true : a.p_want === 'no' ? false : null; return { ok: true }; },
   v15_coach_fill(s, a) { addBots(s, a.p_n); return { ok: true }; },
   v15_coach_remove(s, a) { s.members = s.members.filter((m) => m.id !== a.p_member); return { ok: true }; },
   v15_coach_reset(s, a) {
@@ -619,19 +652,20 @@ const $ = (id) => document.getElementById(id), fm = $('fm'), fc = $('fc'), scree
 if (!CPSim.peek().members.length) CPSim.reset(8);
 const fit = () => { if (innerWidth <= 1100) { fc.style.transform = 'none'; fc.style.width = '100%'; fc.style.height = Math.max(520, innerHeight - 250) + 'px'; screen.style.height = 'auto'; return; } fc.style.width = '1360px'; const s = screen.clientWidth / 1360; fc.style.transform = 'scale(' + s + ')'; const h = Math.max(520, Math.min(1500, (innerHeight - 190) / s)); fc.style.height = Math.round(h) + 'px'; screen.style.height = Math.round(h * s) + 'px'; };
 fit(); addEventListener('resize', fit);
-const STEPS = ['입장', '목표 · 상태', '팀 편성', '1블록', '체크', '2블록', '체크', '3블록', '체크', '리포트 · 내 플랜'];
+const STEPS = ['입장', '컨디션 체크', '팀 편성', '1번째 운동', '반응', '2번째 운동', '반응', '3번째 운동', '반응', '오늘의 결과'];
 function guide() {
   const d = CPSim.peek(), c = d.class, h = d.members.filter((m) => !m.is_bot).pop(), ph = c.phase, r = ph[1] ? +ph[1] : 0;
   const over = ph[0] === 'r' && c.now_ms >= c.started_ms + c.minutes * 60000, has = (n) => !!h && h.checks.some((x) => x.round === n);
-  if (!h) return { i: 0, side: 'm', t: '폰에 이름과 뒷 4자리를 아무거나 넣고 [동의하고 시작하기]를 누르세요.' };
-  if (!h.intake) return { i: 1, side: 'm', t: '폰에서 목표, 수준, 좋아하는 운동, 지금 상태를 고르세요. 여덟 번 누르면 끝납니다.' };
-  if (ph === 'intake') return { i: 2, side: 'c', t: '회원 답변이 코치 화면에 자동으로 들어왔습니다. 코치 화면에서 [팀 편성하기]를 누르세요.' };
-  if (ph === 'teams') return { i: 2, side: 'c', t: '폰에 팀, 순서, 구역별 처방이 떴습니다. 확인했으면 코치 화면에서 [1블록 시작]을 누르세요.' };
-  if (ph[0] === 'r' && !over) return { i: r * 2 + 1, side: 'm', skip: 1, t: `${r}블록이 진행 중입니다. 폰에 지금 할 운동이 분 단위로 나옵니다. 다 봤으면 [블록 끝으로 넘기기]를 누르세요.` };
-  if (ph[0] === 'r' || (ph[0] === 'c' && !has(r))) return has(r) ? { i: r * 2 + 2, side: 'c', t: '코치 화면에서 [블록 끝내고 체크 받기]를 누르세요. 가상 회원들이 체크를 냅니다.' } : { i: r * 2 + 2, side: 'm', t: '시간이 끝나 폰이 체크 화면으로 바뀌었습니다. 기분과 몸 상태를 한 번씩 누르세요.' };
-  if (ph === 'c1' || ph === 'c2') return { i: r * 2 + 2, side: 'c', t: `체크가 모였습니다. 코치 화면에서 [${r + 1}블록 시작]을 누르세요.` };
-  if (ph === 'c3') return { i: 9, side: 'c', t: '폰에는 벌써 개인 리포트가 떴습니다. 코치 화면에서 [수업 마무리하기]를 누르면 오늘의 결론이 나옵니다.' };
-  return { i: 9, side: 'm', skip: 2, t: '폰에서 리포트를 보고, [내 플랜] 탭 → 요일 → [이 운동 시작하기]로 혼자 하는 날까지 해 보세요. 코치 화면 아래에는 오늘의 결론이 있습니다.' };
+  if (!h) return { i: 0, side: 'm', t: '폰에 이름과 뒷 4자리를 아무거나 넣고 [시작하기]를 누르세요.' };
+  if (!h.intake) return { i: 1, side: 'm', t: '폰에서 기분, 몸 컨디션, 기분이 좋아질 것 같은 운동을 하나씩 누르세요. 세 번이면 끝납니다.' };
+  if (ph === 'intake') return { i: 2, side: 'c', t: '답변이 코치 화면에 들어왔습니다. 회원 카드에서 레벨(초급·중급·상급)을 골라 보고 [팀 편성하기]를 누르세요.' };
+  if (ph === 'teams') return { i: 2, side: 'c', t: '폰에 첫 운동 구역이 떴습니다. 코치 화면에서 [1번째 운동 시작]을 누르세요.' };
+  if (ph[0] === 'r' && !has(r) && !over) return { i: r * 2 + 1, side: 'm', skip: 1, t: `폰에 지금 할 동작이 그림과 핵심 큐 두 개로 나옵니다. 다 봤으면 폰에서 [운동 끝났어요]를 누르세요. 시간을 넘기려면 [블록 끝으로 넘기기].` };
+  if ((ph[0] === 'r' || ph[0] === 'c') && !has(r)) return { i: r * 2 + 2, side: 'm', t: '폰에서 기분, 힘든 정도, 다시 하고 싶은 정도를 한 번씩 누르세요. 세 번이면 저장됩니다.' };
+  if (ph[0] === 'r') return { i: r * 2 + 2, side: 'c', t: '반응이 저장됐습니다. 코치 화면에서 [운동 끝내고 반응 받기]를 누르세요. 가상 회원들도 답을 냅니다.' };
+  if (ph === 'c1' || ph === 'c2') return { i: r * 2 + 2, side: 'c', t: `반응이 모였습니다. 코치 화면에서 [${r + 1}번째 운동 시작]을 누르세요.` };
+  if (ph === 'c3') return { i: 9, side: 'c', t: '폰에는 벌써 오늘의 결과가 떴습니다. 코치 화면에서 [수업 마무리하기]를 누르면 오늘의 결론이 나옵니다.' };
+  return { i: 9, side: 'm', t: '폰에서 오늘의 결과(예상 · 실제 · 다시 하고 싶은 운동 · 오늘의 발견)를 보세요. 코치 화면 아래에는 반 전체의 결론이 있습니다.' };
 }
 let sig = '';
 function tick() {
@@ -639,7 +673,7 @@ function tick() {
   $('who').textContent = g.side === 'm' ? '회원 폰' : '코치 화면'; $('todo').textContent = g.t; $('stepno').textContent = `지금 할 일 · ${Math.min(g.i + 1, STEPS.length)} / ${STEPS.length}`;
   $('steps').innerHTML = STEPS.map((x, i) => `<li class="${i < g.i ? 'past' : i === g.i ? 'cur' : ''}">${x}</li>`).join('');
   $('colm').classList.toggle('act', g.side === 'm'); $('colc').classList.toggle('act', g.side === 'c');
-  $('skip').disabled = !g.skip; $('skip').textContent = g.skip === 2 ? '운동 시간 넘기기' : '블록 끝으로 넘기기'; $('skip').dataset.v = g.skip || '';
+  $('skip').disabled = !g.skip; $('skip').textContent = '블록 끝으로 넘기기'; $('skip').dataset.v = g.skip || '';
   $('fast').classList.toggle('on', sp > 1); $('fast').textContent = sp > 1 ? '20배속 켜짐' : '20배속';
   document.querySelectorAll('#tabs button').forEach((b) => b.classList.toggle('need', b.dataset.v === g.side && !grid.classList.contains(g.side)));
 }
