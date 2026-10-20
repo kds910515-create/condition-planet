@@ -7,10 +7,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222.5%22%20fill%3D%22%2315171A%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2220.5%22%20fill%3D%22%23567AFF%22%2F%3E%3Cg%20transform%3D%22rotate(22%2050%2050)%22%3E%3Cellipse%20cx%3D%2250%22%20cy%3D%2250%22%20rx%3D%2239%22%20ry%3D%2212.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%225%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<title>컨디션 플래닛 · 원데이클래스 데모</title>
+<title>컨디션 플래닛 · 센터 운영자용 소개</title>
 <meta name="description" content="45분 수업 한 번으로 회원마다 다른 운동 리듬을 숫자로 보여 주는 컨디션 플래닛 원데이클래스 데모.">
 <style>
-:root{--bg:#F6F7F9;--card:#fff;--ink:#0E1116;--ink2:#4A5160;--ink3:#8B93A1;--line:#E6E8EC;--soft:#EEF0F3;--cardio:#FF6A3D;--weights:#3D5AFE;--stretch:#0FA37A;--sun:#FFD028}
+:root{--bg:#F6F7F9;--card:#fff;--ink:#0E1116;--ink2:#4A5160;--ink3:#8B93A1;--line:#E6E8EC;--soft:#EEF0F3;--cardio:#FF6A3D;--weights:#3D5AFE;--stretch:#0FA37A;--hybrid:#7A5AF8;--sun:#FFD028}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all}
@@ -83,6 +83,14 @@ footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
 .pt .c{color:var(--cardio);font-weight:800}.pt .w{color:var(--weights);font-weight:800}
 .mix{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;margin-top:6px;min-width:90px}
 .mix i{display:block;border-radius:3px}
+.zt{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}.zt th{text-align:left;font-size:12px;font-weight:800;color:var(--ink3);padding:8px 10px 8px 0;border-bottom:1px solid var(--line)}.zt td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}.zt tr:last-child td{border-bottom:0}
+.zc{display:inline-flex;align-items:center;justify-content:center;min-width:76px;padding:4px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:800}
+.zone3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.zbox{background:var(--card);border-radius:22px;padding:18px;box-shadow:0 0 0 1px var(--line)}
+.zbox h3{font-size:19px;font-weight:800;margin:6px 0 2px}.zbox .m{font-size:13px;color:var(--ink3);font-weight:700}
+.zbox .ims{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}.zbox .ims svg{width:100%;height:auto;border-radius:10px;display:block}.zbox .ims b{display:block;font-size:12px;margin-top:4px}
+.zbox ul{margin-top:10px}.zbox li{font-size:14px;color:var(--ink2);padding:5px 0 5px 14px;position:relative;line-height:1.5}.zbox li::before{content:"";position:absolute;left:0;top:14px;width:6px;height:2px;background:var(--ink)}
+@media (max-width:900px){.zone3{grid-template-columns:1fr}}
 .lad{display:grid;grid-template-columns:64px repeat(3,minmax(0,1fr));gap:10px;margin-top:16px;align-items:center}
 .lad .hd{font-size:13px;font-weight:700;color:var(--ink3)}.lad .hd b{color:var(--ink);font-weight:800}
 .lad .row{font-size:15px;font-weight:800}
@@ -92,63 +100,69 @@ footer{padding:36px 0 64px;color:var(--ink3);font-size:14px}
 </style>
 </head>
 <body>
-<header><div class="wrap"><span class="brand"><svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="24" fill="#0E1116"/><g transform="rotate(22 50 50)"><ellipse cx="50" cy="50" rx="39" ry="12.5" fill="none" stroke="#fff" stroke-width="6"/></g><circle cx="50" cy="50" r="20.5" fill="#FFD028"/><g transform="rotate(22 50 50)"><path d="M11 50a39 12.5 0 0 0 78 0" fill="none" stroke="#fff" stroke-width="6"/></g></svg>컨디션 플래닛</span><span class="pill">원데이클래스 데모</span><span class="sp"></span><a class="btn ghost" href="#coach">코치 화면</a><a class="btn" href="sim.html">전체 시뮬레이션</a></div></header>
+<header><div class="wrap"><span class="brand"><svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="24" fill="#0E1116"/><g transform="rotate(22 50 50)"><ellipse cx="50" cy="50" rx="39" ry="12.5" fill="none" stroke="#fff" stroke-width="6"/></g><circle cx="50" cy="50" r="20.5" fill="#FFD028"/><g transform="rotate(22 50 50)"><path d="M11 50a39 12.5 0 0 0 78 0" fill="none" stroke="#fff" stroke-width="6"/></g></svg>컨디션 플래닛</span><span class="pill">센터 운영자용 소개</span><span class="sp"></span><a class="btn ghost" href="#coach">코치 화면</a><a class="btn" href="sim.html">전체 시뮬레이션</a></div></header>
 
 <div class="wrap hero">
-  <div><p class="k">CONDITION PLANET · ONE-DAY CLASS</p>
+  <div><p class="k">CONDITION PLANET · ONE-DAY CLASS · 센터 운영자용</p>
     <h1>"웨이트 40분 하세요"는<br><em>답이 아닙니다.</em></h1>
-    <p class="lead">같은 운동도 사람마다, 그날의 상태마다 다르게 작용합니다. 컨디션 플래닛에서 회원은 코치가 정해 준 운동을 그림 보며 따라 하고, 운동마다 기분과 힘든 정도만 남깁니다. 끝나면 어떤 운동에서 기분이 좋아졌는지, 예상과 무엇이 달랐는지 보여 줍니다.</p>
+    <p class="lead">같은 운동도 사람마다, 그날의 상태마다 다르게 작용합니다. 원데이클래스에서 회원은 웨이트 · 유산소 · 하이브리드 세 가지 방식을 모두 경험하고, 운동마다 기분 · 체감 강도 · 다시 하고 싶은 정도만 남깁니다. 끝나면 오늘의 반응과 다음 운동 제안을 받아 갑니다.</p>
     <div class="cta"><a class="btn lg" href="sim.html">전체 시뮬레이션 해 보기</a><a class="btn lg ghost" href="#coach">코치 화면 보기</a></div></div>
-  <div class="trio"><div style="background:var(--cardio)">유산소 <small>15분 → 체크</small></div><div style="background:var(--weights)">웨이트 <small>15분 → 체크</small></div><div style="background:var(--stretch)">스트레칭 <small>15분 → 체크</small></div></div>
+  <div class="trio"><div style="background:var(--weights)">A · WEIGHT <small>웨이트 · 약 10~12분</small></div><div style="background:var(--cardio)">B · CARDIO <small>유산소 · 약 8분</small></div><div style="background:var(--hybrid)">C · HYBRID <small>하이브리드 · 약 7~8분</small></div></div>
 </div>
 
 <section class="alt"><div class="wrap">
-  <p class="k">회원이 보는 화면</p><h2>회원은 느끼고 답하고, 코치는 판단하고 운영합니다.</h2><p class="sub">앱 설치도 회원가입도 없습니다. 회원은 블록, 레벨, 카테고리를 몰라도 됩니다. 레벨은 코치가 정하고, 회원은 오늘 추천된 운동만 보고 운동 뒤 10초 안에 반응을 남깁니다. 아래는 실제 화면이며 직접 눌러 볼 수 있습니다.</p>
+  <p class="k">회원이 보는 화면</p><h2>회원은 느끼고 답하고, 코치는 판단하고 운영합니다.</h2><p class="sub">회원은 팀 운영 구조나 시스템을 몰라도 됩니다. 사전 설문 → 운동 → 짧은 반응 입력 → 개인 결과 → 다음 운동 제안 → 4주 테스트 관심 표시만 자연스럽게 지나갑니다. 회원 화면에는 가격이나 결제가 나오지 않습니다. 아래는 실제 화면이며 직접 눌러 볼 수 있습니다.</p>
   <div class="phones" id="phones"></div>
 </div></section>
 
 <section id="plan"><div class="wrap">
-  <p class="k">플랜 시스템</p><h2>목표가 강도를 정하고, 수준이 운동 내용을 정합니다.</h2><p class="sub">코치가 정한 목표(4가지)와 수준(3단계)에 따라 유산소 속도와 숨 강도, 웨이트 기구와 세트·횟수·휴식, 주간 시간 배분이 자동으로 정해집니다. 아래 표는 실제 앱이 쓰는 처방 규칙에서 그대로 뽑은 것입니다.</p>
-  <div class="g2"><div class="box tb"><h3>목표가 바뀌면 · 초급 기준</h3><p class="cap">같은 15분이라도 강도와 방식이 달라집니다.</p><table class="pt"><thead><tr><th>목표</th><th>유산소 15분</th><th>웨이트 15분</th><th>하루 45분 배분</th></tr></thead><tbody><tr><td>다이어트</td><td><b>경사 걷기</b><br>5.0~5.5km/h · 경사 4~6%<br><span class="c">숨 5~6</span> · 숨은 차지만 대화가 되는 정도</td><td><span class="w">2세트 × 12~15회 · 휴식 45초</span><br>마지막 2~3회가 힘들면 맞는 강도</td><td>유산소 20 · 웨이트 15 · 스트레칭 10분<span class="mix"><i style="flex:20;background:#FF6A3D"></i><i style="flex:15;background:#3D5AFE"></i><i style="flex:10;background:#0FA37A"></i></span></td></tr><tr><td>근력</td><td><b>가볍게 걷기</b><br>5.0~5.5km/h · 경사 1~2%<br><span class="c">숨 4~5</span> · 숨은 차지만 대화가 되는 정도</td><td><span class="w">3세트 × 8~10회 · 휴식 60초</span><br>마지막 2~3회가 힘들면 맞는 강도</td><td>유산소 10 · 웨이트 25 · 스트레칭 10분<span class="mix"><i style="flex:10;background:#FF6A3D"></i><i style="flex:25;background:#3D5AFE"></i><i style="flex:10;background:#0FA37A"></i></span></td></tr><tr><td>체력</td><td><b>빠른 걷기 인터벌</b><br>빠르게 60초 + 천천히 60초 × 5번<br><span class="c">숨 5~6</span> · 숨은 차지만 대화가 되는 정도</td><td><span class="w">2세트 × 15회 · 휴식 30~45초</span><br>마지막 2~3회가 힘들면 맞는 강도</td><td>유산소 20 · 웨이트 15 · 스트레칭 10분<span class="mix"><i style="flex:20;background:#FF6A3D"></i><i style="flex:15;background:#3D5AFE"></i><i style="flex:10;background:#0FA37A"></i></span></td></tr><tr><td>스트레스</td><td><b>편하게 걷기</b><br>4.5~5.0km/h · 경사 0~1%<br><span class="c">숨 3~4</span> · 노래도 부를 수 있는 정도</td><td><span class="w">2세트 × 10회 · 휴식 60초</span><br>마지막 2~3회가 힘들면 맞는 강도</td><td>유산소 15 · 웨이트 15 · 스트레칭 15분<span class="mix"><i style="flex:15;background:#FF6A3D"></i><i style="flex:15;background:#3D5AFE"></i><i style="flex:15;background:#0FA37A"></i></span></td></tr></tbody></table></div>
-    <div class="box tb"><h3>수준이 바뀌면 · 다이어트 기준</h3><p class="cap">기구에서 프리웨이트로, 걷기에서 인터벌로 올라갑니다.</p><table class="pt"><thead><tr><th>수준</th><th>유산소 15분</th><th>웨이트 15분</th></tr></thead><tbody><tr><td>초급<br><span style="font-weight:500;color:var(--ink3);font-size:12px;white-space:normal">처음이거나 3개월 미만 · 맨몸 운동부터</span></td><td><b>경사 걷기</b><br>5.0~5.5km/h · 경사 4~6%<br><span class="c">숨 5~6</span> · 숨은 차지만 대화가 되는 정도</td><td><b>스쿼트 · 푸쉬업 · 슈퍼맨</b><br><span class="w">2세트 × 12~15회 · 휴식 45초</span><br>마지막 2~3회가 힘들면 맞는 강도</td></tr><tr><td>중급<br><span style="font-weight:500;color:var(--ink3);font-size:12px;white-space:normal">3개월 넘게 꾸준히 · 머신 위주로</span></td><td><b>러닝 인터벌</b><br>빠르게 60초 + 천천히 90초 × 4번<br><span class="c">숨 7~8</span> · 말하기 어려운 정도</td><td><b>레그프레스 · 체스트프레스 · 랫풀다운</b><br><span class="w">3세트 × 12회 · 휴식 30초</span><br>12회를 하고도 2번은 더 할 수 있는 무게</td></tr><tr><td>상급<br><span style="font-weight:500;color:var(--ink3);font-size:12px;white-space:normal">1년 이상 · 바벨 같은 프리웨이트로</span></td><td><b>고강도 인터벌</b><br>빠르게 40초 + 천천히 60초 × 6번<br><span class="c">숨 8~9</span> · 말하기 어려운 정도</td><td><b>바벨 스쿼트 · 벤치프레스 · 바벨 로우</b><br><span class="w">3세트 × 10회 · 휴식 45초</span><br>10회를 하고도 2번은 더 할 수 있는 무게</td></tr></tbody></table></div></div>
-  <div class="box tb" style="margin-top:18px"><h3>수준별 운동 사다리 · 동작마다 움직이는 안내</h3><p class="cap">같은 움직임을 초급은 맨몸, 중급은 머신, 상급은 프리웨이트로 합니다. 회원이 블록 중에 동작을 누르면 이 그림과 세 줄 설명이 뜹니다. 코치 한 명이 아홉 명을 동시에 봐 줄 수 없는 자리를 채웁니다.</p><div class="lad" id="lad"></div><p style="margin-top:14px"><a class="btn ghost" href="moves.html">동작 25개 전체 보기</a></p></div>
+  <p class="k">운영 구조</p><h2>세 개의 존, 한 팀 최대 4명, 모두가 A · B · C를 한 번씩.</h2><p class="sub">참가 인원은 6~9명으로 바뀌어도 됩니다. 웨이트 존에서 2명씩 짝을 지어 머신을 번갈아 쓰려면 4명까지가 한계라서, 한 팀 최대 4명을 최우선으로 자동 편성합니다. 아래 표는 실제 앱이 쓰는 규칙에서 그대로 뽑은 것입니다.</p>
+  <div class="g2"><div class="box tb"><h3>자동 팀 편성 · 한 팀 최대 4명</h3><p class="cap">운동 경력이 비슷한 사람끼리 묶어 웨이트 존 짝이 맞게 합니다.</p><table class="zt"><thead><tr><th>참가 인원</th><th>팀 구성</th><th>쓰는 존</th></tr></thead><tbody><tr><td><b>6명</b></td><td>3 / 3</td><td>Round마다 두 존 · 한 존은 비어 있음</td></tr><tr><td><b>7명</b></td><td>3 / 4</td><td>Round마다 두 존 · 한 존은 비어 있음</td></tr><tr><td><b>8명</b></td><td>4 / 4</td><td>Round마다 두 존 · 한 존은 비어 있음</td></tr><tr><td><b>9명</b></td><td>3 / 3 / 3</td><td>Round마다 세 존 모두</td></tr></tbody></table></div>
+    <div class="box tb"><h3>로테이션</h3><p class="cap">2팀이면 Team 1 · 2만, 3팀이면 세 팀 모두. 모든 회원이 세 존을 한 번씩 경험합니다.</p><table class="zt"><thead><tr><th></th><th>Round 1</th><th>Round 2</th><th>Round 3</th></tr></thead><tbody><tr><td><b>Team 1</b></td><td><span class="zc" style="background:#3D5AFE">A WEIGHT</span></td><td><span class="zc" style="background:#FF6A3D">B CARDIO</span></td><td><span class="zc" style="background:#7A5AF8">C HYBRID</span></td></tr><tr><td><b>Team 2</b></td><td><span class="zc" style="background:#FF6A3D">B CARDIO</span></td><td><span class="zc" style="background:#7A5AF8">C HYBRID</span></td><td><span class="zc" style="background:#3D5AFE">A WEIGHT</span></td></tr><tr><td><b>Team 3</b></td><td><span class="zc" style="background:#7A5AF8">C HYBRID</span></td><td><span class="zc" style="background:#3D5AFE">A WEIGHT</span></td><td><span class="zc" style="background:#FF6A3D">B CARDIO</span></td></tr></tbody></table></div></div><div class="zone3"><div class="zbox"><span class="zc" style="background:#3D5AFE">A WEIGHT</span><h3>웨이트 · 약 10~12분</h3><p class="m">RPE 6~7 · 중량 → 반복 → 휴식 → 다시 수행</p>
+    <div class="ims"><div><svg class="demo" data-demo="legpress" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="레그프레스 동작"><rect width="200" height="140" rx="18" fill="#E9EDFF"/><g><line x1="22" y1="126" x2="178" y2="126" stroke="#C9CED6" stroke-width="2" stroke-linecap="round" opacity="1"/><line x1="38" y1="72" x2="58" y2="112" stroke="#3D5AFE" stroke-width="7" stroke-linecap="round" opacity=".55"/><line x1="58" y1="113" x2="74" y2="113" stroke="#3D5AFE" stroke-width="7" stroke-linecap="round" opacity=".55"/><line x1="70" y1="118" x2="150" y2="62" stroke="#3D5AFE" stroke-width="3" stroke-linecap="round" opacity=".55"/><g class="fig"><line x1="64" y1="108" x2="72" y2="85" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="72" y1="85" x2="94.5" y2="83" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="65.2" y1="104.6" x2="69.6" y2="91.9" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="94.5" y1="83" x2="93.9" y2="76" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="46" y1="76" x2="51" y2="94" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="51" y1="94" x2="63" y2="104" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="63" cy="104" r="4" fill="#C98F6B"/><line x1="46" y1="76" x2="48.4" y2="84.6" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><line x1="89.2" y1="70.3" x2="109.8" y2="99.7" stroke="#3D5AFE" stroke-width="6" stroke-linecap="round"/><circle cx="64" cy="108" r="9.5" fill="#171C27"/><path d="M46 76L64 108" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="64" y1="108" x2="77" y2="87" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="77" y1="87" x2="99.5" y2="85" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="66" y1="104.9" x2="73.1" y2="93.3" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="99.5" y1="85" x2="98.9" y2="78" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="46" y1="76" x2="41.2" y2="66.4" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="37.9" cy="62.1" r="10.6" fill="#2B211C"/><circle cx="38" cy="60" r="9.4" fill="#E8B08A"/><line x1="46" y1="76" x2="56" y2="96" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="56" y1="96" x2="68" y2="106" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="68" cy="106" r="4.4" fill="#E8B08A"/><line x1="46" y1="76" x2="50.8" y2="85.6" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>레그프레스</b></div><div><svg class="demo" data-demo="chestpress" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="체스트프레스 동작"><rect width="200" height="140" rx="18" fill="#E9EDFF"/><g><line x1="22" y1="126" x2="178" y2="126" stroke="#C9CED6" stroke-width="2" stroke-linecap="round" opacity="1"/><line x1="70" y1="50" x2="70" y2="100" stroke="#3D5AFE" stroke-width="7" stroke-linecap="round" opacity=".55"/><line x1="70" y1="103" x2="98" y2="103" stroke="#3D5AFE" stroke-width="7" stroke-linecap="round" opacity=".55"/><line x1="84" y1="106" x2="84" y2="120" stroke="#3D5AFE" stroke-width="4" stroke-linecap="round" opacity=".55"/><g class="fig"><line x1="82" y1="96" x2="103" y2="96" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="103" y1="96" x2="103" y2="118" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="85.2" y1="96" x2="96.7" y2="96" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="103" y1="118" x2="110" y2="118" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="80" y1="58" x2="79" y2="65" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="79" y1="65" x2="97" y2="65" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="97" cy="65" r="4" fill="#C98F6B"/><line x1="80" y1="58" x2="79.5" y2="61.4" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><line x1="92" y1="24" x2="102" y2="67" stroke="#3D5AFE" stroke-width="3" stroke-linecap="round"/><line x1="102" y1="59" x2="102" y2="75" stroke="#3D5AFE" stroke-width="5" stroke-linecap="round"/><circle cx="82" cy="96" r="9.5" fill="#171C27"/><path d="M80 58L82 96" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="82" y1="96" x2="108" y2="98" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="108" y1="98" x2="108" y2="120" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="85.9" y1="96.3" x2="100.2" y2="97.4" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="108" y1="120" x2="115" y2="120" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="80" y1="58" x2="81.2" y2="48.4" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="80.5" cy="44.4" r="10.6" fill="#2B211C"/><circle cx="82" cy="42" r="9.4" fill="#E8B08A"/><line x1="80" y1="58" x2="84" y2="67" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="84" y1="67" x2="102" y2="67" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="102" cy="67" r="4.4" fill="#E8B08A"/><line x1="80" y1="58" x2="81.9" y2="62.3" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>체스트프레스</b></div><div><svg class="demo" data-demo="latpull" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="랫풀다운 동작"><rect width="200" height="140" rx="18" fill="#E9EDFF"/><g><line x1="22" y1="126" x2="178" y2="126" stroke="#C9CED6" stroke-width="2" stroke-linecap="round" opacity="1"/><line x1="78" y1="103" x2="104" y2="103" stroke="#3D5AFE" stroke-width="7" stroke-linecap="round" opacity=".55"/><line x1="86" y1="106" x2="86" y2="120" stroke="#3D5AFE" stroke-width="4" stroke-linecap="round" opacity=".55"/><circle cx="112" cy="89" r="4" fill="#fff" stroke="#3D5AFE" stroke-width="4" opacity=".8"/><g class="fig"><line x1="90" y1="98" x2="111" y2="96" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="111" y1="96" x2="111" y2="118" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="93.2" y1="97.7" x2="104.7" y2="96.6" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="111" y1="118" x2="118" y2="118" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="90" y1="62" x2="94" y2="58" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="94" y1="58" x2="97" y2="40" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="97" cy="40" r="4" fill="#C98F6B"/><line x1="90" y1="62" x2="91.9" y2="60.1" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><line x1="100" y1="4" x2="102" y2="42" stroke="#3D5AFE" stroke-width="2" stroke-linecap="round"/><circle cx="102" cy="42" r="4" fill="#fff" stroke="#3D5AFE" stroke-width="4"/><circle cx="102" cy="42" r="2.2" fill="#3D5AFE"/><circle cx="90" cy="98" r="9.5" fill="#171C27"/><path d="M90 62L90 98" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="90" y1="98" x2="116" y2="98" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="116" y1="98" x2="116" y2="120" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="93.9" y1="98" x2="108.2" y2="98" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="116" y1="120" x2="123" y2="120" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="90" y1="62" x2="90.9" y2="52.4" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="90.1" cy="48.4" r="10.6" fill="#2B211C"/><circle cx="91.5" cy="46" r="9.4" fill="#E8B08A"/><line x1="90" y1="62" x2="99" y2="60" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="99" y1="60" x2="102" y2="42" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="102" cy="42" r="4.4" fill="#E8B08A"/><line x1="90" y1="62" x2="94.3" y2="61" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>랫풀다운</b></div></div>
+    <ul><li>각 10~12회 × 약 2세트</li><li>2명씩 짝을 지어 번갈아 합니다. 한 명이 하는 동안 짝은 쉽니다.</li><li>한 세트가 끝나면 서로 교대합니다.</li><li>마지막 2~3회가 조금 힘든 무게(RPE 6~7)로 합니다.</li></ul></div><div class="zbox"><span class="zc" style="background:#FF6A3D">B CARDIO</span><h3>유산소 · 약 8분</h3><p class="m">RPE 6 중심 · 숨은 차지만 계속 유지할 수 있는 내 속도</p>
+    <div class="ims"><div><svg class="demo" data-demo="run" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="달리기 동작"><rect width="200" height="140" rx="18" fill="#FFEEE7"/><g><line x1="56" y1="124" x2="150" y2="124" stroke="#FF6A3D" stroke-width="6" stroke-linecap="round" opacity=".55"/><line x1="150" y1="124" x2="158" y2="72" stroke="#FF6A3D" stroke-width="4" stroke-linecap="round" opacity=".55"/><line x1="152" y1="72" x2="168" y2="68" stroke="#FF6A3D" stroke-width="5" stroke-linecap="round" opacity=".55"/><g class="fig"><line x1="98" y1="72" x2="102" y2="89" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="102" y1="89" x2="96" y2="105" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="98.6" y1="74.6" x2="100.8" y2="83.9" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="96" y1="105" x2="102.6" y2="107.5" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="107" y1="38" x2="103" y2="53" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="103" y1="53" x2="111" y2="55.5" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="111" cy="55.5" r="4" fill="#C98F6B"/><line x1="107" y1="38" x2="105.1" y2="45.2" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><circle cx="98" cy="72" r="9.5" fill="#171C27"/><path d="M107 38L98 72" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="98" y1="72" x2="102" y2="89" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="102" y1="89" x2="96" y2="105" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="98.6" y1="74.6" x2="100.8" y2="83.9" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="96" y1="105" x2="102.6" y2="107.5" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="107" y1="38" x2="110" y2="29.6" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="110" cy="26.3" r="10.6" fill="#2B211C"/><circle cx="112" cy="24" r="9.4" fill="#E8B08A"/><line x1="107" y1="38" x2="103" y2="53" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="103" y1="53" x2="111" y2="55.5" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="111" cy="55.5" r="4.4" fill="#E8B08A"/><line x1="107" y1="38" x2="105.1" y2="45.2" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>런닝머신</b></div><div><svg class="demo" data-demo="stair" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="천국의 계단 동작"><rect width="200" height="140" rx="18" fill="#FFEEE7"/><g><line x1="22" y1="126" x2="178" y2="126" stroke="#C9CED6" stroke-width="2" stroke-linecap="round" opacity="1"/><line x1="84" y1="124" x2="150" y2="124" stroke="#FF6A3D" stroke-width="5" stroke-linecap="round" opacity=".55"/><line x1="104" y1="112" x2="134" y2="112" stroke="#FF6A3D" stroke-width="4" stroke-linecap="round" opacity=".55"/><line x1="150" y1="124" x2="150" y2="44" stroke="#FF6A3D" stroke-width="4" stroke-linecap="round" opacity=".55"/><line x1="120" y1="56" x2="150" y2="48" stroke="#FF6A3D" stroke-width="4" stroke-linecap="round" opacity=".55"/><g class="fig"><line x1="100" y1="70" x2="105.5" y2="91" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="105.5" y1="91" x2="107" y2="114" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="100.8" y1="73.2" x2="103.9" y2="84.7" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="107" y1="114" x2="114" y2="113.5" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="102" y1="34" x2="108" y2="50" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="108" y1="50" x2="120" y2="56" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="120" cy="56" r="4" fill="#C98F6B"/><line x1="102" y1="34" x2="104.9" y2="41.7" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><circle cx="100" cy="70" r="9.5" fill="#171C27"/><path d="M102 34L100 70" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="100" y1="70" x2="105.5" y2="91" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="105.5" y1="91" x2="107" y2="114" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="100.8" y1="73.2" x2="103.9" y2="84.7" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="107" y1="114" x2="114" y2="113.5" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="102" y1="34" x2="103.2" y2="25.6" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="102.5" cy="22.4" r="10.6" fill="#2B211C"/><circle cx="104" cy="20" r="9.4" fill="#E8B08A"/><line x1="102" y1="34" x2="110" y2="50" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="110" y1="50" x2="122" y2="56" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="122" cy="56" r="4.4" fill="#E8B08A"/><line x1="102" y1="34" x2="105.8" y2="41.7" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>천국의 계단</b></div><div><svg class="demo" data-demo="walk" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="걷기 동작"><rect width="200" height="140" rx="18" fill="#FFEEE7"/><g><line x1="56" y1="124" x2="150" y2="124" stroke="#FF6A3D" stroke-width="6" stroke-linecap="round" opacity=".55"/><line x1="150" y1="124" x2="158" y2="72" stroke="#FF6A3D" stroke-width="4" stroke-linecap="round" opacity=".55"/><line x1="152" y1="72" x2="168" y2="68" stroke="#FF6A3D" stroke-width="5" stroke-linecap="round" opacity=".55"/><g class="fig"><line x1="100" y1="72" x2="102" y2="96.5" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="102" y1="96.5" x2="101" y2="117" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="100.3" y1="75.7" x2="101.4" y2="89.2" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="101" y1="117" x2="108" y2="117.3" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="102" y1="36" x2="102.5" y2="53.5" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="102.5" y1="53.5" x2="105" y2="67.5" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="105" cy="67.5" r="4" fill="#C98F6B"/><line x1="102" y1="36" x2="102.2" y2="44.4" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><circle cx="100" cy="72" r="9.5" fill="#171C27"/><path d="M102 36L100 72" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="100" y1="72" x2="102" y2="96.5" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="102" y1="96.5" x2="101" y2="117" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="100.3" y1="75.7" x2="101.4" y2="89.2" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="101" y1="117" x2="108" y2="117.3" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="102" y1="36" x2="103.2" y2="27.6" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="102.5" cy="24.4" r="10.6" fill="#2B211C"/><circle cx="104" cy="22" r="9.4" fill="#E8B08A"/><line x1="102" y1="36" x2="102.5" y2="53.5" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="102.5" y1="53.5" x2="105" y2="67.5" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="105" cy="67.5" r="4.4" fill="#E8B08A"/><line x1="102" y1="36" x2="102.2" y2="44.4" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>EASY 걷기</b></div></div>
+    <ul><li>0~2분 EASY · RPE 3~4 · 편하게 움직이며 자기 속도 찾기</li><li>2~6분 RHYTHM · RPE 6 · 숨은 차지만 한 문장 정도는 말할 수 있게</li><li>6~8분 PUSH · RPE 7 · 조금 더 숨차지만 끝까지 유지할 수 있게</li></ul></div><div class="zbox"><span class="zc" style="background:#7A5AF8">C HYBRID</span><h3>하이브리드 · 약 7~8분</h3><p class="m">RPE 6~7 · 근력과 심폐가 끊기지 않고 이어지는 느낌</p>
+    <div class="ims"><div><svg class="demo" data-demo="goblet" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="고블릿 스쿼트 동작"><rect width="200" height="140" rx="18" fill="#F1EDFF"/><g><line x1="22" y1="126" x2="178" y2="126" stroke="#C9CED6" stroke-width="2" stroke-linecap="round" opacity="1"/><g class="fig"><line x1="93" y1="81" x2="101.5" y2="93.5" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="101.5" y1="93.5" x2="95" y2="118" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="94.3" y1="82.9" x2="99" y2="89.8" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="95" y1="118" x2="101.8" y2="119.8" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="101.5" y1="47.5" x2="107" y2="61.5" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="107" y1="61.5" x2="104" y2="50.5" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="104" cy="50.5" r="4" fill="#C98F6B"/><line x1="101.5" y1="47.5" x2="104.1" y2="54.2" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><circle cx="109" cy="52.5" r="6" fill="#fff" stroke="#7A5AF8" stroke-width="4"/><circle cx="109" cy="52.5" r="2.2" fill="#7A5AF8"/><circle cx="93" cy="81" r="9.5" fill="#171C27"/><path d="M101.5 47.5L93 81" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="93" y1="81" x2="106.5" y2="95.5" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="106.5" y1="95.5" x2="100" y2="120" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="95" y1="83.2" x2="102.5" y2="91.2" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="100" y1="120" x2="106.8" y2="121.8" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="101.5" y1="47.5" x2="103.3" y2="39.4" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="102.8" cy="36.3" r="10.6" fill="#2B211C"/><circle cx="104.5" cy="34" r="9.4" fill="#E8B08A"/><line x1="101.5" y1="47.5" x2="112" y2="63.5" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="112" y1="63.5" x2="109" y2="52.5" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="109" cy="52.5" r="4.4" fill="#E8B08A"/><line x1="101.5" y1="47.5" x2="106.5" y2="55.2" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>고블릿 스쿼트 10회</b></div><div><svg class="demo" data-demo="pushpress" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="덤벨 푸시프레스 동작"><rect width="200" height="140" rx="18" fill="#F1EDFF"/><g><line x1="22" y1="126" x2="178" y2="126" stroke="#C9CED6" stroke-width="2" stroke-linecap="round" opacity="1"/><g class="fig"><line x1="98.5" y1="73" x2="97.5" y2="95" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="97.5" y1="95" x2="95" y2="118" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="98.4" y1="76.3" x2="97.8" y2="88.4" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="95" y1="118" x2="102" y2="118.8" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="99.5" y1="37" x2="101.5" y2="32.5" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="101.5" y1="32.5" x2="99" y2="18.5" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="99" cy="18.5" r="4" fill="#C98F6B"/><line x1="99.5" y1="37" x2="100.5" y2="34.8" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><circle cx="104" cy="20.5" r="6" fill="#fff" stroke="#7A5AF8" stroke-width="4"/><circle cx="104" cy="20.5" r="2.2" fill="#7A5AF8"/><circle cx="98.5" cy="73" r="9.5" fill="#171C27"/><path d="M99.5 37L98.5 73" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="98.5" y1="73" x2="102.5" y2="97" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="102.5" y1="97" x2="100" y2="120" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="99.1" y1="76.6" x2="101.3" y2="89.8" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="100" y1="120" x2="107" y2="120.8" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="99.5" y1="37" x2="100.4" y2="28.6" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="99.5" cy="25.4" r="10.6" fill="#2B211C"/><circle cx="101" cy="23" r="9.4" fill="#E8B08A"/><line x1="99.5" y1="37" x2="106.5" y2="34.5" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="106.5" y1="34.5" x2="104" y2="20.5" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="104" cy="20.5" r="4.4" fill="#E8B08A"/><line x1="99.5" y1="37" x2="102.9" y2="35.8" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>덤벨 푸시프레스 8회</b></div><div><svg class="demo" data-demo="stepup" viewBox="0 0 200 140" width="120" height="84" role="img" aria-label="스텝업 동작"><rect width="200" height="140" rx="18" fill="#F1EDFF"/><g><line x1="22" y1="126" x2="178" y2="126" stroke="#C9CED6" stroke-width="2" stroke-linecap="round" opacity="1"/><rect x="112" y="108" width="46" height="18" rx="4" fill="#7A5AF8" opacity=".55"/><g class="fig"><line x1="108" y1="68" x2="114" y2="85" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="114" y1="85" x2="111.5" y2="108" stroke="#C98F6B" stroke-width="9.5" stroke-linecap="round"/><line x1="108.9" y1="70.6" x2="112.2" y2="79.9" stroke="#3B4357" stroke-width="12" stroke-linecap="round"/><line x1="111.5" y1="108" x2="118.5" y2="108.8" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="110" y1="32" x2="100" y2="47" stroke="#C98F6B" stroke-width="8.5" stroke-linecap="round"/><line x1="100" y1="47" x2="106" y2="61.5" stroke="#C98F6B" stroke-width="7.5" stroke-linecap="round"/><circle cx="106" cy="61.5" r="4" fill="#C98F6B"/><line x1="110" y1="32" x2="105.2" y2="39.2" stroke="#3A4766" stroke-width="10.5" stroke-linecap="round"/><circle cx="108" cy="68" r="9.5" fill="#171C27"/><path d="M110 32L108 68" fill="none" stroke="#26324A" stroke-width="21" stroke-linecap="round"/><line x1="108" y1="68" x2="120" y2="87" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="120" y1="87" x2="126" y2="108" stroke="#E8B08A" stroke-width="10" stroke-linecap="round"/><line x1="109.8" y1="70.9" x2="116.4" y2="81.3" stroke="#171C27" stroke-width="12.5" stroke-linecap="round"/><line x1="126" y1="108" x2="132.7" y2="106.1" stroke="#11151C" stroke-width="7" stroke-linecap="round"/><line x1="110" y1="32" x2="111.2" y2="23.6" stroke="#E8B08A" stroke-width="7.5" stroke-linecap="round"/><circle cx="110.5" cy="20.4" r="10.6" fill="#2B211C"/><circle cx="112" cy="18" r="9.4" fill="#E8B08A"/><line x1="110" y1="32" x2="105" y2="49" stroke="#E8B08A" stroke-width="9" stroke-linecap="round"/><line x1="105" y1="49" x2="111" y2="63.5" stroke="#E8B08A" stroke-width="8" stroke-linecap="round"/><circle cx="111" cy="63.5" r="4.4" fill="#E8B08A"/><line x1="110" y1="32" x2="107.6" y2="40.2" stroke="#26324A" stroke-width="11" stroke-linecap="round"/></g></g></svg><b>스텝업 10~12회</b></div></div>
+    <ul><li>1 → 2 → 3, 다시 1번부터 반복</li><li>정해진 휴식은 없습니다. 내 속도로 이어 갑니다.</li><li>숨이 너무 차면 20~30초 숨을 고른 뒤 다시 시작합니다.</li><li>기록 경쟁이 아닙니다.</li></ul></div></div>
   <div class="g3">
-    <div class="box"><p class="t">강도 기준</p><h3>속도가 아니라 숨</h3><ul><li>모든 유산소 처방에 <b>숨 1~10 척도</b>가 붙습니다. "숨은 차지만 대화가 되는 정도"처럼 초보자가 바로 알 수 있는 말로 안내합니다.</li><li>웨이트는 <b>"15회를 하고도 3번은 더 할 수 있는 무게"</b>처럼 숫자 없이도 맞출 수 있는 기준을 줍니다.</li></ul></div>
-    <div class="box"><p class="t">오늘 상태 반영</p><h3>처진 날은 낮춰서</h3><ul><li>시작 전 에너지나 몸 상태가 낮으면 <b>속도와 무게를 한 단계 낮춘</b> 처방이 나옵니다.</li><li>기분이 2 이하인 날은 수업에서 기분을 가장 올린 운동 <b>15분만 하고 가는 규칙</b>을 제안합니다.</li></ul></div>
-    <div class="box"><p class="t">진행</p><h3>4주 동안 조금씩</h3><ul><li>1주차는 익숙해지는 주, 2~3주차는 시간·경사·세트를 하나씩 올리고, 4주차에 다시 잽니다.</li><li>혼자 운동한 날도 <b>전후 기분이 기록</b>되어 코치 화면에 "수업 후 혼자 N회"로 보입니다.</li></ul></div>
+    <div class="box"><p class="t">사전 설문</p><h3>수업 전에 미리 압니다</h3><ul><li>단톡방 링크로 클래스 안내를 먼저 보여 주고, <b>1분 설문</b>(경력 · 평소 운동 · 선호 · 통증 · 원하는 느낌)을 받습니다.</li><li>코치는 수업 전에 <b>통증 · 주의 부위</b>와 자동 팀 편성을 확인합니다.</li></ul></div>
+    <div class="box"><p class="t">수업 중</p><h3>10초 반응 입력</h3><ul><li>존이 끝날 때마다 <b>기분 이모지 · RPE 1~10 · 다시 하고 싶은 정도 1~5</b>를 누릅니다.</li><li>코치 화면에 팀별 현재 존과 회원별 입력 완료가 보이고, 버튼 하나로 다음 Round로 넘어갑니다.</li></ul></div>
+    <div class="box"><p class="t">수업 뒤</p><h3>결과는 행동으로 끝납니다</h3><ul><li>오늘의 발견 → 다음 운동 제안(1순위 · 강도 · 운동) → 4주 리듬 테스트 설명.</li><li>하루 결과로 "○○형"이라고 정하지 않고, <b>"오늘의 반응에서는"</b>이라고 말합니다.</li></ul></div>
   </div>
+  <p style="margin-top:18px"><a class="btn ghost" href="moves.html">존별 동작 안내 보기</a></p>
 </div></section>
 
 <section id="coach" class="alt"><div class="wrap">
-  <p class="k">코치가 보는 화면</p><h2>코치는 버튼 하나씩만 누르면 수업이 흘러갑니다.</h2><p class="sub">팀 편성, 타이머, 체크 수집, 수업 뒤 결론까지 한 화면입니다. 태블릿이나 TV에 그대로 띄워 발표 화면으로 씁니다.</p>
-  <div class="tabs" id="tabs"><button class="on" data-v="live">수업 진행 중</button><button data-v="done">수업이 끝난 뒤</button></div>
-  <div class="screen" id="screen"><iframe id="cf" title="코치 화면" src="coach.html?preview=live&show=1"></iframe></div>
+  <p class="k">코치가 보는 화면</p><h2>수업 전 · 중 · 후를 한 화면에서.</h2><p class="sub">수업 전에는 설문 명단과 자동 팀 편성, 수업 중에는 Round와 팀별 위치와 입력 완료, 수업 뒤에는 회원별 결과와 4주 테스트 의향이 보입니다. 태블릿이나 TV에 그대로 띄워 씁니다.</p>
+  <div class="tabs" id="tabs"><button class="on" data-v="pre">수업 전</button><button data-v="live">수업 중</button><button data-v="done">수업 후</button></div>
+  <div class="screen" id="screen"><iframe id="cf" title="코치 화면" src="coach.html?preview=pre&show=1"></iframe></div>
 </div></section>
 
 <section><div class="wrap">
-  <p class="k">왜 이 제품인가</p><h2>기획, 운영, 사업 구조를 한 장으로.</h2>
+  <p class="k">센터 도입 · 운영자 전용</p><h2>기획, 운영, 사업 구조를 한 장으로.</h2><p class="sub">이 섹션은 센터 운영자를 위한 내용입니다. 회원 화면과는 완전히 분리되어 있습니다.</p>
   <div class="g3">
     <div class="box"><p class="t">기획</p><h3>출석은 아는데, 기분은 모른다</h3><ul>
       <li>헬스장은 회원이 <b>왔는지</b>는 알지만 운동이 그 사람에게 <b>어떻게 작용했는지</b>는 모릅니다.</li>
       <li>회원은 무엇이 자기에게 맞는지 모른 채 남들이 하는 루틴을 따라 합니다.</li>
-      <li>운동 전후 컨디션을 <b>두 번의 터치</b>로 남기면 그 답이 숫자로 쌓입니다.</li></ul></div>
+      <li>운동 직후 <b>10초 입력</b>이 쌓이면 그 답이 숫자로 드러납니다.</li></ul></div>
     <div class="box"><p class="t">운영</p><h3>코치 한 명, 링크 하나</h3><ul>
-      <li>준비물은 <b>회원용 링크</b>와 코치용 화면 한 대입니다.</li>
-      <li>선호와 상태가 비슷한 세 명씩 <b>자동으로 팀</b>이 되고 구역이 겹치지 않게 순서가 나옵니다.</li>
+      <li>준비물은 <b>단톡방에 보낼 링크</b>와 코치용 화면 한 대입니다.</li>
+      <li>인원이 6~9명으로 바뀌어도 <b>한 팀 최대 4명</b>으로 자동 편성되고 존이 겹치지 않게 돕니다.</li>
       <li>폰이 꺼진 회원은 코치가 대신 입력하고, 늦게 온 회원은 자동 배정합니다.</li></ul></div>
-    <div class="box"><p class="t">사업</p><h3>체험이 구독으로 이어지는 구조</h3><ul>
+    <div class="box"><p class="t">사업</p><h3>체험 → 이해 → 신뢰 → 자발적 관심</h3><ul>
       <li>원데이클래스는 <b>신규 회원 유입</b>과 재등록 상담의 근거가 됩니다.</li>
-      <li>수업 끝에 회원이 직접 <b>"한 달 더"</b>를 누릅니다. 그 명단이 다음 단계의 고객입니다.</li>
+      <li>회원은 결과를 다 본 뒤에만 4주 리듬 테스트 <b>의향</b>을 남깁니다. 결제는 없습니다.</li>
       <li>센터는 지점 단위 월 구독, 회원은 무료입니다. 가격안은 지점당 월 4.9만~19만 원입니다.</li></ul></div>
   </div>
   <div class="funnel">
-    <div class="now"><p class="s">지금 · 데모</p><h3>원데이클래스</h3><p>목표·수준 설정, 45분 세 블록 가이드, 블록마다 체크. 끝나면 개인 리포트와 요일별로 따라 하는 플랜.</p></div>
-    <div><p class="s">다음</p><h3>한 달 프로그램</h3><p>운동할 때마다 전후 한 번씩 기록. 한 달 뒤 그 사람에게 맞는 운동과 4주 플랜을 줍니다.</p></div>
-    <div><p class="s">그다음</p><h3>지점 구독</h3><p>코치에게는 누가 좋아지고 누가 멀어지는지, 본사에는 지점별 프로그램 효과가 보입니다.</p></div>
+    <div class="now"><p class="s">지금 · 원데이</p><h3>나만의 운동 리듬 찾기</h3><p>사전 설문, A · B · C 세 존, 존마다 10초 입력. 끝나면 오늘의 발견과 다음 운동 제안.</p></div>
+    <div><p class="s">다음</p><h3>4주 리듬 테스트</h3><p>운동할 때마다 짧게 기록. 요일 · 컨디션 · 운동 종류 · 강도별로 어떤 패턴이 맞는지 보여 줍니다.</p></div>
+    <div><p class="s">그다음</p><h3>센터 도입</h3><p>코치에게는 누가 좋아지고 누가 멀어지는지, 본사에는 지점별 프로그램 효과가 보입니다.</p></div>
   </div>
 </div></section>
 
-<footer><div class="wrap">컨디션 플래닛 · 원데이클래스 데모 버전 · 화면 속 이름과 숫자는 예시입니다.</div></footer>
+<footer><div class="wrap">컨디션 플래닛 · 원데이클래스 · 센터 운영자용 소개 · 화면 속 이름과 숫자는 예시입니다.</div></footer>
 
 <script>
 /* Condition Planet V1.5 — one-day class logic (shared by the member page and the coach page).
@@ -556,6 +570,22 @@ const D = {
 const PTS = ['H', 'S', 'E', 'W', 'P', 'K', 'F', 'E2', 'W2', 'K2', 'F2', 'C'];
 const full = (p) => { const o = Object.assign({}, p); ['E', 'W', 'K', 'F'].forEach((k) => { if (!o[k + '2']) o[k + '2'] = [p[k][0] - 5, p[k][1] - 2]; }); return o; };
 const CUES = {"squat":["엉덩이를 뒤로 빼며 앉기","무릎은 발끝 방향으로"],"pushup":["몸은 일자로","힘들면 무릎을 대고"],"superman":["팔다리를 살짝 들기","시선은 바닥"],"legpress":["허리를 패드에 붙이기","무릎은 끝까지 펴지 않기"],"chestpress":["손잡이는 가슴 높이","돌아올 때 천천히"],"latpull":["가슴 펴고 쇄골까지","어깨는 내리기"],"bbsquat":["가슴을 세우고","발바닥 전체로 밀기"],"bench":["어깨뼈를 모으고","가슴 가운데로 내리기"],"bbrow":["허리 곧게, 상체 45도","배꼽 쪽으로 당기기"],"walk":["손잡이 잡지 않기","팔을 자연스럽게"],"incline":["상체 살짝 앞으로","보폭은 짧게"],"run":["발은 가볍게 착지","팔꿈치 90도"],"roller":["등 위아래로 천천히","허리와 목은 피하기"],"hipflexor":["골반을 앞으로 밀기","허리는 꺾지 않기"],"hamstring":["무릎 펴고 다리 들기","반동 없이 30초"],"catcow":["내쉬며 등을 말고","들이쉬며 가슴을 열기"],"deadbug":["허리는 바닥에 붙이고","팔과 반대 다리 뻗기"],"child":["엉덩이는 뒤꿈치 쪽으로","길게 내쉬기"],"wgs":["손은 바닥에 짚고","팔을 천장으로 열기"],"s9090":["허리를 펴고","앞 정강이 위로 숙이기"],"deepsquat":["뒤꿈치 붙이기","가슴 세우고 버티기"],"cossack":["한쪽으로 깊게 앉기","반대 다리는 곧게"],"wallslide":["등을 벽에 붙이고","팔을 위로 밀기"],"breath":["4초 들이쉬기","6초 내쉬기"],"pecwall":["손은 벽에 고정","몸을 앞으로 돌리기"]};
+Object.assign(D, {
+  goblet: { st: 'hybrid', name: '고블릿 스쿼트', eq: '덤벨', tempo: [1.6, 0.2, 1.3, 0.3], dp: [['disc', 'W', 6]], how: ['덤벨 한 개를 세워 가슴 앞에 붙여 듭니다.', '팔꿈치를 무릎 안쪽으로 내리며 앉습니다.', '발바닥 전체로 밀며 일어납니다.'],
+    a: { H: [101, 18], S: [100, 32], E: [111, 48], W: [107, 38], P: [100, 68], K: [101, 94], F: [100, 120] },
+    b: { H: [108, 50], S: [103, 63], E: [113, 79], W: [111, 67], P: [86, 94], K: [112, 97], F: [100, 120] } },
+  pushpress: { st: 'hybrid', name: '덤벨 푸시프레스', eq: '덤벨', tempo: [0.9, 0.3, 1.4, 0.4], dp: [['disc', 'W', 6]], how: ['덤벨을 어깨 위에 들고 섭니다.', '무릎을 살짝 굽혔다가 다리 힘으로 튕기듯 밀어 올립니다.', '천천히 어깨로 내리고 다시 반복합니다.'],
+    a: { H: [101, 26], S: [99, 40], E: [110, 50], W: [104, 36], P: [97, 76], K: [105, 99], F: [100, 120] },
+    b: { H: [101, 20], S: [100, 34], E: [103, 19], W: [104, 5], P: [100, 70], K: [100, 95], F: [100, 120] } },
+  stepup: { st: 'hybrid', name: '스텝업', eq: '스텝 박스', tempo: [1, 0.3, 1, 0.3], sp: [['r', 112, 108, 46, 18, 4]], how: ['한 발을 박스 위에 올립니다.', '올린 발 뒤꿈치로 밀며 올라섭니다.', '천천히 내려오고, 발을 바꿔 가며 반복합니다.'],
+    a: { H: [105, 26], S: [103, 40], E: [98, 57], W: [104, 72], P: [100, 76], K: [118, 90], F: [126, 108], K2: [98, 98], F2: [96, 120] },
+    b: { H: [119, 10], S: [117, 24], E: [112, 41], W: [118, 55], P: [116, 60], K: [122, 84], F: [126, 108], K2: [130, 72], F2: [127, 96] } },
+  stair: { st: 'cardio', name: '천국의 계단', eq: '스텝밀', tempo: [0.6, 0, 0.6, 0], swing: 1, how: ['손잡이는 가볍게만 잡습니다. 매달리지 않습니다.', '발 전체로 계단을 밟습니다.', '숨이 너무 차면 속도를 한 단계 낮춥니다.'],
+    sp: [['l', 84, 124, 150, 124, 5], ['l', 104, 112, 134, 112, 4], ['l', 150, 124, 150, 44, 4], ['l', 120, 56, 150, 48, 4]],
+    a: { H: [104, 20], S: [102, 34], E: [110, 50], W: [122, 56], P: [100, 70], K: [112, 86], F: [114, 108], E2: [108, 50], W2: [120, 56], K2: [99, 96], F2: [100, 120] },
+    b: { H: [104, 20], S: [102, 34], E: [110, 50], W: [122, 56], P: [100, 70], K: [99, 96], F: [100, 120], E2: [108, 50], W2: [120, 56], K2: [112, 86], F2: [114, 108] } },
+});
+Object.assign(CUES, { goblet: ['덤벨은 가슴에 붙이고', '가슴 세우고 앉기'], pushpress: ['무릎 살짝 굽혔다가', '다리 힘으로 밀어 올리기'], stepup: ['올린 발 뒤꿈치로 밀기', '천천히 내려오기'], stair: ['손잡이에 매달리지 않기', '발 전체로 밟기'] });
 Object.keys(D).forEach((k) => { D[k].A = full(D[k].a); D[k].B = full(D[k].b); D[k].cue = CUES[k]; });
 const f1 = (v) => Math.round(v * 10) / 10;
 function phase(d, ms) {
@@ -622,13 +652,79 @@ const yt = (d) => 'https://www.youtube.com/results?search_query=' + encodeURICom
 Object.assign(L, { DEMO: D, demoSvg, demoPhase: phase, demoParts: parts, demoFigure: figure, demoTempo: tempoText, demoYt: yt });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
+/* Condition Planet — one-day class as it runs on the day (loaded after logic.js, plan.js and demo.js).
+   Three zones (A WEIGHT · B CARDIO · C HYBRID), teams of at most four, a fixed rotation so everyone does all three,
+   the pre-class survey, and the result: today's finding → the next workout → why four weeks tell more. */
+(function (g) {
+'use strict';
+const L = g.CPClass, ST = L.ST;
+ST.hybrid = { ko: '하이브리드', c: '#7A5AF8', w: '#F1EDFF' };
+const icon0 = L.UI.icon;
+L.UI.icon = (k, size) => (k === 'hybrid' ? `<svg width="${size || 24}" height="${size || 24}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 5.5 13.5h6l-1 8 8-11h-6z"/></svg>` : icon0(k, size));
+const ZKEYS = ['weights', 'cardio', 'hybrid'];
+const ZONES = {
+  weights: { code: 'A', en: 'WEIGHT', ko: '웨이트', time: '약 10~12분', rpe: 'RPE 6~7', feel: '중량 → 반복 → 휴식 → 다시 수행',
+    items: [{ demo: 'legpress', name: '레그프레스' }, { demo: 'chestpress', name: '체스트프레스' }, { demo: 'latpull', name: '랫풀다운' }],
+    dose: '각 10~12회 × 약 2세트', how: ['2명씩 짝을 지어 번갈아 합니다. 한 명이 하는 동안 짝은 쉽니다.', '한 세트가 끝나면 서로 교대합니다.', '마지막 2~3회가 조금 힘든 무게(RPE 6~7)로 합니다.'] },
+  cardio: { code: 'B', en: 'CARDIO', ko: '유산소', time: '약 8분', rpe: 'RPE 6 중심', feel: '숨은 차지만 계속 유지할 수 있는 내 속도',
+    items: [{ demo: 'run', name: '런닝머신' }, { demo: 'stair', name: '천국의 계단 · 해 본 사람만' }],
+    phases: [{ from: 0, to: 2, name: 'EASY', rpe: 'RPE 3~4', say: '편하게 움직이며 자기 속도 찾기' }, { from: 2, to: 6, name: 'RHYTHM', rpe: 'RPE 6', say: '숨은 차지만 한 문장 정도는 말할 수 있게' }, { from: 6, to: 8, name: 'PUSH', rpe: 'RPE 7', say: '조금 더 숨차지만 끝까지 유지할 수 있게' }],
+    msg: '속도 숫자를 맞추지 말고, 숨은 차지만 계속 유지할 수 있는 자기 속도를 찾아보세요.', how: ['기본은 런닝머신입니다. 천국의 계단은 평소에 써 본 사람만 고릅니다.', '0~2분 EASY → 2~6분 RHYTHM → 6~8분 PUSH.', '전력질주는 하지 않습니다.'] },
+  hybrid: { code: 'C', en: 'HYBRID', ko: '하이브리드', time: '약 7~8분', rpe: 'RPE 6~7', feel: '근력과 심폐가 끊기지 않고 이어지는 느낌',
+    items: [{ demo: 'goblet', name: '고블릿 스쿼트', dose: '10회' }, { demo: 'pushpress', name: '덤벨 푸시프레스', dose: '8회' }, { demo: 'stepup', name: '스텝업', dose: '10~12회' }],
+    dose: '1 → 2 → 3, 다시 1번부터 반복', how: ['정해진 휴식은 없습니다. 내 속도로 이어 갑니다.', '숨이 너무 차면 20~30초 숨을 고른 뒤 다시 시작합니다.', '기록 경쟁이 아닙니다.'] },
+};
+const ROT = [['weights', 'cardio', 'hybrid'], ['cardio', 'hybrid', 'weights'], ['hybrid', 'weights', 'cardio']];
+const SURVEY = [
+  { k: 'exp', t: '운동 경력', o: ['거의 처음', '6개월 미만', '6개월~2년', '2년 이상'] },
+  { k: 'usual', t: '평소 주로 하는 운동', o: ['머신 웨이트', '프리웨이트', '유산소', '여러 가지 섞어서', '거의 안 함'] },
+  { k: 'like', t: '지금 좋아한다고 생각하는 운동', o: ['웨이트', '유산소', '숨차는 운동 / 서킷', '잘 모르겠다'] },
+  { k: 'pain', t: '최근 통증 또는 운동할 때 주의해야 할 부위', text: 1 },
+  { k: 'feel', t: '운동할 때 선호하는 느낌', o: ['천천히 집중하는 운동', '일정하게 계속 움직이는 운동', '짧고 역동적인 운동', '잘 모르겠다'] },
+  { k: 'after', t: '운동이 끝났을 때 가장 원하는 느낌', o: ['몸을 제대로 쓴 느낌', '스트레스가 풀린 느낌', '상쾌하고 가벼운 느낌', '성취감', '잘 모르겠다'] },
+];
+const svText = (sv, k) => { if (!sv) return '—'; const q = SURVEY.find((x) => x.k === k); if (q.text) return sv.pain ? sv.pain : '없음'; return q.o[sv[k]] != null ? q.o[sv[k]] : '—'; };
+const NTH = ['', '첫 번째', '두 번째', '세 번째'];
+const MOODS = ['', '😫', '😔', '😐', '😊', '🤩'];
+const AGAIN5 = ['', '전혀', '별로', '보통', '하고 싶어요', '꼭 다시'];
+// teams of at most four, as even as possible: 6 → 3/3, 7 → 3/4, 8 → 4/4, 9 → 3/3/3
+function teamSizes(n) { if (n <= 0) return []; const k = n <= 4 ? 1 : n <= 8 ? 2 : 3, base = Math.floor(n / k), extra = n % k; return Array.from({ length: k }, (_, i) => base + (i >= k - extra ? 1 : 0)); }
+// people with similar experience train together (weight-zone partners match); the coach can still move anyone
+function zteams(members) {
+  const ready = members.filter((m) => m.intake), sizes = teamSizes(ready.length), xp = (m) => (m.survey && m.survey.exp != null ? m.survey.exp : 1);
+  const sorted = ready.slice().sort((a, b) => xp(a) - xp(b) || ((a.survey && a.survey.usual) || 0) - ((b.survey && b.survey.usual) || 0) || String(a.name).localeCompare(String(b.name)));
+  const out = []; let i = 0;
+  sizes.forEach((sz, t) => { for (let j = 0; j < sz; j++, i++) out.push({ id: sorted[i].id, team: t + 1, ord: ROT[t], kind: 'Team ' + (t + 1), reason: '' }); });
+  return out;
+}
+const teamOf = (t) => ({ id: t, ord: ROT[t - 1], kind: 'Team ' + t });
+const zname = (k) => ZONES[k].ko;
+// today's finding → the next workout. One day is one day's reaction, so it never labels the person.
+function zresult(m) {
+  if (!m || !m.ord || !m.checks || m.checks.length < 3) return null;
+  const rows = m.ord.map((k, i) => { const c = m.checks.find((x) => x.round === i + 1) || {}, before = i === 0 ? m.mood0 : (m.checks.find((x) => x.round === i) || {}).mood; return { st: k, round: i + 1, before: before == null ? null : before, mood: c.mood, dm: before == null ? null : c.mood - before, rpe: c.rpe == null ? null : c.rpe, again: c.again == null ? null : c.again }; });
+  const best = rows.slice().sort((a, b) => (b.dm == null ? -9 : b.dm) - (a.dm == null ? -9 : a.dm) || (b.again || 0) - (a.again || 0) || b.mood - a.mood)[0];
+  const rec = best.dm != null && best.dm > 0 ? best : rows.slice().sort((a, b) => (b.again || 0) - (a.again || 0) || b.mood - a.mood)[0];
+  const over = rows.filter((r) => r.dm != null && r.dm < 0 && r.rpe >= 8).sort((a, b) => a.dm - b.dm)[0];
+  const ex = ST[m.expect] && ZONES[m.expect] ? m.expect : null;
+  let line = best.dm > 0 ? (m.mood0 != null && m.mood0 <= 2 ? `오늘은 컨디션이 낮았지만 ${zname(best.st)} 후 기분이 가장 크게 좋아졌어요.` : `오늘은 ${zname(best.st)} 후 기분이 가장 크게 좋아졌어요.`)
+    : `오늘은 세 운동 모두 기분이 크게 오르지는 않았어요. 그중 ${zname(rec.st)}의 반응이 가장 좋았어요.`;
+  if (ex && best.dm > 0) line += ex === best.st ? ' 처음 예상과 같은 결과예요.' : ` 처음 예상한 ${zname(ex)}와는 다른 결과예요.`;
+  const caution = over ? `오늘 컨디션에서는 ${zname(over.st)} 강도가 조금 높았을 가능성이 있습니다. 다음에는 강도를 한 단계 낮춰보세요.` : null;
+  const hard = rec.rpe != null && rec.rpe >= 8, easy = rec.rpe != null && rec.rpe <= 4;
+  const intensity = hard ? 'RPE 5~6 · 오늘보다 한 단계 낮게' : easy ? `${ZONES[rec.st].rpe} · 오늘보다 조금 더` : ZONES[rec.st].rpe;
+  return { rows, best, rec, expect: ex, line, caution, intensity, items: ZONES[rec.st].items.map((x) => x.name.split(' · ')[0]), sentence: `오늘의 반응에서는 ${zname(rec.st)}가 가장 잘 맞았습니다.` };
+}
+Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSizes, zteams, teamOf, zresult });
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
 /* Condition Planet V1.5 — local simulation backend (pages opened with ?sim=1).
    Same RPC names and result shapes as the server, but the class lives in this browser's localStorage, so the member page and the
    coach page (two frames of the same site) run a whole class together without touching real data. The clock can run fast. */
 (function (g) {
 'use strict';
 const KEY = 'cp15.sim.state', L = g.CPClass, STN = ['cardio', 'weights', 'stretch'];
-const fresh = () => ({ v: 1, class: { slug: 'sim', title: '헬스장에서 운동리듬 찾기', phase: 'intake', minutes: 15, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
+const fresh = () => ({ v: 1, class: { slug: 'sim', title: '나만의 운동 리듬 찾기 · 시뮬레이션', phase: 'intake', minutes: 12, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
 let mem = null;
 const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return s; } catch (_) {} return mem || (mem = fresh()); };
 const save = (s) => { mem = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
@@ -641,14 +737,16 @@ const pub = (m) => { const o = Object.assign({}, m); delete o.key; o.solo = m.so
 const state = (s, m) => { const me = pub(m); delete me.id; delete me.phone4; return { class: cls(s), me, mates: s.members.filter((x) => x !== m && m.team && x.team === m.team).map((x) => x.name), joined: s.members.length }; };
 const who = (s, key) => { const m = s.members.find((x) => x.key && x.key === key); if (!m) throw err('invalid_key'); return m; };
 const started = (p) => ({ r1: 1, c1: 1, r2: 2, c2: 2, r3: 3, c3: 3, done: 3 }[p] || 0);
-const blank = () => ({ goal: null, level: null, expect: null, pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
+const blank = () => ({ goal: null, level: null, expect: null, survey: null, interest: null, pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
 function addBots(s, n) {
   for (let i = 0; i < Math.max(0, Math.min(12, n)); i++) {
     const k = s.members.filter((m) => m.is_bot).length;
     s.members.push(Object.assign(blank(), { id: 'b' + (++s.seq), key: null, name: NAMES[k % NAMES.length] + (k >= NAMES.length ? ' ' + (Math.floor(k / NAMES.length) + 1) : ''), phone4: '0000', is_bot: true,
       goal: 'stamina', level: rnd(['beg', 'beg', 'mid', 'adv']), expect: null, pref: null,
       mood0: 1 + Math.floor(Math.random() * 4), body0: 1 + Math.floor(Math.random() * 4), energy0: 1 + Math.floor(Math.random() * 5), intake: true }));
-    const b = s.members[s.members.length - 1]; b.expect = rnd(STN); b.pref = { [b.expect]: 1 }; b.body0 = b.energy0;
+    const b = s.members[s.members.length - 1], like = Math.floor(Math.random() * 4);
+    b.survey = { exp: Math.floor(Math.random() * 4), usual: Math.floor(Math.random() * 5), like, pain: Math.random() < 0.2 ? rnd(['무릎 조심', '허리 뻐근함', '어깨 통증']) : '', feel: Math.floor(Math.random() * 4), after: Math.floor(Math.random() * 5) };
+    b.expect = ['weights', 'cardio', 'hybrid'][like] || null; b.pref = b.expect ? { [b.expect]: 1 } : {}; b.body0 = b.energy0 = b.mood0;
   }
 }
 function setCheck(m, round, mood, body, by, rpe, again) { const c = { round, station: m.ord[round - 1], mood, body: body || null, rpe: rpe || null, again: again || null, by_coach: !!by }, i = m.checks.findIndex((x) => x.round === round); if (i >= 0) m.checks[i] = c; else m.checks.push(c); m.checks.sort((a, b) => a.round - b.round); }
@@ -668,16 +766,24 @@ const API = {
     Object.assign(m, { mood0: a.p_mood, body0: a.p_body, energy0: a.p_energy, goal: L.GOALS[a.p_goal] ? a.p_goal : m.goal || 'stamina', level: L.LEVELS[a.p_level] ? a.p_level : m.level || 'beg', expect: STN.includes(a.p_expect) ? a.p_expect : m.expect, intake: true });
     return state(s, m);
   },
+  v15_survey(s, a) {
+    const m = who(s, a.p_key), v = a.p_survey || {}, ok = (x, hi) => Number.isInteger(x) && x >= 0 && x <= hi;
+    if (!ok(v.exp, 3) || !ok(v.usual, 4) || !ok(v.like, 3) || !ok(v.feel, 3) || !ok(v.after, 4)) throw err('invalid_input');
+    m.survey = { exp: v.exp, usual: v.usual, like: v.like, pain: String(v.pain || '').trim().slice(0, 120), feel: v.feel, after: v.after };
+    m.expect = ['weights', 'cardio', 'hybrid'][v.like] || null; m.pref = m.expect ? { [m.expect]: 1 } : {}; m.goal = m.goal || 'stamina'; m.intake = true; return state(s, m);
+  },
+  v15_mood(s, a) { const m = who(s, a.p_key); if (!int5(a.p_mood)) throw err('invalid_input'); m.mood0 = a.p_mood; m.body0 = m.body0 || a.p_mood; m.energy0 = m.energy0 || a.p_mood; return state(s, m); },
+  v15_interest(s, a) { const m = who(s, a.p_key); if (!['yes', 'explain', 'no'].includes(a.p_choice)) throw err('invalid_input'); m.interest = a.p_choice; m.want_v2 = a.p_choice === 'yes'; return state(s, m); },
   v15_late_join(s, a) {
     const m = who(s, a.p_key); if (!m.intake || m.team || s.class.phase === 'intake') return state(s, m);
-    const cnt = (t) => s.members.filter((x) => x.team === t).length, opts = (a.p_options || []).filter((o) => [1, 2, 3].includes(o.team));
+    const cnt = (t) => s.members.filter((x) => x.team === t).length, any = s.members.some((x) => x.team), opts = (a.p_options || []).filter((o) => [1, 2, 3].includes(o.team) && (!any || cnt(o.team) > 0));
     if (!opts.length) throw err('invalid_input');
     const o = opts.map((x, i) => [x, i]).sort((x, y) => cnt(x[0].team) - cnt(y[0].team) || x[1] - y[1])[0][0], ex = s.members.find((x) => x.team === o.team && x.ord);
     Object.assign(m, { team: o.team, ord: ex ? ex.ord : o.ord, kind: ex ? ex.kind : o.kind, reason: String(o.reason || '').slice(0, 400) });
     return state(s, m);
   },
   v15_check(s, a) {
-    const m = who(s, a.p_key); if (![1, 2, 3].includes(a.p_round) || !int5(a.p_mood) || (a.p_body != null && !int5(a.p_body)) || (a.p_rpe != null && !(a.p_rpe >= 1 && a.p_rpe <= 10)) || (a.p_again != null && ![1, 2, 3].includes(a.p_again))) throw err('invalid_input');
+    const m = who(s, a.p_key); if (![1, 2, 3].includes(a.p_round) || !int5(a.p_mood) || (a.p_body != null && !int5(a.p_body)) || (a.p_rpe != null && !(a.p_rpe >= 1 && a.p_rpe <= 10)) || (a.p_again != null && ![1, 2, 3, 4, 5].includes(a.p_again))) throw err('invalid_input');
     if (!m.ord) throw err('no_team'); if (a.p_round > started(s.class.phase)) throw err('round_not_started');
     setCheck(m, a.p_round, a.p_mood, a.p_body, false, a.p_rpe, a.p_again); return state(s, m);
   },
@@ -694,7 +800,8 @@ const API = {
     const p = a.p_phase; if (!['intake', 'teams', 'r1', 'c1', 'r2', 'c2', 'r3', 'c3', 'done'].includes(p)) throw err('invalid_phase');
     if (p !== 'intake' && s.members.some((m) => m.intake && !m.team)) throw err('teams_missing');
     s.class.phase = p; if (p[0] === 'r') s.class.started_ms = nowOf(s);
-    if (p[0] === 'c') { const r = +p[1]; s.members.filter((m) => m.is_bot && m.ord && !m.checks.some((x) => x.round === r)).forEach((m) => { const prev = m.checks.find((x) => x.round === r - 1) || { mood: m.mood0, body: m.body0 }; setCheck(m, r, clamp(prev.mood + rnd([-1, 0, 0, 1, 1, 1, 2])), null, false, rnd([3, 4, 5, 6, 7, 8]), rnd([1, 2, 3])); }); }
+    if (p[0] === 'c') { const r = +p[1]; s.members.filter((m) => m.is_bot && m.ord && !m.checks.some((x) => x.round === r)).forEach((m) => { const prev = m.checks.find((x) => x.round === r - 1) || { mood: m.mood0, body: m.body0 }; setCheck(m, r, clamp((prev.mood || 3) + rnd([-1, 0, 0, 1, 1, 1, 2])), null, false, rnd([4, 5, 6, 7, 8]), rnd([1, 2, 3, 4, 5])); }); }
+    if (p === 'done') s.members.filter((m) => m.is_bot && !m.interest).forEach((m) => { m.interest = rnd(['yes', 'explain', 'no', 'no']); m.want_v2 = m.interest === 'yes'; });
     return { ok: true };
   },
   v15_coach_check(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m || !m.ord) throw err('invalid_input'); setCheck(m, a.p_round, a.p_mood, a.p_body, true, a.p_rpe, a.p_again); return { ok: true }; },
@@ -703,7 +810,7 @@ const API = {
   v15_coach_remove(s, a) { s.members = s.members.filter((m) => m.id !== a.p_member); return { ok: true }; },
   v15_coach_reset(s, a) {
     if (a.p_what === 'all') s.members = []; else if (a.p_what === 'bots') s.members = s.members.filter((m) => !m.is_bot);
-    else if (a.p_what === 'progress') s.members.forEach((m) => Object.assign(m, { team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] })); else throw err('invalid_reset');
+    else if (a.p_what === 'progress') s.members.forEach((m) => Object.assign(m, { team: null, ord: null, kind: null, reason: null, want_v2: null, interest: null, checks: [], solo: [] })); else throw err('invalid_reset');
     s.class.phase = 'intake'; s.class.started_ms = null; return { ok: true };
   },
   v15_coach_config(s, a) { if (a.p_routines) s.class.routines = a.p_routines; if (a.p_minutes) s.class.minutes = a.p_minutes; return { ok: true }; },
@@ -715,21 +822,24 @@ g.CPSim = {
   speed(v) { const s = load(); s.clk = { sim: nowOf(s), real: Date.now(), speed: v }; save(s); },
   skip() { const s = load(), c = s.class; if (c.phase[0] !== 'r' || !c.started_ms) return; const end = c.started_ms + c.minutes * 60000 - 4000; if (nowOf(s) < end) { s.clk = { sim: end, real: Date.now(), speed: s.clk.speed }; save(s); } },
   jump(ms) { const s = load(); s.clk = { sim: nowOf(s) + ms, real: Date.now(), speed: s.clk.speed }; save(s); },
-  reset(nBots) { const s = fresh(); addBots(s, nBots == null ? 8 : nBots); save(s); try { Object.keys(localStorage).filter((k) => /^cp15\.[a-z]+\.sim$/.test(k) && k !== KEY).forEach((k) => localStorage.removeItem(k)); } catch (_) {} },
+  reset(nBots) { const s = fresh(); addBots(s, nBots == null ? 6 : nBots); save(s); try { Object.keys(localStorage).filter((k) => /^cp15\.[a-z]+\.sim$/.test(k) && k !== KEY).forEach((k) => localStorage.removeItem(k)); } catch (_) {} },
 };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 </script>
 <script>
 (() => {
-  { const L = CPClass; document.getElementById('lad').innerHTML = `<span class="hd"></span>${Object.keys(L.LEVELS).map((lv) => `<span class="hd">${L.LEVELS[lv].ko} · <b>${L.LEVELS[lv].eq}</b></span>`).join('')}` + L.LADDER.map((r) => `<span class="row">${r.ko}</span>${r.steps.map((x) => `<div class="cell">${L.demoSvg(x.demo, 240)}<b>${x.name}</b></div>`).join('')}`).join(''); }
   const shots = [
-    ['join', '입장', '이름과 뒷 4자리. 오늘의 약속 한 줄을 먼저 보여 줍니다.'],
-    ['start', '오늘 컨디션 체크', '기분, 몸 컨디션, 기분이 좋아질 것 같은 운동. 세 번 누르면 끝.'],
-    ['wait2', '시작 대기', '팀이나 순서는 몰라도 됩니다. 첫 운동 구역만 알려 줍니다.'],
-    ['round', 'N번째 운동', '지금 할 동작 하나. 움직이는 그림, 핵심 큐 두 개, 횟수 한 줄.'],
-    ['input', '반응 입력', '기분 · 힘든 정도 · 다시 하고 싶은 정도. 10초면 끝납니다.'],
-    ['next', '다음 운동 대기', '다음 구역만 알려 줍니다.'],
-    ['result', '오늘의 결과', '예상했던 운동, 실제로 기분이 가장 좋아진 운동, 다시 하고 싶은 운동, 오늘의 발견.'],
+    ['intro', '클래스 안내', '단톡방 링크를 누르면 먼저 보이는 화면. 무엇을 하는 수업인지 한 장으로.'],
+    ['name', '사전 설문 시작', '이름과 뒷 4자리. 수업 날 같은 사람인지 확인하는 데만 씁니다.'],
+    ['survey', '사전 설문 · 1분', '경력, 평소 운동, 좋아하는 운동, 통증, 선호하는 느낌, 원하는 느낌. 누르면 바로 다음 문항.'],
+    ['ready', '설문 완료', '수업 날 같은 링크를 다시 열면 됩니다.'],
+    ['mood', '오늘 기분', '수업 당일, 시작 전에 이모지 한 번.'],
+    ['move', '어디로 갈지', '지금 몇 번째 운동인지, 어느 존으로 가는지만.'],
+    ['round', 'B · CARDIO', 'EASY → RHYTHM → PUSH. 지금 구간과 숨 기준만 보여 줍니다.'],
+    ['round-h', 'C · HYBRID', '고블릿 스쿼트 → 푸시프레스 → 스텝업 반복. 움직이는 그림으로.'],
+    ['input', '10초 입력', '기분 이모지, RPE 1~10, 다시 하고 싶은 정도 1~5.'],
+    ['next', '다음 존으로', '"좋아요. 다음 운동 존으로 이동해주세요."'],
+    ['result', '오늘의 결과', '오늘의 발견 → 다음 운동 제안 → 4주 설명 → 의향 남기기.'],
   ];
   document.getElementById('phones').innerHTML = shots.map(([k, t, d], i) => `<div class="ph"><div class="frame"><div class="in"><iframe title="${t}" loading="lazy" src="./?preview=${k}"></iframe></div></div><b><i>${i + 1}</i>${t}</b><p>${d}</p></div>`).join('');
   const screen = document.getElementById('screen'), cf = document.getElementById('cf');

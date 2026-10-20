@@ -50,9 +50,9 @@ h2{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:48px 0 4px}
 <body>
 <div class="wrap">
   <div class="top"><span class="brand"><svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="24" fill="#0E1116"/><g transform="rotate(22 50 50)"><ellipse cx="50" cy="50" rx="39" ry="12.5" fill="none" stroke="#fff" stroke-width="6"/></g><circle cx="50" cy="50" r="20.5" fill="#567AFF"/></svg>컨디션 플래닛</span><span class="pill">동작 안내</span><span class="sp"></span><a class="btn" href="sim.html">전체 시뮬레이션</a><a class="btn" href="tour.html">소개 페이지</a></div>
-  <h1>같은 움직임, 수준에 맞는 운동.</h1>
-  <p class="lead">하체·밀기·당기기 세 가지 움직임을 초급은 맨몸으로, 중급은 머신으로, 상급은 프리웨이트로 합니다. 회원 폰에서는 블록 중에 동작을 누르면 이 그림과 설명이 바로 뜹니다.</p>
-  <h2>수준별 사다리</h2><p class="sub">수준이 올라가면 같은 움직임이 한 칸씩 올라갑니다.</p>
+  <h1>A · B · C 세 존의 동작 안내</h1>
+  <p class="lead">원데이클래스에서 쓰는 동작입니다. 회원 폰에는 존마다 이 그림과 짧은 안내가 나옵니다. 아래쪽에는 앞으로 4주 리듬 테스트에서 쓸 수 있는 동작도 함께 모았습니다.</p>
+  <div id="zones"></div><h2>그 밖의 동작</h2><p class="sub">수준별 사다리(초급 맨몸 → 중급 머신 → 상급 프리웨이트)와 스트레칭 동작입니다.</p>
   <div class="lad" id="lad"></div>
   <div id="all"></div>
   <p class="note">일반적인 운동 가이드입니다. 통증이 있거나 치료 중인 질환이 있으면 코치나 의료진과 먼저 상의하세요.</p>
@@ -463,6 +463,22 @@ const D = {
 const PTS = ['H', 'S', 'E', 'W', 'P', 'K', 'F', 'E2', 'W2', 'K2', 'F2', 'C'];
 const full = (p) => { const o = Object.assign({}, p); ['E', 'W', 'K', 'F'].forEach((k) => { if (!o[k + '2']) o[k + '2'] = [p[k][0] - 5, p[k][1] - 2]; }); return o; };
 const CUES = {"squat":["엉덩이를 뒤로 빼며 앉기","무릎은 발끝 방향으로"],"pushup":["몸은 일자로","힘들면 무릎을 대고"],"superman":["팔다리를 살짝 들기","시선은 바닥"],"legpress":["허리를 패드에 붙이기","무릎은 끝까지 펴지 않기"],"chestpress":["손잡이는 가슴 높이","돌아올 때 천천히"],"latpull":["가슴 펴고 쇄골까지","어깨는 내리기"],"bbsquat":["가슴을 세우고","발바닥 전체로 밀기"],"bench":["어깨뼈를 모으고","가슴 가운데로 내리기"],"bbrow":["허리 곧게, 상체 45도","배꼽 쪽으로 당기기"],"walk":["손잡이 잡지 않기","팔을 자연스럽게"],"incline":["상체 살짝 앞으로","보폭은 짧게"],"run":["발은 가볍게 착지","팔꿈치 90도"],"roller":["등 위아래로 천천히","허리와 목은 피하기"],"hipflexor":["골반을 앞으로 밀기","허리는 꺾지 않기"],"hamstring":["무릎 펴고 다리 들기","반동 없이 30초"],"catcow":["내쉬며 등을 말고","들이쉬며 가슴을 열기"],"deadbug":["허리는 바닥에 붙이고","팔과 반대 다리 뻗기"],"child":["엉덩이는 뒤꿈치 쪽으로","길게 내쉬기"],"wgs":["손은 바닥에 짚고","팔을 천장으로 열기"],"s9090":["허리를 펴고","앞 정강이 위로 숙이기"],"deepsquat":["뒤꿈치 붙이기","가슴 세우고 버티기"],"cossack":["한쪽으로 깊게 앉기","반대 다리는 곧게"],"wallslide":["등을 벽에 붙이고","팔을 위로 밀기"],"breath":["4초 들이쉬기","6초 내쉬기"],"pecwall":["손은 벽에 고정","몸을 앞으로 돌리기"]};
+Object.assign(D, {
+  goblet: { st: 'hybrid', name: '고블릿 스쿼트', eq: '덤벨', tempo: [1.6, 0.2, 1.3, 0.3], dp: [['disc', 'W', 6]], how: ['덤벨 한 개를 세워 가슴 앞에 붙여 듭니다.', '팔꿈치를 무릎 안쪽으로 내리며 앉습니다.', '발바닥 전체로 밀며 일어납니다.'],
+    a: { H: [101, 18], S: [100, 32], E: [111, 48], W: [107, 38], P: [100, 68], K: [101, 94], F: [100, 120] },
+    b: { H: [108, 50], S: [103, 63], E: [113, 79], W: [111, 67], P: [86, 94], K: [112, 97], F: [100, 120] } },
+  pushpress: { st: 'hybrid', name: '덤벨 푸시프레스', eq: '덤벨', tempo: [0.9, 0.3, 1.4, 0.4], dp: [['disc', 'W', 6]], how: ['덤벨을 어깨 위에 들고 섭니다.', '무릎을 살짝 굽혔다가 다리 힘으로 튕기듯 밀어 올립니다.', '천천히 어깨로 내리고 다시 반복합니다.'],
+    a: { H: [101, 26], S: [99, 40], E: [110, 50], W: [104, 36], P: [97, 76], K: [105, 99], F: [100, 120] },
+    b: { H: [101, 20], S: [100, 34], E: [103, 19], W: [104, 5], P: [100, 70], K: [100, 95], F: [100, 120] } },
+  stepup: { st: 'hybrid', name: '스텝업', eq: '스텝 박스', tempo: [1, 0.3, 1, 0.3], sp: [['r', 112, 108, 46, 18, 4]], how: ['한 발을 박스 위에 올립니다.', '올린 발 뒤꿈치로 밀며 올라섭니다.', '천천히 내려오고, 발을 바꿔 가며 반복합니다.'],
+    a: { H: [105, 26], S: [103, 40], E: [98, 57], W: [104, 72], P: [100, 76], K: [118, 90], F: [126, 108], K2: [98, 98], F2: [96, 120] },
+    b: { H: [119, 10], S: [117, 24], E: [112, 41], W: [118, 55], P: [116, 60], K: [122, 84], F: [126, 108], K2: [130, 72], F2: [127, 96] } },
+  stair: { st: 'cardio', name: '천국의 계단', eq: '스텝밀', tempo: [0.6, 0, 0.6, 0], swing: 1, how: ['손잡이는 가볍게만 잡습니다. 매달리지 않습니다.', '발 전체로 계단을 밟습니다.', '숨이 너무 차면 속도를 한 단계 낮춥니다.'],
+    sp: [['l', 84, 124, 150, 124, 5], ['l', 104, 112, 134, 112, 4], ['l', 150, 124, 150, 44, 4], ['l', 120, 56, 150, 48, 4]],
+    a: { H: [104, 20], S: [102, 34], E: [110, 50], W: [122, 56], P: [100, 70], K: [112, 86], F: [114, 108], E2: [108, 50], W2: [120, 56], K2: [99, 96], F2: [100, 120] },
+    b: { H: [104, 20], S: [102, 34], E: [110, 50], W: [122, 56], P: [100, 70], K: [99, 96], F: [100, 120], E2: [108, 50], W2: [120, 56], K2: [112, 86], F2: [114, 108] } },
+});
+Object.assign(CUES, { goblet: ['덤벨은 가슴에 붙이고', '가슴 세우고 앉기'], pushpress: ['무릎 살짝 굽혔다가', '다리 힘으로 밀어 올리기'], stepup: ['올린 발 뒤꿈치로 밀기', '천천히 내려오기'], stair: ['손잡이에 매달리지 않기', '발 전체로 밟기'] });
 Object.keys(D).forEach((k) => { D[k].A = full(D[k].a); D[k].B = full(D[k].b); D[k].cue = CUES[k]; });
 const f1 = (v) => Math.round(v * 10) / 10;
 function phase(d, ms) {
@@ -529,13 +545,79 @@ const yt = (d) => 'https://www.youtube.com/results?search_query=' + encodeURICom
 Object.assign(L, { DEMO: D, demoSvg, demoPhase: phase, demoParts: parts, demoFigure: figure, demoTempo: tempoText, demoYt: yt });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
+/* Condition Planet — one-day class as it runs on the day (loaded after logic.js, plan.js and demo.js).
+   Three zones (A WEIGHT · B CARDIO · C HYBRID), teams of at most four, a fixed rotation so everyone does all three,
+   the pre-class survey, and the result: today's finding → the next workout → why four weeks tell more. */
+(function (g) {
+'use strict';
+const L = g.CPClass, ST = L.ST;
+ST.hybrid = { ko: '하이브리드', c: '#7A5AF8', w: '#F1EDFF' };
+const icon0 = L.UI.icon;
+L.UI.icon = (k, size) => (k === 'hybrid' ? `<svg width="${size || 24}" height="${size || 24}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 5.5 13.5h6l-1 8 8-11h-6z"/></svg>` : icon0(k, size));
+const ZKEYS = ['weights', 'cardio', 'hybrid'];
+const ZONES = {
+  weights: { code: 'A', en: 'WEIGHT', ko: '웨이트', time: '약 10~12분', rpe: 'RPE 6~7', feel: '중량 → 반복 → 휴식 → 다시 수행',
+    items: [{ demo: 'legpress', name: '레그프레스' }, { demo: 'chestpress', name: '체스트프레스' }, { demo: 'latpull', name: '랫풀다운' }],
+    dose: '각 10~12회 × 약 2세트', how: ['2명씩 짝을 지어 번갈아 합니다. 한 명이 하는 동안 짝은 쉽니다.', '한 세트가 끝나면 서로 교대합니다.', '마지막 2~3회가 조금 힘든 무게(RPE 6~7)로 합니다.'] },
+  cardio: { code: 'B', en: 'CARDIO', ko: '유산소', time: '약 8분', rpe: 'RPE 6 중심', feel: '숨은 차지만 계속 유지할 수 있는 내 속도',
+    items: [{ demo: 'run', name: '런닝머신' }, { demo: 'stair', name: '천국의 계단 · 해 본 사람만' }],
+    phases: [{ from: 0, to: 2, name: 'EASY', rpe: 'RPE 3~4', say: '편하게 움직이며 자기 속도 찾기' }, { from: 2, to: 6, name: 'RHYTHM', rpe: 'RPE 6', say: '숨은 차지만 한 문장 정도는 말할 수 있게' }, { from: 6, to: 8, name: 'PUSH', rpe: 'RPE 7', say: '조금 더 숨차지만 끝까지 유지할 수 있게' }],
+    msg: '속도 숫자를 맞추지 말고, 숨은 차지만 계속 유지할 수 있는 자기 속도를 찾아보세요.', how: ['기본은 런닝머신입니다. 천국의 계단은 평소에 써 본 사람만 고릅니다.', '0~2분 EASY → 2~6분 RHYTHM → 6~8분 PUSH.', '전력질주는 하지 않습니다.'] },
+  hybrid: { code: 'C', en: 'HYBRID', ko: '하이브리드', time: '약 7~8분', rpe: 'RPE 6~7', feel: '근력과 심폐가 끊기지 않고 이어지는 느낌',
+    items: [{ demo: 'goblet', name: '고블릿 스쿼트', dose: '10회' }, { demo: 'pushpress', name: '덤벨 푸시프레스', dose: '8회' }, { demo: 'stepup', name: '스텝업', dose: '10~12회' }],
+    dose: '1 → 2 → 3, 다시 1번부터 반복', how: ['정해진 휴식은 없습니다. 내 속도로 이어 갑니다.', '숨이 너무 차면 20~30초 숨을 고른 뒤 다시 시작합니다.', '기록 경쟁이 아닙니다.'] },
+};
+const ROT = [['weights', 'cardio', 'hybrid'], ['cardio', 'hybrid', 'weights'], ['hybrid', 'weights', 'cardio']];
+const SURVEY = [
+  { k: 'exp', t: '운동 경력', o: ['거의 처음', '6개월 미만', '6개월~2년', '2년 이상'] },
+  { k: 'usual', t: '평소 주로 하는 운동', o: ['머신 웨이트', '프리웨이트', '유산소', '여러 가지 섞어서', '거의 안 함'] },
+  { k: 'like', t: '지금 좋아한다고 생각하는 운동', o: ['웨이트', '유산소', '숨차는 운동 / 서킷', '잘 모르겠다'] },
+  { k: 'pain', t: '최근 통증 또는 운동할 때 주의해야 할 부위', text: 1 },
+  { k: 'feel', t: '운동할 때 선호하는 느낌', o: ['천천히 집중하는 운동', '일정하게 계속 움직이는 운동', '짧고 역동적인 운동', '잘 모르겠다'] },
+  { k: 'after', t: '운동이 끝났을 때 가장 원하는 느낌', o: ['몸을 제대로 쓴 느낌', '스트레스가 풀린 느낌', '상쾌하고 가벼운 느낌', '성취감', '잘 모르겠다'] },
+];
+const svText = (sv, k) => { if (!sv) return '—'; const q = SURVEY.find((x) => x.k === k); if (q.text) return sv.pain ? sv.pain : '없음'; return q.o[sv[k]] != null ? q.o[sv[k]] : '—'; };
+const NTH = ['', '첫 번째', '두 번째', '세 번째'];
+const MOODS = ['', '😫', '😔', '😐', '😊', '🤩'];
+const AGAIN5 = ['', '전혀', '별로', '보통', '하고 싶어요', '꼭 다시'];
+// teams of at most four, as even as possible: 6 → 3/3, 7 → 3/4, 8 → 4/4, 9 → 3/3/3
+function teamSizes(n) { if (n <= 0) return []; const k = n <= 4 ? 1 : n <= 8 ? 2 : 3, base = Math.floor(n / k), extra = n % k; return Array.from({ length: k }, (_, i) => base + (i >= k - extra ? 1 : 0)); }
+// people with similar experience train together (weight-zone partners match); the coach can still move anyone
+function zteams(members) {
+  const ready = members.filter((m) => m.intake), sizes = teamSizes(ready.length), xp = (m) => (m.survey && m.survey.exp != null ? m.survey.exp : 1);
+  const sorted = ready.slice().sort((a, b) => xp(a) - xp(b) || ((a.survey && a.survey.usual) || 0) - ((b.survey && b.survey.usual) || 0) || String(a.name).localeCompare(String(b.name)));
+  const out = []; let i = 0;
+  sizes.forEach((sz, t) => { for (let j = 0; j < sz; j++, i++) out.push({ id: sorted[i].id, team: t + 1, ord: ROT[t], kind: 'Team ' + (t + 1), reason: '' }); });
+  return out;
+}
+const teamOf = (t) => ({ id: t, ord: ROT[t - 1], kind: 'Team ' + t });
+const zname = (k) => ZONES[k].ko;
+// today's finding → the next workout. One day is one day's reaction, so it never labels the person.
+function zresult(m) {
+  if (!m || !m.ord || !m.checks || m.checks.length < 3) return null;
+  const rows = m.ord.map((k, i) => { const c = m.checks.find((x) => x.round === i + 1) || {}, before = i === 0 ? m.mood0 : (m.checks.find((x) => x.round === i) || {}).mood; return { st: k, round: i + 1, before: before == null ? null : before, mood: c.mood, dm: before == null ? null : c.mood - before, rpe: c.rpe == null ? null : c.rpe, again: c.again == null ? null : c.again }; });
+  const best = rows.slice().sort((a, b) => (b.dm == null ? -9 : b.dm) - (a.dm == null ? -9 : a.dm) || (b.again || 0) - (a.again || 0) || b.mood - a.mood)[0];
+  const rec = best.dm != null && best.dm > 0 ? best : rows.slice().sort((a, b) => (b.again || 0) - (a.again || 0) || b.mood - a.mood)[0];
+  const over = rows.filter((r) => r.dm != null && r.dm < 0 && r.rpe >= 8).sort((a, b) => a.dm - b.dm)[0];
+  const ex = ST[m.expect] && ZONES[m.expect] ? m.expect : null;
+  let line = best.dm > 0 ? (m.mood0 != null && m.mood0 <= 2 ? `오늘은 컨디션이 낮았지만 ${zname(best.st)} 후 기분이 가장 크게 좋아졌어요.` : `오늘은 ${zname(best.st)} 후 기분이 가장 크게 좋아졌어요.`)
+    : `오늘은 세 운동 모두 기분이 크게 오르지는 않았어요. 그중 ${zname(rec.st)}의 반응이 가장 좋았어요.`;
+  if (ex && best.dm > 0) line += ex === best.st ? ' 처음 예상과 같은 결과예요.' : ` 처음 예상한 ${zname(ex)}와는 다른 결과예요.`;
+  const caution = over ? `오늘 컨디션에서는 ${zname(over.st)} 강도가 조금 높았을 가능성이 있습니다. 다음에는 강도를 한 단계 낮춰보세요.` : null;
+  const hard = rec.rpe != null && rec.rpe >= 8, easy = rec.rpe != null && rec.rpe <= 4;
+  const intensity = hard ? 'RPE 5~6 · 오늘보다 한 단계 낮게' : easy ? `${ZONES[rec.st].rpe} · 오늘보다 조금 더` : ZONES[rec.st].rpe;
+  return { rows, best, rec, expect: ex, line, caution, intensity, items: ZONES[rec.st].items.map((x) => x.name.split(' · ')[0]), sentence: `오늘의 반응에서는 ${zname(rec.st)}가 가장 잘 맞았습니다.` };
+}
+Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSizes, zteams, teamOf, zresult });
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
 /* Condition Planet V1.5 — local simulation backend (pages opened with ?sim=1).
    Same RPC names and result shapes as the server, but the class lives in this browser's localStorage, so the member page and the
    coach page (two frames of the same site) run a whole class together without touching real data. The clock can run fast. */
 (function (g) {
 'use strict';
 const KEY = 'cp15.sim.state', L = g.CPClass, STN = ['cardio', 'weights', 'stretch'];
-const fresh = () => ({ v: 1, class: { slug: 'sim', title: '헬스장에서 운동리듬 찾기', phase: 'intake', minutes: 15, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
+const fresh = () => ({ v: 1, class: { slug: 'sim', title: '나만의 운동 리듬 찾기 · 시뮬레이션', phase: 'intake', minutes: 12, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
 let mem = null;
 const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return s; } catch (_) {} return mem || (mem = fresh()); };
 const save = (s) => { mem = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
@@ -548,14 +630,16 @@ const pub = (m) => { const o = Object.assign({}, m); delete o.key; o.solo = m.so
 const state = (s, m) => { const me = pub(m); delete me.id; delete me.phone4; return { class: cls(s), me, mates: s.members.filter((x) => x !== m && m.team && x.team === m.team).map((x) => x.name), joined: s.members.length }; };
 const who = (s, key) => { const m = s.members.find((x) => x.key && x.key === key); if (!m) throw err('invalid_key'); return m; };
 const started = (p) => ({ r1: 1, c1: 1, r2: 2, c2: 2, r3: 3, c3: 3, done: 3 }[p] || 0);
-const blank = () => ({ goal: null, level: null, expect: null, pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
+const blank = () => ({ goal: null, level: null, expect: null, survey: null, interest: null, pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
 function addBots(s, n) {
   for (let i = 0; i < Math.max(0, Math.min(12, n)); i++) {
     const k = s.members.filter((m) => m.is_bot).length;
     s.members.push(Object.assign(blank(), { id: 'b' + (++s.seq), key: null, name: NAMES[k % NAMES.length] + (k >= NAMES.length ? ' ' + (Math.floor(k / NAMES.length) + 1) : ''), phone4: '0000', is_bot: true,
       goal: 'stamina', level: rnd(['beg', 'beg', 'mid', 'adv']), expect: null, pref: null,
       mood0: 1 + Math.floor(Math.random() * 4), body0: 1 + Math.floor(Math.random() * 4), energy0: 1 + Math.floor(Math.random() * 5), intake: true }));
-    const b = s.members[s.members.length - 1]; b.expect = rnd(STN); b.pref = { [b.expect]: 1 }; b.body0 = b.energy0;
+    const b = s.members[s.members.length - 1], like = Math.floor(Math.random() * 4);
+    b.survey = { exp: Math.floor(Math.random() * 4), usual: Math.floor(Math.random() * 5), like, pain: Math.random() < 0.2 ? rnd(['무릎 조심', '허리 뻐근함', '어깨 통증']) : '', feel: Math.floor(Math.random() * 4), after: Math.floor(Math.random() * 5) };
+    b.expect = ['weights', 'cardio', 'hybrid'][like] || null; b.pref = b.expect ? { [b.expect]: 1 } : {}; b.body0 = b.energy0 = b.mood0;
   }
 }
 function setCheck(m, round, mood, body, by, rpe, again) { const c = { round, station: m.ord[round - 1], mood, body: body || null, rpe: rpe || null, again: again || null, by_coach: !!by }, i = m.checks.findIndex((x) => x.round === round); if (i >= 0) m.checks[i] = c; else m.checks.push(c); m.checks.sort((a, b) => a.round - b.round); }
@@ -575,16 +659,24 @@ const API = {
     Object.assign(m, { mood0: a.p_mood, body0: a.p_body, energy0: a.p_energy, goal: L.GOALS[a.p_goal] ? a.p_goal : m.goal || 'stamina', level: L.LEVELS[a.p_level] ? a.p_level : m.level || 'beg', expect: STN.includes(a.p_expect) ? a.p_expect : m.expect, intake: true });
     return state(s, m);
   },
+  v15_survey(s, a) {
+    const m = who(s, a.p_key), v = a.p_survey || {}, ok = (x, hi) => Number.isInteger(x) && x >= 0 && x <= hi;
+    if (!ok(v.exp, 3) || !ok(v.usual, 4) || !ok(v.like, 3) || !ok(v.feel, 3) || !ok(v.after, 4)) throw err('invalid_input');
+    m.survey = { exp: v.exp, usual: v.usual, like: v.like, pain: String(v.pain || '').trim().slice(0, 120), feel: v.feel, after: v.after };
+    m.expect = ['weights', 'cardio', 'hybrid'][v.like] || null; m.pref = m.expect ? { [m.expect]: 1 } : {}; m.goal = m.goal || 'stamina'; m.intake = true; return state(s, m);
+  },
+  v15_mood(s, a) { const m = who(s, a.p_key); if (!int5(a.p_mood)) throw err('invalid_input'); m.mood0 = a.p_mood; m.body0 = m.body0 || a.p_mood; m.energy0 = m.energy0 || a.p_mood; return state(s, m); },
+  v15_interest(s, a) { const m = who(s, a.p_key); if (!['yes', 'explain', 'no'].includes(a.p_choice)) throw err('invalid_input'); m.interest = a.p_choice; m.want_v2 = a.p_choice === 'yes'; return state(s, m); },
   v15_late_join(s, a) {
     const m = who(s, a.p_key); if (!m.intake || m.team || s.class.phase === 'intake') return state(s, m);
-    const cnt = (t) => s.members.filter((x) => x.team === t).length, opts = (a.p_options || []).filter((o) => [1, 2, 3].includes(o.team));
+    const cnt = (t) => s.members.filter((x) => x.team === t).length, any = s.members.some((x) => x.team), opts = (a.p_options || []).filter((o) => [1, 2, 3].includes(o.team) && (!any || cnt(o.team) > 0));
     if (!opts.length) throw err('invalid_input');
     const o = opts.map((x, i) => [x, i]).sort((x, y) => cnt(x[0].team) - cnt(y[0].team) || x[1] - y[1])[0][0], ex = s.members.find((x) => x.team === o.team && x.ord);
     Object.assign(m, { team: o.team, ord: ex ? ex.ord : o.ord, kind: ex ? ex.kind : o.kind, reason: String(o.reason || '').slice(0, 400) });
     return state(s, m);
   },
   v15_check(s, a) {
-    const m = who(s, a.p_key); if (![1, 2, 3].includes(a.p_round) || !int5(a.p_mood) || (a.p_body != null && !int5(a.p_body)) || (a.p_rpe != null && !(a.p_rpe >= 1 && a.p_rpe <= 10)) || (a.p_again != null && ![1, 2, 3].includes(a.p_again))) throw err('invalid_input');
+    const m = who(s, a.p_key); if (![1, 2, 3].includes(a.p_round) || !int5(a.p_mood) || (a.p_body != null && !int5(a.p_body)) || (a.p_rpe != null && !(a.p_rpe >= 1 && a.p_rpe <= 10)) || (a.p_again != null && ![1, 2, 3, 4, 5].includes(a.p_again))) throw err('invalid_input');
     if (!m.ord) throw err('no_team'); if (a.p_round > started(s.class.phase)) throw err('round_not_started');
     setCheck(m, a.p_round, a.p_mood, a.p_body, false, a.p_rpe, a.p_again); return state(s, m);
   },
@@ -601,7 +693,8 @@ const API = {
     const p = a.p_phase; if (!['intake', 'teams', 'r1', 'c1', 'r2', 'c2', 'r3', 'c3', 'done'].includes(p)) throw err('invalid_phase');
     if (p !== 'intake' && s.members.some((m) => m.intake && !m.team)) throw err('teams_missing');
     s.class.phase = p; if (p[0] === 'r') s.class.started_ms = nowOf(s);
-    if (p[0] === 'c') { const r = +p[1]; s.members.filter((m) => m.is_bot && m.ord && !m.checks.some((x) => x.round === r)).forEach((m) => { const prev = m.checks.find((x) => x.round === r - 1) || { mood: m.mood0, body: m.body0 }; setCheck(m, r, clamp(prev.mood + rnd([-1, 0, 0, 1, 1, 1, 2])), null, false, rnd([3, 4, 5, 6, 7, 8]), rnd([1, 2, 3])); }); }
+    if (p[0] === 'c') { const r = +p[1]; s.members.filter((m) => m.is_bot && m.ord && !m.checks.some((x) => x.round === r)).forEach((m) => { const prev = m.checks.find((x) => x.round === r - 1) || { mood: m.mood0, body: m.body0 }; setCheck(m, r, clamp((prev.mood || 3) + rnd([-1, 0, 0, 1, 1, 1, 2])), null, false, rnd([4, 5, 6, 7, 8]), rnd([1, 2, 3, 4, 5])); }); }
+    if (p === 'done') s.members.filter((m) => m.is_bot && !m.interest).forEach((m) => { m.interest = rnd(['yes', 'explain', 'no', 'no']); m.want_v2 = m.interest === 'yes'; });
     return { ok: true };
   },
   v15_coach_check(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m || !m.ord) throw err('invalid_input'); setCheck(m, a.p_round, a.p_mood, a.p_body, true, a.p_rpe, a.p_again); return { ok: true }; },
@@ -610,7 +703,7 @@ const API = {
   v15_coach_remove(s, a) { s.members = s.members.filter((m) => m.id !== a.p_member); return { ok: true }; },
   v15_coach_reset(s, a) {
     if (a.p_what === 'all') s.members = []; else if (a.p_what === 'bots') s.members = s.members.filter((m) => !m.is_bot);
-    else if (a.p_what === 'progress') s.members.forEach((m) => Object.assign(m, { team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] })); else throw err('invalid_reset');
+    else if (a.p_what === 'progress') s.members.forEach((m) => Object.assign(m, { team: null, ord: null, kind: null, reason: null, want_v2: null, interest: null, checks: [], solo: [] })); else throw err('invalid_reset');
     s.class.phase = 'intake'; s.class.started_ms = null; return { ok: true };
   },
   v15_coach_config(s, a) { if (a.p_routines) s.class.routines = a.p_routines; if (a.p_minutes) s.class.minutes = a.p_minutes; return { ok: true }; },
@@ -622,7 +715,7 @@ g.CPSim = {
   speed(v) { const s = load(); s.clk = { sim: nowOf(s), real: Date.now(), speed: v }; save(s); },
   skip() { const s = load(), c = s.class; if (c.phase[0] !== 'r' || !c.started_ms) return; const end = c.started_ms + c.minutes * 60000 - 4000; if (nowOf(s) < end) { s.clk = { sim: end, real: Date.now(), speed: s.clk.speed }; save(s); } },
   jump(ms) { const s = load(); s.clk = { sim: nowOf(s) + ms, real: Date.now(), speed: s.clk.speed }; save(s); },
-  reset(nBots) { const s = fresh(); addBots(s, nBots == null ? 8 : nBots); save(s); try { Object.keys(localStorage).filter((k) => /^cp15\.[a-z]+\.sim$/.test(k) && k !== KEY).forEach((k) => localStorage.removeItem(k)); } catch (_) {} },
+  reset(nBots) { const s = fresh(); addBots(s, nBots == null ? 6 : nBots); save(s); try { Object.keys(localStorage).filter((k) => /^cp15\.[a-z]+\.sim$/.test(k) && k !== KEY).forEach((k) => localStorage.removeItem(k)); } catch (_) {} },
 };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 </script>
@@ -633,7 +726,8 @@ const L = CPClass, ST = L.ST, D = L.DEMO, esc = (s) => String(s).replace(/[&<>"]
 document.getElementById('lad').innerHTML = `<span class="hd"></span>${Object.keys(L.LEVELS).map((lv) => `<span class="hd">${L.LEVELS[lv].ko}<b>${L.LEVELS[lv].eq}</b></span>`).join('')}` +
   L.LADDER.map((r) => `<span class="row">${r.ko}</span>${r.steps.map((s, i) => `<div class="cell${i === 2 ? ' end' : ''}">${L.demoSvg(s.demo, 260)}<b>${esc(s.name)}</b><small>${L.LEVELS[s.level].ko} · ${s.eq}</small></div>`).join('')}`).join('');
 const card = (id) => { const d = D[id]; return `<div class="mv" id="m-${id}">${L.demoSvg(id, 300)}<h3>${esc(d.name)}</h3><span class="eq" style="background:${ST[d.st].w};color:${ST[d.st].c}">${esc(d.eq)}</span><ol>${d.how.map((x, i) => `<li><i>${i + 1}</i><span>${esc(x)}</span></li>`).join('')}</ol><p class="tp">박자 · ${esc(L.demoTempo(d))}</p><a href="${L.demoYt(d)}" target="_blank" rel="noopener">유튜브에서 영상 찾아보기 ↗</a></div>`; };
-document.getElementById('all').innerHTML = L.KEYS.map((k) => `<h2 style="color:${ST[k].c}">${ST[k].ko}</h2><p class="sub">${{ cardio: '러닝머신 기준입니다. 사이클을 타도 숨 기준은 같습니다.', weights: '초급 맨몸 → 중급 머신 → 상급 프리웨이트 순서입니다.', stretch: '반동 없이 천천히, 숨을 참지 않습니다.' }[k]}</p><div class="grid">${Object.keys(D).filter((id) => D[id].st === k).map(card).join('')}</div>`).join('');
+const Z = L.ZONES; document.getElementById('zones').innerHTML = L.ZKEYS.map((k) => `<h2 style="color:${ST[k].c}">${Z[k].code} · ${Z[k].en} · ${Z[k].ko} <small style="font-size:15px;color:var(--ink3)">${Z[k].time} · ${Z[k].rpe}</small></h2><p class="sub">${esc(Z[k].feel)}. ${esc(Z[k].how.join(' '))}</p><div class="grid">${Z[k].items.map((x) => card(x.demo)).join('')}</div>`).join('');
+  document.getElementById('all').innerHTML = L.KEYS.map((k) => `<h2 style="color:${ST[k].c}">${ST[k].ko}</h2><p class="sub">${{ cardio: '러닝머신 기준입니다. 사이클을 타도 숨 기준은 같습니다.', weights: '초급 맨몸 → 중급 머신 → 상급 프리웨이트 순서입니다.', stretch: '반동 없이 천천히, 숨을 참지 않습니다.' }[k]}</p><div class="grid">${Object.keys(D).filter((id) => D[id].st === k).map(card).join('')}</div>`).join('');
 })();
 </script>
 </body>
