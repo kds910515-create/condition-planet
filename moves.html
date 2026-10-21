@@ -679,15 +679,149 @@ function twoWeeks(m, R) {
 Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSizes, zteams, teamOf, zresult, twoWeeks, LIB, YT });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
+/* MY EXERCISE RHYTHM — the one-day class for four (loaded after zones.js; its definitions take over the zone set).
+   A MACHINE · B FREE WEIGHT · C CARDIO, then MY PICK (the favourite again). Every number shown comes from what the member entered;
+   when something is missing the profile says "추가 확인 필요". Nothing here labels a person or claims an optimum. */
+(function (g) {
+'use strict';
+const L = g.CPClass, ST = L.ST, D = L.DEMO;
+ST.free = { ko: '프리웨이트', c: '#7A5AF8', w: '#F1EDFF' };
+ST.weights = Object.assign({}, ST.weights, { ko: '머신 웨이트' });
+const icon1 = L.UI.icon;
+L.UI.icon = (k, size) => (k === 'free' ? `<svg width="${size || 24}" height="${size || 24}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 9a3.5 3.5 0 1 1 7 0"/><path d="M6.5 10.5h11l1.5 10h-14z"/></svg>` : icon1(k, size));
+// dumbbell row joins the figures; the dumbbell moves belong to the free-weight zone
+(() => {
+  const full = (p) => { const o = Object.assign({}, p); ['E', 'W', 'K', 'F'].forEach((k) => { if (!o[k + '2']) o[k + '2'] = [p[k][0] - 5, p[k][1] - 2]; }); return o; };
+  const b = D.bbrow, row = { st: 'free', name: '덤벨 로우', eq: '덤벨', tempo: b.tempo, dp: [['disc', 'W', 6]], how: ['덤벨 두 개를 들고 무릎을 살짝 굽혀 상체를 숙입니다.', '허리를 편 채 팔꿈치를 뒤로 보내며 배꼽 쪽으로 당깁니다.', '천천히 내립니다.'], a: b.a, b: b.b };
+  row.A = full(row.a); row.B = full(row.b); row.cue = ['허리는 곧게', '팔꿈치를 뒤로 당기기']; D.dbrow = row;
+  ['goblet', 'pushpress', 'stepup'].forEach((k) => { if (D[k]) D[k].st = 'free'; });
+  if (D.pushpress) D.pushpress.name = '덤벨 숄더프레스';
+})();
+const ZKEYS = ['weights', 'free', 'cardio'];
+const ZONES = {
+  weights: { code: 'A', en: 'MACHINE', ko: '머신 웨이트', time: '약 9분', rpe: 'RPE 6~7', feel: '자리를 잡아 주는 머신으로 중량 → 반복 → 휴식',
+    items: [{ demo: 'legpress', name: '레그프레스' }, { demo: 'chestpress', name: '체스트프레스' }, { demo: 'latpull', name: '랫풀다운' }],
+    dose: '각 10~12회 × 2세트', how: ['2명씩 짝을 지어 번갈아 합니다. 한 명이 하는 동안 짝은 쉽니다.', '한 세트가 끝나면 서로 교대합니다.', '마지막 2~3회가 조금 힘든 무게(RPE 6~7)로 합니다.'] },
+  free: { code: 'B', en: 'FREE WEIGHT', ko: '프리웨이트', time: '약 9분', rpe: 'RPE 6~7', feel: '덤벨을 내 힘으로 다루며 몸 전체를 쓰는 느낌',
+    items: [{ demo: 'goblet', name: '고블릿 스쿼트', dose: '10회 × 2세트' }, { demo: 'pushpress', name: '덤벨 숄더프레스', dose: '10회 × 2세트' }, { demo: 'dbrow', name: '덤벨 로우', dose: '10회 × 2세트' }],
+    dose: '각 10회 × 2세트', how: ['가벼운 덤벨로 시작합니다. 자세가 먼저입니다.', '세트 사이 60초 쉬고, 짝과 번갈아 합니다.', '마지막 2~3회가 조금 힘든 정도(RPE 6~7)면 맞습니다.'] },
+  cardio: Object.assign({}, L.ZONES.cardio, { code: 'C', en: 'CARDIO', ko: '유산소', time: '약 8분' }),
+};
+const ROT = [['weights', 'free', 'cardio'], ['free', 'cardio', 'weights'], ['cardio', 'weights', 'free']];
+const NTH = ['', '첫 번째', '두 번째', '세 번째', '네 번째'];
+const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
+// the pre-class diagnosis: 2-3 minutes on a phone
+const SURVEY = [
+  { k: 'exp', t: '운동 경험은 어느 정도인가요?', o: ['거의 처음', '6개월 미만', '6개월~2년', '2년 이상'] },
+  { k: 'freq', t: '평소 일주일에 몇 번 운동하나요?', o: ['거의 안 함', '1~2회', '3~4회', '5회 이상'] },
+  { k: 'days', t: '운동할 수 있는 요일을 모두 골라 주세요', o: DAYS, multi: 1 },
+  { k: 'times', t: '운동할 수 있는 시간대를 모두 골라 주세요', o: ['아침', '점심', '오후', '저녁', '밤'], multi: 1 },
+  { k: 'like', t: '좋아하거나 끌리는 운동 형태는?', o: ['머신 웨이트', '프리웨이트 (덤벨 · 바벨)', '유산소', '그룹 · 서킷', '잘 모르겠다'] },
+  { k: 'barrier', t: '운동을 시작하기 어려운 이유는? (모두)', o: ['시간이 없어서', '무엇을 해야 할지 몰라서', '헬스장이 낯설고 어색해서', '피곤해서', '의욕이 안 생겨서', '비용이 부담돼서', '기타'], multi: 1 },
+  { k: 'quit', t: '운동을 그만두게 되는 이유는? (모두)', o: ['효과가 안 보여서', '지루해서', '바빠져서', '통증 · 부상', '혼자라서', '방법을 몰라서', '기타'], multi: 1 },
+  { k: 'want', t: '운동으로 얻고 싶은 감정이나 경험은? (모두)', o: ['몸을 제대로 쓴 느낌', '스트레스가 풀린 느낌', '상쾌하고 가벼운 느낌', '성취감', '자신감', '잘 모르겠다'], multi: 1 },
+  { k: 'now', t: '지금 컨디션은 어떤가요?', scale: [['fatigue', '피로', '전혀 없음', '아주 심함'], ['vital', '활력', '아주 낮음', '아주 높음'], ['mood', '기분', '아주 나쁨', '아주 좋음']] },
+  { k: 'pain', t: '운동할 때 주의해야 할 통증이나 불편한 곳이 있나요?', text: 1 },
+];
+function svText(sv, k) {
+  if (!sv) return '—';
+  if (k === 'pain') return sv.pain ? sv.pain : '없음';
+  if (k === 'now') return sv.fatigue == null ? '—' : `피로 ${sv.fatigue} · 활력 ${sv.vital} · 기분 ${sv.mood}`;
+  const q = SURVEY.find((x) => x.k === k); if (!q || !q.o) return '—';
+  if (q.multi) return Array.isArray(sv[k]) && sv[k].length ? sv[k].map((i) => q.o[i]).filter(Boolean).join(', ') : '—';
+  return q.o[sv[k]] != null ? q.o[sv[k]] : '—';
+}
+function teamSizes(n) { return L.teamSizes ? L.teamSizes(n) : [n]; }
+function zteams(members) {
+  const ready = members.filter((m) => m.intake), sizes = L.teamSizes(ready.length), xp = (m) => (m.survey && m.survey.exp != null ? m.survey.exp : 1);
+  const sorted = ready.slice().sort((a, b) => xp(a) - xp(b) || String(a.name).localeCompare(String(b.name)));
+  const out = []; let i = 0;
+  sizes.forEach((sz, t) => { for (let j = 0; j < sz; j++, i++) out.push({ id: sorted[i].id, team: t + 1, ord: ROT[t], kind: 'Team ' + (t + 1), reason: '' }); });
+  return out;
+}
+const teamOf = (t) => ({ id: t, ord: ROT[t - 1], kind: 'Team ' + t });
+const ko = (k) => (ZONES[k] ? ZONES[k].ko : ST[k] ? ST[k].ko : k);
+// the rhythm profile: what the member entered, side by side, plus a cautious reading
+function profile(m) {
+  if (!m || !m.ord) return null;
+  const ck = (r) => m.checks.find((x) => x.round === r) || null, v = (c, k) => (c && c[k] != null ? c[k] : null);
+  const rows = ZKEYS.map((k) => { const i = m.ord.slice(0, 3).indexOf(k), c = i >= 0 ? ck(i + 1) : null; return { st: k, round: i + 1, enjoy: v(c, 'enjoy'), rpe: v(c, 'rpe'), again: v(c, 'again'), done: !!c }; });
+  const pickSt = m.ord[3] || null, c4 = ck(4), pick = pickSt ? { st: pickSt, enjoy: v(c4, 'enjoy'), rpe: v(c4, 'rpe'), again: v(c4, 'again'), done: !!c4 } : null;
+  const score = (r) => (r.done ? (r.enjoy || 0) + (r.again || 0) : -1);
+  const ranked = rows.filter((r) => r.done).sort((a, b) => score(b) - score(a) || (a.rpe || 0) - (b.rpe || 0));
+  const enough = rows.every((r) => r.done && r.enjoy != null && r.again != null);
+  const gap = ranked.length >= 2 ? score(ranked[0]) - score(ranked[1]) : 0, clear = enough && gap >= 2;
+  const top = ranked[0] || null, second = ranked[1] || null;
+  const pre = { mood: m.mood0 == null ? null : m.mood0, energy: m.energy0 == null ? null : m.energy0 }, post = { mood: m.mood1 == null ? null : m.mood1, energy: m.energy1 == null ? null : m.energy1 };
+  let reading;
+  if (!enough || !top) reading = '기록이 일부 비어 있어 추가 확인이 필요합니다.';
+  else if (clear) reading = `오늘 기록에서는 ${ko(top.st)}의 즐거움과 다시 하고 싶은 마음이 가장 높았습니다.`;
+  else reading = `세 운동의 차이가 크지 않아 추가 확인이 필요합니다. 오늘은 ${ko(top.st)}가 조금 높았습니다.`;
+  if (pick && top && enough) reading += pick.st === top.st ? ' MY PICK에서도 같은 운동을 골랐습니다.' : ` MY PICK으로는 ${ko(pick.st)}를 골랐습니다.`;
+  const notes = [];
+  rows.filter((r) => r.rpe != null && r.rpe >= 8).forEach((r) => notes.push(`${ko(r.st)}는 체감강도가 높았습니다(RPE ${r.rpe}). 다음에는 한 단계 가볍게 시작해 보세요.`));
+  if (pre.mood != null && post.mood != null) notes.push(post.mood > pre.mood ? `수업 전보다 기분이 ${post.mood - pre.mood}만큼 올라갔습니다.` : post.mood === pre.mood ? '수업 전후 기분은 같았습니다.' : `수업 뒤 기분이 ${pre.mood - post.mood}만큼 내려갔습니다. 오늘 강도가 높았을 수 있습니다.`);
+  // first combination to try: the favourite (MY PICK when it agrees, otherwise the highest score) plus the next one
+  const firstSt = top ? (pick && pick.done && (pick.enjoy || 0) + (pick.again || 0) >= score(top) ? pick.st : top.st) : null;
+  const secondSt = firstSt ? (ranked.find((r) => r.st !== firstSt) || {}).st || null : null;
+  const hard = (k) => { const r = rows.find((x) => x.st === k); return r && r.rpe != null && r.rpe >= 8; };
+  const combo = firstSt ? { first: firstSt, second: secondSt, minFirst: 20, minSecond: 15, intensity: hard(firstSt) ? 'RPE 5~6 · 오늘보다 한 단계 가볍게' : ZONES[firstSt].rpe, tentative: !clear } : null;
+  return { rows, pick, pre, post, top, second, enough, clear, reading, notes, combo };
+}
+// the gym guide: a draft the coach edits and approves
+function routineDraft(m, pf) {
+  pf = pf || profile(m); const c = pf && pf.combo; if (!c) return null;
+  const sv = m.survey || {}, beginner = sv.exp == null || sv.exp <= 1, list = [], add = (k) => {
+    if (k === 'weights') list.push('레그프레스 10~12회 × 2~3세트', '체스트프레스 10~12회 × 2~3세트', '랫풀다운 10~12회 × 2~3세트');
+    if (k === 'free') list.push('고블릿 스쿼트 10회 × 2~3세트', '덤벨 숄더프레스 10회 × 2~3세트', '덤벨 로우 10회 × 2~3세트');
+  };
+  const order = [c.first, c.second].filter(Boolean);
+  order.forEach((k, i) => { const n0 = list.length; add(k); if (i > 0 && n0 > 0) list.splice(n0 + 2); });
+  if (!list.length) add('weights');
+  const cardioFirst = c.first === 'cardio';
+  return {
+    start: cardioFirst ? '도착하면 런닝머신에서 시작합니다. 몸이 데워지면 바로 메인으로 넘어갑니다.' : `도착하면 ${ko(c.first)}부터 시작합니다.${beginner ? ' 처음 2주는 가벼운 무게로 자세를 먼저 익힙니다.' : ''}`,
+    warm: '런닝머신에서 편하게 5분 걷기 → 팔 · 어깨 · 고관절을 크게 10회씩 돌리기',
+    main: list,
+    cardio: cardioFirst ? '런닝머신 20분: EASY 3분 → RHYTHM 14분(RPE 6) → PUSH 3분(RPE 7)' : '런닝머신 10~15분: 숨은 차지만 한 문장은 말할 수 있는 속도(RPE 5~6)',
+    time: `전체 약 45분 · ${ko(c.first)} ${c.minFirst}분${c.second ? ` + ${ko(c.second)} ${c.minSecond}분` : ''} · 권장 강도 ${c.intensity}`,
+    cool: '천천히 걷기 2분 → 허벅지 · 엉덩이 · 가슴 스트레칭 30초씩 → 길게 내쉬는 호흡 5번',
+    caution: sv.pain ? `${sv.pain}: 통증이 없는 범위에서만 움직이고, 아프면 그 동작은 빼 주세요.` : '',
+    good: `${ko(c.first)} 25분${c.second ? ` + ${ko(c.second)} 15분` : ''}. 마지막 세트는 RPE 7까지 올려 봅니다.`,
+    normal: `${ko(c.first)} 20분${c.second ? ` + ${ko(c.second)} 10분` : ''}. RPE 6 전후로 기본만 합니다.`,
+    low: '가볍게 걷기 15~20분과 스트레칭만 합니다. 몸이 무겁거나 아픈 날은 쉬어도 괜찮습니다.',
+  };
+}
+const ROUTINE_KEYS = [['start', '헬스장 도착 후 시작'], ['warm', '워밍업'], ['main', '주요 웨이트 운동과 순서'], ['cardio', '유산소'], ['time', '운동 시간 · 권장 강도'], ['cool', '마무리'], ['caution', '주의할 점']];
+const COND_KEYS = [['good', 'GOOD DAY', '에너지가 좋은 날'], ['normal', 'NORMAL DAY', '평범한 날'], ['low', 'LOW ENERGY DAY', '피로한 날']];
+const LOGKIND = [['weights', '머신 웨이트'], ['free', '프리웨이트'], ['cardio', '유산소'], ['mixed', '섞어서'], ['other', '기타 운동'], ['rest', '휴식'], ['skip', '못 했어요']];
+const SLOTS = [['morning', '아침'], ['noon', '점심'], ['afternoon', '오후'], ['evening', '저녁'], ['night', '밤']];
+const FOLLOW = [['easy', '운동을 시작하기 쉬웠던 조건'], ['good', '긍정적인 반응을 보인 운동'], ['hard', '실천하기 어려웠던 조건'], ['next', '다음 주에 시도해 볼 운동 계획']];
+const SAT = [['overall', '클래스 전반적인 만족도'], ['found', '나에게 맞는 운동을 발견하는 데 도움이 되었나요?'], ['confident', '혼자 헬스장에 와서 운동할 자신감이 생겼나요?'], ['useful', '개인 운동 리듬 결과가 유용했나요?'], ['recommend', '다른 회원에게 추천하고 싶나요?']];
+const LIB = Object.assign({}, L.LIB, {
+  free: [
+    { name: '고블릿 스쿼트', how: '덤벨을 가슴에 붙이고 엉덩이를 뒤로 빼며 앉기.', q: '고블릿 스쿼트 자세', demo: 'goblet' },
+    { name: '덤벨 숄더프레스', how: '덤벨을 어깨 높이에서 머리 위로. 허리를 젖히지 않기.', q: '덤벨 숄더프레스 자세', demo: 'pushpress' },
+    { name: '덤벨 로우', how: '허리를 편 채 상체를 숙이고 팔꿈치를 뒤로 당기기.', q: '덤벨 로우 정확한 자세', demo: 'dbrow' },
+    { name: '덤벨 런지', how: '한 발 앞으로, 뒷무릎이 바닥에 닿기 직전까지 내려가기.', q: '덤벨 런지 자세 초보' },
+    { name: '덤벨 루마니안 데드리프트', how: '무릎을 살짝 굽힌 채 엉덩이를 뒤로 빼며 덤벨을 내리기.', q: '덤벨 루마니안 데드리프트 자세' },
+    { name: '덤벨 벤치프레스', how: '벤치에 누워 어깨뼈를 모으고 덤벨을 가슴 위로 밀기.', q: '덤벨 벤치프레스 자세' },
+    { name: '스텝박스 스텝업', how: '덤벨을 들고 올린 발 뒤꿈치로 밀며 올라서기.', q: '덤벨 스텝업 하는 법', demo: 'stepup' },
+    { name: '덤벨 무게 고르는 법', how: '10회 중 마지막 2~3회가 조금 힘든 무게(RPE 6~7)부터.', q: '덤벨 무게 고르는 법 초보' },
+  ],
+});
+Object.assign(L, { ZKEYS, ZONES, ROT, NTH, SURVEY, svText, zteams, teamOf, profile, routineDraft, ROUTINE_KEYS, COND_KEYS, LOGKIND, SLOTS, FOLLOW, SAT, LIB, DAYS, zko: ko });
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
 /* Condition Planet V1.5 — local simulation backend (pages opened with ?sim=1).
    Same RPC names and result shapes as the server, but the class lives in this browser's localStorage, so the member page and the
    coach page (two frames of the same site) run a whole class together without touching real data. The clock can run fast. */
 (function (g) {
 'use strict';
 const KEY = 'cp15.sim.state', L = g.CPClass, STN = ['cardio', 'weights', 'stretch'];
-const fresh = () => ({ v: 1, class: { slug: 'sim', title: '나만의 운동 리듬 찾기 · 시뮬레이션', phase: 'intake', minutes: 12, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
+const fresh = () => ({ v: 2, class: { slug: 'sim', title: 'MY EXERCISE RHYTHM · 시뮬레이션', phase: 'intake', minutes: 9, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
 let mem = null;
-const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return s; } catch (_) {} return mem || (mem = fresh()); };
+const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 2) return s; } catch (_) {} return mem || (mem = fresh()); };
 const save = (s) => { mem = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
 const nowOf = (s) => Math.round(s.clk.sim + (Date.now() - s.clk.real) * s.clk.speed);
 const err = (code) => { const e = new Error(code); e.code = code; e.http = 400; return e; };
@@ -697,20 +831,23 @@ const cls = (s) => Object.assign({}, s.class, { routines: s.class.routines || L.
 const pub = (m) => { const o = Object.assign({}, m); delete o.key; o.solo = m.solo.map((x) => { const y = Object.assign({}, x); delete y.cid; return y; }); return o; };
 const state = (s, m) => { const me = pub(m); delete me.id; delete me.phone4; return { class: cls(s), me, mates: s.members.filter((x) => x !== m && m.team && x.team === m.team).map((x) => x.name), joined: s.members.length }; };
 const who = (s, key) => { const m = s.members.find((x) => x.key && x.key === key); if (!m) throw err('invalid_key'); return m; };
-const started = (p) => ({ r1: 1, c1: 1, r2: 2, c2: 2, r3: 3, c3: 3, done: 3 }[p] || 0);
-const blank = () => ({ goal: null, level: null, expect: null, survey: null, interest: null, pref: null, mood0: null, body0: null, energy0: null, intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
+const started = (p) => ({ r1: 1, c1: 1, r2: 2, c2: 2, r3: 3, c3: 3, r4: 4, c4: 4, done: 4 }[p] || 0);
+const PHASES = ['intake', 'teams', 'r1', 'c1', 'r2', 'c2', 'r3', 'c3', 'r4', 'c4', 'done'];
+const pickInt = (n, hi) => Array.from({ length: n }, () => Math.floor(Math.random() * (hi + 1))).filter((v, i, a) => a.indexOf(v) === i).sort();
+const blank = () => ({ goal: null, level: null, expect: null, survey: null, interest: null, pref: null, mood0: null, body0: null, energy0: null, mood1: null, energy1: null, coach_note: null, routine: null, routine_ok: false, followup: null, satisfaction: null, logs: [], intake: false, team: null, ord: null, kind: null, reason: null, want_v2: null, checks: [], solo: [] });
 function addBots(s, n) {
   for (let i = 0; i < Math.max(0, Math.min(12, n)); i++) {
     const k = s.members.filter((m) => m.is_bot).length;
     s.members.push(Object.assign(blank(), { id: 'b' + (++s.seq), key: null, name: NAMES[k % NAMES.length] + (k >= NAMES.length ? ' ' + (Math.floor(k / NAMES.length) + 1) : ''), phone4: '0000', is_bot: true,
       goal: 'stamina', level: rnd(['beg', 'beg', 'mid', 'adv']), expect: null, pref: null,
       mood0: 1 + Math.floor(Math.random() * 4), body0: 1 + Math.floor(Math.random() * 4), energy0: 1 + Math.floor(Math.random() * 5), intake: true }));
-    const b = s.members[s.members.length - 1], like = Math.floor(Math.random() * 4);
-    b.survey = { exp: Math.floor(Math.random() * 4), usual: Math.floor(Math.random() * 5), like, pain: Math.random() < 0.2 ? rnd(['무릎 조심', '허리 뻐근함', '어깨 통증']) : '', feel: Math.floor(Math.random() * 4), after: Math.floor(Math.random() * 5) };
-    b.expect = ['weights', 'cardio', 'hybrid'][like] || null; b.pref = b.expect ? { [b.expect]: 1 } : {}; b.body0 = b.energy0 = b.mood0;
+    const b = s.members[s.members.length - 1], like = Math.floor(Math.random() * 5);
+    b.survey = { exp: Math.floor(Math.random() * 4), freq: Math.floor(Math.random() * 4), days: pickInt(3, 6), times: pickInt(2, 4), like, barrier: pickInt(2, 6), quit: pickInt(2, 6), want: pickInt(2, 5),
+      fatigue: 1 + Math.floor(Math.random() * 5), vital: 1 + Math.floor(Math.random() * 5), mood: 1 + Math.floor(Math.random() * 5), pain: Math.random() < 0.25 ? rnd(['무릎 조심', '허리 뻐근함', '어깨 통증']) : '' };
+    b.expect = ['weights', 'free', 'cardio'][like] || null; b.pref = b.expect ? { [b.expect]: 1 } : {}; b.body0 = b.mood0; b.mood0 = null; b.energy0 = null;
   }
 }
-function setCheck(m, round, mood, body, by, rpe, again) { const c = { round, station: m.ord[round - 1], mood, body: body || null, rpe: rpe || null, again: again || null, by_coach: !!by }, i = m.checks.findIndex((x) => x.round === round); if (i >= 0) m.checks[i] = c; else m.checks.push(c); m.checks.sort((a, b) => a.round - b.round); }
+function setCheck(m, round, mood, body, by, rpe, again, enjoy) { const c = { round, station: m.ord[round - 1], mood: mood || null, enjoy: enjoy || null, body: body || null, rpe: rpe || null, again: again || null, by_coach: !!by }, i = m.checks.findIndex((x) => x.round === round); if (i >= 0) m.checks[i] = c; else m.checks.push(c); m.checks.sort((a, b) => a.round - b.round); }
 const API = {
   v15_class_public: (s) => ({ slug: 'sim', title: s.class.title, phase: s.class.phase }),
   v15_join(s, a) {
@@ -728,12 +865,40 @@ const API = {
     return state(s, m);
   },
   v15_survey(s, a) {
-    const m = who(s, a.p_key), v = a.p_survey || {}, ok = (x, hi) => Number.isInteger(x) && x >= 0 && x <= hi;
-    if (!ok(v.exp, 3) || !ok(v.usual, 4) || !ok(v.like, 3) || !ok(v.feel, 3) || !ok(v.after, 4)) throw err('invalid_input');
-    m.survey = { exp: v.exp, usual: v.usual, like: v.like, pain: String(v.pain || '').trim().slice(0, 120), feel: v.feel, after: v.after };
-    m.expect = ['weights', 'cardio', 'hybrid'][v.like] || null; m.pref = m.expect ? { [m.expect]: 1 } : {}; m.goal = m.goal || 'stamina'; m.intake = true; return state(s, m);
+    const m = who(s, a.p_key), v = a.p_survey || {}, ok = (x, hi) => Number.isInteger(x) && x >= 0 && x <= hi, arr = (x, hi) => (Array.isArray(x) && x.every((y) => ok(y, hi)) ? x.filter((y, i) => x.indexOf(y) === i).sort() : null);
+    const out = { exp: v.exp, freq: v.freq, like: v.like, days: arr(v.days, 6), times: arr(v.times, 4), barrier: arr(v.barrier, 6), quit: arr(v.quit, 6), want: arr(v.want, 5), fatigue: v.fatigue, vital: v.vital, mood: v.mood, pain: String(v.pain || '').trim().slice(0, 160) };
+    if (!ok(v.exp, 3) || !ok(v.freq, 3) || !ok(v.like, 4) || ['days', 'times', 'barrier', 'quit', 'want'].some((k) => !out[k]) || ![v.fatigue, v.vital, v.mood].every(int5)) throw err('invalid_input');
+    m.survey = out; m.expect = ['weights', 'free', 'cardio'][v.like] || null; m.pref = m.expect ? { [m.expect]: 1 } : {}; m.goal = m.goal || 'stamina'; m.intake = true; return state(s, m);
   },
-  v15_mood(s, a) { const m = who(s, a.p_key); if (!int5(a.p_mood)) throw err('invalid_input'); m.mood0 = a.p_mood; m.body0 = m.body0 || a.p_mood; m.energy0 = m.energy0 || a.p_mood; return state(s, m); },
+  v15_mood(s, a) {
+    const m = who(s, a.p_key), w = a.p_when || 'pre'; if (!int5(a.p_mood) || (a.p_energy != null && !int5(a.p_energy)) || !['pre', 'post'].includes(w)) throw err('invalid_input');
+    if (w === 'pre') { m.mood0 = a.p_mood; m.energy0 = a.p_energy || m.energy0; m.body0 = m.body0 || a.p_mood; } else { m.mood1 = a.p_mood; m.energy1 = a.p_energy || m.energy1; }
+    return state(s, m);
+  },
+  v15_pick(s, a) {
+    const m = who(s, a.p_key), p = s.class.phase; if (!m.ord || !m.ord.slice(0, 3).includes(a.p_station)) throw err('invalid_input');
+    if (!['c3', 'r4', 'c4', 'done'].includes(p) && !(p === 'r3' && m.checks.some((x) => x.round === 3))) throw err('not_yet');
+    if (m.checks.some((x) => x.round === 4) && m.ord[3] && m.ord[3] !== a.p_station) throw err('already_done');
+    m.ord = m.ord.slice(0, 3).concat(a.p_station); return state(s, m);
+  },
+  v15_log(s, a) {
+    const m = who(s, a.p_key); if (!a.p_cid || String(a.p_cid).length < 6) throw err('invalid_input');
+    m.logs = m.logs || []; const i = m.logs.findIndex((x) => x.cid === a.p_cid);
+    if (a.p_delete) { if (i >= 0) m.logs.splice(i, 1); return state(s, m); }
+    if (!a.p_day || !['weights', 'free', 'cardio', 'mixed', 'other', 'rest', 'skip'].includes(a.p_kind)) throw err('invalid_input');
+    const row = { cid: a.p_cid, day: a.p_day, slot: a.p_slot || null, kind: a.p_kind, minutes: a.p_minutes || null, mood0: a.p_mood0 || null, energy0: a.p_energy0 || null, mood1: a.p_mood1 || null, energy1: a.p_energy1 || null, rpe: a.p_rpe || null, again: a.p_again || null, note: String(a.p_note || '').trim().slice(0, 200) || null };
+    if (i >= 0) m.logs[i] = row; else m.logs.push(row); m.logs.sort((x, y) => (x.day < y.day ? -1 : x.day > y.day ? 1 : 0)); return state(s, m);
+  },
+  v15_satisfaction(s, a) {
+    const m = who(s, a.p_key), d = a.p_data || {}, v = {}; ['overall', 'found', 'confident', 'useful', 'recommend'].forEach((k) => { if (!int5(d[k])) throw err('invalid_input'); v[k] = d[k]; });
+    v.best = String(d.best || '').trim().slice(0, 300); v.improve = String(d.improve || '').trim().slice(0, 300); m.satisfaction = v; return state(s, m);
+  },
+  v15_coach_update(s, a) {
+    const m = s.members.find((x) => x.id === a.p_member); if (!m) throw err('not_found');
+    if (a.p_note != null) m.coach_note = String(a.p_note).trim().slice(0, 1000) || null;
+    if (a.p_routine) m.routine = a.p_routine; if (a.p_approve === true) m.routine_ok = true; if (a.p_approve === false) m.routine_ok = false; if (a.p_followup) m.followup = a.p_followup;
+    return { ok: true };
+  },
   v15_interest(s, a) { const m = who(s, a.p_key); if (!['yes', 'explain', 'no'].includes(a.p_choice)) throw err('invalid_input'); m.interest = a.p_choice; m.want_v2 = a.p_choice === 'yes'; return state(s, m); },
   v15_late_join(s, a) {
     const m = who(s, a.p_key); if (!m.intake || m.team || s.class.phase === 'intake') return state(s, m);
@@ -744,9 +909,9 @@ const API = {
     return state(s, m);
   },
   v15_check(s, a) {
-    const m = who(s, a.p_key); if (![1, 2, 3].includes(a.p_round) || !int5(a.p_mood) || (a.p_body != null && !int5(a.p_body)) || (a.p_rpe != null && !(a.p_rpe >= 1 && a.p_rpe <= 10)) || (a.p_again != null && ![1, 2, 3, 4, 5].includes(a.p_again))) throw err('invalid_input');
-    if (!m.ord) throw err('no_team'); if (a.p_round > started(s.class.phase)) throw err('round_not_started');
-    setCheck(m, a.p_round, a.p_mood, a.p_body, false, a.p_rpe, a.p_again); return state(s, m);
+    const m = who(s, a.p_key); if (![1, 2, 3, 4].includes(a.p_round) || (a.p_mood == null && a.p_enjoy == null) || (a.p_mood != null && !int5(a.p_mood)) || (a.p_enjoy != null && !int5(a.p_enjoy)) || (a.p_body != null && !int5(a.p_body)) || (a.p_rpe != null && !(a.p_rpe >= 1 && a.p_rpe <= 10)) || (a.p_again != null && ![1, 2, 3, 4, 5].includes(a.p_again))) throw err('invalid_input');
+    if (!m.ord || m.ord.length < a.p_round) throw err('no_team'); if (a.p_round > started(s.class.phase)) throw err('round_not_started');
+    setCheck(m, a.p_round, a.p_mood, a.p_body, false, a.p_rpe, a.p_again, a.p_enjoy); return state(s, m);
   },
   v15_optin(s, a) { const m = who(s, a.p_key); m.want_v2 = !!a.p_yes; return state(s, m); },
   v15_solo(s, a) {
@@ -758,20 +923,27 @@ const API = {
   v15_coach_state: (s) => ({ class: cls(s), members: s.members.map(pub) }),
   v15_coach_teams(s, a) { (a.p_assign || []).forEach((x) => { const m = s.members.find((y) => y.id === x.id); if (m) Object.assign(m, { team: x.team, ord: x.ord, kind: x.kind, reason: x.reason }); }); return { ok: true }; },
   v15_coach_phase(s, a) {
-    const p = a.p_phase; if (!['intake', 'teams', 'r1', 'c1', 'r2', 'c2', 'r3', 'c3', 'done'].includes(p)) throw err('invalid_phase');
+    const p = a.p_phase; if (!PHASES.includes(p)) throw err('invalid_phase');
     if (p !== 'intake' && s.members.some((m) => m.intake && !m.team)) throw err('teams_missing');
+    const bots = s.members.filter((m) => m.is_bot && m.ord);
+    if (p === 'teams' || p === 'r1') bots.forEach((m) => { if (m.mood0 == null) { m.mood0 = 1 + Math.floor(Math.random() * 4); m.energy0 = 1 + Math.floor(Math.random() * 4); } });
+    if (p === 'r4' || p === 'c4') bots.filter((m) => m.ord.length === 3).forEach((m) => { const b = m.checks.slice().sort((x, y) => ((y.enjoy || 0) + (y.again || 0)) - ((x.enjoy || 0) + (x.again || 0)) || x.round - y.round)[0]; m.ord = m.ord.concat(b ? b.station : m.ord[0]); });
     s.class.phase = p; if (p[0] === 'r') s.class.started_ms = nowOf(s);
-    if (p[0] === 'c') { const r = +p[1]; s.members.filter((m) => m.is_bot && m.ord && !m.checks.some((x) => x.round === r)).forEach((m) => { const prev = m.checks.find((x) => x.round === r - 1) || { mood: m.mood0, body: m.body0 }; setCheck(m, r, clamp((prev.mood || 3) + rnd([-1, 0, 0, 1, 1, 1, 2])), null, false, rnd([4, 5, 6, 7, 8]), rnd([1, 2, 3, 4, 5])); }); }
-    if (p === 'done') s.members.filter((m) => m.is_bot && !m.interest).forEach((m) => { m.interest = rnd(['yes', 'explain', 'no', 'no']); m.want_v2 = m.interest === 'yes'; });
+    if (p[0] === 'c') { const r = +p[1]; bots.filter((m) => m.ord.length >= r && !m.checks.some((x) => x.round === r)).forEach((m) => setCheck(m, r, null, null, false, rnd([4, 5, 6, 7, 8]), rnd([1, 2, 3, 4, 5]), rnd([1, 2, 3, 4, 5]))); }
+    if (p === 'done') bots.forEach((m) => {
+      if (!m.interest) { m.interest = rnd(['yes', 'explain', 'no', 'no']); m.want_v2 = m.interest === 'yes'; }
+      if (m.mood1 == null) { m.mood1 = clamp((m.mood0 || 3) + rnd([0, 1, 1, 2])); m.energy1 = clamp((m.energy0 || 3) + rnd([-1, 0, 1, 1])); }
+      if (!m.satisfaction) m.satisfaction = { overall: rnd([4, 5]), found: rnd([3, 4, 5]), confident: rnd([3, 4, 5]), useful: rnd([4, 5]), recommend: rnd([4, 5]), best: '', improve: '' };
+    });
     return { ok: true };
   },
-  v15_coach_check(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m || !m.ord) throw err('invalid_input'); setCheck(m, a.p_round, a.p_mood, a.p_body, true, a.p_rpe, a.p_again); return { ok: true }; },
+  v15_coach_check(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m || !m.ord) throw err('invalid_input'); if (m.ord.length < a.p_round) throw err('no_team'); setCheck(m, a.p_round, a.p_mood, a.p_body, true, a.p_rpe, a.p_again, a.p_enjoy); return { ok: true }; },
   v15_coach_member(s, a) { const m = s.members.find((x) => x.id === a.p_member); if (!m) throw err('not_found'); if (a.p_goal && !L.GOALS[a.p_goal]) throw err('invalid_input'); if (a.p_level && !L.LEVELS[a.p_level]) throw err('invalid_input'); if (a.p_goal) m.goal = a.p_goal; if (a.p_level) m.level = a.p_level; if (a.p_want) m.want_v2 = a.p_want === 'yes' ? true : a.p_want === 'no' ? false : null; return { ok: true }; },
   v15_coach_fill(s, a) { addBots(s, a.p_n); return { ok: true }; },
   v15_coach_remove(s, a) { s.members = s.members.filter((m) => m.id !== a.p_member); return { ok: true }; },
   v15_coach_reset(s, a) {
     if (a.p_what === 'all') s.members = []; else if (a.p_what === 'bots') s.members = s.members.filter((m) => !m.is_bot);
-    else if (a.p_what === 'progress') s.members.forEach((m) => Object.assign(m, { team: null, ord: null, kind: null, reason: null, want_v2: null, interest: null, checks: [], solo: [] })); else throw err('invalid_reset');
+    else if (a.p_what === 'progress') s.members.forEach((m) => Object.assign(m, { team: null, ord: null, kind: null, reason: null, want_v2: null, interest: null, checks: [], solo: [], mood0: null, energy0: null, mood1: null, energy1: null, coach_note: null, routine: null, routine_ok: false, followup: null, satisfaction: null, logs: [] })); else throw err('invalid_reset');
     s.class.phase = 'intake'; s.class.started_ms = null; return { ok: true };
   },
   v15_coach_config(s, a) { if (a.p_routines) s.class.routines = a.p_routines; if (a.p_minutes) s.class.minutes = a.p_minutes; return { ok: true }; },
@@ -783,7 +955,7 @@ g.CPSim = {
   speed(v) { const s = load(); s.clk = { sim: nowOf(s), real: Date.now(), speed: v }; save(s); },
   skip() { const s = load(), c = s.class; if (c.phase[0] !== 'r' || !c.started_ms) return; const end = c.started_ms + c.minutes * 60000 - 4000; if (nowOf(s) < end) { s.clk = { sim: end, real: Date.now(), speed: s.clk.speed }; save(s); } },
   jump(ms) { const s = load(); s.clk = { sim: nowOf(s) + ms, real: Date.now(), speed: s.clk.speed }; save(s); },
-  reset(nBots) { const s = fresh(); addBots(s, nBots == null ? 6 : nBots); save(s); try { Object.keys(localStorage).filter((k) => /^cp15\.[a-z]+\.sim$/.test(k) && k !== KEY).forEach((k) => localStorage.removeItem(k)); } catch (_) {} },
+  reset(nBots) { const s = fresh(); addBots(s, nBots == null ? 3 : nBots); save(s); try { Object.keys(localStorage).filter((k) => /^cp15\.[a-z]+\.sim$/.test(k) && k !== KEY).forEach((k) => localStorage.removeItem(k)); } catch (_) {} },
 };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 </script>
