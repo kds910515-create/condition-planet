@@ -846,7 +846,26 @@ L.UI.icon = (k, size) => (k === 'free' ? `<svg width="${size || 24}" height="${s
   const full = (p) => { const o = Object.assign({}, p); ['E', 'W', 'K', 'F'].forEach((k) => { if (!o[k + '2']) o[k + '2'] = [p[k][0] - 5, p[k][1] - 2]; }); return o; };
   const b = D.bbrow, row = { st: 'free', name: '덤벨 로우', eq: '덤벨', tempo: b.tempo, dp: [['disc', 'W', 6]], how: ['덤벨 두 개를 들고 무릎을 살짝 굽혀 상체를 숙입니다.', '허리를 편 채 팔꿈치를 뒤로 보내며 배꼽 쪽으로 당깁니다.', '천천히 내립니다.'], a: b.a, b: b.b };
   row.A = full(row.a); row.B = full(row.b); row.cue = ['허리는 곧게', '팔꿈치를 뒤로 당기기']; D.dbrow = row;
-  ['goblet', 'pushpress', 'stepup'].forEach((k) => { if (D[k]) D[k].st = 'hybrid'; });
+  ['goblet', 'pushpress'].forEach((k) => { if (D[k]) D[k].st = 'free'; });
+  const add = (id, d) => { d.A = full(d.a); d.B = full(d.b); D[id] = d; };
+  add('wallball', { st: 'hybrid', name: '월볼샷', eq: '월볼 4~6kg', tempo: [1, 0.15, 0.6, 0.35], beat: '앉을 때 1초 · 일어나며 바로 던지기',
+    dp: [['disc', 'W', 9, 3, -2]], sp: [['l', 158, 6, 158, 126, 5], ['r', 151, 8, 7, 12, 2]],
+    how: ['공을 가슴 앞에 들고 벽에서 한 걸음 떨어져 섭니다.', '엉덩이를 뒤로 빼며 스쿼트로 앉았다가, 일어나는 힘으로 공을 벽 위 표적에 던집니다.', '떨어지는 공을 가슴 앞에서 받으며 바로 다음 스쿼트로 이어 갑니다.'],
+    cue: ['스쿼트로 앉았다가', '다리 힘으로 위로 던지기'],
+    a: { H: [101, 20], S: [100, 34], E: [110, 20], W: [116, 6], P: [100, 70], K: [101, 95], F: [100, 120] },
+    b: { H: [108, 50], S: [103, 63], E: [114, 78], W: [119, 64], P: [86, 94], K: [112, 97], F: [100, 120] } });
+  add('kbstep', { st: 'hybrid', name: '스텝박스 케틀벨 스텝업', eq: '케틀벨 · 스텝 박스', tempo: [1, 0.3, 1, 0.3], beat: '올라갈 때 1초 · 내려올 때 1초',
+    dp: [['disc', 'W', 7, 0, 6], ['disc', 'W2', 7, 0, 6]], sp: [['r', 112, 108, 46, 18, 4]],
+    how: ['양손에 케틀벨(또는 한 개를 가슴 앞)을 들고 박스 앞에 섭니다.', '한 발을 박스 위에 올리고 그 발 뒤꿈치로 밀며 올라섭니다.', '천천히 내려오고, 발을 번갈아 가며 반복합니다.'],
+    cue: ['올린 발 뒤꿈치로 밀기', '상체는 세우고 천천히 내려오기'],
+    a: { H: [105, 26], S: [103, 40], E: [100, 57], W: [101, 74], P: [100, 76], K: [118, 90], F: [126, 108], E2: [97, 57], W2: [98, 74], K2: [98, 98], F2: [96, 120] },
+    b: { H: [119, 10], S: [117, 24], E: [114, 41], W: [115, 58], P: [116, 60], K: [122, 84], F: [126, 108], E2: [111, 41], W2: [112, 58], K2: [130, 72], F2: [127, 96] } });
+  add('shtap', { st: 'hybrid', name: '플랭크 숄더탭', eq: '맨몸 · 매트', mat: 1, tempo: [0.5, 0.3, 0.5, 0.3], beat: '한 손씩 번갈아 · 엉덩이는 흔들리지 않게',
+    how: ['손은 어깨 바로 아래, 머리부터 발끝까지 일자로 플랭크 자세를 만듭니다.', '한 손을 들어 반대쪽 어깨를 가볍게 치고 제자리로, 손을 번갈아 합니다.', '발을 조금 넓게 벌리면 쉬워지고, 힘들면 무릎을 바닥에 대고 합니다.'],
+    cue: ['엉덩이는 흔들리지 않게', '배에 힘주고 번갈아 터치'],
+    a: { H: [153, 78], S: [140, 84], E: [141, 102], W: [142, 120], P: [106, 96], K: [82, 105], F: [57, 114], E2: [138, 102], W2: [138, 120] },
+    b: { H: [152, 77], S: [139, 83], E: [151, 96], W: [141, 85], P: [106, 95], K: [82, 105], F: [57, 114], E2: [138, 102], W2: [138, 120] } });
+  ['wallball', 'kbstep', 'shtap'].forEach((k) => { if (L.UI && D[k]) D[k].how = D[k].how.map(KR); });
   Object.keys(D).forEach((k) => { if (D[k].how) D[k].how = D[k].how.map(KR); });
 })();
 const ZKEYS = ['weights', 'cardio', 'hybrid'];
@@ -857,9 +876,11 @@ const ZONES = {
     dose: '각 10~12회 × 2세트', how: ['한 기구에서 차례로 돌아가며 합니다.', '마지막 2~3회가 조금 힘든 무게(운동강도 6~7)로 합니다.', '무게는 코치와 함께 정합니다.'] },
   cardio: Object.assign({}, C0, { code: 'B', en: 'CARDIO', ko: '유산소', time: '약 8~9분', rpe: '운동강도 6 중심',
     phases: C0.phases.map((p) => Object.assign({}, p, { rpe: KR(p.rpe) })), how: C0.how.map(KR), msg: KR(C0.msg) }),
-  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '약 8~9분', rpe: '운동강도 6~7', feel: '여러 동작을 쉬지 않고 이어 가며 근력과 숨이 함께 올라가는 느낌',
-    items: [{ demo: 'goblet', name: '고블릿 스쿼트', dose: '10회' }, { demo: 'pushpress', name: '덤벨 푸시프레스', dose: '8회' }, { demo: 'stepup', name: '스텝업', dose: '10~12회' }],
-    dose: '1 → 2 → 3, 다시 1번부터 반복', how: ['정해진 휴식은 없습니다. 내 속도로 이어 갑니다.', '숨이 너무 차면 20~30초 숨을 고른 뒤 다시 시작합니다.', '기록 경쟁이 아닙니다.'] },
+  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '9분', rpe: '운동강도 7 전후', feel: '세 동작을 1분씩 돌며 근력과 숨이 함께 올라가는 느낌',
+    items: [{ demo: 'wallball', name: '월볼샷', dose: '40초' }, { demo: 'kbstep', name: '스텝박스 케틀벨 스텝업', dose: '40초 · 발 번갈아' }, { demo: 'shtap', name: '플랭크 숄더탭', dose: '40초 · 손 번갈아' }],
+    work: 40, rest: 20, laps: 3,
+    dose: '40초 운동 · 20초 휴식(다음 동작으로 이동) × 3동작 = 한 바퀴 3분, 3바퀴 = 9분',
+    how: ['1분마다 다음 동작으로 넘어갑니다: 40초 운동, 20초 숨 고르며 이동.', '횟수보다 40초 동안 멈추지 않는 것이 목표입니다. 힘들면 속도를 낮추세요.', '플랭크 숄더탭이 힘들면 무릎을 대고, 월볼은 가벼운 공으로 바꿉니다.'] },
 };
 // push-along rotation: when a team finishes a zone it moves on and the next team comes in
 const ROT = [['weights', 'cardio', 'hybrid'], ['cardio', 'hybrid', 'weights'], ['hybrid', 'weights', 'cardio']];
@@ -872,10 +893,10 @@ function teamRule(k, n) {
     if (n >= 4) return '2명씩 짝을 지어 번갈아 합니다. 한 명이 하는 동안 짝은 쉽니다.';
     return '세트 사이 60초 쉬고 다음 세트를 합니다.';
   }
-  if (n === 3) return '세 동작에 한 명씩 서서 동시에 시작하고, 끝나면 옆 동작으로 바로 이동합니다.';
-  if (n === 2) return '2명이 함께 돌되, 한 바퀴가 끝날 때마다 20초 더 쉬고 다음 바퀴를 시작합니다.';
-  if (n >= 4) return '2명씩 나눠 서로 다른 동작에서 시작해 한 방향으로 돕니다.';
-  return '한 바퀴가 끝나면 숨을 고르고 다시 시작합니다.';
+  if (n === 3) return '세 동작에 한 명씩 서서 동시에 시작합니다. 40초 운동 후 20초 동안 옆 동작으로 이동해, 1분마다 자리를 바꿉니다.';
+  if (n === 2) return '두 사람이 서로 다른 동작에서 시작해 1분마다 다음 동작으로 이동합니다(40초 운동 · 20초 휴식). 숨이 너무 차면 마지막 바퀴는 30초만 운동합니다.';
+  if (n >= 4) return '2명씩 나눠 서로 다른 동작에서 시작해 1분마다 다음 동작으로 이동합니다.';
+  return '40초 운동 · 20초 휴식으로 1분마다 다음 동작으로 넘어갑니다.';
 }
 const teamRuleShort = (n) => (n === 3 ? '끝나면 바로 교대' : n === 2 ? '교대 전 20초 더 휴식' : n >= 4 ? '2명씩 짝' : '혼자');
 const NTH = ['', '첫 번째', '두 번째', '세 번째', '네 번째'];
@@ -968,7 +989,7 @@ function routineDraft(m, pf) {
   pf = pf || profile(m); const c = pf && pf.combo; if (!c) return null;
   const sv = m.survey || {}, beginner = sv.exp == null || sv.exp <= 1, list = [], add = (k) => {
     if (k === 'weights') list.push('레그프레스 10~12회 × 2~3세트', '체스트프레스 10~12회 × 2~3세트', '랫풀다운 10~12회 × 2~3세트');
-    if (k === 'hybrid') list.push('서킷 ① 고블릿 스쿼트 10회', '서킷 ② 덤벨 푸시프레스 8회', '서킷 ③ 스텝업 10~12회 → ①~③을 3~4바퀴, 바퀴 사이 60초 휴식');
+    if (k === 'hybrid') list.push('서킷 ① 월볼샷 40초', '서킷 ② 스텝박스 케틀벨 스텝업 40초', '서킷 ③ 플랭크 숄더탭 40초 → 동작 사이 20초 휴식, 3바퀴(9분)');
   };
   const order = [c.first, c.second].filter(Boolean);
   order.forEach((k, i) => { const n0 = list.length; add(k); if (i > 0 && n0 > 0 && k === 'weights') list.splice(n0 + 2); });
@@ -999,7 +1020,16 @@ const FOLLOW = [['easy', '운동을 시작하기 쉬웠던 조건'], ['good', '�
 const SAT = [['overall', '클래스 전반적인 만족도'], ['found', '나에게 맞는 운동을 발견하는 데 도움이 되었나요?'], ['confident', '혼자 헬스장에 와서 운동할 자신감이 생겼나요?'], ['useful', '개인 운동 리듬 결과가 유용했나요?'], ['recommend', '다른 회원에게 추천하고 싶나요?']];
 const fixLib = (a) => a.map((x) => Object.assign({}, x, { how: KR(x.how) }));
 const LIB = {
-  weights: fixLib(L.LIB.weights), cardio: fixLib(L.LIB.cardio), hybrid: fixLib(L.LIB.hybrid),
+  weights: fixLib(L.LIB.weights), cardio: fixLib(L.LIB.cardio),
+  hybrid: [
+    { name: '월볼샷', how: '공을 가슴 앞에 들고 스쿼트로 앉았다가, 일어나는 힘으로 벽 위 표적에 던지기.', q: '월볼샷 자세 초보', demo: 'wallball' },
+    { name: '스텝박스 케틀벨 스텝업', how: '케틀벨을 들고 올린 발 뒤꿈치로 밀며 올라서기. 발 번갈아.', q: '케틀벨 스텝업 박스 자세', demo: 'kbstep' },
+    { name: '플랭크 숄더탭', how: '플랭크에서 한 손씩 반대쪽 어깨 터치. 엉덩이는 흔들리지 않게.', q: '플랭크 숄더탭 자세', demo: 'shtap' },
+    { name: '40초 운동 · 20초 휴식 서킷 짜는 법', how: '3동작을 1분씩 돌고 3바퀴. 힘들면 30초 운동 · 30초 휴식으로.', q: '40초 20초 서킷 트레이닝 초보' },
+    { name: '버피', how: '선 자세 → 손 짚고 다리 뒤로 → 다시 모아 일어나기. 처음엔 점프 없이.', q: '버피 정확한 자세 초보' },
+    { name: '케틀벨 스윙', how: '허리가 아니라 엉덩이를 접었다 펴는 힘으로 흔들기.', q: '케틀벨 스윙 초보 자세' },
+    { name: '마운틴 클라이머', how: '플랭크 자세에서 무릎을 가슴 쪽으로 번갈아 당기기.', q: '마운틴 클라이머 자세' },
+  ],
   free: [
     { name: '고블릿 스쿼트', how: '덤벨을 가슴에 붙이고 엉덩이를 뒤로 빼며 앉기.', q: '고블릿 스쿼트 자세', demo: 'goblet' },
     { name: '덤벨 숄더프레스', how: '덤벨을 어깨 높이에서 머리 위로. 허리를 젖히지 않기.', q: '덤벨 숄더프레스 자세', demo: 'pushpress' },
@@ -1007,11 +1037,17 @@ const LIB = {
     { name: '덤벨 런지', how: '한 발 앞으로, 뒷무릎이 바닥에 닿기 직전까지 내려가기.', q: '덤벨 런지 자세 초보' },
     { name: '덤벨 루마니안 데드리프트', how: '무릎을 살짝 굽힌 채 엉덩이를 뒤로 빼며 덤벨을 내리기.', q: '덤벨 루마니안 데드리프트 자세' },
     { name: '덤벨 벤치프레스', how: '벤치에 누워 어깨뼈를 모으고 덤벨을 가슴 위로 밀기.', q: '덤벨 벤치프레스 자세' },
+    { name: '덤벨 푸시프레스', how: '무릎을 살짝 굽혔다가 다리 힘으로 머리 위로 밀기.', q: '덤벨 푸시프레스 하는 법', demo: 'pushpress' },
     { name: '덤벨 무게 고르는 법', how: '10회 중 마지막 2~3회가 조금 힘든 무게(운동강도 6~7)부터.', q: '덤벨 무게 고르는 법 초보' },
   ],
 };
 const LIBTABS = ['weights', 'cardio', 'hybrid', 'free'];
-Object.assign(L, { ZKEYS, ZONES, ROT, NTH, SURVEY, LIKE_ZONE, svText, zteams, teamOf, teamRule, teamRuleShort, profile, routineDraft, jo, ROUTINE_KEYS, COND_KEYS, LOGTYPES, LOGKIND, logKinds, logText, SLOTS, FOLLOW, SAT, LIB, LIBTABS, DAYS, EFFECT, zko: ko, KR });
+function circuitAt(elSec) {
+  const z = ZONES.hybrid, per = z.work + z.rest, i = Math.max(0, Math.floor(elSec / per)), sec = elSec - i * per;
+  if (i >= z.laps * 3) return { done: true };
+  return { lap: Math.floor(i / 3) + 1, step: (i % 3) + 1, work: sec < z.work, left: Math.ceil(sec < z.work ? z.work - sec : per - sec) };
+}
+Object.assign(L, { circuitAt, ZKEYS, ZONES, ROT, NTH, SURVEY, LIKE_ZONE, svText, zteams, teamOf, teamRule, teamRuleShort, profile, routineDraft, jo, ROUTINE_KEYS, COND_KEYS, LOGTYPES, LOGKIND, logKinds, logText, SLOTS, FOLLOW, SAT, LIB, LIBTABS, DAYS, EFFECT, zko: ko, KR });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 /* Condition Planet V1.5 — local simulation backend (pages opened with ?sim=1).
@@ -1274,6 +1310,13 @@ function guide(k, elMin) {
     return `<div class="card"><h2>${z.time} · 런닝머신</h2><div class="ph">${z.phases.map((x) => `<div class="${p === x ? 'on' : ''}" style="${p === x ? 'background:' + ST[k].c : ''}"><b>${x.name}</b>${x.from}~${x.to}분<br>${x.rpe}</div>`).join('')}</div>
       <p class="say">${p ? esc(p.say) : '8분이 지났어요. 천천히 걸으며 숨을 고르세요.'}</p><div class="tip">${esc(z.msg)}</div><p class="note" style="margin-top:8px">${esc(L.teamRule(k, teamN()))}</p>
       <p class="note" style="margin-top:10px">천국의 계단은 평소에 써 본 사람만 고릅니다. 전력질주는 하지 않습니다.</p></div>`;
+  }
+  if (k === 'hybrid') {
+    const c = L.circuitAt(elMin * 60);
+    return `<div class="card"><h2>9분 · 40초 운동 · 20초 휴식 · 3바퀴</h2><div class="ph">${[1, 2, 3].map((x) => `<div class="${c.lap === x ? 'on' : ''}" style="${c.lap === x ? 'background:' + ST[k].c : ''}"><b>${x}바퀴</b>${(x - 1) * 3}~${x * 3}분</div>`).join('')}</div>
+      <p class="say n">${c.done ? '9분이 끝났어요. 천천히 걸으며 숨을 고르세요.' : c.work ? `운동 중 · ${c.left}초 남음` : `휴식 · ${c.left}초 뒤 다음 동작으로`}</p>
+      <div class="items">${z.items.map((x) => `<div class="it">${L.demoSvg(x.demo, 92)}<div><b>${esc(x.name)}</b><span>${esc(x.dose)}</span></div></div>`).join('')}</div>
+      <div class="tip"><b>${teamN()}명 팀</b> · ${esc(L.teamRule(k, teamN()))}</div><p class="note" style="margin-top:8px">${esc(z.how[1])} ${esc(z.how[2])}</p></div>`;
   }
   return `<div class="card"><h2>${z.time} · ${z.rpe}</h2><div class="items">${z.items.map((x) => `<div class="it">${L.demoSvg(x.demo, 92)}<div><b>${esc(x.name)}</b><span>${esc(x.dose || z.dose)}</span></div></div>`).join('')}</div>
     <div class="tip"><b>${teamN()}명 팀</b> · ${esc(L.teamRule(k, teamN()))}</div><p class="note" style="margin-top:8px">${esc(z.how[1])}</p></div>`;
