@@ -33,7 +33,7 @@ h1,h2,h3,p,ul,ol{margin:0;padding:0} ul,ol{list-style:none}
 /* stage */
 .stage{background:var(--card);border-radius:28px;padding:28px 30px;box-shadow:0 1px 2px rgba(14,17,22,.04),0 0 0 1px var(--line)}
 .stage h1{font-size:15px;font-weight:700;color:var(--ink3)}
-.rail{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:14px}
+.rail{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:14px}
 .rail div{font-size:12px;font-weight:700;color:var(--ink3)}
 .rail i{display:block;height:6px;border-radius:3px;background:var(--line);margin-bottom:8px}
 .rail .past i{background:var(--ink)} .rail .cur i{background:var(--ink);position:relative;overflow:hidden}
@@ -813,7 +813,7 @@ Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSi
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 /* MY EXERCISE RHYTHM — the one-day class (loaded after zones.js; its definitions take over the zone set).
-   A 머신 · B 유산소 · C 서킷, push-along rotation between teams, then MY PICK (the favourite again).
+   A 머신 · B 유산소 · C 서킷, push-along rotation between teams, each zone opened by a short coach demo.
    Every number shown comes from what the member entered; when something is missing the profile says "추가 확인 필요".
    "운동강도" is the member-facing word for RPE. Nothing here labels a person or claims an optimum. */
 (function (g) {
@@ -855,15 +855,16 @@ L.UI.icon = (k, size) => (k === 'free' ? `<svg width="${size || 24}" height="${s
 const ZKEYS = ['weights', 'cardio', 'hybrid'];
 const C0 = L.ZONES.cardio;
 const ZONES = {
-  weights: { code: 'A', en: 'MACHINE', ko: '머신', time: '약 9분', rpe: '운동강도 6~7', feel: '자리를 잡아 주는 머신으로 중량 → 반복 → 휴식',
+  weights: { code: 'A', en: 'MACHINE', ko: '머신', time: '12분', rpe: '운동강도 6~7', feel: '자리를 잡아 주는 머신으로 중량 → 반복 → 휴식',
     items: [{ demo: 'legpress', name: '레그프레스' }, { demo: 'chestpress', name: '체스트프레스' }, { demo: 'latpull', name: '랫풀다운' }],
-    dose: '각 10~12회 × 2세트', how: ['한 기구에서 차례로 돌아가며 합니다.', '마지막 2~3회가 조금 힘든 무게(운동강도 6~7)로 합니다.', '무게는 코치와 함께 정합니다.'] },
-  cardio: Object.assign({}, C0, { code: 'B', en: 'CARDIO', ko: '유산소', time: '약 8~9분', rpe: '운동강도 6 중심',
-    phases: C0.phases.map((p) => Object.assign({}, p, { rpe: KR(p.rpe) })), how: C0.how.map(KR), msg: KR(C0.msg) }),
-  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '9분', rpe: '운동강도 7 전후', feel: '세 동작을 1분씩 돌며 근력과 숨이 함께 올라가는 느낌',
+    dose: '3종 × 각 2세트 (1인 6세트)', how: ['한 기구에서 차례로 돌아가며 합니다.', '마지막 2~3회가 조금 힘든 무게(운동강도 6~7)로 합니다.', '무게는 코치와 함께 정합니다.'] },
+  cardio: Object.assign({}, C0, { code: 'B', en: 'CARDIO', ko: '유산소', time: '12분', rpe: '운동강도 6 중심',
+    phases: [{ from: 0, to: 2, name: 'EASY', rpe: '운동강도 3~4', say: '편하게 걸으며 몸을 데우고 자기 속도 찾기' }, { from: 2, to: 7, name: 'RHYTHM', rpe: '운동강도 6', say: '숨은 차지만 한 문장 정도는 말할 수 있게' }, { from: 7, to: 10, name: 'PUSH', rpe: '운동강도 7', say: '조금 더 숨차지만 끝까지 유지할 수 있게' }, { from: 10, to: 12, name: 'COOL', rpe: '운동강도 3', say: '속도를 낮춰 걸으며 숨 고르기' }],
+    how: ['기본은 런닝머신입니다. 천국의 계단은 평소에 써 본 사람만 고릅니다.', '0~2분 EASY → 2~7분 RHYTHM → 7~10분 PUSH → 10~12분 COOL.', '전력질주는 하지 않습니다.'], msg: KR(C0.msg) }),
+  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '12분', rpe: '운동강도 7 전후', feel: '세 동작을 1분씩 돌며 근력과 숨이 함께 올라가는 느낌',
     items: [{ demo: 'wallball', name: '월볼샷', dose: '40초' }, { demo: 'kbstep', name: '스텝박스 케틀벨 스텝업', dose: '40초 · 발 번갈아' }, { demo: 'shtap', name: '플랭크 숄더탭', dose: '40초 · 손 번갈아' }],
-    work: 40, rest: 20, laps: 3,
-    dose: '40초 운동 · 20초 휴식(다음 동작으로 이동) × 3동작 = 한 바퀴 3분, 3바퀴 = 9분',
+    work: 40, rest: 20, laps: 4,
+    dose: '40초 운동 · 20초 휴식(다음 동작으로 이동) × 3동작 = 한 바퀴 3분, 4바퀴(4세트) = 12분',
     how: ['1분마다 다음 동작으로 넘어갑니다: 40초 운동, 20초 숨 고르며 이동.', '횟수보다 40초 동안 멈추지 않는 것이 목표입니다. 힘들면 속도를 낮추세요.', '플랭크 숄더탭이 힘들면 무릎을 대고, 월볼은 가벼운 공으로 바꿉니다.'] },
 };
 // push-along rotation: when a team finishes a zone it moves on and the next team comes in
@@ -1040,9 +1041,9 @@ Object.assign(L, { circuitAt, ZKEYS, ZONES, ROT, NTH, SURVEY, LIKE_ZONE, svText,
 (function (g) {
 'use strict';
 const KEY = 'cp15.sim.state', L = g.CPClass, STN = ['cardio', 'weights', 'stretch'];
-const fresh = () => ({ v: 2, class: { slug: 'sim', title: 'MY EXERCISE RHYTHM · 시뮬레이션', phase: 'intake', minutes: 9, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
+const fresh = () => ({ v: 3, class: { slug: 'sim', title: 'MY EXERCISE RHYTHM · 시뮬레이션', phase: 'intake', minutes: 12, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
 let mem = null;
-const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 2) return s; } catch (_) {} return mem || (mem = fresh()); };
+const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 3) return s; } catch (_) {} return mem || (mem = fresh()); };
 const save = (s) => { mem = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
 const nowOf = (s) => Math.round(s.clk.sim + (Date.now() - s.clk.real) * s.clk.speed);
 const err = (code) => { const e = new Error(code); e.code = code; e.http = 400; return e; };
@@ -1216,7 +1217,7 @@ function mock(kind) {          // preview without a class: four example members
   if (!pre) L.zteams(M).forEach((a) => Object.assign(M.find((m) => m.id === a.id), a));
   const E = [[3, 5, 2], [4, 3, 3], [2, 3, 5], [3, 4, 3], [4, 3, 5]], R = [[6, 7, 8], [6, 7, 7], [5, 6, 7], [5, 6, 8], [7, 6, 8]], A = [[3, 5, 2], [5, 3, 2], [2, 3, 5], [3, 4, 2], [4, 3, 5]];
   if (!pre) M.forEach((m, i) => { const rounds = done ? 3 : i === 3 ? 0 : 1; for (let r = 1; r <= rounds; r++) m.checks.push({ round: r, station: m.ord[r - 1], enjoy: E[i][r - 1], rpe: R[i][r - 1], again: A[i][r - 1] });
-    if (done) { const b = m.checks.slice().sort((x, y) => y.enjoy + y.again - x.enjoy - x.again)[0]; m.ord = m.ord.concat(b.station); m.checks.push({ round: 4, station: b.station, enjoy: b.enjoy, rpe: b.rpe, again: b.again }); } });
+  });
   return { class: { slug: 'demo', title: 'MY EXERCISE RHYTHM · 10월 24일(토) 12:00', phase: pre ? 'intake' : done ? 'done' : 'r2', minutes: 9, routines: L.ROUTINES, started_ms: Date.now() - 4 * 60000 - 20000, now_ms: Date.now() }, members: M };
 }
 async function load() {
@@ -1226,8 +1227,8 @@ async function load() {
   render();
 }
 async function act(p, ok) { if (PV) { toast('미리보기 화면에서는 동작하지 않습니다.'); return; } if (S.busy) return; S.busy = true; render(); try { await (typeof p === 'function' ? p() : p); if (ok) toast(ok); } catch (e) { toast(e.code === 'teams_missing' ? '팀이 없는 회원이 있습니다. [팀 다시 편성]을 눌러 주세요.' : '실패했습니다. 다시 눌러 주세요.'); } S.busy = false; await load(); }
-const RAIL = ['사전 진단', '시작', '운동 1', '운동 2', '운동 3', 'MY PICK', '결과 · 피드백'];
-const railIdx = (p) => ({ intake: 0, teams: 1, r1: 2, c1: 2, r2: 3, c2: 3, r3: 4, c3: 4, r4: 5, c4: 5, done: 6 }[p]);
+const RAIL = ['사전 진단', '시작', '운동 1', '운동 2', '운동 3', '마무리 · 결과'];
+const railIdx = (p) => ({ intake: 0, teams: 1, r1: 2, c1: 2, r2: 3, c2: 3, r3: 4, c3: 5, r4: 5, c4: 5, done: 5 }[p]);
 const clock = (ms) => { const neg = ms < 0, s = Math.abs(Math.ceil(ms / 1000)); return (neg ? '+' : '') + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
 const left = () => (S.d.class.started_ms + S.d.class.minutes * 60000) - (SIM ? SIM.now() : Date.now() + S.off);
 const memberUrl = () => new URL('./?c=' + slug, location.href).href;
@@ -1245,23 +1246,23 @@ function nextAction(c, M) {
   const ready = M.filter((m) => m.intake), teamed = ready.filter((m) => m.team), round = roundOf(c);
   const checked = (r) => teamed.filter((m) => m.checks.some((x) => x.round === r)).length, moods = teamed.filter((m) => m.mood0 != null).length;
   if (c.phase === 'intake') return { t: !M.length ? '회원을 기다리고 있습니다.' : `사전 진단 ${ready.length}명 완료`, s: !M.length ? '아래 링크를 단톡방에 보내면 진단을 마치는 대로 여기에 나타납니다.' : `자동 편성은 ${sizesTxt(ready.length)}입니다(한 팀 최대 4명). 수업을 시작할 때 [팀 확정하기]를 누르면 회원 폰에 첫 번째 존이 뜹니다.`, b: ready.length ? ['teams-auto', '팀 확정하기'] : null, prog: [ready.length, M.length, '사전 진단'] };
-  if (c.phase === 'teams') return { t: '회원 폰에 첫 번째 존이 떴습니다.', s: `회원은 시작 전에 기분과 에너지를 한 번씩 누릅니다(${moods}/${teamed.length}명). 모두 존에 서면 시작하세요.`, b: ['phase:r1', `운동 1 시작 · ${c.minutes}분`], prog: [moods, teamed.length, '시작 체크'] };
-  if (c.phase[0] === 'r') return { t: round === 4 ? 'MY PICK 진행 중' : `운동 ${round} 진행 중`, s: '회원이 [운동 끝났어요]를 누르면 바로 즐거움 · 강도 · 다시 하고 싶은 정도를 입력합니다. 시간이 끝나면 입력 화면이 저절로 뜹니다.', b: ['phase:c' + round, `${round === 4 ? 'MY PICK' : '운동 ' + round} 끝내고 입력 받기`], timer: true, prog: [checked(round), teamed.length, `${round === 4 ? 'MY PICK' : '운동 ' + round} 입력`] };
-  if (c.phase[0] === 'c' && round < 3) return { t: `운동 ${round} 입력을 받는 중`, s: '입력을 마친 회원 폰에는 다음 존이 떠 있습니다. 모두 이동하면 시작하세요.', b: ['phase:r' + (round + 1), `운동 ${round + 1} 시작 · ${c.minutes}분`], prog: [checked(round), teamed.length, `운동 ${round} 입력`] };
-  if (c.phase === 'c3') { const picked = teamed.filter((m) => m.ord && m.ord.length >= 4).length; return { t: '회원이 MY PICK을 고르는 중', s: '세 번째 입력을 마친 회원은 셋 중 다시 하고 싶은 운동 하나를 고릅니다. 고른 존으로 이동하면 시작하세요.', b: ['phase:r4', `MY PICK 시작 · ${c.minutes}분`], prog: [picked, teamed.length, 'MY PICK 선택'] }; }
+  if (c.phase === 'teams') return { t: '회원 폰에 첫 번째 존이 떴습니다.', s: `회원은 시작 전에 기분과 에너지를 한 번씩 누릅니다(${moods}/${teamed.length}명). 폰에 첫 존의 동작이 떠 있으니, 각 조에 2분 정도 시범을 보인 뒤 시작하세요.`, b: ['phase:r1', `운동 1 시작 · ${c.minutes}분`], prog: [moods, teamed.length, '시작 체크'] };
+  if (c.phase[0] === 'r') return { t: `운동 ${round} 진행 중`, s: '회원이 [운동 끝났어요]를 누르면 바로 즐거움 · 강도 · 다시 하고 싶은 정도를 입력합니다. 시간이 끝나면 입력 화면이 저절로 뜹니다.', b: ['phase:c' + round, `운동 ${round} 끝내고 입력 받기`], timer: true, prog: [checked(round), teamed.length, `운동 ${round} 입력`] };
+  if (c.phase[0] === 'c' && round < 3) return { t: `운동 ${round} 입력을 받는 중`, s: '입력을 마친 회원 폰에는 다음 존과 동작 그림이 떠 있습니다. 조별로 이동하면 2분 정도 시범을 보인 뒤 시작하세요.', b: ['phase:r' + (round + 1), `운동 ${round + 1} 시작 · ${c.minutes}분`], prog: [checked(round), teamed.length, `운동 ${round} 입력`] };
+  if (c.phase === 'c3') { const post = teamed.filter((m) => m.mood1 != null).length; return { t: '마무리 체크와 결과 보기', s: '세 번째 입력을 마친 회원은 바로 수업 후 기분 · 에너지를 누르고 운동 리듬 프로필을 봅니다. 함께 1~2페이지(프로필 · 왜 그럴까요?)를 짚어 준 뒤 마무리하세요.', b: ['phase:done', '수업 마무리하기'], prog: [post, teamed.length, '마무리 체크'] }; }
   if (c.phase === 'c4') { const post = teamed.filter((m) => m.mood1 != null).length; return { t: '마지막 입력과 마무리 체크', s: '회원은 MY PICK 입력 뒤 수업 후 기분 · 에너지를 누르고, 바로 운동 리듬 프로필을 봅니다.', b: ['phase:done', '수업 마무리하기'], prog: [post, teamed.length, '마무리 체크'] }; }
   const ok = M.filter((m) => m.routine_ok).length;
   return { t: '수업이 끝났습니다.', s: '회원을 눌러 관찰 메모를 남기고, 루틴을 확인 · 승인하세요. 7일 뒤에는 기록을 보고 피드백을 남깁니다.', b: null, prog: [ok, M.length, '루틴 승인'] };
 }
 function card(m, c, col) {          // one member: survey essentials, where they are, what they answered
-  const round = roundOf(c), ph = c.phase, waiting = [1, 2, 3, 4].some((r) => owes(m, c, r)), sv = m.survey;
-  const stt = !m.intake ? '<span class="stt">진단 중</span>' : waiting ? '<span class="stt wait">입력 대기</span>' : ph === 'c3' && m.checks.some((x) => x.round === 3) && (m.ord || []).length < 4 ? '<span class="stt wait">PICK 고르는 중</span>'
+  const round = roundOf(c), ph = c.phase, waiting = [1, 2, 3].some((r) => owes(m, c, r)), sv = m.survey;
+  const stt = !m.intake ? '<span class="stt">진단 중</span>' : waiting ? '<span class="stt wait">입력 대기</span>'
     : ph[0] === 'c' && m.checks.some((x) => x.round === round) ? '<span class="stt ok">입력 완료</span>' : ph === 'done' ? (m.routine_ok ? '<span class="stt ok">루틴 승인</span>' : '<span class="stt">루틴 확인 전</span>') : ph === 'intake' ? '<span class="stt ok">진단 완료</span>' : '';
   const here = !m.ord ? null : ph[0] === 'r' ? m.ord[round - 1] || null : ph === 'teams' ? m.ord[0] : ph[0] === 'c' && round < 4 ? m.ord[round] || null : null;
   let traj = '';
   if (m.ord) {
     traj = `<div class="pt"><b>${m.mood0 == null ? '–' : m.mood0}</b>시작<em>에너지 ${m.energy0 == null ? '–' : m.energy0}</em></div>`;
-    [1, 2, 3, 4].forEach((r) => {
+    [1, 2, 3].forEach((r) => {
       const x = m.checks.find((y) => y.round === r), k = m.ord[r - 1], lab = r === 4 ? '★' : k ? Z[k].code : '';
       if (x) traj += `<span class="ln"></span><div class="pt"><b style="background:${ST[x.station].c}">${x.enjoy ?? x.mood ?? '–'}</b>${r === 4 ? '★ ' + Z[x.station].code : lab}<em>강도 ${x.rpe || '–'} · 다시 ${x.again || '–'}</em></div>`;
       else if (owes(m, c, r)) traj += `<span class="ln"></span><button class="pt wait" data-act="proxy" data-id="${m.id}" data-r="${r}" title="대신 입력"><b>?</b>대신 입력</button>`;
@@ -1304,7 +1305,7 @@ function detailHtml(m, tab) {
 }
 function libHtml() {              // what each zone runs, as the members see it
   return `<div class="scrim"><div class="modal wide lib"><div class="mh"><h3>존별 운동 안내</h3><button class="x" data-act="close" aria-label="닫기">×</button></div>
-    <p class="subx" style="margin:0 0 12px">모든 회원이 A 머신 · B 유산소 · C 서킷을 밀어내기식으로 한 번씩 경험하고(Team 1 A→B→C, Team 2 B→C→A), 마지막에 셋 중 하나(MY PICK)를 한 번 더 합니다. 3명 조는 한 명이 끝나면 바로 다음 사람이 들어가고, 2명 조는 교대 전 20초를 더 쉽니다.</p>
+    <p class="subx" style="margin:0 0 12px">모든 회원이 A 머신 · B 유산소 · C 서킷을 밀어내기식으로 한 번씩 경험하고(Team 1 A→B→C, Team 2 B→C→A). 존마다 코치가 2분 정도 시범을 보인 뒤 12분 운동합니다. 3명 조는 한 명이 끝나면 바로 다음 사람이 들어가고, 2명 조는 교대 전 20초를 더 쉽니다.</p>
     <div class="libg">${L.ZKEYS.map((k) => { const z = Z[k]; return `<section><h4><span class="icw" style="background:${ST[k].c}">${z.code}</span>${z.en} · ${z.ko}</h4><p class="ln1">${z.time} · ${z.rpe}</p><p class="tg" style="color:${ST[k].c}">${esc(z.feel)}</p>
       <ol>${z.items.map((x) => `<li><span class="n">${esc(x.dose || z.dose || '')}</span><div><b>${esc(x.name)}</b></div>${L.demoSvg(x.demo, 92)}</li>`).join('')}${z.phases ? z.phases.map((p) => `<li><span class="n">${p.from}~${p.to}분</span><div><b>${p.name} · ${p.rpe}</b><p>${esc(p.say)}</p></div><span></span></li>`).join('') : ''}</ol>
       <ul class="hw">${z.how.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></section>`; }).join('')}</div>
@@ -1315,11 +1316,11 @@ function statusHtml(M) {          // the four at a glance: who has done what, fr
   const y = (v, t) => `<td class="${v ? 'y' : 'no'}">${v ? t || '✓' : '—'}</td>`;
   const rows = M.map((m) => { const ck = (r) => m.checks.find((x) => x.round === r), lg = m.logs || [], P = m.ord ? L.profile(m) : null;
     return `<tr data-detail="${m.id}"><td><b>${esc(m.name)}</b>${m.is_bot ? ' <span class="tagb">가상</span>' : ''}</td>${y(m.intake)}${y(m.mood0 != null, m.mood0 != null ? `${m.mood0} · ${m.energy0 ?? '–'}` : '')}
-      ${[1, 2, 3].map((r) => y(ck(r), ck(r) ? `${ck(r).enjoy ?? '–'} · ${ck(r).rpe ?? '–'} · ${ck(r).again ?? '–'}` : '')).join('')}${y(ck(4), ck(4) ? `${Z[ck(4).station].code} ${ck(4).enjoy ?? '–'} · ${ck(4).rpe ?? '–'} · ${ck(4).again ?? '–'}` : (m.ord || []).length > 3 ? Z[m.ord[3]].code + ' 선택' : '')}
+      ${[1, 2, 3].map((r) => y(ck(r), ck(r) ? `${ck(r).enjoy ?? '–'} · ${ck(r).rpe ?? '–'} · ${ck(r).again ?? '–'}` : '')).join('')}
       ${y(m.mood1 != null, m.mood1 != null ? `${m.mood1} · ${m.energy1 ?? '–'}` : '')}${y(P && m.mood1 != null, P ? (P.enough ? '생성' : '일부 확인 필요') : '')}${y(m.coach_note, '작성')}<td class="${m.routine_ok ? 'y' : m.routine ? 'mid' : 'no'}">${m.routine_ok ? '승인' : m.routine ? '수정 · 승인 전' : P && P.combo ? '초안' : '—'}</td>
       <td class="${lg.length ? 'y' : 'no'}">${lg.length ? `${lg.length}/7일 · 운동 ${lg.filter((x) => !['rest', 'skip'].includes(x.kind)).length}` : '—'}</td>${y(m.satisfaction, m.satisfaction ? m.satisfaction.overall + '/5' : '')}</tr>`; }).join('');
   return `<h2 class="sec" style="font-size:20px;margin-top:30px">참여자 현황<small class="secs">칸 안 숫자는 즐거움 · 강도 · 다시 하고 싶은 정도입니다. 행을 누르면 메모 · 루틴 · 피드백을 쓸 수 있습니다</small></h2>
-  <div class="box"><div class="scroll"><table class="stat"><thead><tr><th>회원</th><th>사전 진단</th><th>시작 기분 · 에너지</th>${[1, 2, 3].map((r) => `<th>운동 ${r}</th>`).join('')}<th>MY PICK</th><th>마무리 기분 · 에너지</th><th>결과</th><th>코치 메모</th><th>루틴</th><th>7일 기록</th><th>만족도</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+  <div class="box"><div class="scroll"><table class="stat"><thead><tr><th>회원</th><th>사전 진단</th><th>시작 기분 · 에너지</th>${[1, 2, 3].map((r) => `<th>운동 ${r}</th>`).join('')}<th>마무리 기분 · 에너지</th><th>결과</th><th>코치 메모</th><th>루틴</th><th>7일 기록</th><th>만족도</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
 }
 function resultHtml(M) {          // after class: what the group's numbers say, plus the satisfaction summary
   const D = M.map((m) => [m, m.ord ? L.profile(m) : null]).filter((x) => x[1] && x[0].checks.length >= 3); if (!D.length) return '';
@@ -1335,7 +1336,6 @@ function resultHtml(M) {          // after class: what the group's numbers say, 
     both('mood0', 'mood1').length ? `기분이 수업 전보다 오른 사람 <b>${mUp}명 / ${both('mood0', 'mood1').length}명</b>, 에너지가 오른 사람 <b>${eUp}명 / ${both('energy0', 'energy1').length}명</b>입니다.` : '',
     topE ? `즐거움 평균은 <b>${Z[topE.k].ko} ${topE.enjoy.toFixed(1)}</b>로 가장 높았습니다(5점 만점).` : '',
     topA ? `다시 하고 싶은 정도는 <b>${Z[topA.k].ko} ${topA.again.toFixed(1)}</b>로 가장 높았습니다.` : '',
-    topPick && topPick.pick ? `MY PICK으로는 <b>${Z[topPick.k].ko}</b>를 가장 많이 골랐습니다(${topPick.pick}명).` : '',
     hard ? `체감 강도가 가장 높았던 운동은 <b>${Z[hard.k].ko}</b>, 평균 강도 <b>${hard.rpe.toFixed(1)}</b>입니다.` : '',
     withEx.length ? `처음 끌린 운동과 실제 반응이 가장 좋았던 운동이 같았던 사람은 <b>${match}명 / ${withEx.length}명</b>입니다.` : '',
     unclear ? `${unclear}명은 운동 간 차이가 작거나 기록이 비어 "추가 확인 필요"로 표시됐습니다. 7일 기록으로 다시 봅니다.` : '',
@@ -1344,13 +1344,13 @@ function resultHtml(M) {          // after class: what the group's numbers say, 
     ${['best', 'improve'].map((k) => { const tx = SA.map((x) => x[k]).filter(Boolean); return tx.length ? `<h3 style="margin-top:18px">${k === 'best' ? '가장 좋았던 점' : '개선했으면 하는 점'}</h3><ul class="quotes">${tx.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''; }).join('')}
     <p class="subx" style="margin-top:12px">4주 리듬 테스트: 관심 있어요 ${ic('yes').length}명 · 설명 먼저 ${ic('explain').length}명 · 이번엔 괜찮아요 ${ic('no').length}명</p></div>` : '';
   const cell = (r) => (r && r.done ? `<span class="n">${r.enjoy ?? '–'} · ${r.rpe ?? '–'} · ${r.again ?? '–'}</span>` : '<small style="color:var(--down)">추가 확인 필요</small>');
-  const rows = D.map(([m, p]) => `<tr data-detail="${m.id}"><td><b>${esc(m.name)}</b></td>${L.ZKEYS.map((k) => `<td>${cell(p.rows.find((x) => x.st === k))}</td>`).join('')}<td>${p.pick ? `<b style="color:${ST[p.pick.st].c}">${Z[p.pick.st].ko}</b>` : '—'}</td>
+  const rows = D.map(([m, p]) => `<tr data-detail="${m.id}"><td><b>${esc(m.name)}</b></td>${L.ZKEYS.map((k) => `<td>${cell(p.rows.find((x) => x.st === k))}</td>`).join('')}
     <td class="n">${m.mood0 ?? '–'}→${m.mood1 ?? '–'} / ${m.energy0 ?? '–'}→${m.energy1 ?? '–'}</td><td>${p.combo ? `${Z[p.combo.first].ko}${p.combo.second ? ' + ' + Z[p.combo.second].ko : ''}${p.combo.tentative ? '<br><small>추가 확인 필요</small>' : ''}` : '—'}</td><td class="txt">${esc(p.reading)}</td></tr>`).join('');
   return `<h2 class="sec">오늘의 결론</h2><p class="subx">${n}명의 기록입니다. 즐거움 1~5, 강도 1~10, 다시 하고 싶은 정도 1~5. 하루 기록으로 본 첫 탐색 결과입니다.</p>
   <div class="res"><div class="box"><h3>한눈에</h3><ul class="concl">${lines.map((x) => `<li>${x}</li>`).join('')}</ul></div>
-    <div class="box"><h3>운동별 평균</h3><table class="mini"><thead><tr><th></th><th>즐거움</th><th>강도</th><th>다시</th><th>MY PICK</th></tr></thead><tbody>${st.map((x) => `<tr><td><b style="color:${ST[x.k].c}">${Z[x.k].code} ${Z[x.k].ko}</b></td><td class="n">${f1(x.enjoy)}</td><td class="n">${f1(x.rpe)}</td><td class="n">${f1(x.again)}</td><td class="n">${x.pick}명</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="box"><h3>운동별 평균</h3><table class="mini"><thead><tr><th></th><th>즐거움</th><th>강도</th><th>다시</th></tr></thead><tbody>${st.map((x) => `<tr><td><b style="color:${ST[x.k].c}">${Z[x.k].code} ${Z[x.k].ko}</b></td><td class="n">${f1(x.enjoy)}</td><td class="n">${f1(x.rpe)}</td><td class="n">${f1(x.again)}</td></tr>`).join('')}</tbody></table></div></div>
   ${satBox ? `<div class="res one" style="margin-top:16px">${satBox}</div>` : ''}
-  <div class="box" style="margin-top:16px"><h3>회원별 결과</h3><div class="scroll"><table class="roster"><thead><tr><th>회원</th>${L.ZKEYS.map((k) => `<th>${ztag(k)}<br><small>즐거움 · 강도 · 다시</small></th>`).join('')}<th>MY PICK</th><th>기분 / 에너지 전→후</th><th>첫 조합</th><th>회원에게 보인 해석</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+  <div class="box" style="margin-top:16px"><h3>회원별 결과</h3><div class="scroll"><table class="roster"><thead><tr><th>회원</th>${L.ZKEYS.map((k) => `<th>${ztag(k)}<br><small>즐거움 · 강도 · 다시</small></th>`).join('')}<th>기분 / 에너지 전→후</th><th>첫 조합</th><th>회원에게 보인 해석</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
 }
 function rosterHtml(M) {          // before class: diagnosis answers and the automatic team preview
   const ready = M.filter((m) => m.intake), plan = L.zteams(M), tc = Math.max(0, ...plan.map((x) => x.team));
@@ -1382,7 +1382,7 @@ function view() {
     <div class="linkbox"><h2 class="sec" style="font-size:20px">단톡방에 보낼 회원 링크</h2><div class="copy"><input readonly id="mlink" value="${esc(memberUrl())}"><button class="btn" data-act="copy">복사</button></div><p class="subx" style="margin-top:8px">회원은 이 링크로 클래스 안내와 사전 설문을 보고, 수업 날 같은 링크로 들어옵니다.</p></div>
     <details class="set"><summary>리허설 · 설정</summary><p class="subx">혼자서 처음부터 끝까지 돌려 볼 수 있습니다. 가상 회원은 설문을 마친 상태로 들어오고, 입력 단계에서 스스로 답합니다. Round 시간을 1분으로 줄이면 5분 안에 끝납니다.</p>
       <div class="toolrow"><button class="btn ghost sm" data-act="fill">가상 회원 5명 채우기</button><button class="btn ghost sm" data-act="reset" data-v="bots">가상 회원만 삭제</button><button class="btn ghost sm" data-act="reset" data-v="progress">팀·입력만 초기화</button><button class="btn ghost sm" style="color:var(--down)" data-act="reset" data-v="all">전체 초기화</button>
-      <span>Round 시간 <select data-minutes>${[9, 8, 5, 3, 1].map((v) => `<option${v === c.minutes ? ' selected' : ''}>${v}</option>`).join('')}</select> 분</span>${c.phase !== 'intake' ? '<button class="btn ghost sm" data-act="teams-auto">팀 다시 편성</button>' : ''}</div></details>
+      <span>Round 시간 <select data-minutes>${[12, 10, 9, 5, 3, 1].map((v) => `<option${v === c.minutes ? ' selected' : ''}>${v}</option>`).join('')}</select> 분</span>${c.phase !== 'intake' ? '<button class="btn ghost sm" data-act="teams-auto">팀 다시 편성</button>' : ''}</div></details>
     <div class="dock${S.dock ? ' on' : ''}" id="dock"><div class="dtx"><em>${RAIL[ri]}</em><b>${na.t}</b></div>${na.timer ? `<span class="clock n${left() < 0 ? ' over' : ''}" id="timer2">${clock(left())}</span>` : ''}${na.b ? `<button class="btn xl" data-act="${na.b[0]}"${S.busy ? ' disabled' : ''}>${na.b[1]}</button>` : ''}</div>`;
 }
 function modalHtml() {

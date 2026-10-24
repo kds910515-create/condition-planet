@@ -77,7 +77,7 @@ a.btn{text-decoration:none}
     <div class="col m" id="colm"><h2>회원 폰 <i>여기를 누르세요</i></h2><div class="phone"><iframe id="fm" title="회원 화면" src="./?sim=1"></iframe></div></div>
     <div class="col c" id="colc"><h2>코치 화면 <i>여기를 누르세요</i></h2><div class="screen" id="screen"><iframe id="fc" title="코치 화면" src="coach.html?sim=1"></iframe></div></div>
   </div>
-  <p class="note" id="foot">가상 수업입니다. 고른 인원에서 나 1명을 뺀 나머지는 가상 회원이 사전 진단을 마친 상태로 들어와 있고, 입력 · MY PICK · 마무리 체크 · 만족도를 스스로 답합니다. 여기서 누른 내용은 이 브라우저에만 저장되며 실제 수업 기록에는 들어가지 않습니다.</p>
+  <p class="note" id="foot">가상 수업입니다. 고른 인원에서 나 1명을 뺀 나머지는 가상 회원이 사전 진단을 마친 상태로 들어와 있고, 입력 · 마무리 체크 · 만족도를 스스로 답합니다. 여기서 누른 내용은 이 브라우저에만 저장되며 실제 수업 기록에는 들어가지 않습니다.</p>
 </div>
 <script>
 /* Condition Planet V1.5 — one-day class logic (shared by the member page and the coach page).
@@ -702,7 +702,7 @@ Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSi
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 /* MY EXERCISE RHYTHM — the one-day class (loaded after zones.js; its definitions take over the zone set).
-   A 머신 · B 유산소 · C 서킷, push-along rotation between teams, then MY PICK (the favourite again).
+   A 머신 · B 유산소 · C 서킷, push-along rotation between teams, each zone opened by a short coach demo.
    Every number shown comes from what the member entered; when something is missing the profile says "추가 확인 필요".
    "운동강도" is the member-facing word for RPE. Nothing here labels a person or claims an optimum. */
 (function (g) {
@@ -744,15 +744,16 @@ L.UI.icon = (k, size) => (k === 'free' ? `<svg width="${size || 24}" height="${s
 const ZKEYS = ['weights', 'cardio', 'hybrid'];
 const C0 = L.ZONES.cardio;
 const ZONES = {
-  weights: { code: 'A', en: 'MACHINE', ko: '머신', time: '약 9분', rpe: '운동강도 6~7', feel: '자리를 잡아 주는 머신으로 중량 → 반복 → 휴식',
+  weights: { code: 'A', en: 'MACHINE', ko: '머신', time: '12분', rpe: '운동강도 6~7', feel: '자리를 잡아 주는 머신으로 중량 → 반복 → 휴식',
     items: [{ demo: 'legpress', name: '레그프레스' }, { demo: 'chestpress', name: '체스트프레스' }, { demo: 'latpull', name: '랫풀다운' }],
-    dose: '각 10~12회 × 2세트', how: ['한 기구에서 차례로 돌아가며 합니다.', '마지막 2~3회가 조금 힘든 무게(운동강도 6~7)로 합니다.', '무게는 코치와 함께 정합니다.'] },
-  cardio: Object.assign({}, C0, { code: 'B', en: 'CARDIO', ko: '유산소', time: '약 8~9분', rpe: '운동강도 6 중심',
-    phases: C0.phases.map((p) => Object.assign({}, p, { rpe: KR(p.rpe) })), how: C0.how.map(KR), msg: KR(C0.msg) }),
-  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '9분', rpe: '운동강도 7 전후', feel: '세 동작을 1분씩 돌며 근력과 숨이 함께 올라가는 느낌',
+    dose: '3종 × 각 2세트 (1인 6세트)', how: ['한 기구에서 차례로 돌아가며 합니다.', '마지막 2~3회가 조금 힘든 무게(운동강도 6~7)로 합니다.', '무게는 코치와 함께 정합니다.'] },
+  cardio: Object.assign({}, C0, { code: 'B', en: 'CARDIO', ko: '유산소', time: '12분', rpe: '운동강도 6 중심',
+    phases: [{ from: 0, to: 2, name: 'EASY', rpe: '운동강도 3~4', say: '편하게 걸으며 몸을 데우고 자기 속도 찾기' }, { from: 2, to: 7, name: 'RHYTHM', rpe: '운동강도 6', say: '숨은 차지만 한 문장 정도는 말할 수 있게' }, { from: 7, to: 10, name: 'PUSH', rpe: '운동강도 7', say: '조금 더 숨차지만 끝까지 유지할 수 있게' }, { from: 10, to: 12, name: 'COOL', rpe: '운동강도 3', say: '속도를 낮춰 걸으며 숨 고르기' }],
+    how: ['기본은 런닝머신입니다. 천국의 계단은 평소에 써 본 사람만 고릅니다.', '0~2분 EASY → 2~7분 RHYTHM → 7~10분 PUSH → 10~12분 COOL.', '전력질주는 하지 않습니다.'], msg: KR(C0.msg) }),
+  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '12분', rpe: '운동강도 7 전후', feel: '세 동작을 1분씩 돌며 근력과 숨이 함께 올라가는 느낌',
     items: [{ demo: 'wallball', name: '월볼샷', dose: '40초' }, { demo: 'kbstep', name: '스텝박스 케틀벨 스텝업', dose: '40초 · 발 번갈아' }, { demo: 'shtap', name: '플랭크 숄더탭', dose: '40초 · 손 번갈아' }],
-    work: 40, rest: 20, laps: 3,
-    dose: '40초 운동 · 20초 휴식(다음 동작으로 이동) × 3동작 = 한 바퀴 3분, 3바퀴 = 9분',
+    work: 40, rest: 20, laps: 4,
+    dose: '40초 운동 · 20초 휴식(다음 동작으로 이동) × 3동작 = 한 바퀴 3분, 4바퀴(4세트) = 12분',
     how: ['1분마다 다음 동작으로 넘어갑니다: 40초 운동, 20초 숨 고르며 이동.', '횟수보다 40초 동안 멈추지 않는 것이 목표입니다. 힘들면 속도를 낮추세요.', '플랭크 숄더탭이 힘들면 무릎을 대고, 월볼은 가벼운 공으로 바꿉니다.'] },
 };
 // push-along rotation: when a team finishes a zone it moves on and the next team comes in
@@ -929,9 +930,9 @@ Object.assign(L, { circuitAt, ZKEYS, ZONES, ROT, NTH, SURVEY, LIKE_ZONE, svText,
 (function (g) {
 'use strict';
 const KEY = 'cp15.sim.state', L = g.CPClass, STN = ['cardio', 'weights', 'stretch'];
-const fresh = () => ({ v: 2, class: { slug: 'sim', title: 'MY EXERCISE RHYTHM · 시뮬레이션', phase: 'intake', minutes: 9, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
+const fresh = () => ({ v: 3, class: { slug: 'sim', title: 'MY EXERCISE RHYTHM · 시뮬레이션', phase: 'intake', minutes: 12, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
 let mem = null;
-const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 2) return s; } catch (_) {} return mem || (mem = fresh()); };
+const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 3) return s; } catch (_) {} return mem || (mem = fresh()); };
 const save = (s) => { mem = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
 const nowOf = (s) => Math.round(s.clk.sim + (Date.now() - s.clk.real) * s.clk.speed);
 const err = (code) => { const e = new Error(code); e.code = code; e.http = 400; return e; };
@@ -1079,7 +1080,7 @@ let N = (() => { try { return +localStorage.getItem('cp15.simn') || 5; } catch (
 if (!CPSim.peek().members.length) CPSim.reset(N - 1);
 const fit = () => { if (innerWidth <= 1100) { fc.style.transform = 'none'; fc.style.width = '100%'; fc.style.height = Math.max(520, innerHeight - 250) + 'px'; screen.style.height = 'auto'; return; } fc.style.width = '1360px'; const s = screen.clientWidth / 1360; fc.style.transform = 'scale(' + s + ')'; const h = Math.max(520, Math.min(1500, (innerHeight - 190) / s)); fc.style.height = Math.round(h) + 'px'; screen.style.height = Math.round(h * s) + 'px'; };
 fit(); addEventListener('resize', fit);
-const STEPS = ['사전 진단', '팀 확정', '시작 체크', '운동 1', '입력', '운동 2', '입력', '운동 3', '입력', 'MY PICK', '입력', '마무리 · 결과', '만족도 · 7일 기록'];
+const STEPS = ['사전 진단', '팀 확정', '시작 체크', '운동 1', '입력', '운동 2', '입력', '운동 3', '입력', '마무리 · 결과', '만족도 · 7일 기록'];
 function guide() {
   const d = CPSim.peek(), c = d.class, h = d.members.filter((m) => !m.is_bot).pop(), ph = c.phase, r = ph[1] ? +ph[1] : 0, ready = d.members.filter((m) => m.intake).length;
   const over = ph[0] === 'r' && c.now_ms >= c.started_ms + c.minutes * 60000, has = (k) => !!h && h.checks.some((x) => x.round === k), nm = (k) => (k === 4 ? 'MY PICK' : '운동 ' + k);
@@ -1088,16 +1089,14 @@ function guide() {
   if (ph === 'intake') return { i: 1, side: 'c', t: `코치 화면에 ${ready}명의 진단 결과와 자동 팀 편성(${CPClass.teamSizes(ready).length === 1 ? ready + '명 한 팀' : CPClass.teamSizes(ready).join(' / ')})이 떴습니다. 확인하고 [팀 확정하기]를 누르세요.` };
   if (ph === 'teams' && h.mood0 == null) return { i: 2, side: 'm', t: '폰에서 지금 기분과 에너지를 한 번씩 누르세요.' };
   if (ph === 'teams') return { i: 2, side: 'c', t: '폰에 첫 번째 존이 떴습니다. 코치 화면에서 [운동 1 시작]을 누르세요.' };
-  if (ph === 'c3' && has(3) && h.ord.length < 4) return { i: 9, side: 'm', t: '폰에서 세 가지 중 한 번 더 하고 싶은 운동(MY PICK)을 고르세요.' };
-  if (ph === 'c3') return { i: 9, side: 'c', t: 'MY PICK을 골랐습니다. 코치 화면에서 [MY PICK 시작]을 누르세요. 가상 회원도 자기 PICK을 고릅니다.' };
   if (ph[0] === 'r' && r <= h.ord.length && !has(r) && !over) return { i: r * 2 + 1, side: 'm', skip: 1, t: `${nm(r)}: 폰에 지금 존과 운동 안내가 나옵니다. 다 봤으면 [운동 끝났어요]를 누르세요. 시간을 넘기려면 [운동 끝으로 넘기기].` };
   if ((ph[0] === 'r' || ph[0] === 'c') && r <= h.ord.length && !has(r)) return { i: r * 2 + 2, side: 'm', t: '폰에서 즐거움, RPE, 다시 하고 싶은 정도를 한 번씩 누르세요.' };
   if (ph[0] === 'r') return { i: r * 2 + 2, side: 'c', t: `입력이 저장됐습니다. 코치 화면에서 [${nm(r)} 끝내고 입력 받기]를 누르세요. 가상 회원들도 답을 냅니다.` };
   if (ph === 'c1' || ph === 'c2') return { i: r * 2 + 2, side: 'c', t: `팀마다 다음 존이 정해졌습니다. 코치 화면에서 [운동 ${r + 1} 시작]을 누르세요.` };
-  if (h.mood1 == null) return { i: 11, side: 'm', t: '폰에서 수업 후 기분과 에너지를 누르면 나의 운동 리듬 프로필이 뜹니다.' };
-  if (ph === 'c4') return { i: 11, side: 'c', t: '코치 화면에서 [수업 마무리하기]를 누르세요. 회원을 누르면 메모를 쓰고 루틴을 수정 · 승인할 수 있습니다.' };
-  if (!h.satisfaction) return { i: 12, side: 'm', t: '폰에서 결과 8페이지를 넘겨 보세요. 7번째 페이지에서 만족도를 보내고, 8번째에서 7일 기록을 하나 남겨 보세요.' };
-  return { i: 12, side: 'c', t: '코치 화면의 참여자 현황 · 만족도 요약을 확인하고, 회원을 눌러 루틴 승인과 7일 피드백을 써 보세요. 회원 폰을 새로 열면 바로 반영됩니다.' };
+  if (h.mood1 == null) return { i: 9, side: 'm', t: '폰에서 수업 후 기분과 에너지를 누르면 나의 운동 리듬 프로필이 뜹니다.' };
+  if (ph === 'c3') return { i: 9, side: 'c', t: '코치 화면에서 [수업 마무리하기]를 누르세요. 회원을 누르면 메모를 쓰고 루틴을 수정 · 승인할 수 있습니다.' };
+  if (!h.satisfaction) return { i: 10, side: 'm', t: '폰에서 결과 8페이지를 넘겨 보세요. 7번째 페이지에서 만족도를 보내고, 8번째에서 7일 기록을 하나 남겨 보세요.' };
+  return { i: 10, side: 'c', t: '코치 화면의 참여자 현황 · 만족도 요약을 확인하고, 회원을 눌러 루틴 승인과 7일 피드백을 써 보세요. 회원 폰을 새로 열면 바로 반영됩니다.' };
 }
 let sig = '';
 function tick() {

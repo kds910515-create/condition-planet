@@ -680,7 +680,7 @@ Object.assign(L, { ZKEYS, ZONES, ROT, SURVEY, svText, NTH, MOODS, AGAIN5, teamSi
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 /* MY EXERCISE RHYTHM — the one-day class (loaded after zones.js; its definitions take over the zone set).
-   A 머신 · B 유산소 · C 서킷, push-along rotation between teams, then MY PICK (the favourite again).
+   A 머신 · B 유산소 · C 서킷, push-along rotation between teams, each zone opened by a short coach demo.
    Every number shown comes from what the member entered; when something is missing the profile says "추가 확인 필요".
    "운동강도" is the member-facing word for RPE. Nothing here labels a person or claims an optimum. */
 (function (g) {
@@ -722,15 +722,16 @@ L.UI.icon = (k, size) => (k === 'free' ? `<svg width="${size || 24}" height="${s
 const ZKEYS = ['weights', 'cardio', 'hybrid'];
 const C0 = L.ZONES.cardio;
 const ZONES = {
-  weights: { code: 'A', en: 'MACHINE', ko: '머신', time: '약 9분', rpe: '운동강도 6~7', feel: '자리를 잡아 주는 머신으로 중량 → 반복 → 휴식',
+  weights: { code: 'A', en: 'MACHINE', ko: '머신', time: '12분', rpe: '운동강도 6~7', feel: '자리를 잡아 주는 머신으로 중량 → 반복 → 휴식',
     items: [{ demo: 'legpress', name: '레그프레스' }, { demo: 'chestpress', name: '체스트프레스' }, { demo: 'latpull', name: '랫풀다운' }],
-    dose: '각 10~12회 × 2세트', how: ['한 기구에서 차례로 돌아가며 합니다.', '마지막 2~3회가 조금 힘든 무게(운동강도 6~7)로 합니다.', '무게는 코치와 함께 정합니다.'] },
-  cardio: Object.assign({}, C0, { code: 'B', en: 'CARDIO', ko: '유산소', time: '약 8~9분', rpe: '운동강도 6 중심',
-    phases: C0.phases.map((p) => Object.assign({}, p, { rpe: KR(p.rpe) })), how: C0.how.map(KR), msg: KR(C0.msg) }),
-  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '9분', rpe: '운동강도 7 전후', feel: '세 동작을 1분씩 돌며 근력과 숨이 함께 올라가는 느낌',
+    dose: '3종 × 각 2세트 (1인 6세트)', how: ['한 기구에서 차례로 돌아가며 합니다.', '마지막 2~3회가 조금 힘든 무게(운동강도 6~7)로 합니다.', '무게는 코치와 함께 정합니다.'] },
+  cardio: Object.assign({}, C0, { code: 'B', en: 'CARDIO', ko: '유산소', time: '12분', rpe: '운동강도 6 중심',
+    phases: [{ from: 0, to: 2, name: 'EASY', rpe: '운동강도 3~4', say: '편하게 걸으며 몸을 데우고 자기 속도 찾기' }, { from: 2, to: 7, name: 'RHYTHM', rpe: '운동강도 6', say: '숨은 차지만 한 문장 정도는 말할 수 있게' }, { from: 7, to: 10, name: 'PUSH', rpe: '운동강도 7', say: '조금 더 숨차지만 끝까지 유지할 수 있게' }, { from: 10, to: 12, name: 'COOL', rpe: '운동강도 3', say: '속도를 낮춰 걸으며 숨 고르기' }],
+    how: ['기본은 런닝머신입니다. 천국의 계단은 평소에 써 본 사람만 고릅니다.', '0~2분 EASY → 2~7분 RHYTHM → 7~10분 PUSH → 10~12분 COOL.', '전력질주는 하지 않습니다.'], msg: KR(C0.msg) }),
+  hybrid: { code: 'C', en: 'CIRCUIT', ko: '서킷', time: '12분', rpe: '운동강도 7 전후', feel: '세 동작을 1분씩 돌며 근력과 숨이 함께 올라가는 느낌',
     items: [{ demo: 'wallball', name: '월볼샷', dose: '40초' }, { demo: 'kbstep', name: '스텝박스 케틀벨 스텝업', dose: '40초 · 발 번갈아' }, { demo: 'shtap', name: '플랭크 숄더탭', dose: '40초 · 손 번갈아' }],
-    work: 40, rest: 20, laps: 3,
-    dose: '40초 운동 · 20초 휴식(다음 동작으로 이동) × 3동작 = 한 바퀴 3분, 3바퀴 = 9분',
+    work: 40, rest: 20, laps: 4,
+    dose: '40초 운동 · 20초 휴식(다음 동작으로 이동) × 3동작 = 한 바퀴 3분, 4바퀴(4세트) = 12분',
     how: ['1분마다 다음 동작으로 넘어갑니다: 40초 운동, 20초 숨 고르며 이동.', '횟수보다 40초 동안 멈추지 않는 것이 목표입니다. 힘들면 속도를 낮추세요.', '플랭크 숄더탭이 힘들면 무릎을 대고, 월볼은 가벼운 공으로 바꿉니다.'] },
 };
 // push-along rotation: when a team finishes a zone it moves on and the next team comes in
@@ -907,9 +908,9 @@ Object.assign(L, { circuitAt, ZKEYS, ZONES, ROT, NTH, SURVEY, LIKE_ZONE, svText,
 (function (g) {
 'use strict';
 const KEY = 'cp15.sim.state', L = g.CPClass, STN = ['cardio', 'weights', 'stretch'];
-const fresh = () => ({ v: 2, class: { slug: 'sim', title: 'MY EXERCISE RHYTHM · 시뮬레이션', phase: 'intake', minutes: 9, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
+const fresh = () => ({ v: 3, class: { slug: 'sim', title: 'MY EXERCISE RHYTHM · 시뮬레이션', phase: 'intake', minutes: 12, routines: null, started_ms: null }, members: [], seq: 0, clk: { sim: Date.now(), real: Date.now(), speed: 1 } });
 let mem = null;
-const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 2) return s; } catch (_) {} return mem || (mem = fresh()); };
+const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 3) return s; } catch (_) {} return mem || (mem = fresh()); };
 const save = (s) => { mem = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
 const nowOf = (s) => Math.round(s.clk.sim + (Date.now() - s.clk.real) * s.clk.speed);
 const err = (code) => { const e = new Error(code); e.code = code; e.http = 400; return e; };
