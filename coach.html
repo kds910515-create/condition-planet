@@ -1352,14 +1352,16 @@ function resultHtml(M) {          // after class: what the group's numbers say, 
   ${satBox ? `<div class="res one" style="margin-top:16px">${satBox}</div>` : ''}
   <div class="box" style="margin-top:16px"><h3>회원별 결과</h3><div class="scroll"><table class="roster"><thead><tr><th>회원</th>${L.ZKEYS.map((k) => `<th>${ztag(k)}<br><small>즐거움 · 강도 · 다시</small></th>`).join('')}<th>기분 / 에너지 전→후</th><th>첫 조합</th><th>회원에게 보인 해석</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
 }
+// before the class the coach may move someone by hand: keep that person where the coach put them, auto-assign the rest
+function teamPlan(M) { return L.zteams(M).map((x) => { const m = M.find((y) => y.id === x.id); if (!m || !m.team) return x; const t = L.teamOf(m.team); return { id: x.id, team: t.id, ord: t.ord, kind: t.kind, reason: '' }; }); }
 function rosterHtml(M) {          // before class: diagnosis answers and the automatic team preview
-  const ready = M.filter((m) => m.intake), plan = L.zteams(M), tc = Math.max(0, ...plan.map((x) => x.team));
+  const ready = M.filter((m) => m.intake), plan = teamPlan(M), tc = Math.max(0, ...plan.map((x) => x.team));
   const lanes = Array.from({ length: tc }, (_, i) => { const t = L.teamOf(i + 1), ids = plan.filter((x) => x.team === t.id).map((x) => x.id), a = M.filter((m) => ids.includes(m.id)), col = ST[t.ord[0]].c;
     return `<section class="lane"><header style="background:${col}"><h2>${t.kind}<small>${a.length}명 · ${L.teamRuleShort(a.length)}</small></h2><div class="route">${t.ord.map((k) => `<span>${UI.icon(k, 14)}${ztag(k)}</span>`).join('')}</div></header><div class="body">${a.map((m) => card(m, S.d.class, col)).join('')}</div></section>`; }).join('');
   const rows = M.map((m) => { const sv = m.survey; return `<tr data-detail="${m.id}"><td><b>${esc(m.name)}</b>${m.is_bot ? ' <span class="tagb">가상</span>' : ''}</td>${sv ? L.SURVEY.map((q) => `<td${q.k === 'pain' && sv.pain ? ' class="warn"' : ''}>${esc(L.svText(sv, q.k))}</td>`).join('') : `<td colspan="${L.SURVEY.length}" style="color:var(--ink3)">진단 중…</td>`}</tr>`; }).join('');
   return `<h2 class="sec" style="font-size:20px;margin-top:30px">사전 진단 ${ready.length}명 / 입장 ${M.length}명<small class="secs">통증 · 주의 부위는 빨간색입니다. 행을 누르면 자세히 볼 수 있습니다</small></h2>
     ${M.length ? `<div class="box"><div class="scroll"><table class="roster"><thead><tr><th>이름</th>${L.SURVEY.map((q) => `<th>${SHORT[q.k] || q.t}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div></div>` : '<p class="empty box">아직 진단을 마친 회원이 없습니다. 아래 링크를 단톡방에 보내세요.</p>'}
-    ${tc ? `<h2 class="sec" style="font-size:20px;margin-top:30px">자동 팀 편성 미리보기 · ${sizesTxt(ready.length)}<small class="secs">한 팀 최대 4명. [팀 확정하기]를 누르기 전까지는 회원에게 보이지 않습니다</small></h2><div class="lanes">${lanes}</div>` : ''}`;
+    ${tc ? `<h2 class="sec" style="font-size:20px;margin-top:30px">팀 편성 미리보기 · ${Array.from({ length: tc }, (_, i) => plan.filter((x) => x.team === i + 1).length).join(' / ')}<small class="secs">자동 편성 + 코치가 옮긴 회원은 그대로. 한 팀 최대 4명. [팀 확정하기]를 누르기 전까지는 회원에게 보이지 않습니다</small></h2><div class="lanes">${lanes}</div>` : ''}`;
 }
 function view() {
   if (!PV && (S.err === 'forbidden' || !coachKey)) return `<div class="center"><div><h1 style="font-size:24px;font-weight:800;margin-bottom:8px">코치 전용 화면입니다</h1><p>전달받은 코치 링크로 다시 열어 주세요.</p></div></div>`;
@@ -1426,7 +1428,7 @@ document.addEventListener('click', (ev) => {
   if (d.px) { S.modal[d.px] = +d.v; modal(S.modal); return; }
   if (a === 'close') return modal(null);
   if (a === 'showmode') { document.body.classList.toggle('show'); render(true); return; }
-  if (a === 'teams-auto') { const go = async () => { const d = await rpc('v15_coach_state'); await rpc('v15_coach_teams', { p_assign: L.zteams(d.members) }); if (S.d.class.phase === 'intake') await rpc('v15_coach_phase', { p_phase: 'teams' }); }; if (S.d.class.phase === 'intake') act(go, '팀을 편성했습니다.'); else modal({ type: 'confirm', title: '팀을 다시 편성할까요?', text: '한 팀 최대 4명으로 다시 나눕니다. 이미 Round가 진행 중이면 회원들의 존 순서가 바뀝니다.', yes: '다시 편성', fn: go }); }
+  if (a === 'teams-auto') { const go = async () => { const d = await rpc('v15_coach_state'); await rpc('v15_coach_teams', { p_assign: d.class.phase === 'intake' ? teamPlan(d.members) : L.zteams(d.members) }); if (S.d.class.phase === 'intake') await rpc('v15_coach_phase', { p_phase: 'teams' }); }; if (S.d.class.phase === 'intake') act(go, '팀을 편성했습니다.'); else modal({ type: 'confirm', title: '팀을 다시 편성할까요?', text: '한 팀 최대 4명으로 다시 나눕니다. 이미 Round가 진행 중이면 회원들의 존 순서가 바뀝니다.', yes: '다시 편성', fn: go }); }
   else if (a === 'late') act(() => rpc('v15_coach_teams', { p_assign: S.d.members.filter((m) => m.intake && !m.team).map(L.one) }), '배정했습니다.');
   else if (a.startsWith('phase:')) act(() => rpc('v15_coach_phase', { p_phase: a.slice(6) }));
   else if (a === 'copy') { const el = $('#mlink'); (navigator.clipboard ? navigator.clipboard.writeText(el.value) : Promise.reject()).then(() => toast('복사했습니다.')).catch(() => { el.select(); toast('선택된 주소를 복사해 주세요.'); }); }
